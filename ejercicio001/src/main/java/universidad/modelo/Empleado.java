@@ -77,7 +77,7 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" + "noDocumento=" + noDocumento + ", tipoDocumento=" + tipoDocumento + ", salarioBase=" + salarioBase + ", genero=" + genero + ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado + '}';
+        return "Empleado{" + "noDocumento=" + noDocumento + ", tipoDocumento=" + tipoDocumento + ", nombre=" + nombre + ", salarioBase=" + salarioBase + ", genero=" + genero + ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado + '}';
     }
     
     
