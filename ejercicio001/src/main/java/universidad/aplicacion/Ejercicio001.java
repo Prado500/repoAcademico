@@ -4,6 +4,9 @@
 
 package universidad.aplicacion;
 
+import java.time.LocalDate;
+import universidad.modelo.Empleado;
+
 /**
  *
  * @author Alejandro
@@ -11,6 +14,13 @@ package universidad.aplicacion;
 public class Ejercicio001 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
+        Empleado emp = new Empleado ("111", "CC", "David", 100, "M", LocalDate.now(), "AC");
+        System.out.println(emp);
+        
+        
+        
+        
+        
     }
 }

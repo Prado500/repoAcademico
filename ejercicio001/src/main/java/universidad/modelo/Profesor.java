@@ -4,7 +4,6 @@
  */
 package universidad.modelo;
 
-import universidad.modelo.Empleado;
 import java.time.LocalDate;
 
 /**
@@ -16,11 +15,15 @@ public class Profesor extends Empleado {
     private double intHoraria;
     private String maxNivelEducativo;
 
-    public Profesor(double intHoraria, String maxNivelEducativo, String noDocumento, String tipoDocumento, String nombre, double salarioBase, String genero, LocalDate fechaNacimiento, String estado) {
+    public Profesor(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String genero, LocalDate fechaNacimiento, String estado, double intHoraria, String maxNivelEducativo) {
         super(noDocumento, tipoDocumento, nombre, salarioBase, genero, fechaNacimiento, estado);
-        this.intHoraria = intHoraria;
-        this.maxNivelEducativo = maxNivelEducativo;
+    
+    this.intHoraria = intHoraria;
+    this.maxNivelEducativo = maxNivelEducativo;
+        
     }
+
+    
 
     public double getIntHoraria() {
         return intHoraria;

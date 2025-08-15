@@ -15,7 +15,7 @@ public class ESerGenerales extends Empleado {
     private String experticia;
     private boolean alturas;
 
-    public ESerGenerales(String experticia, boolean alturas, String noDocumento, String tipoDocumento, String nombre, double salarioBase, String genero, LocalDate fechaNacimiento, String estado) {
+    public ESerGenerales(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String genero, LocalDate fechaNacimiento, String estado, String experticia, boolean alturas) {
         super(noDocumento, tipoDocumento,nombre, salarioBase, genero, fechaNacimiento, estado);
         this.experticia = experticia;
         this.alturas = alturas;

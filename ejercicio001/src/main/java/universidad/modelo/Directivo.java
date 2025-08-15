@@ -7,14 +7,14 @@ package universidad.modelo;
 import java.time.LocalDate;
 
 /**
- *
+ * BUG REPORTADO: Al querer cambiar el orden de los atributos del constructor en la firma del metodo, me daba un errorIllegal Type of expression solo porque corte y pegue al final los atributos unicos de la clase Profesor 
  * @author Alejandro
  */
 public class Directivo extends Empleado {
     private int numProgDirige;
     private int nivelMando; 
 
-    public Directivo(int numProgDirige, int nivelMando, String noDocumento, String tipoDocumento, String nombre, double salarioBase, String genero, LocalDate fechaNacimiento, String estado) {
+    public Directivo(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String genero, LocalDate fechaNacimiento, String estado, int numProgDirige, int nivelMando) {
         super(noDocumento, tipoDocumento, nombre, salarioBase, genero, fechaNacimiento, estado);
         this.numProgDirige = numProgDirige;
         this.nivelMando = nivelMando;
