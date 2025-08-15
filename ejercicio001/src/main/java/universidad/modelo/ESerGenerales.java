@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Organizacion;
+package universidad.modelo;
 
 import java.time.LocalDate;
 
@@ -15,8 +15,8 @@ public class ESerGenerales extends Empleado {
     private String experticia;
     private boolean alturas;
 
-    public ESerGenerales(String experticia, boolean alturas, String noDocumento, String tipoDocumento, double salarioBase, String genero, LocalDate fechaNacimiento, String estado) {
-        super(noDocumento, tipoDocumento, salarioBase, genero, fechaNacimiento, estado);
+    public ESerGenerales(String experticia, boolean alturas, String noDocumento, String tipoDocumento, String nombre, double salarioBase, String genero, LocalDate fechaNacimiento, String estado) {
+        super(noDocumento, tipoDocumento,nombre, salarioBase, genero, fechaNacimiento, estado);
         this.experticia = experticia;
         this.alturas = alturas;
     }
