@@ -36,10 +36,9 @@ public class Directivo extends Empleado {
         this.nivelMando = nivelMando;
     }
 
-    @Override
+         @Override
     public String toString() {
-        return "Directivo{" + "numProgDirige=" + numProgDirige + ", nivelMando=" + nivelMando + '}';
+        return "Directivo{" + "noDocumento=" + super.getNoDocumento() + ", tipoDocumento=" + super.getTipoDocumento() + ", nombre=" + super.getNombre() + ", salarioBase=" + super.getSalarioBase() + ", genero=" + super.getGenero() + ", numProgDirige=" + numProgDirige + ", nivelMando=" + nivelMando + '}';
     }
-    
     
 }

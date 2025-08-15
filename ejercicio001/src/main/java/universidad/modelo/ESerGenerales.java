@@ -36,12 +36,11 @@ public class ESerGenerales extends Empleado {
     public void setAlturas(boolean alturas) {
         this.alturas = alturas;
     }
-
-    @Override
-    public String toString() {
-        return "ESerGenerales{" + "experticia=" + experticia + ", alturas=" + alturas + '}';
-    }
     
+         @Override
+    public String toString() {
+        return "ESerGenerales{" + "noDocumento=" + super.getNoDocumento() + ", tipoDocumento=" + super.getTipoDocumento() + ", nombre=" + super.getNombre() + ", salarioBase=" + super.getSalarioBase() + ", genero=" + super.getGenero() + ", intHoraria=" + "experticia=" + experticia + ", alturas=" + alturas + '}';
+    }
     
 }
 

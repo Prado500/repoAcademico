@@ -8,7 +8,7 @@ import java.time.LocalDate;
  *
  * @author Alejandro
  */
-public class Empleado {
+public class  Empleado {
     private String noDocumento;
     private String tipoDocumento;
     private String nombre;
@@ -35,6 +35,10 @@ public class Empleado {
         return tipoDocumento;
     }
 
+      public String getNombre() {
+        return nombre;
+    }
+    
     public double getSalarioBase() {
         return salarioBase;
     }
@@ -42,6 +46,7 @@ public class Empleado {
     public String getGenero() {
         return genero;
     }
+    
 
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
@@ -59,6 +64,10 @@ public class Empleado {
         this.tipoDocumento = tipoDocumento;
     }
 
+    public void setNombre(String nombre) {
+        this.tipoDocumento = nombre;
+    }
+    
     public void setSalarioBase(double salarioBase) {
         this.salarioBase = salarioBase;
     }
