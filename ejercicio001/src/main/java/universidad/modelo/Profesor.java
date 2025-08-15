@@ -41,9 +41,9 @@ public class Profesor extends Empleado {
         this.maxNivelEducativo = maxNivelEducativo;
     }
 
-    @Override
+        @Override
     public String toString() {
-        return "Profesor{" + "intHoraria=" + intHoraria + ", maxNivelEducativo=" + maxNivelEducativo + '}';
+        return "Empleado{" + "noDocumento=" + super.getNoDocumento() + ", tipoDocumento=" + super.getTipoDocumento() + ", nombre=" + super.getNombre() + ", salarioBase=" + super.getSalarioBase() + ", genero=" + super.getGenero() + ", intHoraria=" + intHoraria + ", maxNivelEducativo=" + maxNivelEducativo + '}';
     }
     
     
