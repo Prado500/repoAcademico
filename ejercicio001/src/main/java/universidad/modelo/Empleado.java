@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Organizacion;
+package universidad.modelo;
 import java.time.LocalDate;
 /**
  *
@@ -11,14 +11,16 @@ import java.time.LocalDate;
 public class Empleado {
     private String noDocumento;
     private String tipoDocumento;
+    private String nombre;
     private double salarioBase;
     private String genero;
     private LocalDate fechaNacimiento;
     private String estado;
 
-    public Empleado(String noDocumento, String tipoDocumento, double salarioBase, String genero, LocalDate fechaNacimiento, String estado) {
+    public Empleado(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String genero, LocalDate fechaNacimiento, String estado) {
         this.noDocumento = noDocumento;
         this.tipoDocumento = tipoDocumento;
+        this.nombre = nombre;
         this.salarioBase = salarioBase;
         this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
