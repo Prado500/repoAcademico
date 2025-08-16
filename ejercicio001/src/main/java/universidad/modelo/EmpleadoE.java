@@ -27,13 +27,11 @@ public class EmpleadoE extends Empleado {
         this.bonus = bonus;
     }
     
-    @Override
-    public void setSalarioBase(double salarioBase)
-    {
-        super.setSalarioBase(salarioBase + bonus);
-        
-    
-    } 
+//    @Override
+//    public void setSalarioBase(double salarioBase)
+//    {
+//        super.setSalarioBase(salarioBase + bonus);
+//    } 
 
     @Override
     public String toString() {
