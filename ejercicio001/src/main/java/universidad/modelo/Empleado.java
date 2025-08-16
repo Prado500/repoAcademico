@@ -21,7 +21,7 @@ public class  Empleado {
         this.noDocumento = noDocumento;
         this.tipoDocumento = tipoDocumento;
         this.nombre = nombre;
-        this.salarioBase = salarioBase;
+        setSalarioBase(salarioBase);
         this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
         this.estado = estado;
@@ -69,8 +69,11 @@ public class  Empleado {
     }
     
     public void setSalarioBase(double salarioBase) {
-        this.salarioBase = salarioBase;
-    }
+        if (salarioBase <= 0){
+        throw new IllegalArgumentException("Ingrese un valor positivo y mayor que 0 cuando digite la cifra del salario.");
+        }
+       this.salarioBase = salarioBase;
+        }
 
     public void setGenero(String genero) {
         this.genero = genero;

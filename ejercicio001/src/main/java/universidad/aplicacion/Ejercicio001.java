@@ -10,6 +10,7 @@ import java.util.List;
 import universidad.modelo.Empleado;
 import universidad.modelo.Profesor;
 import universidad.modelo.Directivo;
+import universidad.modelo.EmpleadoE;
 /**
  *
  * @author Alejandro
@@ -19,10 +20,11 @@ public class Ejercicio001 {
     private static List<Empleado> empleados = new ArrayList<>();
     
     public static void main(String[] args) {
-        
+     
+        try{
         double salarioAnual;
     
-        Empleado emp = new Empleado ("111", "CC", "David", 100, "M", LocalDate.now(), "AC");
+        Empleado emp = new Empleado ("111", "CC", "David", 300, "M", LocalDate.now(), "AC");
         System.out.println(emp);
         salarioAnual = emp.salarioAnual();
         System.out.println("Salario Anual: " + salarioAnual);
@@ -45,13 +47,21 @@ public class Ejercicio001 {
          salarioAnual = emp3.salarioAnual();
         System.out.println("Salario Anual: " + salarioAnual);
         empleados.add(emp3);
+        }catch(IllegalArgumentException e){
+            System.out.println("Error de digitacion del usuario: " + e);
+        }
+        
+       
+        
+        
         
        mostrarEmpleados();
        mostrarEmpleadosForEach();
        calcularNominaEmpleados();
         
-        
-        
+       Empleado empe = new EmpleadoE("111", "CC", "Muriel", 300, "M", LocalDate.now(), "AC", 10);
+       
+        System.out.println(empe);
     }
 
  //Implementar metodos para recorrer todos los empleados y calcular su nomina anual
