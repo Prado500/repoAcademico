@@ -84,6 +84,11 @@ public class  Empleado {
         this.estado = estado;
     }
 
+    public double salarioAnual() {
+    double salario = salarioBase * 12;
+    return salario;
+    }
+    
     @Override
     public String toString() {
         return "Empleado{" + "noDocumento=" + noDocumento + ", tipoDocumento=" + tipoDocumento + ", nombre=" + nombre + ", salarioBase=" + salarioBase + ", genero=" + genero + ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado + '}';

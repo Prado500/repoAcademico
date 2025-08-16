@@ -35,7 +35,12 @@ public class Directivo extends Empleado {
     public void setNivelMando(int nivelMando) {
         this.nivelMando = nivelMando;
     }
-
+    
+            @Override
+    public double salarioAnual(){
+    double salario = 1.5 * (getSalarioBase() * 12);
+    return salario;
+    }
          @Override
     public String toString() {
         return "Directivo{" + "noDocumento=" + super.getNoDocumento() + ", tipoDocumento=" + super.getTipoDocumento() + ", nombre=" + super.getNombre() + ", salarioBase=" + super.getSalarioBase() + ", genero=" + super.getGenero() + ", numProgDirige=" + numProgDirige + ", nivelMando=" + nivelMando + '}';

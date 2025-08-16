@@ -40,10 +40,18 @@ public class Profesor extends Empleado {
     public void setMaxNivelEducativo(String maxNivelEducativo) {
         this.maxNivelEducativo = maxNivelEducativo;
     }
-
+    
+        @Override
+    public double salarioAnual(){
+    double salario = 1.1 * (getSalarioBase() * 12);
+    return salario;
+    
+    }
+    
+    
         @Override
     public String toString() {
-        return "Empleado{" + "noDocumento=" + super.getNoDocumento() + ", tipoDocumento=" + super.getTipoDocumento() + ", nombre=" + super.getNombre() + ", salarioBase=" + super.getSalarioBase() + ", genero=" + super.getGenero() + ", intHoraria=" + intHoraria + ", maxNivelEducativo=" + maxNivelEducativo + '}';
+        return "Profesor{" + "noDocumento=" + super.getNoDocumento() + ", tipoDocumento=" + super.getTipoDocumento() + ", nombre=" + super.getNombre() + ", salarioBase=" + super.getSalarioBase() + ", genero=" + super.getGenero() + ", intHoraria=" + intHoraria + ", maxNivelEducativo=" + maxNivelEducativo + '}';
     }
     
     
