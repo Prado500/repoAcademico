@@ -7,7 +7,7 @@ package ejercicio002.aplicacion;
 import ejercicio002.modelo.TipoA;
 
 /**
- *
+ * Este es el ejercicio 002.
  * @author Alejandro
  */
 public class Ejercicio002 {
