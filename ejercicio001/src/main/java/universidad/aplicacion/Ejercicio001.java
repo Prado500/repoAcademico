@@ -14,6 +14,8 @@ import universidad.modelo.EmpleadoE;
 /**
  *
  * @author Alejandro
+ * 
+ * Se dejó la validación del atributo setSalarioBase de forma que no sea posible que la sobreescritura de un hijo de ese método afecte la asignación de valores desde el constructor padre.
  */
 public class Ejercicio001 {
 
