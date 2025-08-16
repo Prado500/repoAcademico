@@ -23,7 +23,9 @@ public class Ejercicio001 {
      
         try{
         double salarioAnual;
-    
+        
+        
+        
         Empleado emp = new Empleado ("111", "CC", "David", 300, "M", LocalDate.now(), "AC");
         System.out.println(emp);
         salarioAnual = emp.salarioAnual();
@@ -47,7 +49,14 @@ public class Ejercicio001 {
          salarioAnual = emp3.salarioAnual();
         System.out.println("Salario Anual: " + salarioAnual);
         empleados.add(emp3);
-        }catch(IllegalArgumentException e){
+        
+//        Empleado empe = new EmpleadoE("111", "CC", "Muriel", 300, "M", LocalDate.now(), "AC", 10); 
+//        System.out.println(empe);
+//        empe.setSalarioBase(empe.getSalarioBase());
+//        System.out.println(empe); //Ojo que puedo sobreescribir un set si lo necesito.
+        
+        }
+        catch(IllegalArgumentException e){
             System.out.println("Error de digitacion del usuario: " + e);
         }
         
@@ -59,9 +68,7 @@ public class Ejercicio001 {
        mostrarEmpleadosForEach();
        calcularNominaEmpleados();
         
-       Empleado empe = new EmpleadoE("111", "CC", "Muriel", 300, "M", LocalDate.now(), "AC", 10);
-       
-        System.out.println(empe);
+
     }
 
  //Implementar metodos para recorrer todos los empleados y calcular su nomina anual
