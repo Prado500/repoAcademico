@@ -8,7 +8,7 @@ package com.universidad.gui.vista;
  *
  * @author Alejandro
  */
-public class Mavenproject1 {
+public class EjecutarGUI {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
