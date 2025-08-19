@@ -22,27 +22,41 @@ public class Empleado {
     private String nombre;
     private double salarioBase;
     private String fechaNacimiento;
-    public static final Pattern PATRON_VERIFICACION = Pattern.compile("^\\d+$");
+    private String estatus;
+    public static final Pattern PATRON_VERIFICACION = Pattern.compile("^\\d{6,12}$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada del número de identificación es idóneo o nó (solo se permiten números del 1 al 9) 
+    public static final Pattern NOMBRE_CARACTERES_PERMITIDOS = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ\\s]{1,50}$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada del nombre es idónea
+    public static final Pattern IDENTIFICACIONES_PERMITIDAS = Pattern.compile("^(CC|CE|PA)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del tipo de documento sea idónea (solo se aceptan "CC" "CE" o "PA")
+    public static final Pattern ESTATUS_PERMITIDOS = Pattern.compile("^(AC|IN)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del estatus sea idónea (solo se aceptan "AC" o "IA")
 
-    public Empleado(String nombre, double salrioBase) {
+    public Empleado(String nombre, double salarioBase, String estatus) {
+
+        validarNombre(nombre);
 
         this.nombre = Objects.requireNonNull(nombre, "El nombre no puede ser nulo ");
 
-        if (salarioBase <= 0) {
+        if (salarioBase <= 0.0) {
             throw new IllegalArgumentException("Ingrese un valor para el salario que sea positivo y mayor que 0");
         }
 
         this.salarioBase = Objects.requireNonNull(salarioBase, "El salario base no puede ser nulo ");
-
+        validarEstatus(estatus);
+        this.estatus = estatus;
     }
 
-    public Empleado(String noDoumento, String tipoDocumento, String nombre, double salarioBase, String fechaNacimiento) {
-        
-        this(nombre, salarioBase);
-        validarnoDocumento(noDoumento);
+    public Empleado(String noDoumento, String tipoDocumento, String nombre, double salarioBase, String fechaNacimiento, String estatus) {
+
+        this(nombre, salarioBase, estatus);
+
+        validarNoDocumento(noDoumento);
+
         this.noDoumento = noDoumento;
+
+        validarTipoDocumento(tipoDocumento);
+
         this.tipoDocumento = tipoDocumento;
+
         validarFechaNacimiento(fechaNacimiento);
+
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -86,14 +100,55 @@ public class Empleado {
         return fechaNacimiento;
     }
 
+    public String getEstatus() {
+        return estatus;
+    }
+
     public static Pattern getPATRON_VERIFICACION() {
         return PATRON_VERIFICACION;
     }
-    
-    private void validarnoDocumento(String noDocumento) {
+
+    public static Pattern getNOMBRE_CARACTERES_PERMITIDOS() {
+        return NOMBRE_CARACTERES_PERMITIDOS;
+    }
+
+    public static Pattern getIDENTIFICACIONES_PERMITIDAS() {
+        return IDENTIFICACIONES_PERMITIDAS;
+    }
+
+    public static Pattern getESTATUS_PERMITIDOS() {
+        return ESTATUS_PERMITIDOS;
+    }
+
+    private void validarNoDocumento(String noDocumento) {
 
         if (noDocumento.isBlank() || (!PATRON_VERIFICACION.matcher(noDocumento).matches())) {
-            throw new IllegalArgumentException("Recuerde que el número de documento no puede estar en blanco y solo puede contener cifras del 0 al 9");
+            throw new IllegalArgumentException("""
+                                               Recuerde que el campo del número de documento no puede
+                                               estar en blanco y solo puede contener cifras del 0 al 9.
+                                               
+                                               Tambien recuerde que los números de identificación en Colombia
+                                               solo cuentan con entre 6 y 10 dígitos.""");
+        }
+    }
+
+    private void validarTipoDocumento(String tipoDocumento) {
+        if (tipoDocumento.isBlank() || (!IDENTIFICACIONES_PERMITIDAS.matcher(tipoDocumento).matches())) {
+            throw new IllegalArgumentException("""
+                                               Solo puede ingresar "CC" para cédula de ciudadanía
+                                               "CE" para cédula de extranjería o "PA" para
+                                                pasaporte.""");
+        }
+    }
+
+    private void validarNombre(String nombre) {
+        if (nombre.isBlank() || (!NOMBRE_CARACTERES_PERMITIDOS.matcher(nombre).matches())) {
+            throw new IllegalArgumentException("""
+                                               Recuerde que el campo del nombre no puede estar
+                                               en blanco y que los nombres solo pueden incluir
+                                               combinaciones de palabras hechas con las vocales
+                                               y consonantes del alfabeto.
+                                                 """);
         }
     }
 
@@ -101,37 +156,56 @@ public class Empleado {
         Objects.requireNonNull(fechaNacimiento, "La fecha de nacimiento no puede ir vacia");
 
         if (!fechaNacimiento.matches("\\d{2}/\\d{2}/\\d{4}")) {
-            throw new IllegalArgumentException("Formato de fecha inválido.\nIngrese una fecha de acuerdo al formato DD/MM/AAAA. ");
+            throw new IllegalArgumentException("""
+                                               Formato de fecha inválido. Ingrese una fecha de acuerdo al
+                                               formato DD/MM/AAAA.
+                                              """);
         }
-
         try {
 
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yy").withResolverStyle(ResolverStyle.STRICT);
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
 
             LocalDate fecha = LocalDate.parse(fechaNacimiento, formato);
 
             LocalDate minFechaNacimiento = LocalDate.now().minusYears(100);
-           
+
             LocalDate maxFechaNacimiento = LocalDate.now().minusYears(18);
 
             if (fecha.isBefore(minFechaNacimiento) || fecha.isAfter(maxFechaNacimiento)) {
 
-                throw new IllegalArgumentException("La fecha de nacimiento no puede ser la de una persona mayor de 100 años.\ni menor de 18 años");            
+                throw new IllegalArgumentException("""
+                                                   La fecha de nacimiento no puede ser la de una persona
+                                                   mayor de 100 años ni menor de 18 años.
+                                                  """);
             }
 
             return fecha;
-            
+
         } catch (DateTimeParseException e) {
-            
+
             throw new IllegalArgumentException("Error de digitación de la fecha: " + e.getMessage());
         }
-    
-        
-    
+
     }
 
-    
+    private void validarEstatus(String estatus) {
+        if (estatus.isBlank() || (!ESTATUS_PERMITIDOS.matcher(estatus).matches())) {
+            throw new IllegalArgumentException("""
+                                               Recuerde que el campo del estatus no puede estar
+                                               en blanco y que el estatus solo puede ser "AC" o 
+                                               "IN".
+                                                 """);
+        }
+    }
 
+//    @Override
+//    public String toString() {
+//        return "Empleado{" + "noDoumento=" + noDoumento + ", tipoDocumento=" + tipoDocumento + ", nombre=" + nombre + ", salarioBase=" + salarioBase + ", fechaNacimiento=" + fechaNacimiento + ", estatus=" + estatus + '}';
+//    }
     
-    
+    @Override
+    public String toString() {
+        return "Empleado{" + "nombre=" + nombre + ", salarioBase=" + salarioBase + ", estatus=" + estatus + '}';
+    }
+
 }
