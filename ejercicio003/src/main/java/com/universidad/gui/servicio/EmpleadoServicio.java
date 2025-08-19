@@ -19,13 +19,18 @@ import java.util.List;
  */
 public class EmpleadoServicio <T extends Empleado> {
 
-    private List<T> elementos = new ArrayList<>();
+    private List<T> elementos; 
+    
+    public EmpleadoServicio(){
+    this.elementos = new ArrayList<>();
+    
+    }
 
     public void agregar(T elemento) {
         elementos.add(elemento);
     }
     
     public List<T> mostrar(List<T> elementos){
-        return this.elementos; 
+        return new ArrayList<>(elementos); 
     }
 }
