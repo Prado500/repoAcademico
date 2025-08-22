@@ -6,6 +6,8 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.servicio.EmpleadoServicio;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import javax.swing.JOptionPane;
 
 /**
@@ -207,7 +209,12 @@ public class GUISearchEmpleadoPorNoDocumento extends javax.swing.JFrame {
             Empleado emp = empleadoServicio.searchElementoByNoDocumento(noDocumento);
             mostrar();
             this.lblNombre.setText(emp.getNombre());
-            this.lblSalario.setText(String.format("%.0f", emp.getSalarioBase()));
+            DecimalFormat formato = new DecimalFormat("#,##0.00");
+            DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+            simbolos.setGroupingSeparator('.');
+            simbolos.setDecimalSeparator(',');
+            formato.setDecimalFormatSymbols(simbolos);
+            this.lblSalario.setText("$ " + formato.format(emp.getSalarioBase()));
             this.lblEstatus.setText(emp.getEstatus());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
