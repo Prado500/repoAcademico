@@ -36,11 +36,15 @@ public class EmpleadoServicio<T extends Empleado> {
 
     public T searchElementoByNoDocumento(String noDocumento) {
         T elementoRetorno = null;
+        System.out.println(elementos);
         for (T elemento : elementos) {
             if (elemento.getNoDoumento().equals(noDocumento)) {
                 elementoRetorno = elemento;
-            }
-
+            } 
+        }
+        
+        if(elementoRetorno == null){
+                throw new IllegalArgumentException("No se encontró ningún registro con noDocumento " + noDocumento);
         }
         return elementoRetorno;
     }

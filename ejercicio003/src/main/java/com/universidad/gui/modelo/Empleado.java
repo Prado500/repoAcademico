@@ -28,8 +28,11 @@ public class Empleado {
     public static final Pattern IDENTIFICACIONES_PERMITIDAS = Pattern.compile("^(CC|CE|PA)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del tipo de documento sea idónea (solo se aceptan "CC" "CE" o "PA")
     public static final Pattern ESTATUS_PERMITIDOS = Pattern.compile("^(AC|IN)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del estatus sea idónea (solo se aceptan "AC" o "IA")
 
-    public Empleado(String nombre, double salarioBase, String estatus) {
-
+    public Empleado( String noDocumento, String nombre, double salarioBase, String estatus) {
+        
+        validarNoDocumento(noDocumento);
+        this.noDoumento = noDocumento;
+        
         validarNombre(nombre);
 
         this.nombre = Objects.requireNonNull(nombre, "El nombre no puede ser nulo ");
@@ -45,11 +48,7 @@ public class Empleado {
 
     public Empleado(String noDoumento, String tipoDocumento, String nombre, double salarioBase, String fechaNacimiento, String estatus) {
 
-        this(nombre, salarioBase, estatus);
-
-        validarNoDocumento(noDoumento);
-
-        this.noDoumento = noDoumento;
+        this(noDoumento, nombre, salarioBase, estatus);
 
         validarTipoDocumento(tipoDocumento);
 

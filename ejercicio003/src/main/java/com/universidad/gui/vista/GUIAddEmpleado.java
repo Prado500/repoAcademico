@@ -25,6 +25,14 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
         setLocationRelativeTo(null);
         this.empleadoServicio = servicio;
     }
+    
+    public void limpiar(){
+    this.txtNombre.setText(" ");
+    this.txtSalario.setText(" ");
+    this.txtEstatus.setText(" ");
+    this.txtNoDocumento.setText(" ");
+   
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +50,8 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
         txtSalario = new javax.swing.JTextField();
         jLabelEstatus = new javax.swing.JLabel();
         txtEstatus = new javax.swing.JTextField();
+        jLabelNoDocumento = new javax.swing.JLabel();
+        txtNoDocumento = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
@@ -62,6 +72,8 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
             }
         });
 
+        jLabelNoDocumento.setText("noDocumento");
+
         javax.swing.GroupLayout jPanelAddEmpleadoLayout = new javax.swing.GroupLayout(jPanelAddEmpleado);
         jPanelAddEmpleado.setLayout(jPanelAddEmpleadoLayout);
         jPanelAddEmpleadoLayout.setHorizontalGroup(
@@ -69,17 +81,18 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
             .addGroup(jPanelAddEmpleadoLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelAddEmpleadoLayout.createSequentialGroup()
-                        .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 72, 72)
-                        .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                            .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtNombre)
-                                .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)))))
+                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabelNoDocumento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelEstatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                .addGap(72, 72, 72)
+                .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                        .addComponent(txtNombre)
+                        .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+                    .addComponent(txtNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanelAddEmpleadoLayout.setVerticalGroup(
@@ -97,7 +110,11 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         btnGuardar.setText("Guardar");
@@ -126,7 +143,7 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
                         .addComponent(btnSalir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +154,7 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnSalir))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,9 +174,10 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
             String nombre = txtNombre.getText();
             double salario = Double.parseDouble(txtSalario.getText());
             String estatus = txtEstatus.getText();
-            
-            Empleado empleado = new Empleado(nombre, salario, estatus);
-            
+            String noDocumento = txtNoDocumento.getText();
+            Empleado empleado = new Empleado(noDocumento, nombre, salario, estatus);
+            empleadoServicio.agregar(empleado);
+            limpiar();
         
         }catch(Exception e){
           JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -207,10 +225,12 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabelEstatus;
+    private javax.swing.JLabel jLabelNoDocumento;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelSalario;
     private javax.swing.JPanel jPanelAddEmpleado;
     private javax.swing.JTextField txtEstatus;
+    private javax.swing.JTextField txtNoDocumento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSalario;
     // End of variables declaration//GEN-END:variables

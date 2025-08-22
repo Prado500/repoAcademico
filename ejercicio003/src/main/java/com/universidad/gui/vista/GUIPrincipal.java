@@ -43,6 +43,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         menuArchivo = new javax.swing.JMenu();
         menuEmpleado = new javax.swing.JMenu();
         itemAddEmpleado = new javax.swing.JMenuItem();
+        jMenuItemSearchEmpleado = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         itemAcercaDe = new javax.swing.JMenuItem();
 
@@ -64,6 +65,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
             }
         });
         menuEmpleado.add(itemAddEmpleado);
+
+        jMenuItemSearchEmpleado.setText("SearchEmplado");
+        jMenuItemSearchEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSearchEmpleadoActionPerformed(evt);
+            }
+        });
+        menuEmpleado.add(jMenuItemSearchEmpleado);
 
         jMenuBar1.add(menuEmpleado);
 
@@ -107,6 +116,12 @@ public class GUIPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_itemAddEmpleadoActionPerformed
 
+    private void jMenuItemSearchEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSearchEmpleadoActionPerformed
+        GUISearchEmpleadoPorNoDocumento gui = new GUISearchEmpleadoPorNoDocumento(this.empleadoServicio);
+        gui.setVisible(true);
+       
+    }//GEN-LAST:event_jMenuItemSearchEmpleadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -146,6 +161,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemAcercaDe;
     private javax.swing.JMenuItem itemAddEmpleado;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemSearchEmpleado;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenu menuEmpleado;
