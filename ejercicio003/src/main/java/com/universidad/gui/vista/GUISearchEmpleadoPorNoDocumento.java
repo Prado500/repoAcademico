@@ -207,7 +207,7 @@ public class GUISearchEmpleadoPorNoDocumento extends javax.swing.JFrame {
             Empleado emp = empleadoServicio.searchElementoByNoDocumento(noDocumento);
             mostrar();
             this.lblNombre.setText(emp.getNombre());
-            this.lblSalario.setText(Double.toString(emp.getSalarioBase()));
+            this.lblSalario.setText(String.format("%.0f", emp.getSalarioBase()));
             this.lblEstatus.setText(emp.getEstatus());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
