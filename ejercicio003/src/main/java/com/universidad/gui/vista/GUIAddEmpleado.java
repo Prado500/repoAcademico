@@ -171,10 +171,10 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try{
         
-            String nombre = txtNombre.getText();
-            double salario = Double.parseDouble(txtSalario.getText());
-            String estatus = txtEstatus.getText();
-            String noDocumento = txtNoDocumento.getText();
+            String nombre = txtNombre.getText().strip().toUpperCase();
+            double salario = Double.parseDouble(txtSalario.getText().strip());
+            String estatus = txtEstatus.getText().strip().toUpperCase();
+            String noDocumento = txtNoDocumento.getText().strip();
             Empleado empleado = new Empleado(noDocumento, nombre, salario, estatus);
             empleadoServicio.agregar(empleado);
             limpiar();
