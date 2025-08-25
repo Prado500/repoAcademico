@@ -6,8 +6,13 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.servicio.EmpleadoServicio;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,7 +31,13 @@ public class GUIListEmpleados extends javax.swing.JFrame {
         this.empleadoServicio = empleadoServicio;
         setLocationRelativeTo(null);
         this.jPanelListEmpleado.setVisible(false);
-
+        this.jPanelListEmpleado.setLayout(new BorderLayout());
+        this.jPanelListEmpleado.add(new JScrollPane(jTableListEmpleados), BorderLayout.CENTER);
+        JPanel panelBotones = new JPanel(new GridLayout());
+        panelBotones.add(jButton1Salir);
+        panelBotones.add(jButton2Mostrar);
+        getContentPane().add(jPanelListEmpleado, BorderLayout.CENTER);
+        getContentPane().add(panelBotones, BorderLayout.SOUTH);
     }
 
     public void mostrar() {
@@ -90,16 +101,18 @@ public class GUIListEmpleados extends javax.swing.JFrame {
             jPanelListEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListEmpleadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanelListEmpleadoLayout.setVerticalGroup(
             jPanelListEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListEmpleadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        getContentPane().add(jPanelListEmpleado, java.awt.BorderLayout.CENTER);
 
         jButton1Salir.setText("Salir");
         jButton1Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +120,7 @@ public class GUIListEmpleados extends javax.swing.JFrame {
                 jButton1SalirActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1Salir, java.awt.BorderLayout.PAGE_START);
 
         jButton2Mostrar.setText("Mostrar");
         jButton2Mostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,33 +128,7 @@ public class GUIListEmpleados extends javax.swing.JFrame {
                 jButton2MostrarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton1Salir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2Mostrar))
-                    .addComponent(jPanelListEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jPanelListEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1Salir)
-                    .addComponent(jButton2Mostrar))
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
+        getContentPane().add(jButton2Mostrar, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -152,17 +140,17 @@ public class GUIListEmpleados extends javax.swing.JFrame {
     private void jButton2MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2MostrarActionPerformed
         try {
             List<Empleado> empleados = empleadoServicio.mostrar();
-            if (empleados != null) {
+            if (empleados.size() != 0) {
                 mostrar();
                 DefaultTableModel model = (DefaultTableModel) jTableListEmpleados.getModel();
                 model.setRowCount(0);
                 for (Empleado empleado : empleados) {
                     Object[] fila = {
                         empleado.getNoDoumento(),
-                         empleado.getTipoDocumento(),
-                         empleado.getNombre(),
-                         empleado.getSalarioBase(),
-                         empleado.getEstatus()
+                        empleado.getTipoDocumento(),
+                        empleado.getNombre(),
+                        empleado.getSalarioBase(),
+                        empleado.getEstatus()
                     };
                     model.addRow(fila);
                 }
