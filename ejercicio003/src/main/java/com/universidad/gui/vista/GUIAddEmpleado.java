@@ -178,6 +178,7 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
             Empleado empleado = new Empleado(noDocumento, nombre, salario, estatus);
             empleadoServicio.agregar(empleado);
             limpiar();
+            JOptionPane.showMessageDialog(this, "Empleado con nombre " + empleado.getNombre() + " y documento No." +empleado.getNoDoumento()+ " creado exitosamente ");
         
         }catch(Exception e){
           JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
