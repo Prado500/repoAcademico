@@ -30,8 +30,15 @@ public class EmpleadoServicio<T extends Empleado> {
         elementos.add(elemento);
     }
 
-    public List<T> mostrar(List<T> elementos) {
-        return new ArrayList<>(elementos);
+//    public List<T> mostrar(List<T> elementos) {
+//        return new ArrayList<>(elementos);
+//    }
+    public List<T> mostrar() {
+        List<T> elementosMostrar = new ArrayList<>();
+        for (T elemento : this.elementos) {
+            elementosMostrar.add(elemento);
+        }
+        return elementosMostrar;
     }
 
     public T searchElementoByNoDocumento(String noDocumento) {
@@ -40,11 +47,11 @@ public class EmpleadoServicio<T extends Empleado> {
         for (T elemento : elementos) {
             if (elemento.getNoDoumento().equals(noDocumento)) {
                 elementoRetorno = elemento;
-            } 
+            }
         }
-        
-        if(elementoRetorno == null){
-                throw new IllegalArgumentException("No se encontró ningún registro con noDocumento " + noDocumento);
+
+        if (elementoRetorno == null) {
+            throw new IllegalArgumentException("No se encontró ningún registro con noDocumento " + noDocumento);
         }
         return elementoRetorno;
     }

@@ -44,6 +44,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         menuEmpleado = new javax.swing.JMenu();
         itemAddEmpleado = new javax.swing.JMenuItem();
         jMenuItemSearchEmpleado = new javax.swing.JMenuItem();
+        ListEmpleado = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         itemAcercaDe = new javax.swing.JMenuItem();
 
@@ -73,6 +74,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
             }
         });
         menuEmpleado.add(jMenuItemSearchEmpleado);
+
+        ListEmpleado.setText("ListEmpleados");
+        ListEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListEmpleadoActionPerformed(evt);
+            }
+        });
+        menuEmpleado.add(ListEmpleado);
 
         jMenuBar1.add(menuEmpleado);
 
@@ -122,6 +131,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jMenuItemSearchEmpleadoActionPerformed
 
+    private void ListEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListEmpleadoActionPerformed
+        GUIListEmpleados guiListEmpleados = new GUIListEmpleados(this.empleadoServicio);
+        guiListEmpleados.setVisible(true);
+    }//GEN-LAST:event_ListEmpleadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -158,6 +172,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ListEmpleado;
     private javax.swing.JMenuItem itemAcercaDe;
     private javax.swing.JMenuItem itemAddEmpleado;
     private javax.swing.JMenuBar jMenuBar1;
