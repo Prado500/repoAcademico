@@ -7,9 +7,14 @@ package com.universidad.gui.vista;
 import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.servicio.EmpleadoServicio;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.List;
+import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,9 +38,28 @@ public class GUIListEmpleados extends javax.swing.JFrame {
         this.jPanelListEmpleado.setVisible(false);
         this.jPanelListEmpleado.setLayout(new BorderLayout());
         this.jPanelListEmpleado.add(new JScrollPane(jTableListEmpleados), BorderLayout.CENTER);
-        JPanel panelBotones = new JPanel(new GridLayout());
-        panelBotones.add(jButton1Salir);
-        panelBotones.add(jButton2Mostrar);
+        JPanel panelBotones = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        jButton1Salir.setPreferredSize(new Dimension(100, 30));
+        jButton2Mostrar.setPreferredSize(new Dimension(100, 30));
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0; // No se expande horizontalmente
+        gbc.anchor = GridBagConstraints.WEST; // Anclar a la izquierda
+        gbc.insets = new Insets(0, 38, 10, 0); // (top, left, bottom, right)
+        panelBotones.add(jButton1Salir, gbc);
+
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1; // Toma todo el espacio horizontal disponible
+        gbc.anchor = GridBagConstraints.EAST; // Anclar a la derecha
+        gbc.insets = new Insets(0, 0, 10, 38); // Sin margen izquierdo
+        panelBotones.add(jButton2Mostrar, gbc);
+        
+       
         getContentPane().add(jPanelListEmpleado, BorderLayout.CENTER);
         getContentPane().add(panelBotones, BorderLayout.SOUTH);
     }
