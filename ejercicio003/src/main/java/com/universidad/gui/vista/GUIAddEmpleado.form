@@ -68,22 +68,24 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelNombre" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="jLabelSalario" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jLabelNoDocumento" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabelEstatus" alignment="0" pref="100" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabelTipoDocumento" max="32767" attributes="0"/>
+                      <Component id="jLabelNombre" alignment="0" pref="100" max="32767" attributes="0"/>
+                      <Component id="jLabelSalario" alignment="0" pref="100" max="32767" attributes="0"/>
+                      <Component id="jLabelNoDocumento" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelEstatus" alignment="0" pref="100" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtEstatus" pref="217" max="32767" attributes="0"/>
-                          <Component id="txtNombre" max="32767" attributes="0"/>
-                          <Component id="txtSalario" pref="217" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtEstatus" pref="217" max="32767" attributes="0"/>
+                              <Component id="txtNombre" max="32767" attributes="0"/>
+                              <Component id="txtSalario" pref="217" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="txtNoDocumento" min="-2" pref="217" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtNoDocumento" min="-2" pref="217" max="-2" attributes="0"/>
+                      <Component id="jComboBoxTipoDocumento" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
@@ -112,7 +114,12 @@
                       <Component id="jLabelNoDocumento" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="txtNoDocumento" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="114" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelTipoDocumento" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jComboBoxTipoDocumento" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="66" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -148,6 +155,28 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNoDocumento">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelTipoDocumento">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="tipoDocumento"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jComboBoxTipoDocumento">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="CC"/>
+                <StringItem index="1" value="CE"/>
+                <StringItem index="2" value="PA"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxTipoDocumentoActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

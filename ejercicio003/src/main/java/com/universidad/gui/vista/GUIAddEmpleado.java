@@ -52,6 +52,8 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
         txtEstatus = new javax.swing.JTextField();
         jLabelNoDocumento = new javax.swing.JLabel();
         txtNoDocumento = new javax.swing.JTextField();
+        jLabelTipoDocumento = new javax.swing.JLabel();
+        jComboBoxTipoDocumento = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
@@ -74,25 +76,36 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
 
         jLabelNoDocumento.setText("noDocumento");
 
+        jLabelTipoDocumento.setText("tipoDocumento");
+
+        jComboBoxTipoDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC", "CE", "PA" }));
+        jComboBoxTipoDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoDocumentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAddEmpleadoLayout = new javax.swing.GroupLayout(jPanelAddEmpleado);
         jPanelAddEmpleado.setLayout(jPanelAddEmpleadoLayout);
         jPanelAddEmpleadoLayout.setHorizontalGroup(
             jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAddEmpleadoLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabelNoDocumento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelEstatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelTipoDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jLabelSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jLabelNoDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addGap(72, 72, 72)
-                .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                        .addComponent(txtNombre)
-                        .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
-                    .addComponent(txtNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                            .addComponent(txtNombre)
+                            .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+                        .addComponent(txtNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanelAddEmpleadoLayout.setVerticalGroup(
@@ -114,7 +127,11 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         btnGuardar.setText("Guardar");
@@ -175,7 +192,8 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
             double salario = Double.parseDouble(txtSalario.getText().strip());
             String estatus = txtEstatus.getText().strip().toUpperCase();
             String noDocumento = txtNoDocumento.getText().strip();
-            Empleado empleado = new Empleado(noDocumento, nombre, salario, estatus);
+            String tipoDocumento = jComboBoxTipoDocumento.getSelectedItem().toString();
+            Empleado empleado = new Empleado(noDocumento, tipoDocumento, nombre, salario, estatus);
             empleadoServicio.agregar(empleado);
             limpiar();
             JOptionPane.showMessageDialog(this, "Empleado con nombre " + empleado.getNombre() + " y documento No." +empleado.getNoDoumento()+ " creado exitosamente ");
@@ -184,6 +202,10 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
           JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void jComboBoxTipoDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoDocumentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoDocumentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,10 +247,12 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> jComboBoxTipoDocumento;
     private javax.swing.JLabel jLabelEstatus;
     private javax.swing.JLabel jLabelNoDocumento;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelSalario;
+    private javax.swing.JLabel jLabelTipoDocumento;
     private javax.swing.JPanel jPanelAddEmpleado;
     private javax.swing.JTextField txtEstatus;
     private javax.swing.JTextField txtNoDocumento;

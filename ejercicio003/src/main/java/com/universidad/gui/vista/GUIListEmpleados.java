@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,14 +40,14 @@ public class GUIListEmpleados extends JFrame {
         jButton2Mostrar = new JButton("Mostrar");
         jPanelListEmpleado = new JPanel();
         jTableListEmpleados = new JTable();
-        
+
         // Configurar tabla
         DefaultTableModel model = new DefaultTableModel(
-            new Object[][]{},
-            new String[]{"Documento", "Tipo", "Nombre", "Salario", "Estatus"}
+                new Object[][]{},
+                new String[]{"Documento", "Tipo", "Nombre", "Salario", "Estatus"}
         );
         jTableListEmpleados.setModel(model);
-        
+
         // Configurar frame
         setTitle("Lista de Empleados");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -56,19 +58,19 @@ public class GUIListEmpleados extends JFrame {
     private void setupLayout() {
         // Layout principal
         setLayout(new BorderLayout());
-        
+
         // Panel de la tabla
         jPanelListEmpleado.setLayout(new BorderLayout());
         jPanelListEmpleado.add(new JScrollPane(jTableListEmpleados), BorderLayout.CENTER);
         jPanelListEmpleado.setVisible(false);
-        
+
         // Panel de botones
         JPanel panelBotones = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        
+
         jButton1Salir.setPreferredSize(new Dimension(100, 30));
         jButton2Mostrar.setPreferredSize(new Dimension(100, 30));
-        
+
         // Botón Salir (izquierda)
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -76,7 +78,7 @@ public class GUIListEmpleados extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 38, 10, 0);
         panelBotones.add(jButton1Salir, gbc);
-        
+
         // Botón Mostrar (derecha)
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -84,7 +86,7 @@ public class GUIListEmpleados extends JFrame {
         gbc.anchor = GridBagConstraints.EAST;
         gbc.insets = new Insets(10, 0, 10, 38);
         panelBotones.add(jButton2Mostrar, gbc);
-        
+
         // Agregar componentes al frame
         add(jPanelListEmpleado, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
@@ -92,12 +94,17 @@ public class GUIListEmpleados extends JFrame {
 
     private void setupListeners() {
         jButton1Salir.addActionListener(e -> dispose());
-        
+
         jButton2Mostrar.addActionListener(e -> {
             try {
                 List<Empleado> empleados = empleadoServicio.mostrar();
                 if (empleados != null && !empleados.isEmpty()) {
                     jPanelListEmpleado.setVisible(true);
+                    DecimalFormat formato = new DecimalFormat("#,##0.00");
+                    DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+                    simbolos.setGroupingSeparator('.');
+                    simbolos.setDecimalSeparator(',');
+                    formato.setDecimalFormatSymbols(simbolos);
                     DefaultTableModel model = (DefaultTableModel) jTableListEmpleados.getModel();
                     model.setRowCount(0);
                     for (Empleado empleado : empleados) {
@@ -105,7 +112,7 @@ public class GUIListEmpleados extends JFrame {
                             empleado.getNoDoumento(),
                             empleado.getTipoDocumento(),
                             empleado.getNombre(),
-                            empleado.getSalarioBase(),
+                            "$ " + formato.format(empleado.getSalarioBase()),
                             empleado.getEstatus()
                         };
                         model.addRow(fila);
@@ -119,5 +126,3 @@ public class GUIListEmpleados extends JFrame {
         });
     }
 }
-                 
-
