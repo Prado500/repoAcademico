@@ -55,4 +55,23 @@ public class EmpleadoServicio<T extends Empleado> {
         }
         return elementoRetorno;
     }
+
+    //actualizar 
+    public void actualizarElemento(String noDocumento, String tipoDocumento, String nombre, Double salario) {
+        T elementoEncontrado = null;
+        for (T elemento : elementos) {
+            if (elemento.getNoDoumento().equals(noDocumento)) {
+                elementoEncontrado = elemento;
+                elemento.setNoDoumento(noDocumento);
+                elemento.setTipoDocumento(tipoDocumento);
+                elemento.setNombre(nombre);
+                elemento.setSalarioBase(salario);
+            }
+        }
+
+        if (elementoEncontrado == null) {
+            throw new IllegalArgumentException("No fue posible actualizar al empleado con noDocumento " + noDocumento + ". Asegúrese que el noDocumento existe y que los datos ingresados son correctos. ");
+        }
+       
+    }
 }

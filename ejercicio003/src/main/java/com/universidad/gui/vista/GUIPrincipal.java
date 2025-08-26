@@ -45,6 +45,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         itemAddEmpleado = new javax.swing.JMenuItem();
         jMenuItemSearchEmpleado = new javax.swing.JMenuItem();
         ListEmpleado = new javax.swing.JMenuItem();
+        jMenuItemUpdateEmpleados = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         itemAcercaDe = new javax.swing.JMenuItem();
 
@@ -57,6 +58,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
         menuEmpleado.setText("Empleado");
         menuEmpleado.setName("Menu Empleado"); // NOI18N
+        menuEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEmpleadoActionPerformed(evt);
+            }
+        });
 
         itemAddEmpleado.setText("AddEmpleado");
         itemAddEmpleado.setName("Opcion Add Empleado"); // NOI18N
@@ -82,6 +88,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
             }
         });
         menuEmpleado.add(ListEmpleado);
+
+        jMenuItemUpdateEmpleados.setText("UpdateEmpleados");
+        jMenuItemUpdateEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemUpdateEmpleadosActionPerformed(evt);
+            }
+        });
+        menuEmpleado.add(jMenuItemUpdateEmpleados);
 
         jMenuBar1.add(menuEmpleado);
 
@@ -136,6 +150,15 @@ public class GUIPrincipal extends javax.swing.JFrame {
         guiListEmpleados.setVisible(true);
     }//GEN-LAST:event_ListEmpleadoActionPerformed
 
+    private void jMenuItemUpdateEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateEmpleadosActionPerformed
+        GUIActualizarEmpleado guiActualizarEmpleado = new GUIActualizarEmpleado(this.empleadoServicio);
+        guiActualizarEmpleado.setVisible(true);
+    }//GEN-LAST:event_jMenuItemUpdateEmpleadosActionPerformed
+
+    private void menuEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuEmpleadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -177,6 +200,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemAddEmpleado;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemSearchEmpleado;
+    private javax.swing.JMenuItem jMenuItemUpdateEmpleados;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenu menuEmpleado;

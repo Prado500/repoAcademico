@@ -63,10 +63,11 @@ public class GUIListEmpleados extends JFrame {
         jPanelListEmpleado.setLayout(new BorderLayout());
         jPanelListEmpleado.add(new JScrollPane(jTableListEmpleados), BorderLayout.CENTER);
         jPanelListEmpleado.setVisible(false);
-
+  
         // Panel de botones
         JPanel panelBotones = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        
 
         jButton1Salir.setPreferredSize(new Dimension(100, 30));
         jButton2Mostrar.setPreferredSize(new Dimension(100, 30));
