@@ -156,6 +156,11 @@ public class GUIEliminarEmpleado extends JFrame {
             if (empleadoABorrar == null) {
                 throw new IllegalArgumentException("No se ha encontrado un registro con noDocumento " + txtBuscar.getText());
             }
+            
+            if (this.txtDocumento.getText().isBlank()){
+               throw new IllegalArgumentException("Primero busque un empleado para poder eliminarlo. Recuerde hacerlo usando el número de documento del empleado");
+            }
+            
             int respuesta = JOptionPane.showConfirmDialog(
                     this,
                     "¿Está seguro que desea eliminar al empleado " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + "?",
@@ -163,7 +168,7 @@ public class GUIEliminarEmpleado extends JFrame {
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE
             );
-
+            
             if (respuesta == JOptionPane.YES_OPTION) {
                 empleadoServicio.eliminarLogicamenteElementoPorId(txtBuscar.getText());
                 JOptionPane.showMessageDialog(this, "Emplado " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + " eliminado exitosamente");
