@@ -43,6 +43,7 @@ public class GUISearchEmpleadoPorNoDocumento extends javax.swing.JFrame {
        jPanelSearchEmpleado.setVisible(true);
     }
     
+    
    
    
 
@@ -216,6 +217,8 @@ public class GUISearchEmpleadoPorNoDocumento extends javax.swing.JFrame {
             formato.setDecimalFormatSymbols(simbolos);
             this.lblSalario.setText("$ " + formato.format(emp.getSalarioBase()));
             this.lblEstatus.setText(emp.getEstatus());
+            limpiar();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }

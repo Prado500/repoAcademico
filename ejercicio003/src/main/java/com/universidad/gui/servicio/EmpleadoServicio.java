@@ -36,7 +36,9 @@ public class EmpleadoServicio<T extends Empleado> {
     public List<T> mostrar() {
         List<T> elementosMostrar = new ArrayList<>();
         for (T elemento : this.elementos) {
-            elementosMostrar.add(elemento);
+            if (!(elemento.getEstatus().equals("IN"))) {
+                elementosMostrar.add(elemento);
+            }
         }
         return elementosMostrar;
     }
@@ -72,6 +74,22 @@ public class EmpleadoServicio<T extends Empleado> {
         if (elementoEncontrado == null) {
             throw new IllegalArgumentException("No fue posible actualizar al empleado con noDocumento " + noDocumento + ". Asegúrese que el noDocumento existe y que los datos ingresados son correctos. ");
         }
-       
+
     }
+
+    public void eliminarLogicamenteElementoPorId(String id) {
+        T elementoEncontrado = null;
+        for (T elemento : elementos) {
+            if (elemento.getNoDoumento().equals(id)) {
+                elementoEncontrado = elemento;
+                elemento.setEstatus("IN");
+            }
+        }
+
+        if (elementoEncontrado == null) {
+            throw new IllegalArgumentException("No fue posible actualizar al empleado con noDocumento " + id + ". Asegúrese que el noDocumento existe y que los datos ingresados son correctos. ");
+        }
+
+    }
+
 }

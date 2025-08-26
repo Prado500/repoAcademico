@@ -1,0 +1,37 @@
+[33m9259ce1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;32ma[m[33m)[m Lissta versión final del GUIActualizarEmpleado, con correción de bug de salario en formato incómodo para actualizar
+[33m2ef87c4[m Lista versión funcional del GUIActualizarEmpleado con lógica correjida, botónes en posición correcta y funcionamiento apropiado
+[33m78766d5[m Lista versión funcional del GUIActualizarEmpleado con lógica correjida, botónes en posición correcta y funcionamiento apropiado
+[33m3cbc15f[m Lista primera versión del actualizar empleado, usando gridBagLayout para asegurar la posición de los botones inferiores.
+[33m7aa83b8[m Primera version con el Actualizar Empleado listo, pero no se ve la ventana
+[33m7a44a54[m Creacion del JFrame para actualizar empleados. no está listo
+[33m32c5dd9[m Lista versión final del GUIListEmpleados con salario bajo formato especial definido usando concatenacion de strings y DecimalFormat junto con DecimalFormatSymbols. Se modifico el constructor de Emplado para que en el se incluyan los atributos noDocumento, tipoDocumento, nombre, salarioBase y Estatus. Ahora el constructor con todos los argumentos de Empleado llama a un constructor preliminar de 5 argumentos y no 4
+[33m3c66183[m Actualizada GUIListEmpleado con botones fijos en la zona inferior del Jframe mediante el uso de gridBagLayout e insets, se tuvo que descartar el GUIBuilder de apache porque estaba presentando un bug de la aparición de un Jpanel fantasma que bloqueaba la vista del Jtable donde se muestra la información
+[33m8e5456f[m Actualizada GUIListEmpleado con botones fijos en la zona inferior del Jframe mediante el uso de gridBagLayout e insets, se tuvo que descartar el GUIBuilder de apache porque estaba presentando un bug de la aparición de un Jpanel fantasma que bloqueaba la vista del Jtable donde se muestra la información
+[33m0d07577[m corregido tamanio de botones salir y guardar del GUIListEmpleado utilizando GridBagLayout e insets
+[33m7b9a975[m Corregido problema de spwaneo de los botones salir y mostrar del GUIListEmpleados usando grid layout
+[33m44e51ad[m Finalizada primera versión del ListEmpleados usando un Jtable para mostrarlos como filas de una tabla con la información separada por columnas
+[33ma37fb9f[m Implementada funcionalidad de mostrado del salario ajustada para disponer de símbolos (. para los miles y , para los decimales) mediante DecimalFormat y DecimalFormatSymbols
+[33m124631d[m formateada la salida del salarioBase
+[33m72af526[m Uso de metodos strip() y toUpperCase() para evitar errores por digitacion de espacios y aplicar consistencia en la entrada de nombres
+[33mdd637c1[m Se cambio los txtFields donde se mostraba la informacion de los empleados por Jlabels, se deprecó el método bloquearTxt()
+[33m7a235b7[m Lista GUISearchEmpleadoPorCedula con metodos bloquearTxt() y mostrar() en el action performed del boton buscar para bloquear la entrata de texto y mostrar los jtxtfields ocultos
+[33m9433e38[m Creacion del metodo generico para la familia Empleado searchEmpleadoPorNoDocumento en el EmpleadoServicio
+[33mb811933[m GUI finalizado con Lectura de empleados
+[33me213965[m Adicion de EmpleadoServicio usando clase generica para futuras iteraciones con diferentes objetos de la familia Empleado y metodos para agregar elementos a la lista y mostrar elementos
+[33me02f289[m Merge pull request #4 from Prado500/lenovo
+[33m193d456[m[33m ([m[1;31morigin/lenovo[m[33m)[m Lista clase Empleado con atributo estatus y to string que solo muestra el nombre, el salario base y el estatus
+[33m73cae29[m Subida del ejercicio 003 y creación de la clase Empleado con validaciones para el noDocumento, el nombre, la fechaNacimiento y el salarioBase
+[33mb5d04d9[m Se dejó la validación del atributo setSalarioBase de forma que no sea posible que la sobreescritura de un hijo de ese método afecte la asignación de valores desde el constructor padre.
+[33ma12c10e[m Incorporación del ejercicio 002 con POC de static con la clase TipoA y el atributo cargo
+[33mef9bfd0[m se dejo la validacion del atributo setSalarioBase de forma que no sea posible que la sobreescritura de un hijo de ese metodo afecte la asignacion de valores desde el constructor padre.
+[33m04c5b3d[m Comentareado el metodo que sobreescribe el SsetSalarioBase en el empleado especial
+[33me51d716[m Version con caso EmpleadoEspecial y setSalarioBase sobreescrito
+[33m73ff585[m Finalizada la primera POC sobre polimorfismo, impresion de los empleados y calculo de sus nominas
+[33meb61d33[m Merge pull request #3 from Prado500/lenovo. Retoque final a los to-string para que impriman solo la informacion deseada.
+[33madbdef3[m[33m ([m[1;32mlenovo[m[33m)[m Retoque final a los to-string de cada clase del modelo
+[33m559c91b[m Merge pull request #2 from Prado500/lenovo Se modifico los atributos en los constructores de las clases del modelo para tener de ultimos los que son propios de clase
+[33mfe53527[m Solucionado orden de atributos en el constructor para coincidir con el usado por el profesor
+[33m6f4aa3c[m Merge pull request #1 from Prado500/lenovo. Se cambia la jerarquia de paquetes a buenas practicas de programacion en java. se corrige el pom para la correcta ejecucion del proyecto maven.
+[33m0a0d4f6[m Correccion de jerarquia de paquetes para respetar principio single responsability
+[33mec61b78[m Subida del ejercicio 001 sobre la organizacion donde docente, empSerGenerales y Directivo heredan de Empleado
+[33m618d291[m Primer commit

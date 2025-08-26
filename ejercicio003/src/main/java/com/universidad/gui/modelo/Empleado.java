@@ -76,7 +76,12 @@ public class Empleado {
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-
+    
+    public void setEstatus(String estatus) {
+        validarEstatus(estatus);
+        this.estatus = estatus;
+    }
+    
     public String getNoDoumento() {
         return noDoumento;
     }

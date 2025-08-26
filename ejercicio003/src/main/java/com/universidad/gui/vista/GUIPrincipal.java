@@ -46,6 +46,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuItemSearchEmpleado = new javax.swing.JMenuItem();
         ListEmpleado = new javax.swing.JMenuItem();
         jMenuItemUpdateEmpleados = new javax.swing.JMenuItem();
+        jMenuItemDeleteEmpleado = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         itemAcercaDe = new javax.swing.JMenuItem();
 
@@ -96,6 +97,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
             }
         });
         menuEmpleado.add(jMenuItemUpdateEmpleados);
+
+        jMenuItemDeleteEmpleado.setText("DeleteEmpleado");
+        jMenuItemDeleteEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDeleteEmpleadoActionPerformed(evt);
+            }
+        });
+        menuEmpleado.add(jMenuItemDeleteEmpleado);
 
         jMenuBar1.add(menuEmpleado);
 
@@ -159,6 +168,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuEmpleadoActionPerformed
 
+    private void jMenuItemDeleteEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteEmpleadoActionPerformed
+        GUIEliminarEmpleado guiEliminarEmpleado = new GUIEliminarEmpleado(this.empleadoServicio);
+        guiEliminarEmpleado.setVisible(true);
+    }//GEN-LAST:event_jMenuItemDeleteEmpleadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -199,6 +213,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemAcercaDe;
     private javax.swing.JMenuItem itemAddEmpleado;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemDeleteEmpleado;
     private javax.swing.JMenuItem jMenuItemSearchEmpleado;
     private javax.swing.JMenuItem jMenuItemUpdateEmpleados;
     private javax.swing.JMenu menuArchivo;
