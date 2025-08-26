@@ -125,12 +125,12 @@ public class GUIActualizarEmpleado extends JFrame {
             } else {
                 cmbTipoDocumento.setSelectedItem(empleado.getTipoDocumento());
                 txtNombre.setText(empleado.getNombre());
-                DecimalFormat formato = new DecimalFormat("#,##0.00");
-                DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-                simbolos.setGroupingSeparator('.');
-                simbolos.setDecimalSeparator(',');
-                formato.setDecimalFormatSymbols(simbolos);
-                txtSalario.setText(formato.format(empleado.getSalarioBase()));
+//                DecimalFormat formato = new DecimalFormat("#,##0.00");
+//                DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+//                simbolos.setGroupingSeparator('.');
+//                simbolos.setDecimalSeparator(',');
+//                formato.setDecimalFormatSymbols(simbolos);
+                txtSalario.setText(Double.toString(empleado.getSalarioBase()));
                 txtNuevoDocumento.setText(empleado.getNoDoumento());
                 mostrar();
             }
