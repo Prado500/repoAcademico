@@ -141,7 +141,7 @@ public class GUIEliminarEmpleado extends JFrame {
                 simbolos.setGroupingSeparator('.');
                 simbolos.setDecimalSeparator(',');
                 formato.setDecimalFormatSymbols(simbolos);
-                txtSalario.setText(Double.toString(empleado.getSalarioBase()));
+                txtSalario.setText("$ " + formato.format(empleado.getSalarioBase()));
                 txtDocumento.setText(empleado.getNoDoumento());
                 mostrar();
             }

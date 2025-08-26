@@ -47,12 +47,12 @@ public class EmpleadoServicio<T extends Empleado> {
         T elementoRetorno = null;
         System.out.println(elementos);
         for (T elemento : elementos) {
-            if (elemento.getNoDoumento().equals(noDocumento)) {
+            if (elemento.getNoDoumento().equals(noDocumento) && elemento.getEstatus().equals("AC")) {
                 elementoRetorno = elemento;
-            }
+            } 
         }
 
-        if (elementoRetorno == null) {
+        if (elementoRetorno == null || elementoRetorno.getEstatus().equals("IN")) {
             throw new IllegalArgumentException("No se encontró ningún registro con noDocumento " + noDocumento);
         }
         return elementoRetorno;
