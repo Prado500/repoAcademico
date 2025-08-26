@@ -14,6 +14,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,8 +26,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GUIActualizarEmpleado extends JFrame {
+
     private EmpleadoServicio<Empleado> empleadoServicio;
-    
+
     // Componentes
     private JPanel panelPrincipal;
     private JPanel panelBusqueda;
@@ -44,8 +47,8 @@ public class GUIActualizarEmpleado extends JFrame {
     private void initComponentsManual() {
         setTitle("Actualizar Empleado");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(600, 400);
-        
+        setSize(495, 425);
+
         // Inicializar todos los componentes ANTES de usarlos
         btnBuscar = new JButton("Buscar");
         btnSalir = new JButton("Salir");
@@ -55,17 +58,17 @@ public class GUIActualizarEmpleado extends JFrame {
         txtSalario = new JTextField();
         txtNuevoDocumento = new JTextField();
         cmbTipoDocumento = new JComboBox<>(new String[]{"CC", "CE", "PA"});
-        
+
         // Panel principal con BorderLayout
         panelPrincipal = new JPanel(new BorderLayout(10, 10));
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        
+
         // Panel de búsqueda (Norte)
         panelBusqueda = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelBusqueda.add(new JLabel("Buscar por # documento:"));
         panelBusqueda.add(txtBuscar);
         panelBusqueda.add(btnBuscar);
-        
+
         // Panel de datos (Centro) - Inicialmente oculto
         panelDatos = new JPanel(new GridLayout(4, 2, 5, 5));
         panelDatos.setBorder(BorderFactory.createTitledBorder("Datos del Empleado"));
@@ -78,7 +81,7 @@ public class GUIActualizarEmpleado extends JFrame {
         panelDatos.add(new JLabel("Nuevo # Documento:"));
         panelDatos.add(txtNuevoDocumento);
         panelDatos.setVisible(false);
-        
+
         // Panel de botones con GridBagLayout
         panelBotones = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -102,17 +105,17 @@ public class GUIActualizarEmpleado extends JFrame {
         gbc.anchor = GridBagConstraints.EAST;
         gbc.insets = new Insets(10, 0, 10, 38);
         panelBotones.add(btnActualizar, gbc);
-        
+
         // Agregar paneles al principal
         panelPrincipal.add(panelBusqueda, BorderLayout.NORTH);
         panelPrincipal.add(panelDatos, BorderLayout.CENTER);
         panelPrincipal.add(panelBotones, BorderLayout.SOUTH);
-        
+
         // Configurar action listeners
         btnBuscar.addActionListener(this::buscarEmpleado);
         btnActualizar.addActionListener(this::actualizarEmpleado);
         btnSalir.addActionListener(e -> dispose());
-        
+
         setContentPane(panelPrincipal);
     }
 
@@ -120,43 +123,47 @@ public class GUIActualizarEmpleado extends JFrame {
         try {
             Empleado empleado = empleadoServicio.searchElementoByNoDocumento(txtBuscar.getText());
             if (empleado == null) {
-                JOptionPane.showMessageDialog(this, "Empleado no encontrado");
-                panelDatos.setVisible(false);
+                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
+                limpiar();
             } else {
                 cmbTipoDocumento.setSelectedItem(empleado.getTipoDocumento());
                 txtNombre.setText(empleado.getNombre());
-                txtSalario.setText(String.valueOf(empleado.getSalarioBase()));
+                DecimalFormat formato = new DecimalFormat("#,##0.00");
+                DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+                simbolos.setGroupingSeparator('.');
+                simbolos.setDecimalSeparator(',');
+                formato.setDecimalFormatSymbols(simbolos);
+                txtSalario.setText(formato.format(empleado.getSalarioBase()));
                 txtNuevoDocumento.setText(empleado.getNoDoumento());
-                panelDatos.setVisible(true);
+                mostrar();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-            limpiarCampos();
         }
     }
 
     private void actualizarEmpleado(ActionEvent evt) {
         try {
             String id = txtBuscar.getText();
-            String tipoDocumento = cmbTipoDocumento.getSelectedItem().toString();
-            String nombre = txtNombre.getText();
-            double salario = Double.parseDouble(txtSalario.getText());
-            
-            empleadoServicio.actualizarElemento(id, tipoDocumento, nombre, salario);
-            JOptionPane.showMessageDialog(this, "Empleado actualizado correctamente");
-            
-            
+            empleadoServicio.actualizarElemento(id.strip(), cmbTipoDocumento.getSelectedItem().toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()));
+            JOptionPane.showMessageDialog(this, "Empleado con id " + id + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-            limpiarCampos();
         }
     }
 
-    private void limpiarCampos() {
+    private void limpiar() {
         txtBuscar.setText("");
         txtNombre.setText("");
         txtSalario.setText("");
         txtNuevoDocumento.setText("");
         panelDatos.setVisible(false);
     }
+
+    private void mostrar() {
+
+        panelDatos.setVisible(true);
+
+    }
+
 }
