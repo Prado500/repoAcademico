@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.universidad.gui.vista;
 
@@ -8,73 +8,84 @@ import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.servicio.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
-/**
- *
- * @author Alejandro
- */
-public class GUIActualizarEmpleado extends javax.swing.JFrame {
-
+public class GUIActualizarEmpleado extends JFrame {
     private EmpleadoServicio<Empleado> empleadoServicio;
+    
+    // Componentes
+    private JPanel panelPrincipal;
+    private JPanel panelBusqueda;
+    private JPanel panelDatos;
+    private JPanel panelBotones;
+    private JTextField txtBuscar, txtNombre, txtSalario, txtNuevoDocumento;
+    private JComboBox<String> cmbTipoDocumento;
+    private JButton btnBuscar, btnSalir, btnActualizar;
 
-    /**
-     * Creates new form GUIActualizarEmpleado
-     */
     public GUIActualizarEmpleado(EmpleadoServicio<Empleado> empleadoServicio) {
-        initComponents();
-        setupLayout();
-        setLocationRelativeTo(null);
         this.empleadoServicio = empleadoServicio;
+        initComponentsManual();
+        setLocationRelativeTo(null);
     }
 
-    private void setupLayout() {
-        // Layout principal
-        setLayout(new BorderLayout());
-
-        // Panel de la tabla
-        jPanelActualizarEmpleados.setLayout(new BorderLayout());
-        jPanelActualizarEmpleados.add(new JScrollPane(jPanelActualizarEmpleados), BorderLayout.CENTER);
-        jPanelActualizarEmpleados.setVisible(false);
-
-        //panel de búsqueda
-        this.jPanelBusqueda.setLayout(new GridBagLayout());
-
-        // Panel de botones
-        JPanel panelBotones = new JPanel(new GridBagLayout());
+    private void initComponentsManual() {
+        setTitle("Actualizar Empleado");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(600, 400);
+        
+        // Inicializar todos los componentes ANTES de usarlos
+        btnBuscar = new JButton("Buscar");
+        btnSalir = new JButton("Salir");
+        btnActualizar = new JButton("Actualizar");
+        txtBuscar = new JTextField(15);
+        txtNombre = new JTextField();
+        txtSalario = new JTextField();
+        txtNuevoDocumento = new JTextField();
+        cmbTipoDocumento = new JComboBox<>(new String[]{"CC", "CE", "PA"});
+        
+        // Panel principal con BorderLayout
+        panelPrincipal = new JPanel(new BorderLayout(10, 10));
+        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        
+        // Panel de búsqueda (Norte)
+        panelBusqueda = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelBusqueda.add(new JLabel("Buscar por # documento:"));
+        panelBusqueda.add(txtBuscar);
+        panelBusqueda.add(btnBuscar);
+        
+        // Panel de datos (Centro) - Inicialmente oculto
+        panelDatos = new JPanel(new GridLayout(4, 2, 5, 5));
+        panelDatos.setBorder(BorderFactory.createTitledBorder("Datos del Empleado"));
+        panelDatos.add(new JLabel("Tipo Documento:"));
+        panelDatos.add(cmbTipoDocumento);
+        panelDatos.add(new JLabel("Nombre:"));
+        panelDatos.add(txtNombre);
+        panelDatos.add(new JLabel("Salario:"));
+        panelDatos.add(txtSalario);
+        panelDatos.add(new JLabel("Nuevo # Documento:"));
+        panelDatos.add(txtNuevoDocumento);
+        panelDatos.setVisible(false);
+        
+        // Panel de botones con GridBagLayout
+        panelBotones = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        jButtonSalir.setPreferredSize(new Dimension(100, 30));
-        jButtonActualizar.setPreferredSize(new Dimension(100, 30));
-
-        // Label búsqueda (Arriba a la izquierda)
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(10, 38, 10, 0);
-        jPanelBusqueda.add(jButtonSalir, gbc);
-
-        // JText Búsqueda (Arriba al centro)
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.weightx = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
-        //gbc.insets = new Insets(10, 38, 10, 0);
-        jPanelBusqueda.add(jButtonSalir, gbc);
-
-        // Botón Buscar (Arriba a la derecha)      
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        gbc.weightx = 2;
-        gbc.anchor = GridBagConstraints.EAST;
-        gbc.insets = new Insets(10, 0, 10, 38);
-        jPanelBusqueda.add(jButtonActualizar, gbc);
+        // Configurar tamaño preferido de botones
+        btnSalir.setPreferredSize(new Dimension(100, 30));
+        btnActualizar.setPreferredSize(new Dimension(100, 30));
 
         // Botón Salir (izquierda)
         gbc.gridx = 0;
@@ -82,295 +93,70 @@ public class GUIActualizarEmpleado extends javax.swing.JFrame {
         gbc.weightx = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10, 38, 10, 0);
-        panelBotones.add(jButtonSalir, gbc);
+        panelBotones.add(btnSalir, gbc);
 
-        // Botón Actualizar (derecha)      
-        gbc.gridx = 2;
+        // Botón Actualizar (derecha)
+        gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.weightx = 2;
+        gbc.weightx = 1;
         gbc.anchor = GridBagConstraints.EAST;
         gbc.insets = new Insets(10, 0, 10, 38);
-        panelBotones.add(jButtonActualizar, gbc);
-
-        // Agregar componentes al frame
-        add(jPanelBusqueda, BorderLayout.NORTH);
-        add(jPanelActualizarEmpleados, BorderLayout.CENTER);
-        add(panelBotones, BorderLayout.SOUTH);
+        panelBotones.add(btnActualizar, gbc);
+        
+        // Agregar paneles al principal
+        panelPrincipal.add(panelBusqueda, BorderLayout.NORTH);
+        panelPrincipal.add(panelDatos, BorderLayout.CENTER);
+        panelPrincipal.add(panelBotones, BorderLayout.SOUTH);
+        
+        // Configurar action listeners
+        btnBuscar.addActionListener(this::buscarEmpleado);
+        btnActualizar.addActionListener(this::actualizarEmpleado);
+        btnSalir.addActionListener(e -> dispose());
+        
+        setContentPane(panelPrincipal);
     }
 
-    public void mostrar() {
-        jPanelActualizarEmpleados.setVisible(true);
-    }
-
-    public void limpiar() {
-        this.jTextFieldBuscar.setText("");
-        this.jTextFieldNombre.setText("");
-        this.jTextFieldNuevoNumeroDocumento.setText("");
-        this.jTextFieldSalario.setText("");
-
-    }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        jPanelActualizarEmpleados = new javax.swing.JPanel();
-        jLabelTipoDocumento = new javax.swing.JLabel();
-        jLabelNombre = new javax.swing.JLabel();
-        jLabelSalarioBase = new javax.swing.JLabel();
-        jTextFieldNombre = new javax.swing.JTextField();
-        jTextFieldSalario = new javax.swing.JTextField();
-        jComboBoxDocumento = new javax.swing.JComboBox<>();
-        jLabelNuevoNumeroDocumento = new javax.swing.JLabel();
-        jTextFieldNuevoNumeroDocumento = new javax.swing.JTextField();
-        jButtonSalir = new javax.swing.JButton();
-        jButtonActualizar = new javax.swing.JButton();
-        jPanelBusqueda = new javax.swing.JPanel();
-        jLabelNoDocumento = new javax.swing.JLabel();
-        jTextFieldBuscar = new javax.swing.JTextField();
-        jButtonBuscar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("GUIActualizarEmpleado");
-
-        jLabelTipoDocumento.setText("tipoDocumento");
-
-        jLabelNombre.setText("nombre");
-
-        jLabelSalarioBase.setText("Salario");
-
-        jTextFieldSalario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldSalarioActionPerformed(evt);
-            }
-        });
-
-        jComboBoxDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CC", "CE", "PA" }));
-
-        jLabelNuevoNumeroDocumento.setText("número d./mento");
-
-        javax.swing.GroupLayout jPanelActualizarEmpleadosLayout = new javax.swing.GroupLayout(jPanelActualizarEmpleados);
-        jPanelActualizarEmpleados.setLayout(jPanelActualizarEmpleadosLayout);
-        jPanelActualizarEmpleadosLayout.setHorizontalGroup(
-            jPanelActualizarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelActualizarEmpleadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelActualizarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelActualizarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabelTipoDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                        .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelSalarioBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabelNuevoNumeroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelActualizarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldNombre)
-                    .addComponent(jTextFieldSalario)
-                    .addComponent(jComboBoxDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNuevoNumeroDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelActualizarEmpleadosLayout.setVerticalGroup(
-            jPanelActualizarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelActualizarEmpleadosLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(jPanelActualizarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelActualizarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelActualizarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelSalarioBase, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelActualizarEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNuevoNumeroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNuevoNumeroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
-        );
-
-        jButtonSalir.setText("Salir");
-        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalirActionPerformed(evt);
-            }
-        });
-
-        jButtonActualizar.setText("Actualizar");
-        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonActualizarActionPerformed(evt);
-            }
-        });
-
-        jLabelNoDocumento.setText("busque por # de documento");
-
-        jTextFieldBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldBuscarActionPerformed(evt);
-            }
-        });
-
-        jButtonBuscar.setText("Buscar");
-        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBuscarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelBusquedaLayout = new javax.swing.GroupLayout(jPanelBusqueda);
-        jPanelBusqueda.setLayout(jPanelBusquedaLayout);
-        jPanelBusquedaLayout.setHorizontalGroup(
-            jPanelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBusquedaLayout.createSequentialGroup()
-                .addComponent(jLabelNoDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3))
-        );
-        jPanelBusquedaLayout.setVerticalGroup(
-            jPanelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBusquedaLayout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(jPanelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBuscar))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelActualizarEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonSalir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonActualizar)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jPanelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelActualizarEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSalir)
-                    .addComponent(jButtonActualizar))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButtonSalirActionPerformed
-
-    private void jTextFieldSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSalarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldSalarioActionPerformed
-
-    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+    private void buscarEmpleado(ActionEvent evt) {
         try {
-            Empleado empleado = null;
-            empleado = empleadoServicio.searchElementoByNoDocumento(jTextFieldBuscar.getText());
+            Empleado empleado = empleadoServicio.searchElementoByNoDocumento(txtBuscar.getText());
             if (empleado == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + jTextFieldBuscar.getText());
-                limpiar();
+                JOptionPane.showMessageDialog(this, "Empleado no encontrado");
+                panelDatos.setVisible(false);
             } else {
-                jComboBoxDocumento.setSelectedItem(empleado.getTipoDocumento());
-                jTextFieldNombre.setText(empleado.getNombre());
-                jTextFieldSalario.setText(Double.toString(empleado.getSalarioBase()));
-                jTextFieldNuevoNumeroDocumento.setText(empleado.getNoDoumento());
+                cmbTipoDocumento.setSelectedItem(empleado.getTipoDocumento());
+                txtNombre.setText(empleado.getNombre());
+                txtSalario.setText(String.valueOf(empleado.getSalarioBase()));
+                txtNuevoDocumento.setText(empleado.getNoDoumento());
+                panelDatos.setVisible(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            limpiarCampos();
         }
-    }//GEN-LAST:event_jButtonBuscarActionPerformed
+    }
 
-    private void jTextFieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldBuscarActionPerformed
-
-    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+    private void actualizarEmpleado(ActionEvent evt) {
         try {
-            String id = jTextFieldBuscar.getText();
-               empleadoServicio.actualizarElemento(id, jComboBoxDocumento.getSelectedItem().toString(), jTextFieldNombre.getText(), Double.parseDouble(jTextFieldSalario.getText()));
+            String id = txtBuscar.getText();
+            String tipoDocumento = cmbTipoDocumento.getSelectedItem().toString();
+            String nombre = txtNombre.getText();
+            double salario = Double.parseDouble(txtSalario.getText());
+            
+            empleadoServicio.actualizarElemento(id, tipoDocumento, nombre, salario);
+            JOptionPane.showMessageDialog(this, "Empleado actualizado correctamente");
+            
+            
         } catch (Exception e) {
-            limpiar();
-
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            limpiarCampos();
         }
+    }
 
-    }//GEN-LAST:event_jButtonActualizarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GUIActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GUIActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GUIActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GUIActualizarEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GUIActualizarEmpleado().setVisible(true);
-//            }
-//        });
-//    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonActualizar;
-    private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JButton jButtonSalir;
-    private javax.swing.JComboBox<String> jComboBoxDocumento;
-    private javax.swing.JLabel jLabelNoDocumento;
-    private javax.swing.JLabel jLabelNombre;
-    private javax.swing.JLabel jLabelNuevoNumeroDocumento;
-    private javax.swing.JLabel jLabelSalarioBase;
-    private javax.swing.JLabel jLabelTipoDocumento;
-    private javax.swing.JPanel jPanelActualizarEmpleados;
-    private javax.swing.JPanel jPanelBusqueda;
-    private javax.swing.JTextField jTextFieldBuscar;
-    private javax.swing.JTextField jTextFieldNombre;
-    private javax.swing.JTextField jTextFieldNuevoNumeroDocumento;
-    private javax.swing.JTextField jTextFieldSalario;
-    // End of variables declaration//GEN-END:variables
+    private void limpiarCampos() {
+        txtBuscar.setText("");
+        txtNombre.setText("");
+        txtSalario.setText("");
+        txtNuevoDocumento.setText("");
+        panelDatos.setVisible(false);
+    }
 }
