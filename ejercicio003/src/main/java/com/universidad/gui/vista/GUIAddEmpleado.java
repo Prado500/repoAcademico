@@ -5,7 +5,7 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
-import com.universidad.gui.servicio.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import javax.swing.JOptionPane;
 
 /**

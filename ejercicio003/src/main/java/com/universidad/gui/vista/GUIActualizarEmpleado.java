@@ -2,7 +2,7 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
-import com.universidad.gui.servicio.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

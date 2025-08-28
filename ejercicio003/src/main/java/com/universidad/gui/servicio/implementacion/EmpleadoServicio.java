@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.universidad.gui.servicio;
+package com.universidad.gui.servicio.implementacion;
 
 import com.universidad.gui.modelo.Empleado;
+import com.universidad.gui.servicio.IEmpleadoServicio;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * @param <T> el tipo de empleado que debe extender de Empleado
  *
  */
-public class EmpleadoServicio<T extends Empleado> {
+public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T> {
 
     private List<T> elementos;
 
@@ -26,6 +27,11 @@ public class EmpleadoServicio<T extends Empleado> {
 
     }
 
+    /**
+     *
+     * @param elemento
+     */
+    
     public void agregar(T elemento) {
         elementos.add(elemento);
     }
