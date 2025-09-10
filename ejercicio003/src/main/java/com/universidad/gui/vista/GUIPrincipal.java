@@ -42,11 +42,17 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         jMenuItemGenerarReporte = new javax.swing.JMenuItem();
-        menuEmpleado = new javax.swing.JMenu();
-        itemAddEmpleado = new javax.swing.JMenuItem();
+        menuAdministrativo = new javax.swing.JMenu();
+        itemAddAdministrativo = new javax.swing.JMenuItem();
+        jMenuItemSearchAdministrativo = new javax.swing.JMenuItem();
+        jMenuItemListAdministrativos = new javax.swing.JMenuItem();
+        jMenuItemUpdateAdministrativos = new javax.swing.JMenuItem();
+        jMenuItemDeleteAdministrativo = new javax.swing.JMenuItem();
+        jMenuESerGen = new javax.swing.JMenu();
+        jMenuItemAddEmpleado = new javax.swing.JMenuItem();
         jMenuItemSearchEmpleado = new javax.swing.JMenuItem();
-        ListEmpleado = new javax.swing.JMenuItem();
-        jMenuItemUpdateEmpleados = new javax.swing.JMenuItem();
+        jMenuItemListEmpleado = new javax.swing.JMenuItem();
+        jMenuItemUpdateEmpleado = new javax.swing.JMenuItem();
         jMenuItemDeleteEmpleado = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         itemAcercaDe = new javax.swing.JMenuItem();
@@ -67,56 +73,75 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuArchivo);
 
-        menuEmpleado.setText("Empleado");
-        menuEmpleado.setName("Menu Empleado"); // NOI18N
-        menuEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        menuAdministrativo.setText("Administrativo");
+        menuAdministrativo.setName("Menu Empleado"); // NOI18N
+        menuAdministrativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEmpleadoActionPerformed(evt);
+                menuAdministrativoActionPerformed(evt);
             }
         });
 
-        itemAddEmpleado.setText("AddEmpleado");
-        itemAddEmpleado.setName("Opcion Add Empleado"); // NOI18N
-        itemAddEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        itemAddAdministrativo.setText("Crear Administrativo");
+        itemAddAdministrativo.setName("Opcion Add Empleado"); // NOI18N
+        itemAddAdministrativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemAddEmpleadoActionPerformed(evt);
+                itemAddAdministrativoActionPerformed(evt);
             }
         });
-        menuEmpleado.add(itemAddEmpleado);
+        menuAdministrativo.add(itemAddAdministrativo);
 
-        jMenuItemSearchEmpleado.setText("SearchEmplado");
-        jMenuItemSearchEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemSearchAdministrativo.setText("Buscar Administrativo");
+        jMenuItemSearchAdministrativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemSearchEmpleadoActionPerformed(evt);
+                jMenuItemSearchAdministrativoActionPerformed(evt);
             }
         });
-        menuEmpleado.add(jMenuItemSearchEmpleado);
+        menuAdministrativo.add(jMenuItemSearchAdministrativo);
 
-        ListEmpleado.setText("ListEmpleados");
-        ListEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemListAdministrativos.setText("Ver Administrativos");
+        jMenuItemListAdministrativos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ListEmpleadoActionPerformed(evt);
+                jMenuItemListAdministrativosActionPerformed(evt);
             }
         });
-        menuEmpleado.add(ListEmpleado);
+        menuAdministrativo.add(jMenuItemListAdministrativos);
 
-        jMenuItemUpdateEmpleados.setText("UpdateEmpleados");
-        jMenuItemUpdateEmpleados.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemUpdateAdministrativos.setText("Actualizar Administrativos");
+        jMenuItemUpdateAdministrativos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemUpdateEmpleadosActionPerformed(evt);
+                jMenuItemUpdateAdministrativosActionPerformed(evt);
             }
         });
-        menuEmpleado.add(jMenuItemUpdateEmpleados);
+        menuAdministrativo.add(jMenuItemUpdateAdministrativos);
 
-        jMenuItemDeleteEmpleado.setText("DeleteEmpleado");
-        jMenuItemDeleteEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDeleteAdministrativo.setText("Eliminar Administrativo");
+        jMenuItemDeleteAdministrativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDeleteEmpleadoActionPerformed(evt);
+                jMenuItemDeleteAdministrativoActionPerformed(evt);
             }
         });
-        menuEmpleado.add(jMenuItemDeleteEmpleado);
+        menuAdministrativo.add(jMenuItemDeleteAdministrativo);
 
-        jMenuBar1.add(menuEmpleado);
+        jMenuBar1.add(menuAdministrativo);
+
+        jMenuESerGen.setText("Servicios Generales");
+
+        jMenuItemAddEmpleado.setText("Crear Empleado");
+        jMenuESerGen.add(jMenuItemAddEmpleado);
+
+        jMenuItemSearchEmpleado.setText("Buscar Empleado");
+        jMenuESerGen.add(jMenuItemSearchEmpleado);
+
+        jMenuItemListEmpleado.setText("Ver Empleados");
+        jMenuESerGen.add(jMenuItemListEmpleado);
+
+        jMenuItemUpdateEmpleado.setText("Actualizar Empleado");
+        jMenuESerGen.add(jMenuItemUpdateEmpleado);
+
+        jMenuItemDeleteEmpleado.setText("Eliminar Empleado");
+        jMenuESerGen.add(jMenuItemDeleteEmpleado);
+
+        jMenuBar1.add(jMenuESerGen);
 
         menuAyuda.setText("Ayuda");
         menuAyuda.setName("Menu Ayuda"); // NOI18N
@@ -152,36 +177,36 @@ public class GUIPrincipal extends javax.swing.JFrame {
          JOptionPane.showMessageDialog(this, "Desarrollado por David Alejandro De los Reyes Ostos");
     }//GEN-LAST:event_itemAcercaDeActionPerformed
 
-    private void itemAddEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAddEmpleadoActionPerformed
+    private void itemAddAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAddAdministrativoActionPerformed
         GUIAddEmpleado gui = new GUIAddEmpleado(this.empleadoServicio);
         gui.setVisible(true);
         
-    }//GEN-LAST:event_itemAddEmpleadoActionPerformed
+    }//GEN-LAST:event_itemAddAdministrativoActionPerformed
 
-    private void jMenuItemSearchEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSearchEmpleadoActionPerformed
+    private void jMenuItemSearchAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSearchAdministrativoActionPerformed
         GUISearchEmpleadoPorNoDocumento gui = new GUISearchEmpleadoPorNoDocumento(this.empleadoServicio);
         gui.setVisible(true);
        
-    }//GEN-LAST:event_jMenuItemSearchEmpleadoActionPerformed
+    }//GEN-LAST:event_jMenuItemSearchAdministrativoActionPerformed
 
-    private void ListEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListEmpleadoActionPerformed
+    private void jMenuItemListAdministrativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListAdministrativosActionPerformed
         GUIListEmpleados guiListEmpleados = new GUIListEmpleados(this.empleadoServicio);
         guiListEmpleados.setVisible(true);
-    }//GEN-LAST:event_ListEmpleadoActionPerformed
+    }//GEN-LAST:event_jMenuItemListAdministrativosActionPerformed
 
-    private void jMenuItemUpdateEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateEmpleadosActionPerformed
+    private void jMenuItemUpdateAdministrativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateAdministrativosActionPerformed
         GUIActualizarEmpleado guiActualizarEmpleado = new GUIActualizarEmpleado(this.empleadoServicio);
         guiActualizarEmpleado.setVisible(true);
-    }//GEN-LAST:event_jMenuItemUpdateEmpleadosActionPerformed
+    }//GEN-LAST:event_jMenuItemUpdateAdministrativosActionPerformed
 
-    private void menuEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEmpleadoActionPerformed
+    private void menuAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdministrativoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuEmpleadoActionPerformed
+    }//GEN-LAST:event_menuAdministrativoActionPerformed
 
-    private void jMenuItemDeleteEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteEmpleadoActionPerformed
+    private void jMenuItemDeleteAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteAdministrativoActionPerformed
         GUIEliminarEmpleado guiEliminarEmpleado = new GUIEliminarEmpleado(this.empleadoServicio);
         guiEliminarEmpleado.setVisible(true);
-    }//GEN-LAST:event_jMenuItemDeleteEmpleadoActionPerformed
+    }//GEN-LAST:event_jMenuItemDeleteAdministrativoActionPerformed
 
     private void jMenuItemGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGenerarReporteActionPerformed
         JOptionPane.showMessageDialog(this, "Proximamente");
@@ -223,17 +248,23 @@ public class GUIPrincipal extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem ListEmpleado;
     private javax.swing.JMenuItem itemAcercaDe;
-    private javax.swing.JMenuItem itemAddEmpleado;
+    private javax.swing.JMenuItem itemAddAdministrativo;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuESerGen;
+    private javax.swing.JMenuItem jMenuItemAddEmpleado;
+    private javax.swing.JMenuItem jMenuItemDeleteAdministrativo;
     private javax.swing.JMenuItem jMenuItemDeleteEmpleado;
     private javax.swing.JMenuItem jMenuItemGenerarReporte;
+    private javax.swing.JMenuItem jMenuItemListAdministrativos;
+    private javax.swing.JMenuItem jMenuItemListEmpleado;
+    private javax.swing.JMenuItem jMenuItemSearchAdministrativo;
     private javax.swing.JMenuItem jMenuItemSearchEmpleado;
-    private javax.swing.JMenuItem jMenuItemUpdateEmpleados;
+    private javax.swing.JMenuItem jMenuItemUpdateAdministrativos;
+    private javax.swing.JMenuItem jMenuItemUpdateEmpleado;
+    private javax.swing.JMenu menuAdministrativo;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;
-    private javax.swing.JMenu menuEmpleado;
     // End of variables declaration//GEN-END:variables
 }
 

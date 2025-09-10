@@ -20,55 +20,87 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuEmpleado">
+        <Menu class="javax.swing.JMenu" name="menuAdministrativo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Empleado"/>
+            <Property name="text" type="java.lang.String" value="Administrativo"/>
             <Property name="name" type="java.lang.String" value="Menu Empleado" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuEmpleadoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAdministrativoActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itemAddEmpleado">
+            <MenuItem class="javax.swing.JMenuItem" name="itemAddAdministrativo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="AddEmpleado"/>
+                <Property name="text" type="java.lang.String" value="Crear Administrativo"/>
                 <Property name="name" type="java.lang.String" value="Opcion Add Empleado" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAddEmpleadoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAddAdministrativoActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSearchAdministrativo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buscar Administrativo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSearchAdministrativoActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemListAdministrativos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ver Administrativos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemListAdministrativosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUpdateAdministrativos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Actualizar Administrativos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUpdateAdministrativosActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDeleteAdministrativo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Eliminar Administrativo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDeleteAdministrativoActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuESerGen">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Servicios Generales"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAddEmpleado">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Crear Empleado"/>
+              </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSearchEmpleado">
               <Properties>
-                <Property name="text" type="java.lang.String" value="SearchEmplado"/>
+                <Property name="text" type="java.lang.String" value="Buscar Empleado"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemSearchEmpleadoActionPerformed"/>
-              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="ListEmpleado">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemListEmpleado">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ListEmpleados"/>
+                <Property name="text" type="java.lang.String" value="Ver Empleados"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ListEmpleadoActionPerformed"/>
-              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUpdateEmpleados">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUpdateEmpleado">
               <Properties>
-                <Property name="text" type="java.lang.String" value="UpdateEmpleados"/>
+                <Property name="text" type="java.lang.String" value="Actualizar Empleado"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemUpdateEmpleadosActionPerformed"/>
-              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDeleteEmpleado">
               <Properties>
-                <Property name="text" type="java.lang.String" value="DeleteEmpleado"/>
+                <Property name="text" type="java.lang.String" value="Eliminar Empleado"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDeleteEmpleadoActionPerformed"/>
-              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
