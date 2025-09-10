@@ -32,6 +32,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
      * @param elemento
      */
     
+    @Override
     public void agregar(T elemento) {
         elementos.add(elemento);
     }
@@ -39,6 +40,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
 //    public List<T> mostrar(List<T> elementos) {
 //        return new ArrayList<>(elementos);
 //    }
+    @Override
     public List<T> mostrar() {
         List<T> elementosMostrar = new ArrayList<>();
         for (T elemento : this.elementos) {
@@ -49,6 +51,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
         return elementosMostrar;
     }
 
+    @Override
     public T searchElementoByNoDocumento(String noDocumento) {
         T elementoRetorno = null;
         System.out.println(elementos);
@@ -65,6 +68,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
     }
 
     //actualizar 
+    @Override
     public void actualizarElemento(String noDocumento, String tipoDocumento, String nombre, Double salario) {
         T elementoEncontrado = null;
         for (T elemento : elementos) {
@@ -83,6 +87,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
 
     }
 
+    @Override
     public void eliminarLogicamenteElementoPorId(String id) {
         T elementoEncontrado = null;
         for (T elemento : elementos) {
