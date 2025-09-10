@@ -29,7 +29,6 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
     public void limpiar(){
     this.txtNombre.setText(" ");
     this.txtSalario.setText(" ");
-    this.txtEstatus.setText(" ");
     this.txtNoDocumento.setText(" ");
    
     }
@@ -49,11 +48,11 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
         jLabelSalario = new javax.swing.JLabel();
         txtSalario = new javax.swing.JTextField();
         jLabelEstatus = new javax.swing.JLabel();
-        txtEstatus = new javax.swing.JTextField();
         jLabelNoDocumento = new javax.swing.JLabel();
         txtNoDocumento = new javax.swing.JTextField();
         jLabelTipoDocumento = new javax.swing.JLabel();
         jComboBoxTipoDocumento = new javax.swing.JComboBox<>();
+        cmbEstatus = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
@@ -68,12 +67,6 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
 
         jLabelEstatus.setText("Estatus");
 
-        txtEstatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEstatusActionPerformed(evt);
-            }
-        });
-
         jLabelNoDocumento.setText("noDocumento");
 
         jLabelTipoDocumento.setText("tipoDocumento");
@@ -82,6 +75,13 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
         jComboBoxTipoDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoDocumentoActionPerformed(evt);
+            }
+        });
+
+        cmbEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "IN" }));
+        cmbEstatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstatusActionPerformed(evt);
             }
         });
 
@@ -101,11 +101,11 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                             .addComponent(txtNombre)
                             .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
                         .addComponent(txtNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jComboBoxTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanelAddEmpleadoLayout.setVerticalGroup(
@@ -122,7 +122,7 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,16 +181,12 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void txtEstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEstatusActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try{
         
             String nombre = txtNombre.getText().strip().toUpperCase();
             double salario = Double.parseDouble(txtSalario.getText().strip());
-            String estatus = txtEstatus.getText().strip().toUpperCase();
+            String estatus = cmbEstatus.getSelectedItem().toString();
             String noDocumento = txtNoDocumento.getText().strip();
             String tipoDocumento = jComboBoxTipoDocumento.getSelectedItem().toString();
             Empleado empleado = new Empleado(noDocumento, tipoDocumento, nombre, salario, estatus);
@@ -206,6 +202,10 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
     private void jComboBoxTipoDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoDocumentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoDocumentoActionPerformed
+
+    private void cmbEstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstatusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,6 +247,7 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cmbEstatus;
     private javax.swing.JComboBox<String> jComboBoxTipoDocumento;
     private javax.swing.JLabel jLabelEstatus;
     private javax.swing.JLabel jLabelNoDocumento;
@@ -254,7 +255,6 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
     private javax.swing.JLabel jLabelSalario;
     private javax.swing.JLabel jLabelTipoDocumento;
     private javax.swing.JPanel jPanelAddEmpleado;
-    private javax.swing.JTextField txtEstatus;
     private javax.swing.JTextField txtNoDocumento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSalario;
