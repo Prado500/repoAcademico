@@ -4,6 +4,7 @@
  */
 package com.universidad.gui.servicio;
 
+
 import com.universidad.gui.modelo.Empleado;
 import java.util.List;
 
