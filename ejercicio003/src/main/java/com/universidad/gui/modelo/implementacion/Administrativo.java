@@ -47,9 +47,15 @@ public class Administrativo extends Empleado {
         return valorRetorno;
     }
     
-    private boolean verificarEscalafon(String escalafon){
+    private void verificarEscalafon(String escalafon){
        Pattern busqueda = Pattern.compile("^(1|2|3)$");
        Matcher matcher = busqueda.matcher(escalafon); 
-       return matcher.matches();
+       if (!matcher.matches()){
+       throw new IllegalArgumentException("""
+                                               Ha ingresado un valor inválido para el escalafón.
+                                          
+                                               Recuerde que el escalafón solo puede ser "1", "2"
+                                               o "3". """);
+       }
     }
 }
