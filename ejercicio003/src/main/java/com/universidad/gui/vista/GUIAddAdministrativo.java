@@ -12,15 +12,15 @@ import javax.swing.JOptionPane;
  *
  * @author Alejandro
  */
-public class GUIAddEmpleado extends javax.swing.JFrame  {
+public class GUIAddAdministrativo extends javax.swing.JFrame  {
 
     /**
-     * Creates new form GUIAddEmpleado
+     * Creates new form GUIAddAdministrativo
      */
     
     private EmpleadoServicio<Empleado> empleadoServicio;
     
-    public GUIAddEmpleado(EmpleadoServicio<Empleado> servicio) {
+    public GUIAddAdministrativo(EmpleadoServicio<Empleado> servicio) {
         initComponents();
         setLocationRelativeTo(null);
         this.empleadoServicio = servicio;
@@ -224,14 +224,15 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIAddEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIAddAdministrativo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIAddEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIAddAdministrativo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIAddEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIAddAdministrativo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIAddEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIAddAdministrativo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -239,7 +240,7 @@ public class GUIAddEmpleado extends javax.swing.JFrame  {
             private EmpleadoServicio<Empleado> empleadoServicio;
             public void run() {
                 EmpleadoServicio<Empleado> servicioPrueba = new EmpleadoServicio<>();
-                new GUIAddEmpleado(servicioPrueba).setVisible(true);
+                new GUIAddAdministrativo(servicioPrueba).setVisible(true);
             }
         });
     }

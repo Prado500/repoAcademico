@@ -178,7 +178,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemAcercaDeActionPerformed
 
     private void itemAddAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAddAdministrativoActionPerformed
-        GUIAddEmpleado gui = new GUIAddEmpleado(this.empleadoServicio);
+        GUIAddAdministrativo gui = new GUIAddAdministrativo(this.empleadoServicio);
         gui.setVisible(true);
         
     }//GEN-LAST:event_itemAddAdministrativoActionPerformed

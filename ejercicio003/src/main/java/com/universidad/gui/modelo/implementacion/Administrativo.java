@@ -5,6 +5,9 @@
 package com.universidad.gui.modelo.implementacion;
 
 import com.universidad.gui.modelo.Empleado;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 
 /**
  *
@@ -12,18 +15,19 @@ import com.universidad.gui.modelo.Empleado;
  */
 public class Administrativo extends Empleado {
 
-    private int escalafon;
+    private String escalafon;
 
-    public Administrativo(int escalafon, String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
+    public Administrativo(String escalafon, String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
         super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
+        verificarEscalafon(escalafon);
         this.escalafon = escalafon;
     }
 
-    public int getEscalafon() {
+    public String getEscalafon() {
         return escalafon;
     }
 
-    public void setEscalafon(int escalafon) {
+    public void setEscalafon(String escalafon) {
         this.escalafon = escalafon;
     }
 
@@ -31,10 +35,10 @@ public class Administrativo extends Empleado {
     public double calcularBonificacion() {
         double valor = this.getSalarioBase();
         double valorRetorno;
-        if (this.escalafon == 1) {
+        if (this.escalafon == "1") {
             valorRetorno = valor * 1.1;
         }
-        if (this.escalafon == 2) {
+        if (this.escalafon == "2") {
             valorRetorno = valor * 1.3;
         } else {
             valorRetorno = valor * 1.5;
@@ -42,5 +46,10 @@ public class Administrativo extends Empleado {
         this.setSalarioBase(valorRetorno);
         return valorRetorno;
     }
-
+    
+    private boolean verificarEscalafon(String escalafon){
+       Pattern busqueda = Pattern.compile("^(1|2|3)$");
+       Matcher matcher = busqueda.matcher(escalafon); 
+       return matcher.matches();
+    }
 }
