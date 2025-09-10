@@ -4,11 +4,32 @@
  */
 package com.universidad.gui.modelo.implementacion;
 
-///**
-// *
-// * @author Alejandro
-// */
-//public class ESerGen extends Empleado{
-//    
-//    
-//}
+import com.universidad.gui.modelo.Empleado;
+
+public class ESerGen extends Empleado {
+
+    private boolean cerAlturas;
+
+    public ESerGen(boolean cerAlturas, String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
+        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
+        this.cerAlturas = cerAlturas;
+    }
+
+    public boolean getCerAlturas() {
+        return this.cerAlturas;
+    }
+    
+    public void setCerAlturas(boolean cerAlturas) {
+        this.cerAlturas = cerAlturas;
+    }
+
+    @Override
+    public double calcularBonificacion() {
+        double valorRetorno = this.getSalarioBase();
+        if (cerAlturas) {
+            valorRetorno *= 1.5;
+        }
+        return valorRetorno;
+    }
+
+}

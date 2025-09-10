@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  *
  * @author Alejandro
  */
-public class Empleado {
+public abstract class Empleado implements IEmpleado {
 
     private String noDoumento;
     private String tipoDocumento;
@@ -57,71 +57,90 @@ public class Empleado {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    @Override
     public void setNoDoumento(String noDoumento) {
         this.noDoumento = noDoumento;
     }
-
+    
+    @Override
     public void setTipoDocumento(String tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
-
+    
+    @Override
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
+    @Override
     public void setSalarioBase(double salarioBase) {
         this.salarioBase = salarioBase;
     }
-
+    
+    @Override
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
     
+    @Override
     public void setEstatus(String estatus) {
         validarEstatus(estatus);
         this.estatus = estatus;
     }
     
+    @Override
     public String getNoDoumento() {
         return noDoumento;
     }
-
+    
+    @Override
     public String getTipoDocumento() {
         return tipoDocumento;
     }
-
+    
+    @Override
     public String getNombre() {
         return nombre;
     }
-
+    
+    @Override
     public double getSalarioBase() {
         return salarioBase;
     }
-
+    
+    @Override
     public String getFechaNacimiento() {
         return fechaNacimiento;
     }
-
+    
+    @Override
     public String getEstatus() {
         return estatus;
     }
-
+    
+   
     public static Pattern getPATRON_VERIFICACION() {
         return PATRON_VERIFICACION;
     }
-
+    
+    
     public static Pattern getNOMBRE_CARACTERES_PERMITIDOS() {
         return NOMBRE_CARACTERES_PERMITIDOS;
     }
-
+    
+   
     public static Pattern getIDENTIFICACIONES_PERMITIDAS() {
         return IDENTIFICACIONES_PERMITIDAS;
     }
-
+    
+    
     public static Pattern getESTATUS_PERMITIDOS() {
         return ESTATUS_PERMITIDOS;
     }
-
+    
+    @Override
+    public abstract double calcularBonificacion(); // delego la implementacion a las subclases.
+    
     private void validarNoDocumento(String noDocumento) {
 
         if (noDocumento.isBlank() || (!PATRON_VERIFICACION.matcher(noDocumento).matches())) {
