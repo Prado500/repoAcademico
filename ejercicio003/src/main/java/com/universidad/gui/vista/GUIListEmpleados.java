@@ -26,7 +26,7 @@ public class GUIListEmpleados extends JFrame {
     private JPanel jPanelListEmpleado;
     private JTable jTableListEmpleados;
 
-    public GUIListEmpleados(EmpleadoServicio<Administrativo> empleadoServicio) {
+    public GUIListEmpleados(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
         this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
         initializeComponents();
         setupLayout();
@@ -44,7 +44,7 @@ public class GUIListEmpleados extends JFrame {
         // Configurar tabla
         DefaultTableModel model = new DefaultTableModel(
                 new Object[][]{},
-                new String[]{"Documento", "Tipo", "Nombre", "Salario", "Estatus"}
+                new String[]{"Documento", "Tipo", "Nombre", "Salario", "Estatus", "Escalafón"}
         );
         jTableListEmpleados.setModel(model);
 
@@ -98,8 +98,8 @@ public class GUIListEmpleados extends JFrame {
 
         jButton2Mostrar.addActionListener(e -> {
             try {
-                List<Administrativo> empleados = empleadoServicioAdministrativo.mostrar();
-                if (empleados != null && !empleados.isEmpty()) {
+                List<Administrativo> administrativos = empleadoServicioAdministrativo.mostrar();
+                if (administrativos != null && !administrativos.isEmpty()) {
                     jPanelListEmpleado.setVisible(true);
                     DecimalFormat formato = new DecimalFormat("#,##0.00");
                     DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
@@ -108,13 +108,14 @@ public class GUIListEmpleados extends JFrame {
                     formato.setDecimalFormatSymbols(simbolos);
                     DefaultTableModel model = (DefaultTableModel) jTableListEmpleados.getModel();
                     model.setRowCount(0);
-                    for (Administrativo empleado : empleados) {
+                    for (Administrativo administrativo : administrativos) {
                         Object[] fila = {
-                            empleado.getNoDoumento(),
-                            empleado.getTipoDocumento(),
-                            empleado.getNombre(),
-                            "$ " + formato.format(empleado.getSalarioBase()),
-                            empleado.getEstatus()
+                            administrativo.getNoDoumento(),
+                            administrativo.getTipoDocumento(),
+                            administrativo.getNombre(),
+                            "$ " + formato.format(administrativo.getSalarioBase()),
+                            administrativo.getEstatus(),
+                            administrativo.getEscalafon()
                         };
                         model.addRow(fila);
                     }
