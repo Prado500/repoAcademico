@@ -5,6 +5,7 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
+import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -16,14 +17,14 @@ import javax.swing.JOptionPane;
  */
 public class GUISearchEmpleadoPorNoDocumento extends javax.swing.JFrame {
 
-    private EmpleadoServicio<Empleado> empleadoServicio;
+    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
 
     /**
      * Creates new form GUISearchEmpleadoPorNoDocumento
      */
-    public GUISearchEmpleadoPorNoDocumento(EmpleadoServicio<Empleado> empleadoServicio) {
+    public GUISearchEmpleadoPorNoDocumento(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
         initComponents();
-        this.empleadoServicio = empleadoServicio;
+        this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
         setLocationRelativeTo(null);
         jPanelSearchEmpleado.setVisible(false);
         
@@ -207,7 +208,7 @@ public class GUISearchEmpleadoPorNoDocumento extends javax.swing.JFrame {
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         try {
             String noDocumento = txtSearchEmpleado.getText();
-            Empleado emp = empleadoServicio.searchElementoByNoDocumento(noDocumento);
+            Empleado emp = empleadoServicioAdministrativo.searchElementoByNoDocumento(noDocumento);
             mostrar();
             this.lblNombre.setText(emp.getNombre());
             DecimalFormat formato = new DecimalFormat("#,##0.00");

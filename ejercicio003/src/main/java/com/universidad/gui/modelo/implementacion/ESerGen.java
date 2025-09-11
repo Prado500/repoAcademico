@@ -23,6 +23,11 @@ public class ESerGen extends Empleado {
         this.cerAlturas = cerAlturas;
     }
 
+    
+    private boolean isBoolean (String cerAlturas){
+    return "si".equalsIgnoreCase(cerAlturas) || "no".equalsIgnoreCase(cerAlturas);
+    }
+    
     @Override
     public double calcularBonificacion() {
         double valorRetorno = this.getSalarioBase();

@@ -5,6 +5,7 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
+import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import javax.swing.JOptionPane;
 
@@ -18,16 +19,16 @@ public class GUIPrincipal extends javax.swing.JFrame {
      * Creates new form GUIPrincipal
      */
     
-  private EmpleadoServicio<Empleado> empleadoServicio;
+  private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
   
     public GUIPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
-        this.empleadoServicio = new EmpleadoServicio<>();
+        this.empleadoServicioAdministrativo = new EmpleadoServicio<>();
     }
 
-    public EmpleadoServicio<Empleado> getEmpleadoServicio() {
-        return empleadoServicio;
+    public EmpleadoServicio<Administrativo> getEmpleadoServicio() {
+        return empleadoServicioAdministrativo;
     }
 
     /**
@@ -178,24 +179,24 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemAcercaDeActionPerformed
 
     private void itemAddAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAddAdministrativoActionPerformed
-        GUIAddAdministrativo gui = new GUIAddAdministrativo(this.empleadoServicio);
+        GUIAddAdministrativo gui = new GUIAddAdministrativo(this.empleadoServicioAdministrativo);
         gui.setVisible(true);
         
     }//GEN-LAST:event_itemAddAdministrativoActionPerformed
 
     private void jMenuItemSearchAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSearchAdministrativoActionPerformed
-        GUISearchEmpleadoPorNoDocumento gui = new GUISearchEmpleadoPorNoDocumento(this.empleadoServicio);
+        GUISearchEmpleadoPorNoDocumento gui = new GUISearchEmpleadoPorNoDocumento(this.empleadoServicioAdministrativo);
         gui.setVisible(true);
        
     }//GEN-LAST:event_jMenuItemSearchAdministrativoActionPerformed
 
     private void jMenuItemListAdministrativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListAdministrativosActionPerformed
-        GUIListEmpleados guiListEmpleados = new GUIListEmpleados(this.empleadoServicio);
+        GUIListEmpleados guiListEmpleados = new GUIListEmpleados(this.empleadoServicioAdministrativo);
         guiListEmpleados.setVisible(true);
     }//GEN-LAST:event_jMenuItemListAdministrativosActionPerformed
 
     private void jMenuItemUpdateAdministrativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateAdministrativosActionPerformed
-        GUIActualizarEmpleado guiActualizarEmpleado = new GUIActualizarEmpleado(this.empleadoServicio);
+        GUIActualizarEmpleado guiActualizarEmpleado = new GUIActualizarEmpleado(this.empleadoServicioAdministrativo);
         guiActualizarEmpleado.setVisible(true);
     }//GEN-LAST:event_jMenuItemUpdateAdministrativosActionPerformed
 
@@ -204,7 +205,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAdministrativoActionPerformed
 
     private void jMenuItemDeleteAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteAdministrativoActionPerformed
-        GUIEliminarEmpleado guiEliminarEmpleado = new GUIEliminarEmpleado(this.empleadoServicio);
+        GUIEliminarEmpleado guiEliminarEmpleado = new GUIEliminarEmpleado(this.empleadoServicioAdministrativo);
         guiEliminarEmpleado.setVisible(true);
     }//GEN-LAST:event_jMenuItemDeleteAdministrativoActionPerformed
 
@@ -215,37 +216,37 @@ public class GUIPrincipal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GUIPrincipal().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GUIPrincipal().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemAcercaDe;

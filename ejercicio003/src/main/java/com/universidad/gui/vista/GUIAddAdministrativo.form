@@ -69,6 +69,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabelEscalafon" max="32767" attributes="0"/>
                       <Component id="jLabelTipoDocumento" max="32767" attributes="0"/>
                       <Component id="jLabelNombre" alignment="0" pref="100" max="32767" attributes="0"/>
                       <Component id="jLabelSalario" alignment="0" pref="100" max="32767" attributes="0"/>
@@ -86,6 +87,7 @@
                       </Group>
                       <Component id="jComboBoxTipoDocumento" min="-2" max="-2" attributes="0"/>
                       <Component id="cmbEstatus" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbEscalafon" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
@@ -119,7 +121,12 @@
                       <Component id="jLabelTipoDocumento" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jComboBoxTipoDocumento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="66" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelEscalafon" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="cmbEscalafon" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -185,6 +192,25 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbEstatusActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelEscalafon">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Escalaf&#xf3;n"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbEscalafon">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="1"/>
+                <StringItem index="1" value="2"/>
+                <StringItem index="2" value="3"/>
+              </StringArray>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

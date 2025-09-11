@@ -5,6 +5,7 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
+import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import javax.swing.JOptionPane;
 
@@ -18,12 +19,12 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
      * Creates new form GUIAddAdministrativo
      */
     
-    private EmpleadoServicio<Empleado> empleadoServicio;
+    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
     
-    public GUIAddAdministrativo(EmpleadoServicio<Empleado> servicio) {
+    public GUIAddAdministrativo(EmpleadoServicio<Administrativo> servicio) {
         initComponents();
         setLocationRelativeTo(null);
-        this.empleadoServicio = servicio;
+        this.empleadoServicioAdministrativo = servicio;
     }
     
     public void limpiar(){
@@ -53,6 +54,8 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
         jLabelTipoDocumento = new javax.swing.JLabel();
         jComboBoxTipoDocumento = new javax.swing.JComboBox<>();
         cmbEstatus = new javax.swing.JComboBox<>();
+        jLabelEscalafon = new javax.swing.JLabel();
+        cmbEscalafon = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
@@ -85,6 +88,10 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
             }
         });
 
+        jLabelEscalafon.setText("Escalafón");
+
+        cmbEscalafon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+
         javax.swing.GroupLayout jPanelAddEmpleadoLayout = new javax.swing.GroupLayout(jPanelAddEmpleado);
         jPanelAddEmpleado.setLayout(jPanelAddEmpleadoLayout);
         jPanelAddEmpleadoLayout.setHorizontalGroup(
@@ -92,6 +99,7 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
             .addGroup(jPanelAddEmpleadoLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelEscalafon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelTipoDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(jLabelSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -105,7 +113,8 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
                             .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
                         .addComponent(txtNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jComboBoxTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEscalafon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanelAddEmpleadoLayout.setVerticalGroup(
@@ -131,7 +140,11 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEscalafon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEscalafon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         btnGuardar.setText("Guardar");
@@ -189,10 +202,11 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
             String estatus = cmbEstatus.getSelectedItem().toString();
             String noDocumento = txtNoDocumento.getText().strip();
             String tipoDocumento = jComboBoxTipoDocumento.getSelectedItem().toString();
-            Empleado empleado = new Empleado(noDocumento, tipoDocumento, nombre, salario, estatus);
-            empleadoServicio.agregar(empleado);
+            String escalafon = cmbEscalafon.getSelectedItem().toString();
+            Administrativo administrativo = new Administrativo (noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
+            empleadoServicioAdministrativo.agregar(administrativo);
             limpiar();
-            JOptionPane.showMessageDialog(this, "Empleado con nombre " + empleado.getNombre() + " y documento No." +empleado.getNoDoumento()+ " creado exitosamente ");
+            JOptionPane.showMessageDialog(this, "Empleado con nombre " + administrativo.getNombre() + " y documento No." +administrativo.getNoDoumento()+ " creado exitosamente ");
         
         }catch(Exception e){
           JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -237,9 +251,9 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            private EmpleadoServicio<Empleado> empleadoServicio;
+            private EmpleadoServicio<Administrativo> empleadoServicio;
             public void run() {
-                EmpleadoServicio<Empleado> servicioPrueba = new EmpleadoServicio<>();
+                EmpleadoServicio<Administrativo> servicioPrueba = new EmpleadoServicio<>();
                 new GUIAddAdministrativo(servicioPrueba).setVisible(true);
             }
         });
@@ -248,8 +262,10 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cmbEscalafon;
     private javax.swing.JComboBox<String> cmbEstatus;
     private javax.swing.JComboBox<String> jComboBoxTipoDocumento;
+    private javax.swing.JLabel jLabelEscalafon;
     private javax.swing.JLabel jLabelEstatus;
     private javax.swing.JLabel jLabelNoDocumento;
     private javax.swing.JLabel jLabelNombre;

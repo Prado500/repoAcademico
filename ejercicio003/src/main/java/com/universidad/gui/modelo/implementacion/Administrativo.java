@@ -17,7 +17,7 @@ public class Administrativo extends Empleado {
 
     private String escalafon;
 
-    public Administrativo(String escalafon, String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
+    public Administrativo(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, String escalafon) {
         super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
         verificarEscalafon(escalafon);
         this.escalafon = escalafon;

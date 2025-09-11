@@ -1,6 +1,6 @@
 package com.universidad.gui.vista;
 
-import com.universidad.gui.modelo.Empleado;
+import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -20,14 +20,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class GUIListEmpleados extends JFrame {
 
-    private EmpleadoServicio<Empleado> empleadoServicio;
+    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
     private JButton jButton1Salir;
     private JButton jButton2Mostrar;
     private JPanel jPanelListEmpleado;
     private JTable jTableListEmpleados;
 
-    public GUIListEmpleados(EmpleadoServicio<Empleado> empleadoServicio) {
-        this.empleadoServicio = empleadoServicio;
+    public GUIListEmpleados(EmpleadoServicio<Administrativo> empleadoServicio) {
+        this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
         initializeComponents();
         setupLayout();
         setupListeners();
@@ -98,7 +98,7 @@ public class GUIListEmpleados extends JFrame {
 
         jButton2Mostrar.addActionListener(e -> {
             try {
-                List<Empleado> empleados = empleadoServicio.mostrar();
+                List<Administrativo> empleados = empleadoServicioAdministrativo.mostrar();
                 if (empleados != null && !empleados.isEmpty()) {
                     jPanelListEmpleado.setVisible(true);
                     DecimalFormat formato = new DecimalFormat("#,##0.00");
@@ -108,7 +108,7 @@ public class GUIListEmpleados extends JFrame {
                     formato.setDecimalFormatSymbols(simbolos);
                     DefaultTableModel model = (DefaultTableModel) jTableListEmpleados.getModel();
                     model.setRowCount(0);
-                    for (Empleado empleado : empleados) {
+                    for (Administrativo empleado : empleados) {
                         Object[] fila = {
                             empleado.getNoDoumento(),
                             empleado.getTipoDocumento(),

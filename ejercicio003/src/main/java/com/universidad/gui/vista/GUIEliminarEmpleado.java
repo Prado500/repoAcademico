@@ -8,7 +8,8 @@ package com.universidad.gui.vista;
  *
  * @author Alejandro
  */
-import com.universidad.gui.modelo.Empleado;
+
+import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -31,7 +32,7 @@ import javax.swing.JTextField;
 
 public class GUIEliminarEmpleado extends JFrame {
 
-    private EmpleadoServicio<Empleado> empleadoServicio;
+    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -41,8 +42,8 @@ public class GUIEliminarEmpleado extends JFrame {
     private JTextField txtBuscar, txtNombre, txtSalario, txtDocumento, txtTipoDocumento;
     private JButton btnBuscar, btnSalir, btnEliminar;
 
-    public GUIEliminarEmpleado(EmpleadoServicio<Empleado> empleadoServicio) {
-        this.empleadoServicio = empleadoServicio;
+    public GUIEliminarEmpleado(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
+        this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
         initComponentsManual();
         setLocationRelativeTo(null);
     }
@@ -129,7 +130,7 @@ public class GUIEliminarEmpleado extends JFrame {
 
     private void buscarEmpleado(ActionEvent evt) {
         try {
-            Empleado empleado = empleadoServicio.searchElementoByNoDocumento(txtBuscar.getText());
+            Administrativo empleado = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
             if (empleado == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
                 limpiar();
@@ -152,7 +153,7 @@ public class GUIEliminarEmpleado extends JFrame {
 
     private void borrarEmpleado(ActionEvent evt) {
         try {
-            Empleado empleadoABorrar = empleadoServicio.searchElementoByNoDocumento(txtBuscar.getText());
+            Administrativo empleadoABorrar = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
             if (empleadoABorrar == null) {
                 throw new IllegalArgumentException("No se ha encontrado un registro con noDocumento " + txtBuscar.getText());
             }
@@ -170,7 +171,7 @@ public class GUIEliminarEmpleado extends JFrame {
             );
             
             if (respuesta == JOptionPane.YES_OPTION) {
-                empleadoServicio.eliminarLogicamenteElementoPorId(txtBuscar.getText());
+                empleadoServicioAdministrativo.eliminarLogicamenteElementoPorId(txtBuscar.getText());
                 JOptionPane.showMessageDialog(this, "Emplado " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + " eliminado exitosamente");
                 limpiar();
             } else {

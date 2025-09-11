@@ -2,6 +2,7 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
+import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -17,12 +18,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GUIActualizarEmpleado extends JFrame {
 
-    private EmpleadoServicio<Empleado> empleadoServicio;
+    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -31,10 +33,11 @@ public class GUIActualizarEmpleado extends JFrame {
     private JPanel panelBotones;
     private JTextField txtBuscar, txtNombre, txtSalario, txtNuevoDocumento;
     private JComboBox<String> cmbTipoDocumento;
+    private JComboBox<String> cmbEscalafon;
     private JButton btnBuscar, btnSalir, btnActualizar;
 
-    public GUIActualizarEmpleado(EmpleadoServicio<Empleado> empleadoServicio) {
-        this.empleadoServicio = empleadoServicio;
+    public GUIActualizarEmpleado(EmpleadoServicio<Administrativo> empleadoServicio) {
+        this.empleadoServicioAdministrativo = empleadoServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
     }
@@ -53,7 +56,8 @@ public class GUIActualizarEmpleado extends JFrame {
         txtSalario = new JTextField();
         txtNuevoDocumento = new JTextField();
         cmbTipoDocumento = new JComboBox<>(new String[]{"CC", "CE", "PA"});
-
+        cmbEscalafon = new JComboBox<>(new String[]{"1", "2", "3"});
+        
         // Panel principal con BorderLayout
         panelPrincipal = new JPanel(new BorderLayout(10, 10));
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -65,10 +69,12 @@ public class GUIActualizarEmpleado extends JFrame {
         panelBusqueda.add(btnBuscar);
 
         // Panel de datos (Centro) - Inicialmente oculto
-        panelDatos = new JPanel(new GridLayout(4, 2, 5, 5));
+        panelDatos = new JPanel(new GridLayout(5, 2, 5, 5));
         panelDatos.setBorder(BorderFactory.createTitledBorder("Datos del Empleado"));
         panelDatos.add(new JLabel("Tipo Documento:"));
         panelDatos.add(cmbTipoDocumento);
+        panelDatos.add(new JLabel("Escalafón :"));
+        panelDatos.add(cmbEscalafon);
         panelDatos.add(new JLabel("Nombre:"));
         panelDatos.add(txtNombre);
         panelDatos.add(new JLabel("Salario:"));
@@ -116,7 +122,7 @@ public class GUIActualizarEmpleado extends JFrame {
 
     private void buscarEmpleado(ActionEvent evt) {
         try {
-            Empleado empleado = empleadoServicio.searchElementoByNoDocumento(txtBuscar.getText());
+            Empleado empleado = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
             if (empleado == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
                 limpiar();
@@ -140,7 +146,9 @@ public class GUIActualizarEmpleado extends JFrame {
     private void actualizarEmpleado(ActionEvent evt) {
         try {
             String id = txtBuscar.getText();
-            empleadoServicio.actualizarElemento(id.strip(), cmbTipoDocumento.getSelectedItem().toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()));
+            Administrativo administrativo = empleadoServicioAdministrativo.searchElementoByNoDocumento(id.strip());
+            empleadoServicioAdministrativo.actualizarElemento(id.strip(), cmbTipoDocumento.getSelectedItem().toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()));
+            administrativo.setEscalafon(id.strip());
             JOptionPane.showMessageDialog(this, "Empleado con id " + id + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
