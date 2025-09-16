@@ -30,7 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUIEliminarEmpleado extends JFrame {
+public class GUIEliminarAdministrativo extends JFrame {
 
     private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
 
@@ -42,7 +42,7 @@ public class GUIEliminarEmpleado extends JFrame {
     private JTextField txtBuscar, txtNombre, txtSalario, txtDocumento, txtTipoDocumento;
     private JButton btnBuscar, btnSalir, btnEliminar;
 
-    public GUIEliminarEmpleado(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
+    public GUIEliminarAdministrativo(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
         this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
         initComponentsManual();
         setLocationRelativeTo(null);
@@ -121,14 +121,14 @@ public class GUIEliminarEmpleado extends JFrame {
         panelPrincipal.add(panelBotones, BorderLayout.SOUTH);
 
         // Configurar action listeners
-        btnBuscar.addActionListener(this::buscarEmpleado);
-        btnEliminar.addActionListener(this::borrarEmpleado); //3
+        btnBuscar.addActionListener(this::buscarAdministrativo);
+        btnEliminar.addActionListener(this::borrarAdministrativo); //3
         btnSalir.addActionListener(e -> dispose());
 
         setContentPane(panelPrincipal);
     }
 
-    private void buscarEmpleado(ActionEvent evt) {
+    private void buscarAdministrativo(ActionEvent evt) {
         try {
             Administrativo empleado = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
             if (empleado == null) {
@@ -151,7 +151,7 @@ public class GUIEliminarEmpleado extends JFrame {
         }
     }
 
-    private void borrarEmpleado(ActionEvent evt) {
+    private void borrarAdministrativo(ActionEvent evt) {
         try {
             Administrativo empleadoABorrar = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
             if (empleadoABorrar == null) {

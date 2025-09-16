@@ -196,7 +196,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemListAdministrativosActionPerformed
 
     private void jMenuItemUpdateAdministrativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateAdministrativosActionPerformed
-        GUIActualizarEmpleado guiActualizarEmpleado = new GUIActualizarEmpleado(this.empleadoServicioAdministrativo);
+        GUIActualizarAdministrativo guiActualizarEmpleado = new GUIActualizarAdministrativo(this.empleadoServicioAdministrativo);
         guiActualizarEmpleado.setVisible(true);
     }//GEN-LAST:event_jMenuItemUpdateAdministrativosActionPerformed
 
@@ -205,7 +205,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAdministrativoActionPerformed
 
     private void jMenuItemDeleteAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteAdministrativoActionPerformed
-        GUIEliminarEmpleado guiEliminarEmpleado = new GUIEliminarEmpleado(this.empleadoServicioAdministrativo);
+        GUIEliminarAdministrativo guiEliminarEmpleado = new GUIEliminarAdministrativo(this.empleadoServicioAdministrativo);
         guiEliminarEmpleado.setVisible(true);
     }//GEN-LAST:event_jMenuItemDeleteAdministrativoActionPerformed
 

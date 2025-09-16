@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUIActualizarEmpleado extends JFrame {
+public class GUIActualizarAdministrativo extends JFrame {
 
     private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
 
@@ -36,7 +36,7 @@ public class GUIActualizarEmpleado extends JFrame {
     private JComboBox<String> cmbEscalafon;
     private JButton btnBuscar, btnSalir, btnActualizar;
 
-    public GUIActualizarEmpleado(EmpleadoServicio<Administrativo> empleadoServicio) {
+    public GUIActualizarAdministrativo(EmpleadoServicio<Administrativo> empleadoServicio) {
         this.empleadoServicioAdministrativo = empleadoServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
@@ -114,7 +114,7 @@ public class GUIActualizarEmpleado extends JFrame {
 
         // Configurar action listeners
         btnBuscar.addActionListener(this::buscarEmpleado);
-        btnActualizar.addActionListener(this::actualizarEmpleado);
+        btnActualizar.addActionListener(this::actualizarAdministrativo);
         btnSalir.addActionListener(e -> dispose());
 
         setContentPane(panelPrincipal);
@@ -144,7 +144,7 @@ public class GUIActualizarEmpleado extends JFrame {
         }
     }
 
-    private void actualizarEmpleado(ActionEvent evt) {
+    private void actualizarAdministrativo(ActionEvent evt) {
         try {
             String id = txtBuscar.getText();
             Administrativo administrativo = empleadoServicioAdministrativo.searchElementoByNoDocumento(id.strip());
