@@ -163,12 +163,12 @@ public abstract class Empleado implements IEmpleado {
 
     private void validarSalarioBase(double salarioBase) {
 
-        if (salarioBase <= 0.0 || salarioBase < 21000000) {
-            throw new IllegalArgumentException("""                          
+        if (salarioBase <= 0.0 || salarioBase > 21000000) {
+            throw new IllegalArgumentException("""
                                                Ingrese un valor para el salario que sea positivo
                                                y mayor que 0. Recuerde que el salario base no
                                                puede exceder los COP $20.000.000.
-                    """
+                                               """
             );
         }
     }
