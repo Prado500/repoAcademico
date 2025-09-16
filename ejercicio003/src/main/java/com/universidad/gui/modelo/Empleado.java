@@ -28,22 +28,20 @@ public abstract class Empleado implements IEmpleado {
     public static final Pattern IDENTIFICACIONES_PERMITIDAS = Pattern.compile("^(CC|CE|PA)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del tipo de documento sea idónea (solo se aceptan "CC" "CE" o "PA")
     public static final Pattern ESTATUS_PERMITIDOS = Pattern.compile("^(AC|IN)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del estatus sea idónea (solo se aceptan "AC" o "IA")
 
-    public Empleado( String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
-        
+    public Empleado(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
+
         validarNoDocumento(noDocumento);
         this.noDoumento = noDocumento;
-        
+
         validarTipoDocumento(tipoDocumento);
         this.tipoDocumento = tipoDocumento;
         validarNombre(nombre);
 
         this.nombre = Objects.requireNonNull(nombre, "El nombre no puede ser nulo ");
 
-        if (salarioBase <= 0.0) {
-            throw new IllegalArgumentException("Ingrese un valor para el salario que sea positivo y mayor que 0");
-        }
-
+        validarSalarioBase(salarioBase);
         this.salarioBase = Objects.requireNonNull(salarioBase, "El salario base no puede ser nulo ");
+        
         validarEstatus(estatus);
         this.estatus = estatus;
     }
@@ -62,89 +60,86 @@ public abstract class Empleado implements IEmpleado {
         validarNoDocumento(noDoumento);
         this.noDoumento = noDoumento;
     }
-    
+
     @Override
     public void setTipoDocumento(String tipoDocumento) {
         validarTipoDocumento(tipoDocumento);
         this.tipoDocumento = tipoDocumento;
     }
-    
+
     @Override
     public void setNombre(String nombre) {
         validarNombre(nombre);
         this.nombre = nombre;
     }
-    
+
     @Override
     public void setSalarioBase(double salarioBase) {
-        this.salarioBase = salarioBase;
+        validarSalarioBase(salarioBase);
+        this.salarioBase = Objects.requireNonNull(salarioBase, "El salario base no puede ser nulo ");
     }
-    
+
     @Override
     public void setFechaNacimiento(String fechaNacimiento) {
         validarFechaNacimiento(fechaNacimiento);
         this.fechaNacimiento = fechaNacimiento;
     }
-    
+
     @Override
     public void setEstatus(String estatus) {
         validarEstatus(estatus);
         this.estatus = estatus;
     }
-    
+
     @Override
     public String getNoDoumento() {
         return noDoumento;
     }
-    
+
     @Override
     public String getTipoDocumento() {
         return tipoDocumento;
     }
-    
+
     @Override
     public String getNombre() {
         return nombre;
     }
-    
+
     @Override
     public double getSalarioBase() {
         return salarioBase;
     }
-    
+
     @Override
     public String getFechaNacimiento() {
         return fechaNacimiento;
     }
-    
+
     @Override
     public String getEstatus() {
         return estatus;
     }
-    
-   
+
     public static Pattern getPATRON_VERIFICACION() {
         return PATRON_VERIFICACION;
     }
-    
-    
+
     public static Pattern getNOMBRE_CARACTERES_PERMITIDOS() {
         return NOMBRE_CARACTERES_PERMITIDOS;
     }
-    
-   
+
     public static Pattern getIDENTIFICACIONES_PERMITIDAS() {
         return IDENTIFICACIONES_PERMITIDAS;
     }
-    
-    
+
     public static Pattern getESTATUS_PERMITIDOS() {
         return ESTATUS_PERMITIDOS;
     }
-    
+
     @Override
     public abstract double calcularBonificacion(); // delego la implementacion a las subclases.
-    
+
     private void validarNoDocumento(String noDocumento) {
 
         if (noDocumento.isBlank() || (!PATRON_VERIFICACION.matcher(noDocumento).matches())) {
@@ -163,6 +158,18 @@ public abstract class Empleado implements IEmpleado {
                                                Solo puede ingresar "CC" para cédula de ciudadanía
                                                "CE" para cédula de extranjería o "PA" para
                                                 pasaporte.""");
+        }
+    }
+
+    private void validarSalarioBase(double salarioBase) {
+
+        if (salarioBase <= 0.0 || salarioBase < 21000000) {
+            throw new IllegalArgumentException("""                          
+                                               Ingrese un valor para el salario que sea positivo
+                                               y mayor que 0. Recuerde que el salario base no
+                                               puede exceder los COP $20.000.000.
+                    """
+            );
         }
     }
 
@@ -227,7 +234,6 @@ public abstract class Empleado implements IEmpleado {
 //    public String toString() {
 //        return "Empleado{" + "noDoumento=" + noDoumento + ", tipoDocumento=" + tipoDocumento + ", nombre=" + nombre + ", salarioBase=" + salarioBase + ", fechaNacimiento=" + fechaNacimiento + ", estatus=" + estatus + '}';
 //    }
-    
     @Override
     public String toString() {
         return "Empleado{" + "nombre=" + nombre + ", salarioBase=" + salarioBase + ", estatus=" + estatus + '}';
