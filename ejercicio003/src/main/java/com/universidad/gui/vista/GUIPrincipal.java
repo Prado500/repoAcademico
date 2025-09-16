@@ -152,6 +152,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuESerGen.add(jMenuItemListEmpleado);
 
         jMenuItemUpdateEmpleado.setText("Actualizar Empleado");
+        jMenuItemUpdateEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemUpdateEmpleadoActionPerformed(evt);
+            }
+        });
         jMenuESerGen.add(jMenuItemUpdateEmpleado);
 
         jMenuItemDeleteEmpleado.setText("Eliminar Empleado");
@@ -241,9 +246,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemListEmpleadoActionPerformed
 
     private void jMenuItemSearchEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSearchEmpleadoActionPerformed
-        GUISearchESerGenPorNoDocumento gui = new GUISearchESerGenPorNoDocumento(empleadoServicioESerGen);
+        GUISearchESerGenPorNoDocumento gui = new GUISearchESerGenPorNoDocumento(this.empleadoServicioESerGen);
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemSearchEmpleadoActionPerformed
+
+    private void jMenuItemUpdateEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateEmpleadoActionPerformed
+            GUIActualizarESerGen gui = new GUIActualizarESerGen(this.empleadoServicioESerGen);
+            gui.setVisible(true);
+    }//GEN-LAST:event_jMenuItemUpdateEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments
