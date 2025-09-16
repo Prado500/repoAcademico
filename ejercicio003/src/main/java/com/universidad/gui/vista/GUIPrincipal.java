@@ -20,17 +20,26 @@ public class GUIPrincipal extends javax.swing.JFrame {
      * Creates new form GUIPrincipal
      */
     
+  
+  private static GUIPrincipal instancia;
   private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
   private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
   
-    public GUIPrincipal() {
+    private GUIPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
         this.empleadoServicioAdministrativo = new EmpleadoServicio<>();
         this.empleadoServicioESerGen = new EmpleadoServicio<>();
     }
 
-   
+    public static GUIPrincipal getInstance(){
+        
+        if(instancia == null){
+           instancia = new GUIPrincipal();
+        }
+            return instancia;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
