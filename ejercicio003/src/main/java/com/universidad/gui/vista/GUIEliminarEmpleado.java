@@ -80,7 +80,7 @@ public class GUIEliminarEmpleado extends JFrame {
 
         // Panel de datos (Centro) - Inicialmente oculto
         panelDatos = new JPanel(new GridLayout(4, 2, 5, 5));
-        panelDatos.setBorder(BorderFactory.createTitledBorder("Datos del Empleado"));
+        panelDatos.setBorder(BorderFactory.createTitledBorder("Datos del Empleado Administrativo"));
         panelDatos.add(new JLabel("Tipo Documento:"));
         panelDatos.add(txtTipoDocumento);
         panelDatos.add(new JLabel("Nombre:"));

@@ -122,20 +122,21 @@ public class GUIActualizarEmpleado extends JFrame {
 
     private void buscarEmpleado(ActionEvent evt) {
         try {
-            Empleado empleado = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
-            if (empleado == null) {
+            Administrativo administrativo = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
+            if (administrativo == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
                 limpiar();
             } else {
-                cmbTipoDocumento.setSelectedItem(empleado.getTipoDocumento());
-                txtNombre.setText(empleado.getNombre());
+                cmbTipoDocumento.setSelectedItem(administrativo.getTipoDocumento());
+                cmbEscalafon.setSelectedItem(administrativo.getEscalafon());
+                txtNombre.setText(administrativo.getNombre());
 //                DecimalFormat formato = new DecimalFormat("#,##0.00");
 //                DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
 //                simbolos.setGroupingSeparator('.');
 //                simbolos.setDecimalSeparator(',');
 //                formato.setDecimalFormatSymbols(simbolos);
-                txtSalario.setText(Double.toString(empleado.getSalarioBase()));
-                txtNuevoDocumento.setText(empleado.getNoDoumento());
+                txtSalario.setText(Double.toString(administrativo.getSalarioBase()));
+                txtNuevoDocumento.setText(administrativo.getNoDoumento());
                 mostrar();
             }
         } catch (Exception e) {
@@ -148,7 +149,7 @@ public class GUIActualizarEmpleado extends JFrame {
             String id = txtBuscar.getText();
             Administrativo administrativo = empleadoServicioAdministrativo.searchElementoByNoDocumento(id.strip());
             empleadoServicioAdministrativo.actualizarElemento(id.strip(), cmbTipoDocumento.getSelectedItem().toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()));
-            administrativo.setEscalafon(id.strip());
+            administrativo.setEscalafon(cmbEscalafon.getSelectedItem().toString().strip());
             JOptionPane.showMessageDialog(this, "Empleado con id " + id + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());

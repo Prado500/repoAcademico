@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class GUIListEmpleados extends JFrame {
+public class GUIListAdministrativos extends JFrame {
 
     private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
     private JButton jButton1Salir;
@@ -26,7 +26,7 @@ public class GUIListEmpleados extends JFrame {
     private JPanel jPanelListEmpleado;
     private JTable jTableListEmpleados;
 
-    public GUIListEmpleados(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
+    public GUIListAdministrativos(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
         this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
         initializeComponents();
         setupLayout();

@@ -185,13 +185,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemAddAdministrativoActionPerformed
 
     private void jMenuItemSearchAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSearchAdministrativoActionPerformed
-        GUISearchEmpleadoPorNoDocumento gui = new GUISearchEmpleadoPorNoDocumento(this.empleadoServicioAdministrativo);
+        GUISearchAdministrativoPorNoDocumento gui = new GUISearchAdministrativoPorNoDocumento(this.empleadoServicioAdministrativo);
         gui.setVisible(true);
        
     }//GEN-LAST:event_jMenuItemSearchAdministrativoActionPerformed
 
     private void jMenuItemListAdministrativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListAdministrativosActionPerformed
-        GUIListEmpleados guiListEmpleados = new GUIListEmpleados(this.empleadoServicioAdministrativo);
+        GUIListAdministrativos guiListEmpleados = new GUIListAdministrativos(this.empleadoServicioAdministrativo);
         guiListEmpleados.setVisible(true);
     }//GEN-LAST:event_jMenuItemListAdministrativosActionPerformed
 

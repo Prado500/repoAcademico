@@ -15,14 +15,14 @@ import javax.swing.JOptionPane;
  *
  * @author Alejandro
  */
-public class GUISearchEmpleadoPorNoDocumento extends javax.swing.JFrame {
+public class GUISearchAdministrativoPorNoDocumento extends javax.swing.JFrame {
 
     private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
 
     /**
      * Creates new form GUISearchEmpleadoPorNoDocumento
      */
-    public GUISearchEmpleadoPorNoDocumento(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
+    public GUISearchAdministrativoPorNoDocumento(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
         initComponents();
         this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
         setLocationRelativeTo(null);
@@ -246,13 +246,13 @@ public class GUISearchEmpleadoPorNoDocumento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUISearchEmpleadoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUISearchAdministrativoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUISearchEmpleadoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUISearchAdministrativoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUISearchEmpleadoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUISearchAdministrativoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUISearchEmpleadoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUISearchAdministrativoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -260,6 +260,14 @@ public class GUISearchEmpleadoPorNoDocumento extends javax.swing.JFrame {
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
 //                new GUISearchEmpleadoPorNoDocumento().setVisible(true);
+//            }
+//        });
+        //</editor-fold>
+
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new GUISearchAdministrativoPorNoDocumento().setVisible(true);
 //            }
 //        });
     }
