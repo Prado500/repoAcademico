@@ -10,8 +10,8 @@ public class ESerGen extends Empleado {
 
     private boolean cerAlturas;
 
-    public ESerGen(boolean cerAlturas, String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
-        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
+    public ESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean cerAlturas) {
+        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus );
         this.cerAlturas = cerAlturas;
     }
 

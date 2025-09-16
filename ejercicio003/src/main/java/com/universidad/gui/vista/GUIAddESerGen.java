@@ -5,7 +5,7 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
-import com.universidad.gui.modelo.implementacion.Administrativo;
+import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import javax.swing.JOptionPane;
 
@@ -13,18 +13,18 @@ import javax.swing.JOptionPane;
  *
  * @author Alejandro
  */
-public class GUIAddAdministrativo extends javax.swing.JFrame  {
+public class GUIAddESerGen extends javax.swing.JFrame  {
 
     /**
      * Creates new form GUIAddAdministrativo
      */
     
-    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
+    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
     
-    public GUIAddAdministrativo(EmpleadoServicio<Administrativo> servicio) {
+    public GUIAddESerGen(EmpleadoServicio<ESerGen> servicio) {
         initComponents();
         setLocationRelativeTo(null);
-        this.empleadoServicioAdministrativo = servicio;
+        this.empleadoServicioESerGen = servicio;
     }
     
     public void limpiar(){
@@ -54,8 +54,8 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
         jLabelTipoDocumento = new javax.swing.JLabel();
         jComboBoxTipoDocumento = new javax.swing.JComboBox<>();
         cmbEstatus = new javax.swing.JComboBox<>();
-        jLabelEscalafon = new javax.swing.JLabel();
-        cmbEscalafon = new javax.swing.JComboBox<>();
+        jLabelAlturas = new javax.swing.JLabel();
+        cmbAlturas = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
@@ -88,9 +88,9 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
             }
         });
 
-        jLabelEscalafon.setText("Escalafón");
+        jLabelAlturas.setText("Cert. Alturas");
 
-        cmbEscalafon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        cmbAlturas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO", " " }));
 
         javax.swing.GroupLayout jPanelAddEmpleadoLayout = new javax.swing.GroupLayout(jPanelAddEmpleado);
         jPanelAddEmpleado.setLayout(jPanelAddEmpleadoLayout);
@@ -99,7 +99,7 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
             .addGroup(jPanelAddEmpleadoLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelEscalafon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelAlturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelTipoDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(jLabelSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -114,7 +114,7 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
                         .addComponent(txtNoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jComboBoxTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbEscalafon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbAlturas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanelAddEmpleadoLayout.setVerticalGroup(
@@ -142,8 +142,8 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
                     .addComponent(jComboBoxTipoDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAddEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEscalafon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbEscalafon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelAlturas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbAlturas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -196,17 +196,20 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try{
-        
+            boolean alturas = false;
             String nombre = txtNombre.getText().strip().toUpperCase();
             double salario = Double.parseDouble(txtSalario.getText().strip());
             String estatus = cmbEstatus.getSelectedItem().toString();
             String noDocumento = txtNoDocumento.getText().strip();
             String tipoDocumento = jComboBoxTipoDocumento.getSelectedItem().toString();
-            String escalafon = cmbEscalafon.getSelectedItem().toString();
-            Administrativo administrativo = new Administrativo (noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
-            empleadoServicioAdministrativo.agregar(administrativo);
+            String resAlturas = cmbAlturas.getSelectedItem().toString();
+            if(resAlturas.equalsIgnoreCase("SI")){
+            alturas = true;
+            }
+            ESerGen serGenerales = new ESerGen (noDocumento, tipoDocumento, nombre, salario, estatus, alturas);
+            empleadoServicioESerGen.agregar(serGenerales);
             limpiar();
-            JOptionPane.showMessageDialog(this, "Administrativo con nombre " + administrativo.getNombre() + " y documento No." +administrativo.getNoDoumento()+ " creado exitosamente ");
+            JOptionPane.showMessageDialog(this, "Empleado con nombre " + serGenerales.getNombre() + " y documento No." +serGenerales.getNoDoumento()+ " creado exitosamente ");
         
         }catch(Exception e){
           JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -238,23 +241,25 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIAddAdministrativo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIAddESerGen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIAddAdministrativo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIAddESerGen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIAddAdministrativo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIAddESerGen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIAddAdministrativo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIAddESerGen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            private EmpleadoServicio<Administrativo> empleadoServicio;
+            private EmpleadoServicio<ESerGen> empleadoServicio;
             public void run() {
-                EmpleadoServicio<Administrativo> servicioPrueba = new EmpleadoServicio<>();
-                new GUIAddAdministrativo(servicioPrueba).setVisible(true);
+                EmpleadoServicio<ESerGen> servicioPrueba = new EmpleadoServicio<>();
+                new GUIAddESerGen(servicioPrueba).setVisible(true);
             }
         });
     }
@@ -262,10 +267,10 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cmbEscalafon;
+    private javax.swing.JComboBox<String> cmbAlturas;
     private javax.swing.JComboBox<String> cmbEstatus;
     private javax.swing.JComboBox<String> jComboBoxTipoDocumento;
-    private javax.swing.JLabel jLabelEscalafon;
+    private javax.swing.JLabel jLabelAlturas;
     private javax.swing.JLabel jLabelEstatus;
     private javax.swing.JLabel jLabelNoDocumento;
     private javax.swing.JLabel jLabelNombre;

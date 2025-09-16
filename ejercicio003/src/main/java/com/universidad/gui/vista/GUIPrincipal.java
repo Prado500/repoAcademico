@@ -4,8 +4,9 @@
  */
 package com.universidad.gui.vista;
 
-import com.universidad.gui.modelo.Empleado;
+
 import com.universidad.gui.modelo.implementacion.Administrativo;
+import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import javax.swing.JOptionPane;
 
@@ -20,17 +21,16 @@ public class GUIPrincipal extends javax.swing.JFrame {
      */
     
   private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
+  private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
   
     public GUIPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
         this.empleadoServicioAdministrativo = new EmpleadoServicio<>();
+        this.empleadoServicioESerGen = new EmpleadoServicio<>();
     }
 
-    public EmpleadoServicio<Administrativo> getEmpleadoServicio() {
-        return empleadoServicioAdministrativo;
-    }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,6 +128,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuESerGen.setText("Servicios Generales");
 
         jMenuItemAddEmpleado.setText("Crear Empleado");
+        jMenuItemAddEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAddEmpleadoActionPerformed(evt);
+            }
+        });
         jMenuESerGen.add(jMenuItemAddEmpleado);
 
         jMenuItemSearchEmpleado.setText("Buscar Empleado");
@@ -212,6 +217,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private void jMenuItemGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGenerarReporteActionPerformed
         JOptionPane.showMessageDialog(this, "Proximamente");
     }//GEN-LAST:event_jMenuItemGenerarReporteActionPerformed
+
+    private void jMenuItemAddEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddEmpleadoActionPerformed
+
+        GUIAddESerGen gui = new GUIAddESerGen(empleadoServicioESerGen);
+        gui.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItemAddEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments
