@@ -32,6 +32,7 @@ public class GUIListAdministrativos extends JFrame {
         setupLayout();
         setupListeners();
         setLocationRelativeTo(null);
+        jTableListEmpleados.setEnabled(false);
     }
 
     private void initializeComponents() {
