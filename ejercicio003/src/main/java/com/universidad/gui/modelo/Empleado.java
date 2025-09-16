@@ -59,16 +59,19 @@ public abstract class Empleado implements IEmpleado {
 
     @Override
     public void setNoDoumento(String noDoumento) {
+        validarNoDocumento(noDoumento);
         this.noDoumento = noDoumento;
     }
     
     @Override
     public void setTipoDocumento(String tipoDocumento) {
+        validarTipoDocumento(tipoDocumento);
         this.tipoDocumento = tipoDocumento;
     }
     
     @Override
     public void setNombre(String nombre) {
+        validarNombre(nombre);
         this.nombre = nombre;
     }
     
@@ -79,6 +82,7 @@ public abstract class Empleado implements IEmpleado {
     
     @Override
     public void setFechaNacimiento(String fechaNacimiento) {
+        validarFechaNacimiento(fechaNacimiento);
         this.fechaNacimiento = fechaNacimiento;
     }
     
