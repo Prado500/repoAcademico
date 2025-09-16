@@ -139,6 +139,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuESerGen.add(jMenuItemSearchEmpleado);
 
         jMenuItemListEmpleado.setText("Ver Empleados");
+        jMenuItemListEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListEmpleadoActionPerformed(evt);
+            }
+        });
         jMenuESerGen.add(jMenuItemListEmpleado);
 
         jMenuItemUpdateEmpleado.setText("Actualizar Empleado");
@@ -224,6 +229,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         gui.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemAddEmpleadoActionPerformed
+
+    private void jMenuItemListEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListEmpleadoActionPerformed
+        GUIListESerGen gui = new GUIListESerGen(this.empleadoServicioESerGen);
+        gui.setVisible(true);
+    }//GEN-LAST:event_jMenuItemListEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments
