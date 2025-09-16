@@ -60,7 +60,7 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("GUIAddEmpleado");
+        setTitle("Añadir administrativo");
 
         jPanelAddEmpleado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
