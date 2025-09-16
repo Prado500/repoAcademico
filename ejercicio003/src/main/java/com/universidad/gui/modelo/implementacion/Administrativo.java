@@ -28,6 +28,7 @@ public class Administrativo extends Empleado {
     }
 
     public void setEscalafon(String escalafon) {
+        verificarEscalafon(escalafon);
         this.escalafon = escalafon;
     }
 
