@@ -58,6 +58,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuItemListAdministrativos = new javax.swing.JMenuItem();
         jMenuItemUpdateAdministrativos = new javax.swing.JMenuItem();
         jMenuItemDeleteAdministrativo = new javax.swing.JMenuItem();
+        jMenuItemBonificacion = new javax.swing.JMenuItem();
         jMenuESerGen = new javax.swing.JMenu();
         jMenuItemAddEmpleado = new javax.swing.JMenuItem();
         jMenuItemSearchEmpleado = new javax.swing.JMenuItem();
@@ -131,6 +132,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
             }
         });
         menuAdministrativo.add(jMenuItemDeleteAdministrativo);
+
+        jMenuItemBonificacion.setText("Calcular Nómina");
+        jMenuItemBonificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBonificacionActionPerformed(evt);
+            }
+        });
+        menuAdministrativo.add(jMenuItemBonificacion);
 
         jMenuBar1.add(menuAdministrativo);
 
@@ -264,6 +273,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
             gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemUpdateEmpleadoActionPerformed
 
+    private void jMenuItemBonificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBonificacionActionPerformed
+        
+        GUICalcularNominaAdministrativos gui = new GUICalcularNominaAdministrativos(empleadoServicioAdministrativo);
+        gui.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemBonificacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -305,6 +321,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuESerGen;
     private javax.swing.JMenuItem jMenuItemAddEmpleado;
+    private javax.swing.JMenuItem jMenuItemBonificacion;
     private javax.swing.JMenuItem jMenuItemDeleteAdministrativo;
     private javax.swing.JMenuItem jMenuItemDeleteEmpleado;
     private javax.swing.JMenuItem jMenuItemGenerarReporte;
