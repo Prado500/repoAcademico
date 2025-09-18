@@ -42,6 +42,8 @@ public interface IEmpleado {
 
     public String getEstatus();
     
+    public double calcularBonificacion(Double salarioBase);
+    
     void aplicarBonificacion(ArrayList<Administrativo> administrativos);
     
     public double calcularNominaConBonificacion(ArrayList<Administrativo> administrativos);

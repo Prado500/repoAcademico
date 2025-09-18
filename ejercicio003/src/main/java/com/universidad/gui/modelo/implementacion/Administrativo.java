@@ -34,7 +34,11 @@ public class Administrativo extends Empleado {
     public boolean getHasBonificacion() {
         return hasBonificacion;
     }
-
+    
+     public double getBonificacion() {
+        return bonificacion;
+    }
+     
     public void setEscalafon(String escalafon) {
         verificarEscalafon(escalafon);
         this.escalafon = escalafon;
@@ -44,6 +48,12 @@ public class Administrativo extends Empleado {
         this.hasBonificacion = hasBonificacion;
     }
 
+    public void setBonificacion(double bonificacion) {
+        this.bonificacion = bonificacion;
+    }
+    
+    
+    
     private void verificarEscalafon(String escalafon) {
         Pattern busqueda = Pattern.compile("^(1|2|3)$");
         Matcher matcher = busqueda.matcher(escalafon);
@@ -56,7 +66,8 @@ public class Administrativo extends Empleado {
         }
     }
 
-    private double calcularBonificacion(Double salarioBase){
+    @Override
+    public double calcularBonificacion(Double salarioBase){
                 double bonificacion = 0;
 
                 if (this.getEscalafon().equals("1")) {

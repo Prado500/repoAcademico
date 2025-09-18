@@ -25,6 +25,7 @@ public abstract class Empleado implements IEmpleado {
     private double salarioBase;
     private String fechaNacimiento;
     private String estatus;
+    private double bonificacion;
     public static final Pattern PATRON_VERIFICACION = Pattern.compile("^\\d{6,12}$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada del número de identificación es idóneo o nó (solo se permiten números del 1 al 9) 
     public static final Pattern NOMBRE_CARACTERES_PERMITIDOS = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ\\s]{1,50}$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada del nombre es idónea
     public static final Pattern IDENTIFICACIONES_PERMITIDAS = Pattern.compile("^(CC|CE|PA)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del tipo de documento sea idónea (solo se aceptan "CC" "CE" o "PA")
@@ -48,13 +49,14 @@ public abstract class Empleado implements IEmpleado {
         this.estatus = estatus;
     }
 
-    public Empleado(String noDoumento, String tipoDocumento, String nombre, double salarioBase, String fechaNacimiento, String estatus) {
+    public Empleado(String noDoumento, String tipoDocumento, String nombre, double salarioBase, String fechaNacimiento, String estatus, double bonificacion) {
 
         this(noDoumento, tipoDocumento, nombre, salarioBase, estatus);
 
         validarFechaNacimiento(fechaNacimiento);
-
         this.fechaNacimiento = fechaNacimiento;
+        
+         this.bonificacion = calcularBonificacion(salarioBase);
     }
 
     @Override
@@ -147,6 +149,9 @@ public abstract class Empleado implements IEmpleado {
     
     @Override
     public abstract double calcularNominaConBonificacion(ArrayList<Administrativo> administrativos);
+    
+    @Override
+    public abstract double calcularBonificacion(Double salarioBase);
     
     private void validarNoDocumento(String noDocumento) {
 
