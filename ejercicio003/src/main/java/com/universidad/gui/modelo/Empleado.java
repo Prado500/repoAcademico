@@ -4,10 +4,12 @@
  */
 package com.universidad.gui.modelo;
 
+import com.universidad.gui.modelo.implementacion.Administrativo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -138,8 +140,14 @@ public abstract class Empleado implements IEmpleado {
     }
 
     @Override
-    public abstract double calcularBonificacion(); // delego la implementacion a las subclases.
+    public abstract void aplicarBonificacion(ArrayList<Administrativo> administrativos); // delego la implementacion a las subclases.
 
+    @Override
+    public abstract double calcularNomina(ArrayList<Administrativo> administrativos);
+    
+    @Override
+    public abstract double calcularNominaConBonificacion(ArrayList<Administrativo> administrativos);
+    
     private void validarNoDocumento(String noDocumento) {
 
         if (noDocumento.isBlank() || (!PATRON_VERIFICACION.matcher(noDocumento).matches())) {

@@ -21,6 +21,7 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
     
     private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
     
+    
     public GUIAddAdministrativo(EmpleadoServicio<Administrativo> servicio) {
         initComponents();
         setLocationRelativeTo(null);

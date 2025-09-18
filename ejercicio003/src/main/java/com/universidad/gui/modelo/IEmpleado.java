@@ -8,6 +8,8 @@ import static com.universidad.gui.modelo.Empleado.ESTATUS_PERMITIDOS;
 import static com.universidad.gui.modelo.Empleado.IDENTIFICACIONES_PERMITIDAS;
 import static com.universidad.gui.modelo.Empleado.NOMBRE_CARACTERES_PERMITIDOS;
 import static com.universidad.gui.modelo.Empleado.PATRON_VERIFICACION;
+import com.universidad.gui.modelo.implementacion.Administrativo;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
@@ -40,5 +42,9 @@ public interface IEmpleado {
 
     public String getEstatus();
     
-    double calcularBonificacion();
+    void aplicarBonificacion(ArrayList<Administrativo> administrativos);
+    
+    public double calcularNominaConBonificacion(ArrayList<Administrativo> administrativos);
+    
+    public double calcularNomina(ArrayList<Administrativo> administrativos);
 }

@@ -164,5 +164,7 @@ public class GUICalcularNominaAdministrativos extends JFrame {
         panelDatos.setVisible(false);
 
     }
+    
+    //private void
 
 }

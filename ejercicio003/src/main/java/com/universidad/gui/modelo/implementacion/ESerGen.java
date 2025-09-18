@@ -5,6 +5,7 @@
 package com.universidad.gui.modelo.implementacion;
 
 import com.universidad.gui.modelo.Empleado;
+import java.util.ArrayList;
 
 public class ESerGen extends Empleado {
 
@@ -29,7 +30,7 @@ public class ESerGen extends Empleado {
     }
     
     @Override
-    public double calcularBonificacion() {
+    public void aplicarBonificacion(ArrayList<Administrativo> administrativos) {
         double valorRetorno = this.getSalarioBase();
         if (cerAlturas) {
             valorRetorno *= 1.5;
