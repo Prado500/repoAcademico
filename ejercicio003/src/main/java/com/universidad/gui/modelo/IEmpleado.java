@@ -29,7 +29,7 @@ public interface IEmpleado {
     public void setFechaNacimiento(String fechaNacimiento);
 
     public void setEstatus(String estatus);
-
+   
     public String getNoDoumento();
 
     public String getTipoDocumento();
@@ -42,9 +42,9 @@ public interface IEmpleado {
 
     public String getEstatus();
     
-    public double calcularBonificacion(Double salarioBase);
+    public double aplicarBonificacion(Double salarioBase);
     
-    void aplicarBonificacion(ArrayList<Administrativo> administrativos);
+    public double getBonificacion();
     
     public double calcularNominaConBonificacion(ArrayList<Administrativo> administrativos);
     

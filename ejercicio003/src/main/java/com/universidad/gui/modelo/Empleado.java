@@ -31,7 +31,7 @@ public abstract class Empleado implements IEmpleado {
     public static final Pattern IDENTIFICACIONES_PERMITIDAS = Pattern.compile("^(CC|CE|PA)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del tipo de documento sea idónea (solo se aceptan "CC" "CE" o "PA")
     public static final Pattern ESTATUS_PERMITIDOS = Pattern.compile("^(AC|IN)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del estatus sea idónea (solo se aceptan "AC" o "IA")
 
-    public Empleado(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
+    public Empleado(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, double bonificacion) {
 
         validarNoDocumento(noDocumento);
         this.noDoumento = noDocumento;
@@ -47,16 +47,19 @@ public abstract class Empleado implements IEmpleado {
         
         validarEstatus(estatus);
         this.estatus = estatus;
+        
+        this.bonificacion = aplicarBonificacion(salarioBase);
+        
     }
 
     public Empleado(String noDoumento, String tipoDocumento, String nombre, double salarioBase, String fechaNacimiento, String estatus, double bonificacion) {
 
-        this(noDoumento, tipoDocumento, nombre, salarioBase, estatus);
+        this(noDoumento, tipoDocumento, nombre, salarioBase, estatus, bonificacion);
 
+        
         validarFechaNacimiento(fechaNacimiento);
         this.fechaNacimiento = fechaNacimiento;
-        
-         this.bonificacion = calcularBonificacion(salarioBase);
+         
     }
 
     @Override
@@ -124,6 +127,11 @@ public abstract class Empleado implements IEmpleado {
     public String getEstatus() {
         return estatus;
     }
+    
+    @Override
+    public double getBonificacion(){
+        return bonificacion;
+    }
 
     public static Pattern getPATRON_VERIFICACION() {
         return PATRON_VERIFICACION;
@@ -142,16 +150,13 @@ public abstract class Empleado implements IEmpleado {
     }
 
     @Override
-    public abstract void aplicarBonificacion(ArrayList<Administrativo> administrativos); // delego la implementacion a las subclases.
-
-    @Override
     public abstract double calcularNomina(ArrayList<Administrativo> administrativos);
     
     @Override
     public abstract double calcularNominaConBonificacion(ArrayList<Administrativo> administrativos);
     
     @Override
-    public abstract double calcularBonificacion(Double salarioBase);
+    public abstract double aplicarBonificacion(Double salarioBase); // delego la implementacion a las subclases.
     
     private void validarNoDocumento(String noDocumento) {
 

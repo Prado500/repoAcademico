@@ -20,7 +20,7 @@ public class Administrativo extends Empleado {
     private double bonificacion;
 
     public Administrativo(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, String escalafon, boolean hasBonificacion, double bonificacion) {
-        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
+        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus, hasBonificacion, bonificacion);
         verificarEscalafon(escalafon);
         this.escalafon = escalafon;
         this.hasBonificacion = hasBonificacion;
@@ -34,11 +34,7 @@ public class Administrativo extends Empleado {
     public boolean getHasBonificacion() {
         return hasBonificacion;
     }
-    
-     public double getBonificacion() {
-        return bonificacion;
-    }
-     
+
     public void setEscalafon(String escalafon) {
         verificarEscalafon(escalafon);
         this.escalafon = escalafon;
@@ -48,12 +44,6 @@ public class Administrativo extends Empleado {
         this.hasBonificacion = hasBonificacion;
     }
 
-    public void setBonificacion(double bonificacion) {
-        this.bonificacion = bonificacion;
-    }
-    
-    
-    
     private void verificarEscalafon(String escalafon) {
         Pattern busqueda = Pattern.compile("^(1|2|3)$");
         Matcher matcher = busqueda.matcher(escalafon);
@@ -67,21 +57,21 @@ public class Administrativo extends Empleado {
     }
 
     @Override
-    public double calcularBonificacion(Double salarioBase){
-                double bonificacion = 0;
+    public double calcularBonificacion(Double salarioBase) {
+        double bonificacion = 0;
 
-                if (this.getEscalafon().equals("1")) {
-                    bonificacion = salarioBase * 1.1;
-                }
-                if (this.getEscalafon().equals("2")) {
-                    bonificacion = salarioBase * 1.3;
-                } else {
-                    bonificacion = salarioBase * 1.5;
-                }
-    
-                return bonificacion;
+        if (this.getEscalafon().equals("1")) {
+            bonificacion = salarioBase * 1.1;
+        }
+        if (this.getEscalafon().equals("2")) {
+            bonificacion = salarioBase * 1.3;
+        } else {
+            bonificacion = salarioBase * 1.5;
+        }
+
+        return bonificacion;
     }
-    
+
     @Override
     public void aplicarBonificacion(ArrayList<Administrativo> administrativos) {
         double valorRetorno;
@@ -113,7 +103,7 @@ public class Administrativo extends Empleado {
         double nominaAcumulada = 0;
         for (Administrativo administrativo : administrativos) {
             double valor = administrativo.getSalarioBase();
-            
+
             if (!(administrativo.hasBonificacion)) {
 
                 if (administrativo.getEscalafon() == "1") {
