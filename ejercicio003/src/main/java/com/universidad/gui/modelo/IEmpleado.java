@@ -43,13 +43,7 @@ public interface IEmpleado<T extends Empleado<T>> {
 
     public String getEstatus();
     
-    public double aplicarBonificacion(Double salarioBase);
-    
     public double getBonificacion();
-    
-    public double calcularNominaConBonificacion(ArrayList<T> elementos);
-    
-    public double calcularNomina(ArrayList<T> elementos);
-    
-    public T obtenerCopia();
+   
+    public double aplicarBonificacion(Double salarioBase);
 }

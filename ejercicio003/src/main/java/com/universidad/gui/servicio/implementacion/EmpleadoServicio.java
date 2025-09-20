@@ -6,6 +6,7 @@ package com.universidad.gui.servicio.implementacion;
 
 
 import com.universidad.gui.modelo.Empleado;
+import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.IEmpleadoServicio;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +43,8 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
 //        return new ArrayList<>(elementos);
 //    }
     @Override
-    public List<T> mostrar() {
-        List<T> elementosMostrar = new ArrayList<>();
+    public ArrayList<T> mostrar() {
+        ArrayList<T> elementosMostrar = new ArrayList<>();
         for (T elemento : this.elementos) {
             if (!(elemento.getEstatus().equals("IN"))) {
                 elementosMostrar.add(elemento);
@@ -104,4 +105,29 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
 
     }
 
+    
+        @Override
+    public double calcularNominaConBonificacion(ArrayList<T> elementos) {
+
+        double nominaAcumulada = 0;
+        for (T elemento : elementos) {
+            nominaAcumulada += elemento.getBonificacion();
+        }
+
+        return nominaAcumulada;
+
+    }
+
+    @Override
+    public double calcularNomina(ArrayList<T> elementos) {
+        double nominaAcumulada = 0;
+        for (T elemento : elementos) {
+            nominaAcumulada += elemento.getSalarioBase();
+        }
+
+        return nominaAcumulada;
+    }
+
+    
+    
 }

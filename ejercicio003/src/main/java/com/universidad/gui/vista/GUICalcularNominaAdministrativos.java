@@ -98,17 +98,15 @@ public class GUICalcularNominaAdministrativos extends JFrame {
         panelPrincipal.add(panelBotones, BorderLayout.SOUTH);
 
         // Configurar action listeners
-        btnCalcular.addActionListener(this::calcularNominaTotal);
-        btnCalcular.addActionListener(this::calcularNominaCruda);
+        btnCalcular.addActionListener(this::calcularNomina);
+        btnCalcular.addActionListener(this::calcularNominaConBonificacion);
         //btnCalcular.addActionListener(this::mostrar);
         btnSalir.addActionListener(e -> dispose());
 
         setContentPane(panelPrincipal);
     }
 
-    private void calcularNominaTotal(ActionEvent evt) {
-        double acumulador = 0;
-        double valorBonificacion = 0;
+    private void calcularNominaConBonificacion(ActionEvent evt) {
 
         try {
             if (empleadoServicioAdministrativo.mostrar().isEmpty()) {
@@ -116,35 +114,34 @@ public class GUICalcularNominaAdministrativos extends JFrame {
                 this.ocultar();
             }else{
             this.mostrar();
+            this.txtNominaTotal.setText(Double.toString(empleadoServicioAdministrativo.calcularNominaConBonificacion(empleadoServicioAdministrativo.mostrar())));
             }
             
             
-            for (Administrativo administrativo : empleadoServicioAdministrativo.mostrar()) {
-                valorBonificacion = administrativo.calcularBonificacion();
-                acumulador += valorBonificacion;
-            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
-        this.txtNominaTotal.setText(Double.toString(acumulador));
+       
     }
 
-    private void calcularNominaCruda(ActionEvent evt) {
-        double acumulador = 0;
+    private void calcularNomina(ActionEvent evt) {
         try {
-            
-            
-            for (Administrativo administrativo : empleadoServicioAdministrativo.mostrar()) {
-                acumulador += administrativo.getSalarioBase();
+            if (empleadoServicioAdministrativo.mostrar().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "La lista está vacia");
+                this.ocultar();
+            }else{
+            this.mostrar();
+            this.txtNominaCruda.setText(Double.toString(empleadoServicioAdministrativo.calcularNomina(empleadoServicioAdministrativo.mostrar())));
             }
+            
+            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
-        this.txtNominaCruda.setText(Double.toString(acumulador));
     }
 
     private void limpiar() {

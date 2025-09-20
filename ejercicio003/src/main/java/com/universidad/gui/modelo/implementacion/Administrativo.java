@@ -17,10 +17,9 @@ public class Administrativo extends Empleado<Administrativo> {
 
     private String escalafon;
     private boolean hasBonificacion = false;
-    private double bonificacion;
-
-    public Administrativo(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, String escalafon, double bonificacion) {
-        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus, bonificacion);
+   
+    public Administrativo(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, String escalafon) {
+        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
         verificarEscalafon(escalafon);
         this.escalafon = escalafon;
     }
@@ -92,12 +91,6 @@ public class Administrativo extends Empleado<Administrativo> {
         return nominaAcumulada;
     }
 
-    @Override
-    public Administrativo obtenerCopia(){
-    return new Administrativo();
-    }
-    public static void main(String[] args) {
-        
-    }
+    
 }
 

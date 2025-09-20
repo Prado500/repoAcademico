@@ -150,14 +150,7 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
         return ESTATUS_PERMITIDOS;
     }
 
-    @Override
-    public abstract double calcularNomina(ArrayList<T> elementos);
-    
-    @Override
-    public abstract double calcularNominaConBonificacion(ArrayList<T> elementos);
-    
-    @Override
-    public abstract double aplicarBonificacion(Double salarioBase); // delego la implementacion a las subclases.
+   // delego la implementacion a las subclases.
     
     private void validarNoDocumento(String noDocumento) {
 

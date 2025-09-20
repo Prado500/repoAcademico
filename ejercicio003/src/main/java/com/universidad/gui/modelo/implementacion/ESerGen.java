@@ -7,12 +7,12 @@ package com.universidad.gui.modelo.implementacion;
 import com.universidad.gui.modelo.Empleado;
 import java.util.ArrayList;
 
-public class ESerGen extends Empleado {
+public class ESerGen extends Empleado<ESerGen> {
 
     private boolean cerAlturas;
 
-    public ESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean cerAlturas, double bonificacion) {
-        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus, bonificacion);
+    public ESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean cerAlturas) {
+        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
 
         this.cerAlturas = cerAlturas;
     }
@@ -30,11 +30,11 @@ public class ESerGen extends Empleado {
     }
 
     @Override
-    public double calcularNominaConBonificacion(ArrayList<ESerGen> serGenerales) {
+    public double calcularNominaConBonificacion(ArrayList<ESerGen> serGeneralesLista) {
 
         double nominaAcumulada = 0;
-        for (Administrativo administrativo : administrativos) {
-            nominaAcumulada += administrativo.getBonificacion();
+        for (ESerGen serGenerales : serGeneralesLista) {
+            nominaAcumulada += serGenerales.getBonificacion();
         }
 
         return nominaAcumulada;
@@ -42,10 +42,10 @@ public class ESerGen extends Empleado {
     }
 
     @Override
-    public double calcularNomina(ArrayList<Administrativo> administrativos) {
+    public double calcularNomina(ArrayList<ESerGen> serGeneralesLista) {
         double nominaAcumulada = 0;
-        for (Administrativo administrativo : administrativos) {
-            nominaAcumulada += administrativo.getSalarioBase();
+        for (ESerGen serGenerales : serGeneralesLista) {
+            nominaAcumulada += serGenerales.getSalarioBase();
         }
 
         return nominaAcumulada;
