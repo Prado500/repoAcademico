@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
  *
  * @author Alejandro
  */
-public class Administrativo extends Empleado {
+public class Administrativo extends Empleado<Administrativo> {
 
     private String escalafon;
     private boolean hasBonificacion = false;

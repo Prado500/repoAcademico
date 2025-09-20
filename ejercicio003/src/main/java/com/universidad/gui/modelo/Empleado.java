@@ -16,8 +16,9 @@ import java.util.regex.Pattern;
 /**
  *
  * @author Alejandro
+ * @param <T>
  */
-public abstract class Empleado implements IEmpleado {
+public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
 
     private String noDoumento;
     private String tipoDocumento;
@@ -150,10 +151,10 @@ public abstract class Empleado implements IEmpleado {
     }
 
     @Override
-    public abstract double calcularNomina(ArrayList<Administrativo> administrativos);
+    public abstract double calcularNomina(ArrayList<T> elementos);
     
     @Override
-    public abstract double calcularNominaConBonificacion(ArrayList<Administrativo> administrativos);
+    public abstract double calcularNominaConBonificacion(ArrayList<T> elementos);
     
     @Override
     public abstract double aplicarBonificacion(Double salarioBase); // delego la implementacion a las subclases.

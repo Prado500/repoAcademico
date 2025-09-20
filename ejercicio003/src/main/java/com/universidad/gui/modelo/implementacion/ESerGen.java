@@ -11,31 +11,52 @@ public class ESerGen extends Empleado {
 
     private boolean cerAlturas;
 
-    public ESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean cerAlturas) {
-        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus );
+    public ESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean cerAlturas, double bonificacion) {
+        super(noDocumento, tipoDocumento, nombre, salarioBase, estatus, bonificacion);
+
         this.cerAlturas = cerAlturas;
     }
 
     public boolean getCerAlturas() {
         return this.cerAlturas;
     }
-    
+
     public void setCerAlturas(boolean cerAlturas) {
         this.cerAlturas = cerAlturas;
     }
 
-    
-    private boolean isBoolean (String cerAlturas){
-    return "si".equalsIgnoreCase(cerAlturas) || "no".equalsIgnoreCase(cerAlturas);
+    private boolean isBoolean(String cerAlturas) {
+        return "si".equalsIgnoreCase(cerAlturas) || "no".equalsIgnoreCase(cerAlturas);
     }
-    
+
     @Override
-    public void aplicarBonificacion(ArrayList<Administrativo> administrativos) {
-        double valorRetorno = this.getSalarioBase();
-        if (cerAlturas) {
-            valorRetorno *= 1.5;
+    public double calcularNominaConBonificacion(ArrayList<ESerGen> serGenerales) {
+
+        double nominaAcumulada = 0;
+        for (Administrativo administrativo : administrativos) {
+            nominaAcumulada += administrativo.getBonificacion();
         }
-        return valorRetorno;
+
+        return nominaAcumulada;
+
+    }
+
+    @Override
+    public double calcularNomina(ArrayList<Administrativo> administrativos) {
+        double nominaAcumulada = 0;
+        for (Administrativo administrativo : administrativos) {
+            nominaAcumulada += administrativo.getSalarioBase();
+        }
+
+        return nominaAcumulada;
+    }
+
+    @Override
+    public double aplicarBonificacion(Double salarioBase) {
+        if (this.cerAlturas) {
+            salarioBase *= 1.5;
+        }
+        return salarioBase;
     }
 
 }

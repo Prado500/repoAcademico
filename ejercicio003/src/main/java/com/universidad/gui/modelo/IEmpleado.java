@@ -15,8 +15,9 @@ import java.util.regex.Pattern;
 /**
  *
  * @author Alejandro
+ * @param <T>
  */
-public interface IEmpleado {
+public interface IEmpleado<T extends Empleado<T>> {
 
     public void setNoDoumento(String noDoumento);
 
@@ -46,7 +47,7 @@ public interface IEmpleado {
     
     public double getBonificacion();
     
-    public double calcularNominaConBonificacion(ArrayList<Administrativo> administrativos);
+    public double calcularNominaConBonificacion(ArrayList<T> elementos);
     
-    public double calcularNomina(ArrayList<Administrativo> administrativos);
+    public double calcularNomina(ArrayList<T> elementos);
 }
