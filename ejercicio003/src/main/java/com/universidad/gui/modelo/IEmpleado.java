@@ -50,4 +50,6 @@ public interface IEmpleado<T extends Empleado<T>> {
     public double calcularNominaConBonificacion(ArrayList<T> elementos);
     
     public double calcularNomina(ArrayList<T> elementos);
+    
+    public T obtenerCopia();
 }

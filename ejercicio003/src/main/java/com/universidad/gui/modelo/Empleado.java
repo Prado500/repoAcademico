@@ -32,7 +32,7 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
     public static final Pattern IDENTIFICACIONES_PERMITIDAS = Pattern.compile("^(CC|CE|PA)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del tipo de documento sea idónea (solo se aceptan "CC" "CE" o "PA")
     public static final Pattern ESTATUS_PERMITIDOS = Pattern.compile("^(AC|IN)$");// Expresión regular que genera un patron de búsqueda para verificar que la entrada del estatus sea idónea (solo se aceptan "AC" o "IA")
 
-    public Empleado(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, double bonificacion) {
+    public Empleado(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
 
         validarNoDocumento(noDocumento);
         this.noDoumento = noDocumento;
@@ -53,9 +53,9 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
         
     }
 
-    public Empleado(String noDoumento, String tipoDocumento, String nombre, double salarioBase, String fechaNacimiento, String estatus, double bonificacion) {
+    public Empleado(String noDoumento, String tipoDocumento, String nombre, double salarioBase, String fechaNacimiento, String estatus) {
 
-        this(noDoumento, tipoDocumento, nombre, salarioBase, estatus, bonificacion);
+        this(noDoumento, tipoDocumento, nombre, salarioBase, estatus);
 
         
         validarFechaNacimiento(fechaNacimiento);

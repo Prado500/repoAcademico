@@ -91,4 +91,13 @@ public class Administrativo extends Empleado<Administrativo> {
 
         return nominaAcumulada;
     }
+
+    @Override
+    public Administrativo obtenerCopia(){
+    return new Administrativo();
+    }
+    public static void main(String[] args) {
+        
+    }
 }
+
