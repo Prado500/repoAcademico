@@ -49,7 +49,7 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
         validarEstatus(estatus);
         this.estatus = estatus;
         
-        this.bonificacion = aplicarBonificacion(salarioBase);
+        //this.bonificacion = aplicarBonificacion(salarioBase);
         
     }
 
@@ -97,6 +97,10 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
     public void setEstatus(String estatus) {
         validarEstatus(estatus);
         this.estatus = estatus;
+    }
+    
+    public void setBonificacion(Double bonificacion){
+    this.bonificacion = bonificacion;
     }
 
     @Override
@@ -242,6 +246,10 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
         }
     }
 
+    
+    @Override
+    public abstract double aplicarBonificacion(Double salarioBase); //delego la implementacion a las subclases hijas de Empleado
+    
 //    @Override
 //    public String toString() {
 //        return "Empleado{" + "noDoumento=" + noDoumento + ", tipoDocumento=" + tipoDocumento + ", nombre=" + nombre + ", salarioBase=" + salarioBase + ", fechaNacimiento=" + fechaNacimiento + ", estatus=" + estatus + '}';

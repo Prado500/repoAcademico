@@ -29,28 +29,7 @@ public class ESerGen extends Empleado<ESerGen> {
         return "si".equalsIgnoreCase(cerAlturas) || "no".equalsIgnoreCase(cerAlturas);
     }
 
-    @Override
-    public double calcularNominaConBonificacion(ArrayList<ESerGen> serGeneralesLista) {
-
-        double nominaAcumulada = 0;
-        for (ESerGen serGenerales : serGeneralesLista) {
-            nominaAcumulada += serGenerales.getBonificacion();
-        }
-
-        return nominaAcumulada;
-
-    }
-
-    @Override
-    public double calcularNomina(ArrayList<ESerGen> serGeneralesLista) {
-        double nominaAcumulada = 0;
-        for (ESerGen serGenerales : serGeneralesLista) {
-            nominaAcumulada += serGenerales.getSalarioBase();
-        }
-
-        return nominaAcumulada;
-    }
-
+   
     @Override
     public double aplicarBonificacion(Double salarioBase) {
         if (this.cerAlturas) {

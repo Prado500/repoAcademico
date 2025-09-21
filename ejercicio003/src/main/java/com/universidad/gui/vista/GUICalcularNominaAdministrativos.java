@@ -105,27 +105,8 @@ public class GUICalcularNominaAdministrativos extends JFrame {
 
         setContentPane(panelPrincipal);
     }
-
-    private void calcularNominaConBonificacion(ActionEvent evt) {
-
-        try {
-            if (empleadoServicioAdministrativo.mostrar().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "La lista está vacia");
-                this.ocultar();
-            }else{
-            this.mostrar();
-            this.txtNominaTotal.setText(Double.toString(empleadoServicioAdministrativo.calcularNominaConBonificacion(empleadoServicioAdministrativo.mostrar())));
-            }
-            
-            
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-        }
-
-       
-    }
-
+    
+    
     private void calcularNomina(ActionEvent evt) {
         try {
             if (empleadoServicioAdministrativo.mostrar().isEmpty()) {
@@ -143,6 +124,21 @@ public class GUICalcularNominaAdministrativos extends JFrame {
         }
 
     }
+    
+
+    private void calcularNominaConBonificacion(ActionEvent evt) {
+
+        try {
+             
+            this.txtNominaTotal.setText(Double.toString(empleadoServicioAdministrativo.calcularNominaConBonificacion(empleadoServicioAdministrativo.mostrar())));
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
+
+       
+    }
+
 
     private void limpiar() {
         this.txtNominaCruda.setText("");

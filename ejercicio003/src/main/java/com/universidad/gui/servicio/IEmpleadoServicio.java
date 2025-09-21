@@ -25,9 +25,9 @@ public interface IEmpleadoServicio<T extends Empleado> {
 
     public void eliminarLogicamenteElementoPorId(String id);
 
-    public double calcularNominaConBonificacion(ArrayList<T> elementos);
+    public double calcularNominaConBonificacion(List<T> elementos);
 
-    public double calcularNomina(ArrayList<T> elementos);
+    public double calcularNomina(List<T> elementos);
 
     
 }

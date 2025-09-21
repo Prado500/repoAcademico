@@ -43,8 +43,8 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
 //        return new ArrayList<>(elementos);
 //    }
     @Override
-    public ArrayList<T> mostrar() {
-        ArrayList<T> elementosMostrar = new ArrayList<>();
+    public List<T> mostrar() {
+        List<T> elementosMostrar = new ArrayList<>();
         for (T elemento : this.elementos) {
             if (!(elemento.getEstatus().equals("IN"))) {
                 elementosMostrar.add(elemento);
@@ -107,7 +107,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
 
     
         @Override
-    public double calcularNominaConBonificacion(ArrayList<T> elementos) {
+    public double calcularNominaConBonificacion(List<T> elementos) {
 
         double nominaAcumulada = 0;
         for (T elemento : elementos) {
@@ -119,7 +119,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
     }
 
     @Override
-    public double calcularNomina(ArrayList<T> elementos) {
+    public double calcularNomina(List<T> elementos) {
         double nominaAcumulada = 0;
         for (T elemento : elementos) {
             nominaAcumulada += elemento.getSalarioBase();
