@@ -7,6 +7,7 @@ package com.universidad.gui.servicio.implementacion;
 import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.IEmpleadoServicio;
+import com.universidad.gui.servicio.IObservador;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -25,8 +26,11 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
 
     private List<T> elementos;
 
+    private List<IObservador> observadores;
+
     public EmpleadoServicio() {
         this.elementos = new ArrayList<>();
+        this.observadores = new ArrayList<>();
 
     }
 
@@ -37,7 +41,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
     @Override
     public void agregar(T elemento) {
         elementos.add(elemento);
-    
+        this.notificarObservadores();
     }
 
 //    public List<T> mostrar(List<T> elementos) {
@@ -125,10 +129,10 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
     @Override
     public double calcularNomina(List<T> elementos) {
         DecimalFormat formato = new DecimalFormat("#,##0.00");
-                    DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-                    simbolos.setGroupingSeparator('.');
-                    simbolos.setDecimalSeparator(',');
-                    formato.setDecimalFormatSymbols(simbolos);
+        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+        simbolos.setGroupingSeparator('.');
+        simbolos.setDecimalSeparator(',');
+        formato.setDecimalFormatSymbols(simbolos);
         double nominaAcumulada = 0;
         for (T elemento : elementos) {
             nominaAcumulada += elemento.getSalarioBase();
@@ -137,4 +141,28 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
         return nominaAcumulada;
     }
 
+    //Metodos del servicio de notificacion
+    public void agregarObservador(IObservador observador) {
+        this.observadores.add(observador);
+    }
+
+    public void notificarObservadores() {
+
+        for (IObservador observador : observadores) {
+            observador.actualizar();
+        }
+    }
+
+    public void eliminarObservador(IObservador observador) {
+        this.observadores.remove(observador);
+    }
+
+    public void mostrarObservadores(){
+        
+        for (IObservador observador : observadores){
+            System.out.println(observador);
+        }
+        
+    }
+    
 }
