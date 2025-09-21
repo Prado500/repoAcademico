@@ -49,7 +49,7 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
         validarEstatus(estatus);
         this.estatus = estatus;
         
-        //this.bonificacion = aplicarBonificacion(salarioBase);
+        
         
     }
 
@@ -99,6 +99,7 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
         this.estatus = estatus;
     }
     
+    @Override
     public void setBonificacion(Double bonificacion){
     this.bonificacion = bonificacion;
     }

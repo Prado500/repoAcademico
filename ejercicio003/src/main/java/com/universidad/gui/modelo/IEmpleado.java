@@ -30,6 +30,8 @@ public interface IEmpleado<T extends Empleado<T>> {
     public void setFechaNacimiento(String fechaNacimiento);
 
     public void setEstatus(String estatus);
+    
+    public void setBonificacion(Double bonificacion);
    
     public String getNoDoumento();
 
