@@ -66,6 +66,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuItemUpdateEmpleado = new javax.swing.JMenuItem();
         jMenuItemDeleteEmpleado = new javax.swing.JMenuItem();
         jMenuCalcularNomina = new javax.swing.JMenuItem();
+        jMenuItemComanda = new javax.swing.JMenuItem();
+        CrudComandas = new javax.swing.JMenu();
+        jMenuItemCrearComanda = new javax.swing.JMenuItem();
+        jMenuItemBuscarComanda = new javax.swing.JMenuItem();
+        jMenuItemVerComandas = new javax.swing.JMenuItem();
+        jMenuItemActualizarComanda = new javax.swing.JMenuItem();
+        jMenuItemEliminarComanda = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         itemAcercaDe = new javax.swing.JMenuItem();
 
@@ -194,7 +201,29 @@ public class GUIPrincipal extends javax.swing.JFrame {
         });
         jMenuESerGen.add(jMenuCalcularNomina);
 
+        jMenuItemComanda.setText("Crear Comanda");
+        jMenuESerGen.add(jMenuItemComanda);
+
         jMenuBar1.add(jMenuESerGen);
+
+        CrudComandas.setText("Comandas");
+
+        jMenuItemCrearComanda.setText("Crear Comanda");
+        CrudComandas.add(jMenuItemCrearComanda);
+
+        jMenuItemBuscarComanda.setText("Buscar Comanda");
+        CrudComandas.add(jMenuItemBuscarComanda);
+
+        jMenuItemVerComandas.setText("Ver Comandas");
+        CrudComandas.add(jMenuItemVerComandas);
+
+        jMenuItemActualizarComanda.setText("Actualizar Comanda");
+        CrudComandas.add(jMenuItemActualizarComanda);
+
+        jMenuItemEliminarComanda.setText("Eliminar Comanda");
+        CrudComandas.add(jMenuItemEliminarComanda);
+
+        jMenuBar1.add(CrudComandas);
 
         menuAyuda.setText("Ayuda");
         menuAyuda.setName("Menu Ayuda"); // NOI18N
@@ -220,7 +249,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 341, Short.MAX_VALUE)
+            .addGap(0, 342, Short.MAX_VALUE)
         );
 
         pack();
@@ -343,15 +372,21 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu CrudComandas;
     private javax.swing.JMenuItem itemAcercaDe;
     private javax.swing.JMenuItem itemAddAdministrativo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCalcularNomina;
     private javax.swing.JMenu jMenuESerGen;
+    private javax.swing.JMenuItem jMenuItemActualizarComanda;
     private javax.swing.JMenuItem jMenuItemAddEmpleado;
     private javax.swing.JMenuItem jMenuItemBonificacion;
+    private javax.swing.JMenuItem jMenuItemBuscarComanda;
+    private javax.swing.JMenuItem jMenuItemComanda;
+    private javax.swing.JMenuItem jMenuItemCrearComanda;
     private javax.swing.JMenuItem jMenuItemDeleteAdministrativo;
     private javax.swing.JMenuItem jMenuItemDeleteEmpleado;
+    private javax.swing.JMenuItem jMenuItemEliminarComanda;
     private javax.swing.JMenuItem jMenuItemGenerarReporte;
     private javax.swing.JMenuItem jMenuItemListAdministrativos;
     private javax.swing.JMenuItem jMenuItemListEmpleado;
@@ -359,6 +394,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemSearchEmpleado;
     private javax.swing.JMenuItem jMenuItemUpdateAdministrativos;
     private javax.swing.JMenuItem jMenuItemUpdateEmpleado;
+    private javax.swing.JMenuItem jMenuItemVerComandas;
     private javax.swing.JMenu menuAdministrativo;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;
