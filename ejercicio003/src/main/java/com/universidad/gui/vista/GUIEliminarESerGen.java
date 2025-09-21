@@ -10,6 +10,7 @@ package com.universidad.gui.vista;
  */
 
 import com.universidad.gui.modelo.implementacion.ESerGen;
+import com.universidad.gui.servicio.IObservador;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;

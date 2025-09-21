@@ -2,12 +2,15 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.modelo.implementacion.ESerGen;
+import com.universidad.gui.servicio.IObservador;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
@@ -19,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class GUIListESerGen extends JFrame {
+public class GUIListESerGen extends JFrame implements IObservador {
 
     private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
     private JButton jButton1Salir;
@@ -34,6 +37,7 @@ public class GUIListESerGen extends JFrame {
         setupListeners();
         setLocationRelativeTo(null);
         jTableListEmpleados.setEnabled(false);
+        empleadoServicioESerGen.agregarObservador(this);
     }
 
     private void initializeComponents() {
@@ -55,6 +59,13 @@ public class GUIListESerGen extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(495, 425));
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                empleadoServicioESerGen.eliminarObservador(GUIListESerGen.this);
+            }
+        });
     }
 
     private void setupLayout() {
@@ -95,45 +106,53 @@ public class GUIListESerGen extends JFrame {
     }
 
     private void setupListeners() {
-        jButton1Salir.addActionListener(e -> dispose());
+        jButton1Salir.addActionListener(e -> {
+            this.empleadoServicioESerGen.eliminarObservador(this);
+            empleadoServicioESerGen.mostrarObservadores();
+            dispose();
+        });
 
         jButton2Mostrar.addActionListener(e -> {
-            try {
-                List<ESerGen> ESerGenList = empleadoServicioESerGen.mostrar();
-                if (ESerGenList != null && !ESerGenList.isEmpty()) {
-                    jPanelListEmpleado.setVisible(true);
-                    DecimalFormat formato = new DecimalFormat("#,##0.00");
-                    DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-                    simbolos.setGroupingSeparator('.');
-                    simbolos.setDecimalSeparator(',');
-                    formato.setDecimalFormatSymbols(simbolos);
-                    DefaultTableModel model = (DefaultTableModel) jTableListEmpleados.getModel();
-                    model.setRowCount(0);
-                    String alturas;
-
-                    for (ESerGen serGenerales : ESerGenList) {
-                        if (serGenerales.getCerAlturas()) {
-                            alturas = "SI";
-                        }
-                        Object[] fila = {
-                            
-                            serGenerales.getNoDoumento(),
-                            serGenerales.getTipoDocumento(),
-                            serGenerales.getNombre(),
-                            "$ " + formato.format(serGenerales.getSalarioBase()),
-                            serGenerales.getEstatus(),
-                            this.hasAlturas(serGenerales.getCerAlturas())
-                        };
-                        model.addRow(fila);
-                        alturas = "NO";
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "La lista está vacía");
-                }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Error al mostrar empleados: " + ex.getMessage());
-            }
+            this.cargarTabla();
         });
+    }
+
+    private void cargarTabla() {
+        try {
+            List<ESerGen> ESerGenList = empleadoServicioESerGen.mostrar();
+            if (ESerGenList != null && !ESerGenList.isEmpty()) {
+                jPanelListEmpleado.setVisible(true);
+                DecimalFormat formato = new DecimalFormat("#,##0.00");
+                DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+                simbolos.setGroupingSeparator('.');
+                simbolos.setDecimalSeparator(',');
+                formato.setDecimalFormatSymbols(simbolos);
+                DefaultTableModel model = (DefaultTableModel) jTableListEmpleados.getModel();
+                model.setRowCount(0);
+                String alturas;
+
+                for (ESerGen serGenerales : ESerGenList) {
+                    if (serGenerales.getCerAlturas()) {
+                        alturas = "SI";
+                    }
+                    Object[] fila = {
+                        serGenerales.getNoDoumento(),
+                        serGenerales.getTipoDocumento(),
+                        serGenerales.getNombre(),
+                        "$ " + formato.format(serGenerales.getSalarioBase()),
+                        serGenerales.getEstatus(),
+                        this.hasAlturas(serGenerales.getCerAlturas())
+                    };
+                    model.addRow(fila);
+                    alturas = "NO";
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "La lista está vacía");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al mostrar empleados: " + ex.getMessage());
+        }
+
     }
 
     private String hasAlturas(boolean alturas) {
@@ -144,5 +163,10 @@ public class GUIListESerGen extends JFrame {
             alturasRetorno = "SI";
         }
         return alturasRetorno;
+    }
+
+    @Override
+    public void actualizar() {
+        this.cargarTabla();
     }
 }
