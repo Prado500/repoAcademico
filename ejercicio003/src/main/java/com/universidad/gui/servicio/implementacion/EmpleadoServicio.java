@@ -157,12 +157,17 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
         this.observadores.remove(observador);
     }
 
-    public void mostrarObservadores(){
-        
-        for (IObservador observador : observadores){
+    public void mostrarObservadores() {
+
+        for (IObservador observador : observadores) {
             System.out.println(observador);
         }
-        
+
+        if (observadores.isEmpty()) {
+            System.out.println("La lista de observadores esta vacia!");
+
+        }
+
     }
-    
+
 }

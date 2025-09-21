@@ -206,6 +206,7 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
             String escalafon = cmbEscalafon.getSelectedItem().toString();
             Administrativo administrativo = new Administrativo (noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
             empleadoServicioAdministrativo.agregar(administrativo);
+            empleadoServicioAdministrativo.mostrarObservadores();
             limpiar();
             JOptionPane.showMessageDialog(this, "Administrativo con nombre " + administrativo.getNombre() + " y documento No." +administrativo.getNoDoumento()+ " creado exitosamente ");
         

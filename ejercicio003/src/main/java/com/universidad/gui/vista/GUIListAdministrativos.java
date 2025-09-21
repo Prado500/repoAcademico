@@ -8,6 +8,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
@@ -56,6 +58,14 @@ public class GUIListAdministrativos extends JFrame implements IObservador {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(495, 425));
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                empleadoServicioAdministrativo.eliminarObservador(GUIListAdministrativos.this);
+            }
+        });
+
     }
 
     private void setupLayout() {
@@ -98,11 +108,14 @@ public class GUIListAdministrativos extends JFrame implements IObservador {
     private void setupListeners() {
         jButton1Salir.addActionListener(e -> {
             this.empleadoServicioAdministrativo.eliminarObservador(this);
+            empleadoServicioAdministrativo.mostrarObservadores();
             dispose();
+
         });
 
         jButton2Mostrar.addActionListener(e -> {
             cargarTabla();
+            empleadoServicioAdministrativo.mostrarObservadores();
         });
     }
 
