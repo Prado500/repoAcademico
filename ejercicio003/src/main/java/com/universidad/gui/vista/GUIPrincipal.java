@@ -182,6 +182,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuESerGen.add(jMenuItemDeleteEmpleado);
 
         jMenuCalcularNomina.setText("Calcular Nómina");
+        jMenuCalcularNomina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCalcularNominaActionPerformed(evt);
+            }
+        });
         jMenuESerGen.add(jMenuCalcularNomina);
 
         jMenuBar1.add(jMenuESerGen);
@@ -283,6 +288,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
         gui.setVisible(true);
         
     }//GEN-LAST:event_jMenuItemBonificacionActionPerformed
+
+    private void jMenuCalcularNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCalcularNominaActionPerformed
+        GUICalcularNominaESerGen gui = new GUICalcularNominaESerGen(empleadoServicioESerGen);
+        gui.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_jMenuCalcularNominaActionPerformed
 
     /**
      * @param args the command line arguments

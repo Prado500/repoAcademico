@@ -22,7 +22,7 @@ public class Administrativo extends Empleado<Administrativo> {
         super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
         verificarEscalafon(escalafon);
         this.escalafon = escalafon;
-        this.setBonificacion(aplicarBonificacion(this.getSalarioBase()));
+        this.setBonificacion(this.aplicarBonificacion(this.getSalarioBase()));
         
     }
 

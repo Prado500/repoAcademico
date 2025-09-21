@@ -15,6 +15,7 @@ public class ESerGen extends Empleado<ESerGen> {
         super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
 
         this.cerAlturas = cerAlturas;
+        this.setBonificacion(this.aplicarBonificacion(this.getSalarioBase()));
     }
 
     public boolean getCerAlturas() {
