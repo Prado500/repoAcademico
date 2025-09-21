@@ -1,11 +1,11 @@
 package com.universidad.gui.vista;
 
-import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.IObservador;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,7 +15,9 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -27,6 +29,8 @@ public class GUIListESerGen extends JFrame implements IObservador {
     private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
     private JButton jButton1Salir;
     private JButton jButton2Mostrar;
+    private JCheckBox chkRefrescable;
+    private JPanel jPanelCheckBox;
     private JPanel jPanelListEmpleado;
     private JTable jTableListEmpleados;
 
@@ -44,8 +48,14 @@ public class GUIListESerGen extends JFrame implements IObservador {
         // Inicializar componentes
         jButton1Salir = new JButton("Salir");
         jButton2Mostrar = new JButton("Mostrar");
+        chkRefrescable = new JCheckBox();
         jPanelListEmpleado = new JPanel();
         jTableListEmpleados = new JTable();
+        
+        //Panel Norte
+        jPanelCheckBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        jPanelCheckBox.add(new JLabel("Auto-Refrescable: "));
+        jPanelCheckBox.add(chkRefrescable);
 
         // Configurar tabla
         DefaultTableModel model = new DefaultTableModel(
@@ -101,6 +111,7 @@ public class GUIListESerGen extends JFrame implements IObservador {
         panelBotones.add(jButton2Mostrar, gbc);
 
         // Agregar componentes al frame
+        add(jPanelCheckBox, BorderLayout.NORTH);
         add(jPanelListEmpleado, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
     }
@@ -167,6 +178,7 @@ public class GUIListESerGen extends JFrame implements IObservador {
 
     @Override
     public void actualizar() {
+       if (this.chkRefrescable.isSelected())   
         this.cargarTabla();
     }
 }
