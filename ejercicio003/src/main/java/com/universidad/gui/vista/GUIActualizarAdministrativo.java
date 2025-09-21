@@ -1,7 +1,6 @@
 
 package com.universidad.gui.vista;
 
-import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
@@ -43,7 +42,7 @@ public class GUIActualizarAdministrativo extends JFrame {
     }
 
     private void initComponentsManual() {
-        setTitle("Actualizar Empleado");
+        setTitle("Actualizar Administrativo");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(495, 425);
 

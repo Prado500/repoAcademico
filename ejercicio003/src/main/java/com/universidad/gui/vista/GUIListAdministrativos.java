@@ -50,7 +50,7 @@ public class GUIListAdministrativos extends JFrame {
         jTableListEmpleados.setModel(model);
 
         // Configurar frame
-        setTitle("Lista de Empleados");
+        setTitle("Lista de Administrativos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(495, 425));

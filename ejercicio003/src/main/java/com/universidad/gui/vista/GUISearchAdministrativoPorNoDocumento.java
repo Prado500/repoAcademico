@@ -71,7 +71,7 @@ public class GUISearchAdministrativoPorNoDocumento extends javax.swing.JFrame {
         jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("GUISearchEmpleado");
+        setTitle("Buscar Administrativo");
 
         jPanelSearchEmpleado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 

@@ -65,11 +65,12 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuItemListEmpleado = new javax.swing.JMenuItem();
         jMenuItemUpdateEmpleado = new javax.swing.JMenuItem();
         jMenuItemDeleteEmpleado = new javax.swing.JMenuItem();
+        jMenuCalcularNomina = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         itemAcercaDe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Principal");
+        setTitle("Crudnator v 1_0 By Ostos Software");
 
         menuArchivo.setText("Archivo");
         menuArchivo.setName("Menu Archivo"); // NOI18N
@@ -179,6 +180,9 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
         jMenuItemDeleteEmpleado.setText("Eliminar Empleado");
         jMenuESerGen.add(jMenuItemDeleteEmpleado);
+
+        jMenuCalcularNomina.setText("Calcular Nómina");
+        jMenuESerGen.add(jMenuCalcularNomina);
 
         jMenuBar1.add(jMenuESerGen);
 
@@ -319,6 +323,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemAcercaDe;
     private javax.swing.JMenuItem itemAddAdministrativo;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuCalcularNomina;
     private javax.swing.JMenu jMenuESerGen;
     private javax.swing.JMenuItem jMenuItemAddEmpleado;
     private javax.swing.JMenuItem jMenuItemBonificacion;

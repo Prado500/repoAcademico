@@ -122,6 +122,11 @@
                 <Property name="text" type="java.lang.String" value="Eliminar Empleado"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuCalcularNomina">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Calcular N&#xf3;mina"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuAyuda">
@@ -146,7 +151,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Principal"/>
+    <Property name="title" type="java.lang.String" value="Crudnator v 1_0 By Ostos Software"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>

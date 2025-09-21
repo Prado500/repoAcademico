@@ -1,10 +1,10 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Administrativo;
+import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -14,7 +14,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,9 +21,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUICalcularNominaAdministrativos extends JFrame {
+public class GUICalcularNominaESerGen extends JFrame {
 
-    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
+    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -34,8 +33,8 @@ public class GUICalcularNominaAdministrativos extends JFrame {
     private JTextField txtNominaCruda, txtNominaTotal;
     private JButton btnSalir, btnCalcular;
 
-    public GUICalcularNominaAdministrativos(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
-        this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
+    public GUICalcularNominaESerGen(EmpleadoServicio<ESerGen> empleadoServicioESerGen) {
+        this.empleadoServicioESerGen = empleadoServicioESerGen;
         initComponentsManual();
         setLocationRelativeTo(null);
         this.txtNominaCruda.setEditable(false);
@@ -43,7 +42,7 @@ public class GUICalcularNominaAdministrativos extends JFrame {
     }
 
     private void initComponentsManual() {
-        setTitle("Calcular nóminas de los Administrativos");
+        setTitle("Calcular nóminas de los Empleados de Servicios Generales");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(495, 425);
 
@@ -110,12 +109,12 @@ public class GUICalcularNominaAdministrativos extends JFrame {
 
     private void calcularNomina(ActionEvent evt) {
         try {
-            if (empleadoServicioAdministrativo.mostrar().isEmpty()) {
+            if (empleadoServicioESerGen.mostrar().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "La lista está vacia");
                 this.ocultar();
             } else {
                 this.mostrar();
-                this.txtNominaCruda.setText("$ " + this.aplicarFormato(empleadoServicioAdministrativo.calcularNomina(empleadoServicioAdministrativo.mostrar())));
+                this.txtNominaCruda.setText("$ " + this.aplicarFormato(empleadoServicioESerGen.calcularNomina(empleadoServicioESerGen.mostrar())));
             }
 
         } catch (Exception e) {
@@ -128,7 +127,7 @@ public class GUICalcularNominaAdministrativos extends JFrame {
 
         try {
             
-            this.txtNominaTotal.setText("$ " + this.aplicarFormato(empleadoServicioAdministrativo.calcularNominaConBonificacion(empleadoServicioAdministrativo.mostrar())));
+            this.txtNominaTotal.setText("$ " + this.aplicarFormato(empleadoServicioESerGen.calcularNominaConBonificacion(empleadoServicioESerGen.mostrar())));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());

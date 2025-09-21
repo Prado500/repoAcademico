@@ -41,7 +41,7 @@ public class GUIActualizarESerGen extends JFrame {
     }
 
     private void initComponentsManual() {
-        setTitle("Actualizar Empleado");
+        setTitle("Actualizar Empleado de Servicios Generales");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(495, 425);
 

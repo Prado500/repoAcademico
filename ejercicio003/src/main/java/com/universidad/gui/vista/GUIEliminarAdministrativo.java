@@ -49,7 +49,7 @@ public class GUIEliminarAdministrativo extends JFrame {
     }
 
     private void initComponentsManual() {
-        setTitle("Eliminar Empleado"); //1
+        setTitle("Eliminar Administrativo"); //1
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(495, 425);
 
