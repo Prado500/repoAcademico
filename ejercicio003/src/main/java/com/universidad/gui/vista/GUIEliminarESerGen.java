@@ -9,7 +9,6 @@ package com.universidad.gui.vista;
  * @author Alejandro
  */
 
-import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
