@@ -10,6 +10,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -105,40 +107,34 @@ public class GUICalcularNominaAdministrativos extends JFrame {
 
         setContentPane(panelPrincipal);
     }
-    
-    
+
     private void calcularNomina(ActionEvent evt) {
         try {
             if (empleadoServicioAdministrativo.mostrar().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "La lista está vacia");
                 this.ocultar();
-            }else{
-            this.mostrar();
-            this.txtNominaCruda.setText(Double.toString(empleadoServicioAdministrativo.calcularNomina(empleadoServicioAdministrativo.mostrar())));
+            } else {
+                this.mostrar();
+                this.txtNominaCruda.setText("$ " + this.aplicarFormato(empleadoServicioAdministrativo.calcularNomina(empleadoServicioAdministrativo.mostrar())));
             }
-            
-            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
     }
-    
 
     private void calcularNominaConBonificacion(ActionEvent evt) {
 
         try {
-             
-            this.txtNominaTotal.setText(Double.toString(empleadoServicioAdministrativo.calcularNominaConBonificacion(empleadoServicioAdministrativo.mostrar())));
             
+            this.txtNominaTotal.setText("$ " + this.aplicarFormato(empleadoServicioAdministrativo.calcularNominaConBonificacion(empleadoServicioAdministrativo.mostrar())));
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
-       
     }
-
 
     private void limpiar() {
         this.txtNominaCruda.setText("");
@@ -157,7 +153,16 @@ public class GUICalcularNominaAdministrativos extends JFrame {
         panelDatos.setVisible(false);
 
     }
-    
-    //private void
 
+    private String aplicarFormato(Double numero) {
+        DecimalFormat formato = new DecimalFormat("#,##0.00");
+        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+        simbolos.setGroupingSeparator('.');
+        simbolos.setDecimalSeparator(',');
+        formato.setDecimalFormatSymbols(simbolos);
+        
+        return formato.format(numero);
+    }
+
+    //private void
 }

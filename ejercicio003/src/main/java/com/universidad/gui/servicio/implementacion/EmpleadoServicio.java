@@ -4,10 +4,11 @@
  */
 package com.universidad.gui.servicio.implementacion;
 
-
 import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.IEmpleadoServicio;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,6 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
      *
      * @param elemento
      */
-    
     @Override
     public void agregar(T elemento) {
         elementos.add(elemento);
@@ -60,7 +60,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
         for (T elemento : elementos) {
             if (elemento.getNoDoumento().equals(noDocumento) && elemento.getEstatus().equals("AC")) {
                 elementoRetorno = elemento;
-            } 
+            }
         }
 
         if (elementoRetorno == null || elementoRetorno.getEstatus().equals("IN")) {
@@ -105,10 +105,13 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
 
     }
 
-    
-        @Override
+    @Override
     public double calcularNominaConBonificacion(List<T> elementos) {
-
+        DecimalFormat formato = new DecimalFormat("#,##0.00");
+        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+        simbolos.setGroupingSeparator('.');
+        simbolos.setDecimalSeparator(',');
+        formato.setDecimalFormatSymbols(simbolos);
         double nominaAcumulada = 0;
         for (T elemento : elementos) {
             nominaAcumulada += elemento.getBonificacion();
@@ -120,6 +123,11 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
 
     @Override
     public double calcularNomina(List<T> elementos) {
+        DecimalFormat formato = new DecimalFormat("#,##0.00");
+                    DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+                    simbolos.setGroupingSeparator('.');
+                    simbolos.setDecimalSeparator(',');
+                    formato.setDecimalFormatSymbols(simbolos);
         double nominaAcumulada = 0;
         for (T elemento : elementos) {
             nominaAcumulada += elemento.getSalarioBase();
@@ -128,6 +136,4 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
         return nominaAcumulada;
     }
 
-    
-    
 }
