@@ -112,6 +112,7 @@ public class Comanda {
     }
 
     public void setFechaCaducidad(String fechaCaducidad) {
+        verificarFechaCaducidad(fechaCaducidad);
         this.fechaCaducidad = fechaCaducidad;
     }
 
