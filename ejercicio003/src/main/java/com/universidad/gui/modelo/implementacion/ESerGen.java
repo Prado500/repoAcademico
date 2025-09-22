@@ -42,4 +42,33 @@ public class ESerGen extends Empleado<ESerGen> {
         return salarioBase;
     }
 
+    //Metodos para gestionar la asociacion con Comanda
+    
+    public void agregarComanda (Comanda comanda){
+        this.comandas.add(comanda);
+        comanda.setEserGen(this);
+    }
+    
+    public void removerComanda(Comanda comanda){
+    this.comandas.remove(comanda);
+    comanda.setEserGen(null);
+    }
+    
+    public List<Comanda> getComandas(){
+//        List<Comanda> retorno = new ArrayList<Comanda>();
+//        for (Comanda comanda : comandas){
+//            retorno.add(comanda);
+//        }
+        return new ArrayList<>(comandas); //copia de comandas
+    }
+
+    public void deleteComandas(){
+    
+        for(Comanda comanda : comandas){
+            comanda.setEserGen(null);
+        }
+        comandas.clear();
+    }
+    
+    
 }
