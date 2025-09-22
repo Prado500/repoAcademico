@@ -24,6 +24,7 @@ public class Comanda {
     private String proteina;
     private String sopa;
     private String fechaCaducidad;
+    private String estatus;
     public static final Pattern PATRON_CARACTERES_PERMITIDOS_DESCRIPCION = Pattern.compile("\"^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ\\\\s]{1,204}$\""); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada de los campos que se escribiran manualmente (descripcion, principio, proteina y sopa) esta conformada unica y exclusivamente por combinaciones de letras y vocales del alfabeto del español latino.
     public static final Pattern PATRON_CARACTERES_PERMITIDOS = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ\\\\s]{1,50}$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada de los campos que se escribiran manualmente (descripcion, principio, proteina y sopa) esta conformada unica y exclusivamente por combinaciones de letras y vocales del alfabeto del español latino.
 
@@ -41,6 +42,8 @@ public class Comanda {
         this.sopa = sopa;
         verificarFechaCaducidad(fechaCaducidad);
         this.fechaCaducidad = fechaCaducidad;
+        this.estatus = darEstatus();
+        
     }
 
     // Getters y setters
@@ -71,6 +74,10 @@ public class Comanda {
     public String getFechaCaducidad() {
         return fechaCaducidad;
     }
+    
+    public String getEstatus(){
+        return estatus;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -94,6 +101,10 @@ public class Comanda {
 
     public void setSopa(String sopa) {
         this.sopa = sopa;
+    }
+    
+    public void setEstatus(String estatus){
+        this.estatus = estatus;
     }
 
     public void setFechaCaducidad(String fechaCaducidad) {
@@ -173,4 +184,10 @@ public class Comanda {
         }
 
     }
+    
+    private String darEstatus(){
+     return "AC";
+    }
+
+    
 }
