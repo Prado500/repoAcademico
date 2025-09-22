@@ -13,28 +13,62 @@ import java.util.List;
  *
  * @author Alejandro
  */
-public class ComandaServicio implements IComandaServicio{
-     private List<Comanda> comandas = new ArrayList<>();
-     
-     
+public class ComandaServicio implements IComandaServicio {
+
+    private List<Comanda> comandas = new ArrayList<>();
+
     @Override
     public void agregarComanda(Comanda comanda) {
         this.comandas.add(comanda);
     }
 
     @Override
-    public void eliminarComandaId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void eliminarComandaLogId(int id) {
+        Comanda placeholder = null;
+        for (Comanda comanda : comandas) {
+            if (comanda.getId() == id) {
+                comanda.setEstatus("IN");
+                placeholder = comanda;
+            }
+        }
+        if (placeholder == null) {
+
+            throw new IllegalArgumentException("No fue posible eliminar la comanda con id " + id + ". " + "Asegúrese que la comanda existe y que el id proporcionado es el correcto.");
+        }
     }
 
     @Override
     public Comanda buscarComandaID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Comanda retorno = null;
+        for (Comanda comanda : comandas) {
+            if (comanda.getId() == id && comanda.getEstatus().equals("AC")) {
+                retorno = comanda;
+            }
+        }
+        if (retorno == null) {
+            throw new IllegalArgumentException("No existe registro de la comanda con id " + id + ". " + "Asegúrese que la comanda existe y que el id proporcionado es el correcto.");
+        }
+        return retorno;
     }
 
     @Override
-    public List<Comanda> verComandas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Comanda> mostrarComandas() {
+        return new ArrayList<>(comandas);
     }
-    
+
+    @Override
+    public void actualizarComanda(String descripcion, String principio, String proteina, String fechaCaducidad) {
+        
+        try{
+        
+        
+        
+        
+        }catch(Exception e){
+            throw new IllegalArgumentException("""
+                                               Error actualizando la comanda: 
+                                               """ + e.getMessage());
+        }
+    }
+
 }

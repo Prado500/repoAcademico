@@ -105,7 +105,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
         }
 
         if (elementoEncontrado == null) {
-            throw new IllegalArgumentException("No fue posible actualizar al empleado con noDocumento " + id + ". Asegúrese que el noDocumento existe y que los datos ingresados son correctos. ");
+            throw new IllegalArgumentException("No fue posible eliminar al empleado con noDocumento " + id + ". Asegúrese que el noDocumento existe y que los datos ingresados son correctos. ");
         }
 
     }

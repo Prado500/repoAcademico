@@ -88,18 +88,22 @@ public class Comanda {
     }
 
     public void setDescripcion(String descripcion) {
+        verificarInformacionDescripcion(descripcion);
         this.descripcion = descripcion;
     }
 
     public void setPrincipio(String principio) {
+        verificarInformacion(principio);
         this.principio = principio;
     }
 
     public void setProteina(String proteina) {
+        verificarInformacion(proteina);
         this.proteina = proteina;
     }
 
     public void setSopa(String sopa) {
+        verificarInformacion(sopa);
         this.sopa = sopa;
     }
     
