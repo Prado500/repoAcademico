@@ -4,15 +4,15 @@
  */
 package com.universidad.gui.modelo.implementacion;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 /**
  *
  * @author Alejandro
  */
-
 public class Comanda {
+
     private int id;
     private ESerGen eserGen; // Referencia al ESerGen dueño (para asociación bidireccional)
     private String descripcion;
@@ -20,22 +20,27 @@ public class Comanda {
     private String proteina;
     private String sopa;
     private String fechaCaducidad;
-    public static final Pattern PATRON_CARACTERES_PERMITIDOS = Pattern.compile("^[a-zA-ZñÑáéíóúüÁÉÍÓÚÜ]+$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada de los campos que se escribiran manualmente (descripcion, principio, proteina y sopa) esta conformada unica y exclusivamente por combinaciones de letras y vocales del alfabeto del español latino.
-
-
+    public static final Pattern PATRON_CARACTERES_PERMITIDOS_DESCRIPCION = Pattern.compile("\"^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ\\\\s]{1,204}$\""); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada de los campos que se escribiran manualmente (descripcion, principio, proteina y sopa) esta conformada unica y exclusivamente por combinaciones de letras y vocales del alfabeto del español latino.
+    public static final Pattern PATRON_CARACTERES_PERMITIDOS = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ\\\\s]{1,50}$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada de los campos que se escribiran manualmente (descripcion, principio, proteina y sopa) esta conformada unica y exclusivamente por combinaciones de letras y vocales del alfabeto del español latino.
+    public static final Pattern PARTRON_VERIFICAR_FECHA_CADUCIDAD = Pattern.compile();
+            
     // Constructor
-    public Comanda(String descripcion, String principio, String proteina, 
-                   String sopa, String fechaCaducidad) {
+    public Comanda(String descripcion, String principio, String proteina,
+            String sopa, String fechaCaducidad) {
         this.id = incrementarId();
+        verificarInformacionDescripcion(descripcion);
         this.descripcion = descripcion;
+        verificarInformacion(principio);
         this.principio = principio;
+        verificarInformacion(proteina);
         this.proteina = proteina;
+        verificarInformacion(sopa);
         this.sopa = sopa;
+        
         this.fechaCaducidad = fechaCaducidad;
     }
 
     // Getters y setters
-
     public int getId() {
         return id;
     }
@@ -96,14 +101,37 @@ public class Comanda {
     public String toString() {
         return "Comanda{" + "id=" + id + ", eserGen=" + eserGen + ", descripcion=" + descripcion + ", principio=" + principio + ", proteina=" + proteina + ", sopa=" + sopa + ", fechaCaducidad=" + fechaCaducidad + '}';
     }
-    
-    private int incrementarId(){
-        
+
+    private int incrementarId() {
         int id = this.getId();
-        
-        return id += 1;        
-        
-    
+        return id += 1;
+    }
+
+    private void verificarInformacion(String input){
+     
+    if(descripcion.isBlank() || ! PATRON_CARACTERES_PERMITIDOS.matcher(input).matches()){
+        throw new IllegalArgumentException("""
+                                           Descripción inválida. Ingrese en la descripción palabras
+                                           y oraciones compuestas únicamente por combinaciones
+                                           entre las letras y vocales del alfabeto español lationamericano.
+                                           """);
+    }
     }
     
+   
+     private void verificarInformacionDescripcion(String input){
+     
+    if(descripcion.isBlank() || ! PATRON_CARACTERES_PERMITIDOS_DESCRIPCION.matcher(input).matches()){
+        throw new IllegalArgumentException("""
+                                           Descripción inválida. Ingrese en la descripción palabras
+                                           y oraciones compuestas únicamente por combinaciones
+                                           entre las letras y vocales del alfabeto español lationamericano.
+                                           """);
+    }
+    }
+     
+    
+     private void verificarFechaCaducidad(){
+     
+     }
 }
