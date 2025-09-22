@@ -62,7 +62,7 @@ public class ESerGen extends Empleado<ESerGen> {
         return new ArrayList<>(comandas); //copia de comandas
     }
 
-    public void deleteComandas(){
+    public void removerComandas(){
     
         for(Comanda comanda : comandas){
             comanda.setEserGen(null);
