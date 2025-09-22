@@ -6,16 +6,19 @@ package com.universidad.gui.modelo.implementacion;
 
 import com.universidad.gui.modelo.Empleado;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ESerGen extends Empleado<ESerGen> {
 
     private boolean cerAlturas;
+    private List<Comanda> comandas;
 
     public ESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean cerAlturas) {
         super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
 
         this.cerAlturas = cerAlturas;
         this.setBonificacion(this.aplicarBonificacion(this.getSalarioBase()));
+        this.comandas = new ArrayList<>();
     }
 
     public boolean getCerAlturas() {
