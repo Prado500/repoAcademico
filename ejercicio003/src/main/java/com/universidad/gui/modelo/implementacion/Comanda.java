@@ -4,35 +4,106 @@
  */
 package com.universidad.gui.modelo.implementacion;
 
+import java.util.regex.Pattern;
+
+
 /**
  *
  * @author Alejandro
  */
+
 public class Comanda {
-    private int alto;
-    private int ancho;
+    private int id;
+    private ESerGen eserGen; // Referencia al ESerGen dueño (para asociación bidireccional)
+    private String descripcion;
+    private String principio;
+    private String proteina;
+    private String sopa;
+    private String fechaCaducidad;
+    public static final Pattern PATRON_CARACTERES_PERMITIDOS = Pattern.compile("^[a-zA-ZñÑáéíóúüÁÉÍÓÚÜ]+$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada de los campos que se escribiran manualmente (descripcion, principio, proteina y sopa) esta conformada unica y exclusivamente por combinaciones de letras y vocales del alfabeto del español latino.
 
-    public Comanda(int alto, int ancho) {
-        this.alto = alto;
-        this.ancho = ancho;
+
+    // Constructor
+    public Comanda(String descripcion, String principio, String proteina, 
+                   String sopa, String fechaCaducidad) {
+        this.id = incrementarId();
+        this.descripcion = descripcion;
+        this.principio = principio;
+        this.proteina = proteina;
+        this.sopa = sopa;
+        this.fechaCaducidad = fechaCaducidad;
     }
 
-    public int getAlto() {
-        return alto;
+    // Getters y setters
+
+    public int getId() {
+        return id;
     }
 
-    public int getAncho() {
-        return ancho;
+    public ESerGen getEserGen() {
+        return eserGen;
     }
 
-    public void setAlto(int alto) {
-        this.alto = alto;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setAncho(int ancho) {
-        this.ancho = ancho;
+    public String getPrincipio() {
+        return principio;
+    }
+
+    public String getProteina() {
+        return proteina;
+    }
+
+    public String getSopa() {
+        return sopa;
+    }
+
+    public String getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setEserGen(ESerGen eserGen) {
+        this.eserGen = eserGen;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setPrincipio(String principio) {
+        this.principio = principio;
+    }
+
+    public void setProteina(String proteina) {
+        this.proteina = proteina;
+    }
+
+    public void setSopa(String sopa) {
+        this.sopa = sopa;
+    }
+
+    public void setFechaCaducidad(String fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Comanda{" + "id=" + id + ", eserGen=" + eserGen + ", descripcion=" + descripcion + ", principio=" + principio + ", proteina=" + proteina + ", sopa=" + sopa + ", fechaCaducidad=" + fechaCaducidad + '}';
     }
     
+    private int incrementarId(){
+        
+        int id = this.getId();
+        
+        return id += 1;        
+        
     
+    }
     
 }
