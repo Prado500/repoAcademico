@@ -152,7 +152,7 @@ public class Comanda {
 
         Objects.requireNonNull(fechaCaducidad, "La fecha de caducidad de la comanda no puede ser nula.");
 
-        if (!fechaCaducidad.matches("\\d{2}/\\d{2}/\\d{4}/")) {
+        if (!fechaCaducidad.matches("\\d{2}/\\d{2}/\\d{4}")) {
 
             throw new IllegalArgumentException("""
                                                 Formato de fecha inválido. Ingrese una fecha de acuerdo al formato
@@ -165,7 +165,7 @@ public class Comanda {
         
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
             
-            LocalDate fecha = LocalDate.parse(this.fechaCaducidad, formato);
+            LocalDate fecha = LocalDate.parse(fechaCaducidad, formato);
             
             LocalDate minFechaCaducidad = LocalDate.now();
             

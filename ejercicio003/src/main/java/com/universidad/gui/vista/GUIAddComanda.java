@@ -174,13 +174,12 @@ public class GUIAddComanda extends JFrame {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
                 limpiar();
             }
-            String fechaCaducidad = this.cldFechaCaducidad.getDate().toString();
             System.out.println(this.txtDescripcion.getText());
             System.out.println(this.txtPrincipio.getText());
             System.out.println(this.txtProteina.getText());
             System.out.println(this.txtSopa.getText());
-            System.out.println(fechaCaducidad);
-            Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
+            System.out.println(this.cldFechaCaducidad.getDateFormatString());
+            Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), "25/09/2025");
             System.out.println(comanda);
             eSerGenServicio.asignarComanda(id, comanda);
             JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada y asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " NO. " + serGenerales.getNoDoumento());
