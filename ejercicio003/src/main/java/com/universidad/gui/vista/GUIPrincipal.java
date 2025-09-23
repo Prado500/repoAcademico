@@ -7,6 +7,8 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.modelo.implementacion.ESerGen;
+import com.universidad.gui.servicio.implementacion.ComandaServicio;
+import com.universidad.gui.servicio.implementacion.ESerGenServicio;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import javax.swing.JOptionPane;
 
@@ -24,12 +26,16 @@ public class GUIPrincipal extends javax.swing.JFrame {
   private static GUIPrincipal instancia;
   private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
   private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
+  private ComandaServicio comandaServicio;
+  private ESerGenServicio eSerGenServicio;
   
     private GUIPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
         this.empleadoServicioAdministrativo = new EmpleadoServicio<>();
         this.empleadoServicioESerGen = new EmpleadoServicio<>();
+        this.comandaServicio = new ComandaServicio();
+        this.eSerGenServicio = new ESerGenServicio(comandaServicio);
     }
 
     public static GUIPrincipal getInstance(){
@@ -209,6 +215,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         CrudComandas.setText("Comandas");
 
         jMenuItemCrearComanda.setText("Crear Comanda");
+        jMenuItemCrearComanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCrearComandaActionPerformed(evt);
+            }
+        });
         CrudComandas.add(jMenuItemCrearComanda);
 
         jMenuItemBuscarComanda.setText("Buscar Comanda");
@@ -335,6 +346,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
        GUIEliminarESerGen gui = new GUIEliminarESerGen(empleadoServicioESerGen);
        gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemDeleteEmpleadoActionPerformed
+
+    private void jMenuItemCrearComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearComandaActionPerformed
+        
+        GUIAddComanda gui = new GUIAddComanda(eSerGenServicio);
+        gui.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemCrearComandaActionPerformed
 
     /**
      * @param args the command line arguments

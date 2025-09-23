@@ -10,5 +10,12 @@
         <maven.compiler.release>22</maven.compiler.release>
         <exec.mainClass>com.universidad.gui.vista.GUIPrincipal</exec.mainClass>
     </properties>
+    <dependencies>
+      <dependency>
+        <groupId>com.toedter</groupId>
+        <artifactId>jcalendar</artifactId>
+        <version>1.4</version>
+    </dependency>
+</dependencies>
     <name>ejercicio003</name>
 </project>
