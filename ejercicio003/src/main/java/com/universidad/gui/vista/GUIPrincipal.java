@@ -55,6 +55,10 @@ public class GUIPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDayChooser1 = new com.toedter.calendar.JDayChooser();
+        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        jDayChooser2 = new com.toedter.calendar.JDayChooser();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         jMenuItemGenerarReporte = new javax.swing.JMenuItem();
@@ -256,11 +260,24 @@ public class GUIPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jDayChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 342, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDayChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         pack();
@@ -393,6 +410,8 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu CrudComandas;
     private javax.swing.JMenuItem itemAcercaDe;
     private javax.swing.JMenuItem itemAddAdministrativo;
+    private com.toedter.calendar.JDayChooser jDayChooser1;
+    private com.toedter.calendar.JDayChooser jDayChooser2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCalcularNomina;
     private javax.swing.JMenu jMenuESerGen;
@@ -413,6 +432,8 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemUpdateAdministrativos;
     private javax.swing.JMenuItem jMenuItemUpdateEmpleado;
     private javax.swing.JMenuItem jMenuItemVerComandas;
+    private com.toedter.calendar.JMonthChooser jMonthChooser1;
+    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JMenu menuAdministrativo;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;

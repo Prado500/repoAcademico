@@ -2,6 +2,8 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="com.toedter.calendar.JDayChooser" name="jDayChooser1">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menuArchivo">
@@ -219,13 +221,37 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="512" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+              <Component id="jMonthChooser1" min="-2" pref="125" max="-2" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <Component id="jDayChooser2" min="-2" pref="168" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jYearChooser1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="342" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jDayChooser2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jYearChooser1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jMonthChooser1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="135" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="com.toedter.calendar.JMonthChooser" name="jMonthChooser1">
+    </Component>
+    <Component class="com.toedter.calendar.JYearChooser" name="jYearChooser1">
+    </Component>
+    <Component class="com.toedter.calendar.JDayChooser" name="jDayChooser2">
+    </Component>
+  </SubComponents>
 </Form>
