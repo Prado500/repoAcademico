@@ -25,7 +25,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
   
   private static GUIPrincipal instancia;
   private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
-  private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
+  //private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
   private ComandaServicio comandaServicio;
   private ESerGenServicio eSerGenServicio;
   
@@ -33,7 +33,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.empleadoServicioAdministrativo = new EmpleadoServicio<>();
-        this.empleadoServicioESerGen = new EmpleadoServicio<>();
+        //this.empleadoServicioESerGen = new EmpleadoServicio<>();
         this.comandaServicio = new ComandaServicio();
         this.eSerGenServicio = new ESerGenServicio(comandaServicio);
     }
@@ -307,23 +307,23 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemAddEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddEmpleadoActionPerformed
 
-        GUIAddESerGen gui = new GUIAddESerGen(empleadoServicioESerGen);
+        GUIAddESerGen gui = new GUIAddESerGen(this.eSerGenServicio);
         gui.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemAddEmpleadoActionPerformed
 
     private void jMenuItemListEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListEmpleadoActionPerformed
-        GUIListESerGen gui = new GUIListESerGen(this.empleadoServicioESerGen);
+        GUIListESerGen gui = new GUIListESerGen(this.eSerGenServicio);
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemListEmpleadoActionPerformed
 
     private void jMenuItemSearchEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSearchEmpleadoActionPerformed
-        GUISearchESerGenPorNoDocumento gui = new GUISearchESerGenPorNoDocumento(this.empleadoServicioESerGen);
+        GUISearchESerGenPorNoDocumento gui = new GUISearchESerGenPorNoDocumento(this.eSerGenServicio);
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemSearchEmpleadoActionPerformed
 
     private void jMenuItemUpdateEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateEmpleadoActionPerformed
-            GUIActualizarESerGen gui = new GUIActualizarESerGen(this.empleadoServicioESerGen);
+            GUIActualizarESerGen gui = new GUIActualizarESerGen(this.eSerGenServicio);
             gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemUpdateEmpleadoActionPerformed
 
@@ -335,7 +335,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemBonificacionActionPerformed
 
     private void jMenuCalcularNominaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCalcularNominaActionPerformed
-        GUICalcularNominaESerGen gui = new GUICalcularNominaESerGen(empleadoServicioESerGen);
+        GUICalcularNominaESerGen gui = new GUICalcularNominaESerGen(this.eSerGenServicio);
         gui.setVisible(true);
         
         
@@ -343,13 +343,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuCalcularNominaActionPerformed
 
     private void jMenuItemDeleteEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteEmpleadoActionPerformed
-       GUIEliminarESerGen gui = new GUIEliminarESerGen(empleadoServicioESerGen);
+       GUIEliminarESerGen gui = new GUIEliminarESerGen(this.eSerGenServicio);
        gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemDeleteEmpleadoActionPerformed
 
     private void jMenuItemCrearComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearComandaActionPerformed
         
-        GUIAddComanda gui = new GUIAddComanda(eSerGenServicio);
+        GUIAddComanda gui = new GUIAddComanda(this.eSerGenServicio);
         gui.setVisible(true);
         
     }//GEN-LAST:event_jMenuItemCrearComandaActionPerformed

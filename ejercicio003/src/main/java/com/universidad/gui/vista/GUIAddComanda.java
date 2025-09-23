@@ -13,9 +13,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 public class GUIAddComanda extends JFrame {
 
     private ESerGenServicio eSerGenServicio;
+    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -37,7 +38,7 @@ public class GUIAddComanda extends JFrame {
     private JButton btnBuscar, btnSalir, btnCrearYAsignar;
 
     public GUIAddComanda(ESerGenServicio eSerGenServicio) {
-        this. eSerGenServicio =  eSerGenServicio;
+        this.eSerGenServicio = eSerGenServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
     }
@@ -125,7 +126,11 @@ public class GUIAddComanda extends JFrame {
 
     private void buscarEmpleado(ActionEvent evt) {
         try {
-            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(txtBuscar.getText());
+            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(this.txtBuscar.getText());
+            //System.out.println("Hola" + serGenerales);
+            for (ESerGen serGen : eSerGenServicio.mostrar()) {
+                System.out.println(serGen);
+            }
             if (serGenerales == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
                 limpiar();
@@ -134,19 +139,43 @@ public class GUIAddComanda extends JFrame {
                 mostrar();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage() );
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
+
+//    private void prueba(ActionEvent evt) {
+//        EmpleadoServicio<ESerGen> objServiciooriginal = new EmpleadoServicio<>();
+//        List<ESerGen> lista = this.eSerGenServicio.mostrar();
+//        List<ESerGen> lista2 = this.empleadoServicioESerGen.mostrar();
+//        System.out.println("Entro");
+//        if (lista.isEmpty()) {
+//            System.out.println("La lista de ESerGenServicio esta vacia");
+//        } else {
+//            System.out.println("La lista no esta vacia");
+//        }
+//        if(! lista2.isEmpty()){
+//            System.out.println("La lista original NO esta vacia:");
+//        
+//            for (ESerGen serGenerales : lista2){
+//                System.out.println(serGenerales); 
+//           }
+//        }
+//        
+//        if(lista2.isEmpty()){
+//            System.out.println("La lista original esta vacia");
+//        }
+//        
+//    }
 
     private void crearYAsignarComanda(ActionEvent evt) {
         try {
             String id = txtBuscar.getText();
             ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(id.strip());
-             if (serGenerales == null) {
+            if (serGenerales == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
                 limpiar();
             }
-            String fechaCaducidad =  this.cldFechaCaducidad.getDate().toString();
+            String fechaCaducidad = this.cldFechaCaducidad.getDate().toString();
             Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
             eSerGenServicio.asignarComanda(id, comanda);
             JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada y asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " NO. " + serGenerales.getNoDoumento());
@@ -162,8 +191,7 @@ public class GUIAddComanda extends JFrame {
         txtPrincipio.setText("");
         txtProteina.setText("");
         txtSopa.setText("");
-        
-        
+
         panelDatos.setVisible(false);
     }
 
