@@ -128,7 +128,7 @@ public class Comanda {
 
     private void verificarInformacion(String input) {
 
-        if (descripcion.isBlank() || !PATRON_CARACTERES_PERMITIDOS.matcher(input).matches()) {
+        if (input.isBlank() || !PATRON_CARACTERES_PERMITIDOS.matcher(input).matches()) {
             throw new IllegalArgumentException("""
                                            Descripción inválida. Ingrese en la descripción palabras
                                            y oraciones compuestas únicamente por combinaciones
@@ -139,7 +139,7 @@ public class Comanda {
 
     private void verificarInformacionDescripcion(String input) {
 
-        if (descripcion.isBlank() || !PATRON_CARACTERES_PERMITIDOS_DESCRIPCION.matcher(input).matches()) {
+        if (input.isBlank() || !PATRON_CARACTERES_PERMITIDOS_DESCRIPCION.matcher(input).matches()) {
             throw new IllegalArgumentException("""
                                            Descripción inválida. Ingrese en la descripción palabras
                                            y oraciones compuestas únicamente por combinaciones

@@ -1,6 +1,6 @@
 package com.universidad.gui.vista;
 
-import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
@@ -25,7 +25,6 @@ import javax.swing.JTextField;
 public class GUIAddComanda extends JFrame {
 
     private ESerGenServicio eSerGenServicio;
-    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -33,7 +32,7 @@ public class GUIAddComanda extends JFrame {
     private JPanel panelDatos;
     private JPanel panelBotones;
     private JTextField txtBuscar, txtID, txtDescripcion, txtPrincipio, txtProteina, txtSopa;
-    private JCalendar cldFechaCaducidad;
+    private JDateChooser cldFechaCaducidad;
     private JButton btnBuscar, btnSalir, btnCrearYAsignar;
 
     public GUIAddComanda(ESerGenServicio eSerGenServicio) {
@@ -53,7 +52,8 @@ public class GUIAddComanda extends JFrame {
         btnCrearYAsignar = new JButton("Crear y Asignar");
         txtBuscar = new JTextField(15);
         txtID = new JTextField();
-        cldFechaCaducidad = new JCalendar();
+        cldFechaCaducidad = new JDateChooser();
+        cldFechaCaducidad.setDateFormatString("dd/MM/yyyy");
         txtDescripcion = new JTextField();
         txtPrincipio = new JTextField();
         txtProteina = new JTextField();
@@ -175,7 +175,13 @@ public class GUIAddComanda extends JFrame {
                 limpiar();
             }
             String fechaCaducidad = this.cldFechaCaducidad.getDate().toString();
+            System.out.println(this.txtDescripcion.getText());
+            System.out.println(this.txtPrincipio.getText());
+            System.out.println(this.txtProteina.getText());
+            System.out.println(this.txtSopa.getText());
+            System.out.println(fechaCaducidad);
             Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
+            System.out.println(comanda);
             eSerGenServicio.asignarComanda(id, comanda);
             JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada y asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " NO. " + serGenerales.getNoDoumento());
         } catch (Exception e) {
