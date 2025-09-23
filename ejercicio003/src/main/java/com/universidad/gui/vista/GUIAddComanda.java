@@ -13,6 +13,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -178,8 +179,11 @@ public class GUIAddComanda extends JFrame {
             System.out.println(this.txtPrincipio.getText());
             System.out.println(this.txtProteina.getText());
             System.out.println(this.txtSopa.getText());
-            System.out.println(this.cldFechaCaducidad.getDateFormatString());
-            Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), "25/09/2025");
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
+            System.out.println(fechaComanda);
+            Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
+            
             System.out.println(comanda);
             eSerGenServicio.asignarComanda(id, comanda);
             JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada y asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " NO. " + serGenerales.getNoDoumento());
