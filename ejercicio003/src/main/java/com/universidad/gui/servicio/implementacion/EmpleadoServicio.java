@@ -69,7 +69,7 @@ public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T
         }
 
         if (elementoRetorno == null || elementoRetorno.getEstatus().equals("IN")) {
-            throw new IllegalArgumentException("No se encontró ningún registro con noDocumento " + noDocumento);
+            throw new IllegalArgumentException("No se encontró ningún registro con No.documento " + noDocumento + "\nAsegúrese de ingresar un número de documento válido y existente.");
         }
         return elementoRetorno;
     }

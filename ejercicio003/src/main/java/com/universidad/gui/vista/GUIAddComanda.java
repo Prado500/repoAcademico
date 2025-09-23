@@ -50,7 +50,7 @@ public class GUIAddComanda extends JFrame {
         // Inicializar todos los componentes ANTES de usarlos
         btnBuscar = new JButton("Buscar");
         btnSalir = new JButton("Salir");
-        btnCrearYAsignar = new JButton("Actualizar");
+        btnCrearYAsignar = new JButton("Crear y Asignar");
         txtBuscar = new JTextField(15);
         txtID = new JTextField();
         cldFechaCaducidad = new JCalendar();
@@ -127,14 +127,14 @@ public class GUIAddComanda extends JFrame {
         try {
             ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(txtBuscar.getText());
             if (serGenerales == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
+                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Aceptar' o cierre esta ventana para crear y asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
                 mostrar();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage() );
         }
     }
 
@@ -142,7 +142,11 @@ public class GUIAddComanda extends JFrame {
         try {
             String id = txtBuscar.getText();
             ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(id.strip());
-            String fechaCaducidad = "Hola";
+             if (serGenerales == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
+                limpiar();
+            }
+            String fechaCaducidad =  this.cldFechaCaducidad.getDate().toString();
             Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
             eSerGenServicio.asignarComanda(id, comanda);
             JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada y asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " NO. " + serGenerales.getNoDoumento());
