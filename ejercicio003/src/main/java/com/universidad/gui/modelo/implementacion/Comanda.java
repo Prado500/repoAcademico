@@ -25,7 +25,7 @@ public class Comanda {
     private String sopa;
     private String fechaCaducidad;
     private String estatus;
-    public static final Pattern PATRON_CARACTERES_PERMITIDOS_DESCRIPCION = Pattern.compile("\"^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ\\\\s]{1,204}$\""); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada de los campos que se escribiran manualmente (descripcion, principio, proteina y sopa) esta conformada unica y exclusivamente por combinaciones de letras y vocales del alfabeto del español latino.
+    public static final Pattern PATRON_CARACTERES_PERMITIDOS_DESCRIPCION = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ\\\\s]{1,204}$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada de los campos que se escribiran manualmente (descripcion, principio, proteina y sopa) esta conformada unica y exclusivamente por combinaciones de letras y vocales del alfabeto del español latino.
     public static final Pattern PATRON_CARACTERES_PERMITIDOS = Pattern.compile("^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ\\\\s]{1,50}$"); // Expresión regular que genera un patrón de búsqueda para verificar si la entrada de los campos que se escribiran manualmente (descripcion, principio, proteina y sopa) esta conformada unica y exclusivamente por combinaciones de letras y vocales del alfabeto del español latino.
 
     // Constructor
@@ -139,7 +139,7 @@ public class Comanda {
 
     private void verificarInformacionDescripcion(String input) {
 
-        if (input.isBlank() || !PATRON_CARACTERES_PERMITIDOS_DESCRIPCION.matcher(input).matches()) {
+        if (input.isBlank() || !(PATRON_CARACTERES_PERMITIDOS_DESCRIPCION.matcher(input).matches())) {
             throw new IllegalArgumentException("""
                                            Descripción inválida. Ingrese en la descripción palabras
                                            y oraciones compuestas únicamente por combinaciones
