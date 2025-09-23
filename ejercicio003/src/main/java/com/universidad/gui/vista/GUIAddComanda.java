@@ -52,9 +52,9 @@ public class GUIAddComanda extends JFrame {
         btnSalir = new JButton("Salir");
         btnCrearYAsignar = new JButton("Crear y Asignar");
         txtBuscar = new JTextField(15);
-        txtID = new JTextField();
         cldFechaCaducidad = new JDateChooser();
         cldFechaCaducidad.setDateFormatString("dd/MM/yyyy");
+        txtID = new JTextField();
         txtDescripcion = new JTextField();
         txtPrincipio = new JTextField();
         txtProteina = new JTextField();
@@ -127,15 +127,14 @@ public class GUIAddComanda extends JFrame {
     private void buscarEmpleado(ActionEvent evt) {
         try {
             ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(this.txtBuscar.getText());
-            //System.out.println("Hola" + serGenerales);
-            for (ESerGen serGen : eSerGenServicio.mostrar()) {
-                System.out.println(serGen);
-            }
+            System.out.println("Este es el id: " + this.txtBuscar.getText());
             if (serGenerales == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Aceptar' o cierre esta ventana para crear y asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
+                this.txtID.setText(this.txtBuscar.getText());
+                this.txtID.setEditable(false);
                 mostrar();
             }
         } catch (Exception e) {
@@ -146,7 +145,8 @@ public class GUIAddComanda extends JFrame {
     
     private void crearYAsignarComanda(ActionEvent evt) {
         try {
-            String id = txtBuscar.getText();
+            String id = this.txtBuscar.getText();
+            
             ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(id.strip());
             if (serGenerales == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
