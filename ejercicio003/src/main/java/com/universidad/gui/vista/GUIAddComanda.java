@@ -143,30 +143,7 @@ public class GUIAddComanda extends JFrame {
         }
     }
 
-//    private void prueba(ActionEvent evt) {
-//        EmpleadoServicio<ESerGen> objServiciooriginal = new EmpleadoServicio<>();
-//        List<ESerGen> lista = this.eSerGenServicio.mostrar();
-//        List<ESerGen> lista2 = this.empleadoServicioESerGen.mostrar();
-//        System.out.println("Entro");
-//        if (lista.isEmpty()) {
-//            System.out.println("La lista de ESerGenServicio esta vacia");
-//        } else {
-//            System.out.println("La lista no esta vacia");
-//        }
-//        if(! lista2.isEmpty()){
-//            System.out.println("La lista original NO esta vacia:");
-//        
-//            for (ESerGen serGenerales : lista2){
-//                System.out.println(serGenerales); 
-//           }
-//        }
-//        
-//        if(lista2.isEmpty()){
-//            System.out.println("La lista original esta vacia");
-//        }
-//        
-//    }
-
+    
     private void crearYAsignarComanda(ActionEvent evt) {
         try {
             String id = txtBuscar.getText();
@@ -175,15 +152,9 @@ public class GUIAddComanda extends JFrame {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
                 limpiar();
             }
-            System.out.println(this.txtDescripcion.getText());
-            System.out.println(this.txtPrincipio.getText());
-            System.out.println(this.txtProteina.getText());
-            System.out.println(this.txtSopa.getText());
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
-            System.out.println(fechaComanda);
             Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
-            
             System.out.println(comanda);
             eSerGenServicio.asignarComanda(id, comanda);
             JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada y asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " NO. " + serGenerales.getNoDoumento());
