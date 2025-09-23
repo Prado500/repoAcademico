@@ -163,7 +163,7 @@ public class Comanda {
         
         try{
         
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
             
             LocalDate fecha = LocalDate.parse(fechaCaducidad, formato);
             
