@@ -80,6 +80,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuItemCrearComanda = new javax.swing.JMenuItem();
         jMenuItemBuscarComanda = new javax.swing.JMenuItem();
         jMenuItemVerComandas = new javax.swing.JMenuItem();
+        jMenuItemVerComandasEmp = new javax.swing.JMenuItem();
         jMenuItemActualizarComanda = new javax.swing.JMenuItem();
         jMenuItemEliminarComanda = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
@@ -242,7 +243,15 @@ public class GUIPrincipal extends javax.swing.JFrame {
         CrudComandas.add(jMenuItemBuscarComanda);
 
         jMenuItemVerComandas.setText("Ver Comandas");
+        jMenuItemVerComandas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVerComandasActionPerformed(evt);
+            }
+        });
         CrudComandas.add(jMenuItemVerComandas);
+
+        jMenuItemVerComandasEmp.setText("Ver Comandas Por Empleado");
+        CrudComandas.add(jMenuItemVerComandasEmp);
 
         jMenuItemActualizarComanda.setText("Actualizar Comanda");
         CrudComandas.add(jMenuItemActualizarComanda);
@@ -380,6 +389,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
        gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemBuscarComandaActionPerformed
 
+    private void jMenuItemVerComandasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerComandasActionPerformed
+        GUIListComandas gui = new GUIListComandas(eSerGenServicio);
+        gui.setVisible(true);
+    }//GEN-LAST:event_jMenuItemVerComandasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -442,6 +456,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemUpdateAdministrativos;
     private javax.swing.JMenuItem jMenuItemUpdateEmpleado;
     private javax.swing.JMenuItem jMenuItemVerComandas;
+    private javax.swing.JMenuItem jMenuItemVerComandasEmp;
     private javax.swing.JMenu menuAdministrativo;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;
