@@ -76,7 +76,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuCalcularNomina = new javax.swing.JMenuItem();
         jMenuItemComanda = new javax.swing.JMenuItem();
         CrudComandas = new javax.swing.JMenu();
-        jMenuItemCrearComanda = new javax.swing.JMenuItem();
+        jMenuItemCrearYAsignarComanda = new javax.swing.JMenuItem();
         jMenuItemBuscarComanda = new javax.swing.JMenuItem();
         jMenuItemVerComandas = new javax.swing.JMenuItem();
         jMenuItemActualizarComanda = new javax.swing.JMenuItem();
@@ -216,13 +216,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
         CrudComandas.setText("Comandas");
 
-        jMenuItemCrearComanda.setText("Crear Comanda");
-        jMenuItemCrearComanda.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCrearYAsignarComanda.setText("Crear Comanda y Asignar");
+        jMenuItemCrearYAsignarComanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCrearComandaActionPerformed(evt);
+                jMenuItemCrearYAsignarComandaActionPerformed(evt);
             }
         });
-        CrudComandas.add(jMenuItemCrearComanda);
+        CrudComandas.add(jMenuItemCrearYAsignarComanda);
 
         jMenuItemBuscarComanda.setText("Buscar Comanda");
         CrudComandas.add(jMenuItemBuscarComanda);
@@ -349,12 +349,12 @@ public class GUIPrincipal extends javax.swing.JFrame {
        gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemDeleteEmpleadoActionPerformed
 
-    private void jMenuItemCrearComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearComandaActionPerformed
+    private void jMenuItemCrearYAsignarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearYAsignarComandaActionPerformed
         
-        GUIAddComanda gui = new GUIAddComanda(this.eSerGenServicio);
+        GUIAddAndAssignComanda gui = new GUIAddAndAssignComanda(this.eSerGenServicio);
         gui.setVisible(true);
         
-    }//GEN-LAST:event_jMenuItemCrearComandaActionPerformed
+    }//GEN-LAST:event_jMenuItemCrearYAsignarComandaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,7 +405,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemBonificacion;
     private javax.swing.JMenuItem jMenuItemBuscarComanda;
     private javax.swing.JMenuItem jMenuItemComanda;
-    private javax.swing.JMenuItem jMenuItemCrearComanda;
+    private javax.swing.JMenuItem jMenuItemCrearYAsignarComanda;
     private javax.swing.JMenuItem jMenuItemDeleteAdministrativo;
     private javax.swing.JMenuItem jMenuItemDeleteEmpleado;
     private javax.swing.JMenuItem jMenuItemEliminarComanda;

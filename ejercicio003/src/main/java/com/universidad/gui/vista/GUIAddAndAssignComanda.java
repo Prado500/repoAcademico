@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUIAddComanda extends JFrame {
+public class GUIAddAndAssignComanda extends JFrame {
 
     private ESerGenServicio eSerGenServicio;
 
@@ -36,7 +36,7 @@ public class GUIAddComanda extends JFrame {
     private JDateChooser cldFechaCaducidad;
     private JButton btnBuscar, btnSalir, btnCrearYAsignar;
 
-    public GUIAddComanda(ESerGenServicio eSerGenServicio) {
+    public GUIAddAndAssignComanda(ESerGenServicio eSerGenServicio) {
         this.eSerGenServicio = eSerGenServicio;
         initComponentsManual();
         setLocationRelativeTo(null);

@@ -149,12 +149,12 @@
             <Property name="text" type="java.lang.String" value="Comandas"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCrearComanda">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCrearYAsignarComanda">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Crear Comanda"/>
+                <Property name="text" type="java.lang.String" value="Crear Comanda y Asignar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCrearComandaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCrearYAsignarComandaActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBuscarComanda">
