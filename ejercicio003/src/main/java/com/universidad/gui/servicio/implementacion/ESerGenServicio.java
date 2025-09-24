@@ -37,10 +37,10 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
         }
     }
 
-    public void crearComandaIndependiente(Comanda comanda){
+    public void crearComandaIndependiente(Comanda comanda) {
         comandaServicio.agregarComanda(comanda);
     }
-    
+
     public void eliminaryDesasociarComanda(String idESerGen, int idComanda) {
         ESerGen serGenerales = this.searchElementoByNoDocumento(idESerGen);
         Comanda comanda = comandaServicio.buscarComandaID(idComanda);
@@ -71,6 +71,14 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
         return new ArrayList<>(serGenerales.getComandas());
     }
 
+    public Comanda buscarComandaPorId(int id) {
+        Comanda comanda = this.comandaServicio.buscarComandaID(id);
+        if (comanda == null) {
+            throw new IllegalArgumentException("No existe registro de la comanda con id " + id + ". Asegúrese que la comanda Exista");
+        }
+        return comanda;
+    }
+
     public void actualizarComanda(String idESerGen, int idComanda, String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
         try {
 
@@ -88,8 +96,7 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
         }
     }
 
-    
-    public List<Comanda> mostrarComandas(){
+    public List<Comanda> mostrarComandas() {
         return new ArrayList<>(this.comandaServicio.mostrarComandas());
     }
 }

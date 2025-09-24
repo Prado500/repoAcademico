@@ -234,6 +234,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         CrudComandas.add(jMenuItemCrearComanda);
 
         jMenuItemBuscarComanda.setText("Buscar Comanda");
+        jMenuItemBuscarComanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBuscarComandaActionPerformed(evt);
+            }
+        });
         CrudComandas.add(jMenuItemBuscarComanda);
 
         jMenuItemVerComandas.setText("Ver Comandas");
@@ -369,6 +374,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         GUIAddComanda gui = new GUIAddComanda(eSerGenServicio);
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemCrearComandaActionPerformed
+
+    private void jMenuItemBuscarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscarComandaActionPerformed
+       GUISearchComandaPorID gui = new GUISearchComandaPorID(eSerGenServicio);
+       gui.setVisible(true);
+    }//GEN-LAST:event_jMenuItemBuscarComandaActionPerformed
 
     /**
      * @param args the command line arguments
