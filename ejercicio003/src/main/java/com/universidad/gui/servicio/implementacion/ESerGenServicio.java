@@ -37,6 +37,10 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
         }
     }
 
+    public void crearComandaIndependiente(Comanda comanda){
+        comandaServicio.agregarComanda(comanda);
+    }
+    
     public void eliminaryDesasociarComanda(String idESerGen, int idComanda) {
         ESerGen serGenerales = this.searchElementoByNoDocumento(idESerGen);
         Comanda comanda = comandaServicio.buscarComandaID(idComanda);

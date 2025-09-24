@@ -77,6 +77,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuItemComanda = new javax.swing.JMenuItem();
         CrudComandas = new javax.swing.JMenu();
         jMenuItemCrearYAsignarComanda = new javax.swing.JMenuItem();
+        jMenuItemCrearComanda = new javax.swing.JMenuItem();
         jMenuItemBuscarComanda = new javax.swing.JMenuItem();
         jMenuItemVerComandas = new javax.swing.JMenuItem();
         jMenuItemActualizarComanda = new javax.swing.JMenuItem();
@@ -224,6 +225,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
         });
         CrudComandas.add(jMenuItemCrearYAsignarComanda);
 
+        jMenuItemCrearComanda.setText("Crear Comanda");
+        jMenuItemCrearComanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCrearComandaActionPerformed(evt);
+            }
+        });
+        CrudComandas.add(jMenuItemCrearComanda);
+
         jMenuItemBuscarComanda.setText("Buscar Comanda");
         CrudComandas.add(jMenuItemBuscarComanda);
 
@@ -356,6 +365,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemCrearYAsignarComandaActionPerformed
 
+    private void jMenuItemCrearComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearComandaActionPerformed
+        GUIAddComanda gui = new GUIAddComanda(eSerGenServicio);
+        gui.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCrearComandaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -405,6 +419,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemBonificacion;
     private javax.swing.JMenuItem jMenuItemBuscarComanda;
     private javax.swing.JMenuItem jMenuItemComanda;
+    private javax.swing.JMenuItem jMenuItemCrearComanda;
     private javax.swing.JMenuItem jMenuItemCrearYAsignarComanda;
     private javax.swing.JMenuItem jMenuItemDeleteAdministrativo;
     private javax.swing.JMenuItem jMenuItemDeleteEmpleado;
