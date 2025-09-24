@@ -251,6 +251,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         CrudComandas.add(jMenuItemVerComandas);
 
         jMenuItemVerComandasEmp.setText("Ver Comandas Por Empleado");
+        jMenuItemVerComandasEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVerComandasEmpActionPerformed(evt);
+            }
+        });
         CrudComandas.add(jMenuItemVerComandasEmp);
 
         jMenuItemActualizarComanda.setText("Actualizar Comanda");
@@ -393,6 +398,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         GUIListComandas gui = new GUIListComandas(eSerGenServicio);
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemVerComandasActionPerformed
+
+    private void jMenuItemVerComandasEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerComandasEmpActionPerformed
+        GUIListComandasPorEmpleado gui = new GUIListComandasPorEmpleado(eSerGenServicio);
+        gui.setVisible(true);
+    }//GEN-LAST:event_jMenuItemVerComandasEmpActionPerformed
 
     /**
      * @param args the command line arguments
