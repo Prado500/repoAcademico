@@ -132,7 +132,7 @@ public class GUIAddComanda extends JFrame {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
                 limpiar();
             } else {
-                JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Aceptar' o cierre esta ventana para crear y asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
+                JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana para crear y asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
                 this.txtID.setText(this.txtBuscar.getText());
                 this.txtID.setEditable(false);
                 mostrar();
@@ -158,6 +158,7 @@ public class GUIAddComanda extends JFrame {
             System.out.println(comanda);
             eSerGenServicio.asignarComanda(id, comanda);
             JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada y asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " NO. " + serGenerales.getNoDoumento());
+            limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
