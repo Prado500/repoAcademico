@@ -99,4 +99,23 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
     public List<Comanda> mostrarComandas() {
         return new ArrayList<>(this.comandaServicio.mostrarComandas());
     }
+    
+    public void asignarComanda(String ESerGenId, int comandaId){
+        
+        ESerGen serGenerales = this.searchElementoByNoDocumento(ESerGenId);
+        Comanda comanda = comandaServicio.buscarComandaID(comandaId);
+        
+        if (serGenerales == null)
+            throw new IllegalArgumentException("No se encontró ningún registro del empleado con id: " + ESerGenId);
+        
+        if (comanda == null)
+            throw new IllegalArgumentException("No se encontró ningún registro de la comanda con id: " + comandaId);
+        
+        for(Comanda comandaLista : this.comandaServicio.mostrarComandas()){
+                if (comanda.getId() == comandaId){
+                    comanda.setEserGen(serGenerales);
+                }
+        }
+        
+    }
 }
