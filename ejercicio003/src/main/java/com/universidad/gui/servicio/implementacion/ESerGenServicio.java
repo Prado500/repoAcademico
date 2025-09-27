@@ -23,7 +23,7 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
         this.comandaServicio = comandaServicio;
     }
 
-    public void asignarComanda(String idESerGen, Comanda comanda) {
+    public void crearYAsignarComanda(String idESerGen, Comanda comanda) {
         ESerGen serGenerales = this.searchElementoByNoDocumento(idESerGen);
         try {
             if (serGenerales != null) {

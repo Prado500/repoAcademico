@@ -1,6 +1,5 @@
 package com.universidad.gui.vista;
 
-import com.toedter.calendar.JDateChooser;
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
@@ -22,7 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUIAddAndAssignComanda extends JFrame {
+public class GUIAsignarComanda extends JFrame {
 
     private ESerGenServicio eSerGenServicio;
 
@@ -31,11 +30,10 @@ public class GUIAddAndAssignComanda extends JFrame {
     private JPanel panelBusqueda;
     private JPanel panelDatos;
     private JPanel panelBotones;
-    private JTextField txtBuscar, txtID, txtDescripcion, txtPrincipio, txtProteina, txtSopa;
-    private JDateChooser cldFechaCaducidad;
-    private JButton btnBuscar, btnSalir, btnCrearYAsignar;
+    private JTextField txtBuscar, txtID;
+    private JButton btnBuscar, btnSalir, btnAsignar;
 
-    public GUIAddAndAssignComanda(ESerGenServicio eSerGenServicio) {
+    public GUIAsignarComanda(ESerGenServicio eSerGenServicio) {
         this.eSerGenServicio = eSerGenServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
@@ -49,15 +47,10 @@ public class GUIAddAndAssignComanda extends JFrame {
         // Inicializar todos los componentes ANTES de usarlos
         btnBuscar = new JButton("Buscar");
         btnSalir = new JButton("Salir");
-        btnCrearYAsignar = new JButton("Crear y Asignar");
+        btnAsignar = new JButton("Asignar");
         txtBuscar = new JTextField(15);
-        cldFechaCaducidad = new JDateChooser();
-        cldFechaCaducidad.setDateFormatString("dd/MM/yyyy");
         txtID = new JTextField();
-        txtDescripcion = new JTextField();
-        txtPrincipio = new JTextField();
-        txtProteina = new JTextField();
-        txtSopa = new JTextField();
+        
 
         // Panel principal con BorderLayout
         panelPrincipal = new JPanel(new BorderLayout(10, 10));
@@ -70,20 +63,10 @@ public class GUIAddAndAssignComanda extends JFrame {
         panelBusqueda.add(btnBuscar);
 
         // Panel de datos (Centro) - Inicialmente oculto
-        panelDatos = new JPanel(new GridLayout(6, 2, 5, 5));
+        panelDatos = new JPanel(new GridLayout(1, 2, 5, 5));
         panelDatos.setBorder(BorderFactory.createTitledBorder("Datos de la Comanda"));
-        panelDatos.add(new JLabel("Asignada a Empleado con Documento No. "));
+        panelDatos.add(new JLabel("Se Asignará al Empleado con Documento No. "));
         panelDatos.add(txtID);
-        panelDatos.add(new JLabel("Fecha de Caducidad:"));
-        panelDatos.add(cldFechaCaducidad);
-        panelDatos.add(new JLabel("Descripción:"));
-        panelDatos.add(txtDescripcion);
-        panelDatos.add(new JLabel("Principio:"));
-        panelDatos.add(txtPrincipio);
-        panelDatos.add(new JLabel("Proteina:"));
-        panelDatos.add(txtProteina);
-        panelDatos.add(new JLabel("Sopa:"));
-        panelDatos.add(txtSopa);
         panelDatos.setVisible(false);
 
         // Panel de botones con GridBagLayout
@@ -92,7 +75,7 @@ public class GUIAddAndAssignComanda extends JFrame {
 
         // Configurar tamaño preferido de botones
         btnSalir.setPreferredSize(new Dimension(100, 30));
-        btnCrearYAsignar.setPreferredSize(new Dimension(100, 30));
+        btnAsignar.setPreferredSize(new Dimension(100, 30));
 
         // Botón Salir (izquierda)
         gbc.gridx = 0;
@@ -108,7 +91,7 @@ public class GUIAddAndAssignComanda extends JFrame {
         gbc.weightx = 1;
         gbc.anchor = GridBagConstraints.EAST;
         gbc.insets = new Insets(10, 0, 10, 38);
-        panelBotones.add(btnCrearYAsignar, gbc);
+        panelBotones.add(btnAsignar, gbc);
 
         // Agregar paneles al principal
         panelPrincipal.add(panelBusqueda, BorderLayout.NORTH);
@@ -117,7 +100,7 @@ public class GUIAddAndAssignComanda extends JFrame {
 
         // Configurar action listeners
         btnBuscar.addActionListener(this::buscarEmpleado);
-        btnCrearYAsignar.addActionListener(this::crearYAsignarComanda);
+        btnAsignar.addActionListener(this::AsignarComanda);
         btnSalir.addActionListener(e -> dispose());
 
         setContentPane(panelPrincipal);
@@ -129,9 +112,9 @@ public class GUIAddAndAssignComanda extends JFrame {
             System.out.println("Este es el id: " + this.txtBuscar.getText());
             if (serGenerales == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
-                limpiar();
+                //limpiar();
             } else {
-                JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana para crear y asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
+                JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana para asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
                 this.txtID.setText(this.txtBuscar.getText());
                 this.txtID.setEditable(false);
                 mostrar();
@@ -142,21 +125,16 @@ public class GUIAddAndAssignComanda extends JFrame {
     }
 
     
-    private void crearYAsignarComanda(ActionEvent evt) {
+    private void AsignarComanda(ActionEvent evt) {
         try {
             String id = this.txtBuscar.getText();
             
             ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(id.strip());
-            if (serGenerales == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
-                limpiar();
-            }
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
-            Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
-            System.out.println(comanda);
-            eSerGenServicio.crearYAsignarComanda(id, comanda);
-            JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada y asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " NO. " + serGenerales.getNoDoumento());
+            
+            
+            
+            eSerGenServicio.asignarComanda(serGenerales.getNoDoumento() , id);
+ 
             limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());

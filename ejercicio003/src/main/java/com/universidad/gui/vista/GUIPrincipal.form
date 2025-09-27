@@ -181,6 +181,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemVerComandasActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAsignarComanda">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Asignar Comanda"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAsignarComandaActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemVerComandasEmp">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ver Comandas Por Empleado"/>

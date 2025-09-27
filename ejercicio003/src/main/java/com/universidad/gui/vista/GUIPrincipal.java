@@ -80,6 +80,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuItemCrearComanda = new javax.swing.JMenuItem();
         jMenuItemBuscarComanda = new javax.swing.JMenuItem();
         jMenuItemVerComandas = new javax.swing.JMenuItem();
+        jMenuItemAsignarComanda = new javax.swing.JMenuItem();
         jMenuItemVerComandasEmp = new javax.swing.JMenuItem();
         jMenuItemActualizarComanda = new javax.swing.JMenuItem();
         jMenuItemEliminarComanda = new javax.swing.JMenuItem();
@@ -250,6 +251,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
         });
         CrudComandas.add(jMenuItemVerComandas);
 
+        jMenuItemAsignarComanda.setText("Asignar Comanda");
+        jMenuItemAsignarComanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAsignarComandaActionPerformed(evt);
+            }
+        });
+        CrudComandas.add(jMenuItemAsignarComanda);
+
         jMenuItemVerComandasEmp.setText("Ver Comandas Por Empleado");
         jMenuItemVerComandasEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,6 +413,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemVerComandasEmpActionPerformed
 
+    private void jMenuItemAsignarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAsignarComandaActionPerformed
+        GUIAsignarComanda gui = new GUIAsignarComanda(eSerGenServicio);
+        gui.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAsignarComandaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -450,6 +464,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuESerGen;
     private javax.swing.JMenuItem jMenuItemActualizarComanda;
     private javax.swing.JMenuItem jMenuItemAddEmpleado;
+    private javax.swing.JMenuItem jMenuItemAsignarComanda;
     private javax.swing.JMenuItem jMenuItemBonificacion;
     private javax.swing.JMenuItem jMenuItemBuscarComanda;
     private javax.swing.JMenuItem jMenuItemComanda;
