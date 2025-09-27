@@ -40,7 +40,7 @@ public class GUIAsignarComanda extends JFrame {
     }
 
     private void initComponentsManual() {
-        setTitle("Crear y Asignar Comanda");
+        setTitle("Asignar Comanda");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(495, 425);
 
@@ -127,7 +127,7 @@ public class GUIAsignarComanda extends JFrame {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
                 //limpiar();
             } else {
-                JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana para asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
+                JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana y haga clic en el botón Asignar Comanda para asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
                 this.txtID.setText(this.txtBuscar.getText());
                 this.txtID.setEditable(false);
                 mostrar();
@@ -139,6 +139,7 @@ public class GUIAsignarComanda extends JFrame {
 
     private void asignarComanda(int idComanda) {
         try {
+            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(this.txtBuscar.getText());
             String idEserGen = this.txtBuscar.getText();
 
             if (this.txtID.getText().isBlank()) {
@@ -149,6 +150,7 @@ public class GUIAsignarComanda extends JFrame {
                                                    """);
             }
             eSerGenServicio.asignarComanda(idEserGen, idComanda);
+            JOptionPane.showMessageDialog(this, "Comanda exitosamente asignada al empleado " + serGenerales.getNombre() + " con " +serGenerales.getTipoDocumento() +  " No. " + idEserGen);
             limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
