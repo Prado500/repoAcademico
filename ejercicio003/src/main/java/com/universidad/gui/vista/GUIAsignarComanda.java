@@ -127,13 +127,18 @@ public class GUIAsignarComanda extends JFrame {
     
     private void AsignarComanda(ActionEvent evt) {
         try {
-            String id = this.txtBuscar.getText();
             
-            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(id.strip());
+            String idEserGen = this.txtBuscar.getText();
             
+            if(this.txtID.getText().isBlank()){
+                throw new IllegalArgumentException("""
+                                                   No es posible asignar una comanda sin primero buscar un empleado.
+                                                   Primero busque un empleado por su número de documento y luego
+                                                   Asígnele a ese empleado la comanda.
+                                                   """);
+            }
             
-            
-            eSerGenServicio.asignarComanda(serGenerales.getNoDoumento() , id);
+            eSerGenServicio.asignarComanda(idEserGen , id);
  
             limpiar();
         } catch (Exception e) {
