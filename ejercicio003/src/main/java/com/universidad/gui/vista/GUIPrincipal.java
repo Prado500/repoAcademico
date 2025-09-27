@@ -78,9 +78,9 @@ public class GUIPrincipal extends javax.swing.JFrame {
         CrudComandas = new javax.swing.JMenu();
         jMenuItemCrearYAsignarComanda = new javax.swing.JMenuItem();
         jMenuItemCrearComanda = new javax.swing.JMenuItem();
+        jMenuItemAsignarComanda = new javax.swing.JMenuItem();
         jMenuItemBuscarComanda = new javax.swing.JMenuItem();
         jMenuItemVerComandas = new javax.swing.JMenuItem();
-        jMenuItemAsignarComanda = new javax.swing.JMenuItem();
         jMenuItemVerComandasEmp = new javax.swing.JMenuItem();
         jMenuItemActualizarComanda = new javax.swing.JMenuItem();
         jMenuItemEliminarComanda = new javax.swing.JMenuItem();
@@ -235,6 +235,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
         });
         CrudComandas.add(jMenuItemCrearComanda);
 
+        jMenuItemAsignarComanda.setText("Asignar Comanda");
+        jMenuItemAsignarComanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAsignarComandaActionPerformed(evt);
+            }
+        });
+        CrudComandas.add(jMenuItemAsignarComanda);
+
         jMenuItemBuscarComanda.setText("Buscar Comanda");
         jMenuItemBuscarComanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,14 +258,6 @@ public class GUIPrincipal extends javax.swing.JFrame {
             }
         });
         CrudComandas.add(jMenuItemVerComandas);
-
-        jMenuItemAsignarComanda.setText("Asignar Comanda");
-        jMenuItemAsignarComanda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemAsignarComandaActionPerformed(evt);
-            }
-        });
-        CrudComandas.add(jMenuItemAsignarComanda);
 
         jMenuItemVerComandasEmp.setText("Ver Comandas Por Empleado");
         jMenuItemVerComandasEmp.addActionListener(new java.awt.event.ActionListener() {
