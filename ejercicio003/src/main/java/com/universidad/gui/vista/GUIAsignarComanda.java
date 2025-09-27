@@ -50,7 +50,6 @@ public class GUIAsignarComanda extends JFrame {
         btnAsignar = new JButton("Asignar");
         txtBuscar = new JTextField(15);
         txtID = new JTextField();
-        
 
         // Panel principal con BorderLayout
         panelPrincipal = new JPanel(new BorderLayout(10, 10));
@@ -100,7 +99,21 @@ public class GUIAsignarComanda extends JFrame {
 
         // Configurar action listeners
         btnBuscar.addActionListener(this::buscarEmpleado);
-        btnAsignar.addActionListener(this::AsignarComanda);
+        btnAsignar.addActionListener(evt -> {
+            try {
+                String idComandaS = JOptionPane.showInputDialog(
+                        this,
+                        "Ingrese el ID de la comanda que asignará. Si no lo conoce, diríjase desde el menú principal\na la barra de opiones, Comanda, y Ver Comandas o Ver Comandas Por Empleado",
+                        "Ingresar ID de la comanda",
+                        JOptionPane.QUESTION_MESSAGE
+                );
+                int idComanda = Integer.parseInt(idComandaS);
+                asignarComanda(idComanda);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error: " + e);
+            }
+        });
+
         btnSalir.addActionListener(e -> dispose());
 
         setContentPane(panelPrincipal);
@@ -120,26 +133,22 @@ public class GUIAsignarComanda extends JFrame {
                 mostrar();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error. Asegúrese de ingresar un ID de comanda válido y existente:\n" + e.getMessage());
         }
     }
 
-    
-    private void AsignarComanda(ActionEvent evt) {
+    private void asignarComanda(int idComanda) {
         try {
-            
             String idEserGen = this.txtBuscar.getText();
-            
-            if(this.txtID.getText().isBlank()){
+
+            if (this.txtID.getText().isBlank()) {
                 throw new IllegalArgumentException("""
                                                    No es posible asignar una comanda sin primero buscar un empleado.
                                                    Primero busque un empleado por su número de documento y luego
                                                    Asígnele a ese empleado la comanda.
                                                    """);
             }
-            
-            eSerGenServicio.asignarComanda(idEserGen , id);
- 
+            eSerGenServicio.asignarComanda(idEserGen, idComanda);
             limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -148,19 +157,12 @@ public class GUIAsignarComanda extends JFrame {
 
     private void limpiar() {
         txtBuscar.setText("");
-        txtDescripcion.setText("");
         txtID.setText("");
-        txtPrincipio.setText("");
-        txtProteina.setText("");
-        txtSopa.setText("");
-
         panelDatos.setVisible(false);
     }
 
     private void mostrar() {
-
         panelDatos.setVisible(true);
-
     }
 
 }
