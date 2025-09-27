@@ -149,6 +149,7 @@ public class GUIAsignarComanda extends JFrame {
                                                    Asígnele a ese empleado la comanda.
                                                    """);
             }
+            
             eSerGenServicio.asignarComanda(idEserGen, idComanda);
             JOptionPane.showMessageDialog(this, "Comanda exitosamente asignada al empleado " + serGenerales.getNombre() + " con " +serGenerales.getTipoDocumento() +  " No. " + idEserGen);
             limpiar();
