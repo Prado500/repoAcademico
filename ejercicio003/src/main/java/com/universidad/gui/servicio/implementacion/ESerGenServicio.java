@@ -112,7 +112,7 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
             throw new IllegalArgumentException("No se encontró ningún registro de la comanda con id: " + comandaId);
         
         if(comanda.getEserGen() != null)
-            throw new IllegalArgumentException("La comanda con ID " + comandaId + "ya fué asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No." + comanda.getEserGen().getNoDoumento());
+            throw new IllegalArgumentException("La comanda con ID " + comandaId + " ya fué asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No." + comanda.getEserGen().getNoDoumento());
 
          
         

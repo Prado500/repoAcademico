@@ -155,6 +155,7 @@ public class GUIAsignarComanda extends JFrame {
             limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            limpiar();
         }
     }
 
