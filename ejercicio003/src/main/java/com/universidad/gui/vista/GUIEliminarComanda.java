@@ -203,19 +203,21 @@ public class GUIEliminarComanda extends JFrame {
 
                     eSerGenServicio.eliminarComanda(Integer.parseInt(this.txtID.getText()));
                     JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y sin asignar eliminada exitosamente");
-
+                    limpiar();
                 } else {
-
-                    eSerGenServicio.eliminaryDesasociarComanda(comanda.getEserGen().getNoDoumento(), Integer.parseInt(this.txtID.getText()));
+                    
                     JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nEliminada exitosamente");
-
+                    eSerGenServicio.eliminaryDesasociarComanda(comanda.getEserGen().getNoDoumento(), Integer.parseInt(this.txtID.getText()));
+                    limpiar();
                 }
 
             } else {
                 JOptionPane.showMessageDialog(this, "Eliminación cancelada");
+                limpiar();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            limpiar();
         }
     }
 
@@ -229,7 +231,8 @@ public class GUIEliminarComanda extends JFrame {
         txtSopa.setText("");
         panelDatos.setVisible(false);
     }
-
+    
+    
     private void mostrar() {
 
         panelDatos.setVisible(true);
