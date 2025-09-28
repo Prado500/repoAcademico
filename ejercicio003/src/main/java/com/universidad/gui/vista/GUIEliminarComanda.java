@@ -140,12 +140,12 @@ public class GUIEliminarComanda extends JFrame {
         try {
             int idComanda = Integer.parseInt(this.txtBuscar.getText().trim());
             Comanda comanda = eSerGenServicio.buscarComandaPorId(idComanda);
-                this.txtID.setText(Integer.toString(comanda.getId()));
-                String idESerGen = "No asignada";
-                if (comanda.getEserGen() != null) {
-                    idESerGen = comanda.getEserGen().getNoDoumento();
-                }
-                this.txtIdESerGen.setText(idESerGen);
+            this.txtID.setText(Integer.toString(comanda.getId()));
+            String idESerGen = "No asignada";
+            if (comanda.getEserGen() != null) {
+                idESerGen = comanda.getEserGen().getNoDoumento();
+            }
+            this.txtIdESerGen.setText(idESerGen);
 //                DateTimeFormatter formatoFechaCaducidad = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
 //                LocalDate fechaCaducidad = LocalDate.parse(comanda.getFechaCaducidad(), formatoFechaCaducidad);
 
@@ -155,36 +155,64 @@ public class GUIEliminarComanda extends JFrame {
 //                formatoFechaCaducidad.setLenient(false);
 //                formatoFechaCaducidad.parse(comanda.getFechaCaducidad());  
 //                this.jdcFechaCaducidad.setDate(formatoFechaCaducidad.parse(comanda.getFechaCaducidad()));
-                //pasar de LocalDateTime a Date
-                DateTimeFormatter formatoFechaCaducidad = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
-                LocalDate fechaCaducidad = LocalDate.parse(comanda.getFechaCaducidad(), formatoFechaCaducidad);
-                Date fechaCaducidadDate = Date.from(fechaCaducidad.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                this.jdcFechaCaducidad.setDate(fechaCaducidadDate);
-                this.txtDescripcion.setText(comanda.getDescripcion());
-                this.txtPrincipio.setText(comanda.getPrincipio());
-                this.txtProteina.setText(comanda.getProteina());
-                this.txtSopa.setText(comanda.getSopa());
-                mostrar();
-            
+            //pasar de LocalDateTime a Date
+            DateTimeFormatter formatoFechaCaducidad = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+            LocalDate fechaCaducidad = LocalDate.parse(comanda.getFechaCaducidad(), formatoFechaCaducidad);
+            Date fechaCaducidadDate = Date.from(fechaCaducidad.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            this.jdcFechaCaducidad.setDate(fechaCaducidadDate);
+            this.txtDescripcion.setText(comanda.getDescripcion());
+            this.txtPrincipio.setText(comanda.getPrincipio());
+            this.txtProteina.setText(comanda.getProteina());
+            this.txtSopa.setText(comanda.getSopa());
+            mostrar();
+
         } catch (Exception e) {
+
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
             limpiar();
+
         }
     }
 
     private void eliminarComanda(ActionEvent evt) {
         try {
-            if(this.txtID.getText().isEmpty())
+
+            if (this.txtID.getText().isEmpty()) {
                 throw new IllegalArgumentException("""
                                                    Es necesario que busque la comanda por su ID único antes de poder eliminarla
                                                    """);
+            }
+
             Comanda comanda = eSerGenServicio.buscarComandaPorId(Integer.parseInt(this.txtID.getText()));
-            if (comanda.getEserGen() == null){
-                eSerGenServicio.eliminarComanda(Integer.parseInt(this.txtID.getText()));
-                JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y sin asignar eliminada exitosamente");
-            }else{
-                eSerGenServicio.eliminaryDesasociarComanda(comanda.getEserGen().getNoDoumento(), Integer.parseInt(this.txtID.getText()));
-                JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nEliminada exitosamente");
+
+            String placeholder = " no asignada?";
+
+            if (comanda.getEserGen() != null) {
+                placeholder = " asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "?";
+            }
+
+            int respuesta = JOptionPane.showConfirmDialog(this,
+                    "¿Está Seguro que desea eliminar la comanda con ID " + this.txtID.getText() + placeholder,
+                    "Confirmar Elección",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+                if (comanda.getEserGen() == null) {
+
+                    eSerGenServicio.eliminarComanda(Integer.parseInt(this.txtID.getText()));
+                    JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y sin asignar eliminada exitosamente");
+
+                } else {
+
+                    eSerGenServicio.eliminaryDesasociarComanda(comanda.getEserGen().getNoDoumento(), Integer.parseInt(this.txtID.getText()));
+                    JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nEliminada exitosamente");
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Eliminación cancelada");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
