@@ -182,7 +182,9 @@ public class GUIActualizarComanda extends JFrame {
             SimpleDateFormat formatoFechaCaducidad = new SimpleDateFormat("dd/MM/yyyy");
             String fechaCaducidad = formatoFechaCaducidad.format(this.jdcFechaCaducidad.getDate());
             eSerGenServicio.actualizarComanda(id, this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
-            if (comanda.getEserGen() == null) {
+            limpiar();
+            ESerGen serGenerales = comanda.getEserGen();
+            if (serGenerales == null) {
                 JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y sin asignar actualizada exitosamente");
             } else {
                 JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nActualizada exitosamente");
