@@ -68,7 +68,7 @@ public class GUIActualizarComanda extends JFrame {
         txtSopa = new JTextField();
         jdcFechaCaducidad = new JDateChooser();
         jdcFechaCaducidad.setDateFormatString("dd/MM/yyyy");
-       
+
         // Panel principal con BorderLayout
         panelPrincipal = new JPanel(new BorderLayout(10, 10));
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -145,21 +145,20 @@ public class GUIActualizarComanda extends JFrame {
             } else {
                 this.txtID.setText(Integer.toString(comanda.getId()));
                 String idESerGen = "No asignada";
-                if (comanda.getEserGen() != null){
+                if (comanda.getEserGen() != null) {
                     idESerGen = "No asignada";
-                    
+
                 }
                 this.txtIdESerGen.setText(idESerGen);
 //                DateTimeFormatter formatoFechaCaducidad = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
 //                LocalDate fechaCaducidad = LocalDate.parse(comanda.getFechaCaducidad(), formatoFechaCaducidad);
-               
+
 //                //Pasar de String A date
 //    
 //                SimpleDateFormat formatoFechaCaducidad = new SimpleDateFormat("dd/MM/yyyy");
 //                formatoFechaCaducidad.setLenient(false);
 //                formatoFechaCaducidad.parse(comanda.getFechaCaducidad());  
 //                this.jdcFechaCaducidad.setDate(formatoFechaCaducidad.parse(comanda.getFechaCaducidad()));
-                
                 //pasar de LocalDateTime a Date
                 DateTimeFormatter formatoFechaCaducidad = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
                 LocalDate fechaCaducidad = LocalDate.parse(comanda.getFechaCaducidad(), formatoFechaCaducidad);
@@ -180,19 +179,18 @@ public class GUIActualizarComanda extends JFrame {
         try {
             int id = Integer.parseInt(txtBuscar.getText());
             Comanda comanda = this.eSerGenServicio.buscarComandaPorId(id);
-            String idSerGenerales = comanda.getEserGen().getNoDoumento();
             SimpleDateFormat formatoFechaCaducidad = new SimpleDateFormat("dd/MM/yyyy");
             String fechaCaducidad = formatoFechaCaducidad.format(this.jdcFechaCaducidad.getDate());
-            eSerGenServicio.actualizarComanda(idSerGenerales, id, this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
-            if(comanda.getEserGen() == null)
+            eSerGenServicio.actualizarComanda(id, this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
+            if (comanda.getEserGen() == null) {
                 JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y sin asignar actualizada exitosamente");
-            
-            JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() +"\nActualizada exitosamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nActualizada exitosamente");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
-
 
     private void limpiar() {
         txtBuscar.setText("");
