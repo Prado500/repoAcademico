@@ -47,6 +47,8 @@ public class GUIActualizarComanda extends JFrame {
     public GUIActualizarComanda(ESerGenServicio eSerGenServicio) {
         this.eSerGenServicio = eSerGenServicio;
         initComponentsManual();
+        this.txtID.setEditable(false);
+        this.txtIdESerGen.setEditable(false);
         setLocationRelativeTo(null);
     }
 
@@ -146,8 +148,7 @@ public class GUIActualizarComanda extends JFrame {
                 this.txtID.setText(Integer.toString(comanda.getId()));
                 String idESerGen = "No asignada";
                 if (comanda.getEserGen() != null) {
-                    idESerGen = "No asignada";
-
+                    idESerGen = comanda.getEserGen().getNoDoumento();
                 }
                 this.txtIdESerGen.setText(idESerGen);
 //                DateTimeFormatter formatoFechaCaducidad = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
@@ -177,6 +178,10 @@ public class GUIActualizarComanda extends JFrame {
 
     private void actualizarComanda(ActionEvent evt) {
         try {
+            if(this.txtID.getText().isEmpty())
+                throw new IllegalArgumentException("""
+                                                   Es necesario que busque la comanda por su ID único antes de poder actualizarla
+                                                   """);
             int id = Integer.parseInt(txtBuscar.getText());
             Comanda comanda = this.eSerGenServicio.buscarComandaPorId(id);
             SimpleDateFormat formatoFechaCaducidad = new SimpleDateFormat("dd/MM/yyyy");
