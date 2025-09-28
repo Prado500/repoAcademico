@@ -79,12 +79,12 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
         return comanda;
     }
 
-    public void actualizarComanda(String idESerGen, int idComanda, String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
+    public void actualizarComanda(int idComanda, String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
         try {
 
             Comanda comanda = this.comandaServicio.buscarComandaID(idComanda);
             if (comanda == null) {
-                throw new IllegalArgumentException("No existe registro de la comanda con id " + idComanda + ". Asegúrese que la comanda con id " + idComanda + "\nExista para el empleado con id: " + idESerGen);
+                throw new IllegalArgumentException("No existe registro de la comanda con id " + idComanda + ". Asegúrese que la comanda con id " + idComanda + "\nExista");
             }
             comanda.setDescripcion(descripcion);
             comanda.setPrincipio(principio);
@@ -95,6 +95,7 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
             System.out.println("Error: " + e);
         }
     }
+    
 
     public List<Comanda> mostrarComandas() {
         return new ArrayList<>(this.comandaServicio.mostrarComandas());

@@ -137,14 +137,19 @@ public class GUIActualizarComanda extends JFrame {
 
     private void buscarComanda(ActionEvent evt) {
         try {
-            int idComanda = Integer.parseInt(this.txtBuscar.getText());
+            int idComanda = Integer.parseInt(this.txtBuscar.getText().trim());
             Comanda comanda = eSerGenServicio.buscarComandaPorId(idComanda);
             if (comanda == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
+                JOptionPane.showMessageDialog(this, "No se encontró ningúna comanda con documento " + txtBuscar.getText());
                 limpiar();
             } else {
                 this.txtID.setText(Integer.toString(comanda.getId()));
-                this.txtIdESerGen.setText(comanda.getEserGen().getNoDoumento());
+                String idESerGen = "No asignada";
+                if (comanda.getEserGen() != null){
+                    idESerGen = "No asignada";
+                    
+                }
+                this.txtIdESerGen.setText(idESerGen);
 //                DateTimeFormatter formatoFechaCaducidad = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
 //                LocalDate fechaCaducidad = LocalDate.parse(comanda.getFechaCaducidad(), formatoFechaCaducidad);
                
@@ -160,8 +165,10 @@ public class GUIActualizarComanda extends JFrame {
                 LocalDate fechaCaducidad = LocalDate.parse(comanda.getFechaCaducidad(), formatoFechaCaducidad);
                 Date fechaCaducidadDate = Date.from(fechaCaducidad.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 this.jdcFechaCaducidad.setDate(fechaCaducidadDate);
-                
-               
+                this.txtDescripcion.setText(comanda.getDescripcion());
+                this.txtPrincipio.setText(comanda.getPrincipio());
+                this.txtProteina.setText(comanda.getProteina());
+                this.txtSopa.setText(comanda.getSopa());
                 mostrar();
             }
         } catch (Exception e) {
@@ -171,11 +178,16 @@ public class GUIActualizarComanda extends JFrame {
 
     private void actualizarComanda(ActionEvent evt) {
         try {
-            String id = txtBuscar.getText();
-            ESerGen serGenerales = empleadoServicioESerGen.searchElementoByNoDocumento(id.strip());
-            empleadoServicioESerGen.actualizarElemento(id.strip(), cmbTipoDocumento.getSelectedItem().toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()));
-            serGenerales.setCerAlturas(Boolean.parseBoolean(hasAlturasLogical(cmbAlturas.getSelectedItem().toString())));
-            JOptionPane.showMessageDialog(this, "Empleado con id " + id + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
+            int id = Integer.parseInt(txtBuscar.getText());
+            Comanda comanda = this.eSerGenServicio.buscarComandaPorId(id);
+            String idSerGenerales = comanda.getEserGen().getNoDoumento();
+            SimpleDateFormat formatoFechaCaducidad = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaCaducidad = formatoFechaCaducidad.format(this.jdcFechaCaducidad.getDate());
+            eSerGenServicio.actualizarComanda(idSerGenerales, id, this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
+            if(comanda.getEserGen() == null)
+                JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y sin asignar actualizada exitosamente");
+            
+            JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() +"\nActualizada exitosamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
