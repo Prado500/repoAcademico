@@ -141,10 +141,6 @@ public class GUIActualizarComanda extends JFrame {
         try {
             int idComanda = Integer.parseInt(this.txtBuscar.getText().trim());
             Comanda comanda = eSerGenServicio.buscarComandaPorId(idComanda);
-            if (comanda == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningúna comanda con documento " + txtBuscar.getText());
-                limpiar();
-            } else {
                 this.txtID.setText(Integer.toString(comanda.getId()));
                 String idESerGen = "No asignada";
                 if (comanda.getEserGen() != null) {
@@ -170,9 +166,10 @@ public class GUIActualizarComanda extends JFrame {
                 this.txtProteina.setText(comanda.getProteina());
                 this.txtSopa.setText(comanda.getSopa());
                 mostrar();
-            }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            limpiar();
         }
     }
 
