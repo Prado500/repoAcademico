@@ -281,6 +281,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         CrudComandas.add(jMenuItemActualizarComanda);
 
         jMenuItemEliminarComanda.setText("Eliminar Comanda");
+        jMenuItemEliminarComanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEliminarComandaActionPerformed(evt);
+            }
+        });
         CrudComandas.add(jMenuItemEliminarComanda);
 
         jMenuBar1.add(CrudComandas);
@@ -437,6 +442,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
         GUIActualizarComanda gui = new GUIActualizarComanda(eSerGenServicio);
         gui.setVisible(true);
     }//GEN-LAST:event_CrudComandasActionPerformed
+
+    private void jMenuItemEliminarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEliminarComandaActionPerformed
+        GUIEliminarComanda gui = new GUIEliminarComanda(eSerGenServicio);
+        gui.setVisible(true);
+
+
+        
+    }//GEN-LAST:event_jMenuItemEliminarComandaActionPerformed
 
     /**
      * @param args the command line arguments

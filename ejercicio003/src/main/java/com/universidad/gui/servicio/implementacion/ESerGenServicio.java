@@ -60,6 +60,10 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
             System.out.println("Error: " + e);
         }
     }
+    
+    public void eliminarComanda(int idComanda){
+        this.comandaServicio.eliminarComandaLogId(idComanda);
+    }
 
     public List<Comanda> mostrarComandaPorESerGen(String idESerGen) {
 
