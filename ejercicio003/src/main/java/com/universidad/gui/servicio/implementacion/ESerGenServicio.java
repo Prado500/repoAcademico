@@ -115,6 +115,7 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
         for (Comanda comandaLista : this.comandaServicio.mostrarComandas()) {
             if (comanda.getId() == comandaId) {
                 comanda.setEserGen(serGenerales);
+                serGenerales.agregarComanda(comanda);
             }
         }
 
