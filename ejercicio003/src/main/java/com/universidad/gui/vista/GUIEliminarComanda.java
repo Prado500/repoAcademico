@@ -48,6 +48,7 @@ public class GUIEliminarComanda extends JFrame {
         this.txtPrincipio.setEditable(false);
         this.txtProteina.setEditable(false);
         this.txtSopa.setEditable(false);
+        this.jdcFechaCaducidad.setEnabled(false);
         setLocationRelativeTo(null);
     }
 
@@ -87,13 +88,13 @@ public class GUIEliminarComanda extends JFrame {
         panelDatos.add(txtID);
         panelDatos.add(new JLabel("ID emp.: "));
         panelDatos.add(txtIdESerGen);
-        panelDatos.add(new JLabel("Nueva Fecha de Caducidad: "));
+        panelDatos.add(new JLabel("Fecha de Caducidad: "));
         panelDatos.add(jdcFechaCaducidad);
-        panelDatos.add(new JLabel("Nueva Descripción:"));
+        panelDatos.add(new JLabel("Descripción:"));
         panelDatos.add(txtDescripcion);
-        panelDatos.add(new JLabel("Nuevo Principio: "));
+        panelDatos.add(new JLabel("Principio: "));
         panelDatos.add(txtPrincipio);
-        panelDatos.add(new JLabel("Nueva proteina: "));
+        panelDatos.add(new JLabel("Proteina: "));
         panelDatos.add(txtProteina);
         panelDatos.add(new JLabel("Nueva sopa: "));
         panelDatos.add(txtSopa);
