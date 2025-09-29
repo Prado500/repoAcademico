@@ -58,7 +58,11 @@ public class ComandaServicio implements IComandaServicio {
 
     @Override
     public List<Comanda> mostrarComandas() {
-        return new ArrayList<>(comandas);
+        List<Comanda> retorno = new ArrayList<>(); 
+        for (Comanda comanda : comandas)
+            if (comanda.getEstatus().equals("AC"))
+                retorno.add(comanda);
+        return retorno;
     }
 
     @Override

@@ -96,6 +96,7 @@ public class ESerGenServicio extends EmpleadoServicio<ESerGen> {
     }
 
     public List<Comanda> mostrarComandas() {
+        
         return new ArrayList<>(this.comandaServicio.mostrarComandas());
     }
 
