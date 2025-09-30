@@ -247,20 +247,13 @@ public class ESerGenServicio implements IEserGenServicio {
 
     public List<Comanda> mostrarComandaPorESerGen(String idESerGen) {
 
-        ESerGen serGenerales = this.searchElementoByNoDocumento(idESerGen);
-
-        if (serGenerales == null) {
-            throw new IllegalArgumentException("Error al mostrar las comandas. No se enconttró ningún empleado con id" + idESerGen);
-        }
+        ESerGen serGenerales = this.buscarESerGenPorNoDocumento(idESerGen);
         return new ArrayList<>(serGenerales.getComandas());
     }
 
     public Comanda buscarComandaPorId(int id) {
 
         Comanda comanda = this.comandaServicio.buscarComandaID(id);
-        if (comanda == null) {
-            throw new IllegalArgumentException("No existe registro de la comanda con id " + id + ". Asegúrese que la comanda Exista");
-        }
         return comanda;
     }
 
@@ -281,16 +274,8 @@ public class ESerGenServicio implements IEserGenServicio {
 
     public void asignarComanda(String ESerGenId, int comandaId) {
 
-        ESerGen serGenerales = this.searchElementoByNoDocumento(ESerGenId);
+        ESerGen serGenerales = this.buscarESerGenPorNoDocumento(ESerGenId);
         Comanda comanda = comandaServicio.buscarComandaID(comandaId);
-
-        if (serGenerales == null) {
-            throw new IllegalArgumentException("No se encontró ningún registro del empleado con id: " + ESerGenId);
-        }
-
-        if (comanda == null) {
-            throw new IllegalArgumentException("No se encontró ningún registro de la comanda con id: " + comandaId);
-        }
 
         if (comanda.getEserGen() != null) {
             throw new IllegalArgumentException("La comanda con ID " + comandaId + " ya fué asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No." + comanda.getEserGen().getNoDoumento());
@@ -305,6 +290,7 @@ public class ESerGenServicio implements IEserGenServicio {
     }
 
     // Métodos para la implementación del patrón observer
+    
     public void agregarObservador(IObservador observador) {
 
         this.observadores.add(observador);

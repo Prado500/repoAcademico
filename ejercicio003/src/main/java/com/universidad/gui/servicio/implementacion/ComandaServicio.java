@@ -29,6 +29,7 @@ public class ComandaServicio implements IComandaServicio {
 
     @Override
     public void eliminarComandaLogId(int id) {
+        
         Comanda placeholder = null;
         for (Comanda comanda : comandas) {
             if (comanda.getId() == id) {
