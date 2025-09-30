@@ -148,12 +148,12 @@ public class ESerGenServicio implements IEserGenServicio {
      * 
      * Método para calcular la nómina con bonificación de los empleados administrativos a partir de su atributo bonificación
      * Se usa polimorfismo para calcular la bonificacion de cada empleado desde las clases estrucutrales al sobreescribir el método calcularBonificación.
-     * @param administrativos
+     * @param serGenerales
      * @return el valor total de la nómina de los administrativos después de aplicada la bonificación
      * 
      */
     @Override
-    public double calcularNominaConBonificacionESerGen(List<ESerGen> SerGenerales) {
+    public double calcularNominaConBonificacionESerGen(List<ESerGen> serGeneralesList) {
        
         DecimalFormat formato = new DecimalFormat("#,##0.00");
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
@@ -161,15 +161,32 @@ public class ESerGenServicio implements IEserGenServicio {
         simbolos.setDecimalSeparator(',');
         formato.setDecimalFormatSymbols(simbolos);
         double nominaAcumulada = 0;
-        for (ESerGen serGenerales : this.serGenerales) {
+        for (ESerGen serGenerales : serGeneralesList) {
             nominaAcumulada += serGenerales.getBonificacion();
         }
         return nominaAcumulada;
     }
-
+    
+    /**
+     * 
+     * Método para calcular la nómina de los empleados administrativos sin aplicar la bonificación a partir de su atributo salarioBase
+     * @param serGeneralesList
+     * @return el valor total de la nómina de los administrativos antes de aplicada la bonificación
+     * 
+     */
     @Override
-    public double calcularNominaESerGen(List<Administrativo> elementos) {
-
+    public double calcularNominaESerGen(List<ESerGen> serGeneralesList) {
+        
+        DecimalFormat formato = new DecimalFormat("#,##0.00");
+        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+        simbolos.setGroupingSeparator('.');
+        simbolos.setDecimalSeparator(',');
+        formato.setDecimalFormatSymbols(simbolos);
+        double nominaAcumulada = 0;
+        for (ESerGen serGenerales : serGeneralesList) {
+            nominaAcumulada += serGenerales.getSalarioBase();
+        }
+        return nominaAcumulada;
     }
 
     //Métodos asociados con Comanda (DETALLE Relación maestro/detalle)
