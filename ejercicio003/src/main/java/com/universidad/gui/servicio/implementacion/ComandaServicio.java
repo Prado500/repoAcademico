@@ -19,12 +19,11 @@ public class ComandaServicio implements IComandaServicio {
 
     @Override
     public void agregarComanda(Comanda comanda) {
+        
         int acumulador = 0; 
         this.comandas.add(comanda);
         acumulador = comandas.size();
         comanda.setId(acumulador);
-        
-        
     }
 
     @Override
