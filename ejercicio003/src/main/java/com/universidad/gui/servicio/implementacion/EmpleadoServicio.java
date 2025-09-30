@@ -5,12 +5,12 @@
 package com.universidad.gui.servicio.implementacion;
 
 import com.universidad.gui.modelo.Empleado;
-import com.universidad.gui.servicio.IEmpleadoServicio;
 import com.universidad.gui.servicio.IObservador;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import com.universidad.gui.servicio.IBaseEmpleadoServicio;
 
 /**
  *
@@ -21,7 +21,7 @@ import java.util.List;
  * @param <T> el tipo de empleado que debe extender de Empleado
  *
  */
-public class EmpleadoServicio<T extends Empleado> implements IEmpleadoServicio<T> {
+public class EmpleadoServicio<T extends Empleado> implements IBaseEmpleadoServicio<T> {
 
     private List<T> elementos;
 

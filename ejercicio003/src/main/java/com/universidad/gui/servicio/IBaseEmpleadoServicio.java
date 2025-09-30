@@ -13,7 +13,7 @@ import java.util.List;
  * @author Alejandro
  * @param <T>
  */
-public interface IEmpleadoServicio<T extends Empleado> {
+public interface IBaseEmpleadoServicio<T extends Empleado> {
 
     public void agregar(T elemento);
 
