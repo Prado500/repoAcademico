@@ -56,7 +56,7 @@ public class ESerGenServicio implements IEserGenServicio {
      */
     @Override
     public List<ESerGen> mostrarESerGen() {
-       
+
         List<ESerGen> elementosMostrar = new ArrayList<>();
         for (ESerGen serGenerales : this.serGenerales) {
             if (!(serGenerales.getEstatus().equals("IN"))) {
@@ -65,17 +65,17 @@ public class ESerGenServicio implements IEserGenServicio {
         }
         return elementosMostrar;
     }
-    
+
     /**
      *
      * @param noDocumento
-     * @return Un objeto de tipo ESerGen alojado en la lista del servicio
-     * de los empleados de ese tipo con estatus = "AC"
+     * @return Un objeto de tipo ESerGen alojado en la lista del servicio de los
+     * empleados de ese tipo con estatus = "AC"
      *
      */
     @Override
     public ESerGen buscarESerGenPorNoDocumento(String noDocumento) {
-        
+
         ESerGen elementoRetorno = null;
         for (ESerGen serGenerales : this.serGenerales) {
             if (serGenerales.getNoDoumento().equals(noDocumento) && serGenerales.getEstatus().equals("AC")) {
@@ -86,13 +86,14 @@ public class ESerGenServicio implements IEserGenServicio {
         if (elementoRetorno == null || elementoRetorno.getEstatus().equals("IN")) {
             throw new IllegalArgumentException("No se encontró ningún registro de un empleado de servicios generales con No.documento " + noDocumento + "\nAsegúrese de ingresar un número de documento válido y existente.");
         }
-        
+
         return elementoRetorno;
     }
 
     /**
      *
-     * Método para actualizar un empleado de servicios generales usando sus setters
+     * Método para actualizar un empleado de servicios generales usando sus
+     * setters
      *
      * @param nNoDocumento
      * @param noDocumento
@@ -103,7 +104,7 @@ public class ESerGenServicio implements IEserGenServicio {
      */
     @Override
     public void actualizarESerGen(String nNoDocumento, String noDocumento, String tipoDocumento, String nombre, Double salario, boolean cerAlturas) {
-        
+
         ESerGen elementoEncontrado = null;
 
         for (ESerGen serGenerales : this.serGenerales) {
@@ -121,16 +122,18 @@ public class ESerGenServicio implements IEserGenServicio {
             throw new IllegalArgumentException("No fue posible actualizar al empleado de servicios generales con No.documento " + noDocumento + ". Asegúrese que el No.documento existe y que los datos ingresados son correctos. ");
         }
     }
-    
+
     /**
      *
-     * Método que elimina logicamente a un empleado de servicios generales mediante AC = "IN"
+     * Método que elimina logicamente a un empleado de servicios generales
+     * mediante AC = "IN"
+     *
      * @param id
-     * 
+     *
      */
     @Override
     public void eliminarLogicamenteESerGenPorId(String id) {
-        
+
         ESerGen elementoEncontrado = null;
         for (ESerGen serGenerales : this.serGenerales) {
             if (serGenerales.getNoDoumento().equals(id)) {
@@ -141,20 +144,24 @@ public class ESerGenServicio implements IEserGenServicio {
 
         if (elementoEncontrado == null) {
             throw new IllegalArgumentException("No fue posible eliminar al empleado de servicios generales con No.documento " + id + ". Asegúrese que el noDocumento existe y que los datos ingresados son correctos. ");
-        }   
+        }
     }
-    
+
     /**
-     * 
-     * Método para calcular la nómina con bonificación de los empleados administrativos a partir de su atributo bonificación
-     * Se usa polimorfismo para calcular la bonificacion de cada empleado desde las clases estrucutrales al sobreescribir el método calcularBonificación.
+     *
+     * Método para calcular la nómina con bonificación de los empleados
+     * administrativos a partir de su atributo bonificación Se usa polimorfismo
+     * para calcular la bonificacion de cada empleado desde las clases
+     * estrucutrales al sobreescribir el método calcularBonificación.
+     *
      * @param serGenerales
-     * @return el valor total de la nómina de los administrativos después de aplicada la bonificación
-     * 
+     * @return el valor total de la nómina de los administrativos después de
+     * aplicada la bonificación
+     *
      */
     @Override
     public double calcularNominaConBonificacionESerGen(List<ESerGen> serGeneralesList) {
-       
+
         DecimalFormat formato = new DecimalFormat("#,##0.00");
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
         simbolos.setGroupingSeparator('.');
@@ -166,17 +173,20 @@ public class ESerGenServicio implements IEserGenServicio {
         }
         return nominaAcumulada;
     }
-    
+
     /**
-     * 
-     * Método para calcular la nómina de los empleados administrativos sin aplicar la bonificación a partir de su atributo salarioBase
+     *
+     * Método para calcular la nómina de los empleados administrativos sin
+     * aplicar la bonificación a partir de su atributo salarioBase
+     *
      * @param serGeneralesList
-     * @return el valor total de la nómina de los administrativos antes de aplicada la bonificación
-     * 
+     * @return el valor total de la nómina de los administrativos antes de
+     * aplicada la bonificación
+     *
      */
     @Override
     public double calcularNominaESerGen(List<ESerGen> serGeneralesList) {
-        
+
         DecimalFormat formato = new DecimalFormat("#,##0.00");
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
         simbolos.setGroupingSeparator('.');
@@ -192,13 +202,15 @@ public class ESerGenServicio implements IEserGenServicio {
     //Métodos asociados con Comanda (DETALLE Relación maestro/detalle)
     public void crearYAsignarComanda(String idESerGen, Comanda comanda) {
 
-        ESerGen serGenerales = this.searchElementoByNoDocumento(idESerGen);
         try {
+
+            ESerGen serGenerales = this.buscarESerGenPorNoDocumento(idESerGen);
+
             if (serGenerales != null) {
                 serGenerales.agregarComanda(comanda);
                 comandaServicio.agregarComanda(comanda);
             } else {
-                throw new IllegalArgumentException("Error al asignar comanda. No se enconttró ningún empleado con id" + idESerGen);
+                throw new IllegalArgumentException("Error al asignar comanda. No se enconttró ningún empleado de servicios generales con id" + idESerGen);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -213,20 +225,15 @@ public class ESerGenServicio implements IEserGenServicio {
 
     public void eliminaryDesasociarComanda(String idESerGen, int idComanda) {
 
-        ESerGen serGenerales = this.searchElementoByNoDocumento(idESerGen);
-        
-        Comanda comanda = comandaServicio.buscarComandaID(idComanda);
-
         try {
+            ESerGen serGenerales = this.buscarESerGenPorNoDocumento(idESerGen);
+            Comanda comanda = comandaServicio.buscarComandaID(idComanda);
+
             if (serGenerales != null && comanda != null) {
                 serGenerales.removerComanda(comanda);
                 comandaServicio.eliminarComandaLogId(idComanda);
             } else {
-                if (serGenerales == null) {
-                    throw new IllegalArgumentException("Error al eliminar comanda. No se enconttró ningún empleado con id" + idESerGen);
-                } else if (comanda == null) {
-                    throw new IllegalArgumentException("Error al eliminar comanda. No se enconttró ningún empleado con id" + idESerGen);
-                }
+                throw new IllegalArgumentException("No se pudo eliminar la comanda. Asegúrese que el No.documento " + idESerGen + " proporcionado pertenece a un\n empleado de servicios generales existente al cual se le haya asignado una comanda con id " + idComanda);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
