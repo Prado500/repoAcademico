@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author Alejandro
+ * @author David Alejandro De Los Reyes Ostos
  */
 public class AdministrativoServicio implements IAdministrativoServicio {
 
@@ -36,9 +36,10 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      * @param administrativo agregamos administrativos a la lista del servicio
      */
     @Override
-    public void agregar(Administrativo administrativo) {
-        administrativos.add(administrativo);
-        //this.notificarObservadores();
+    public void agregarAdministrativo(Administrativo administrativo) {
+       
+        this.administrativos.add(administrativo);
+        this.notificarObservadores();
     }
 
     /**
@@ -49,7 +50,8 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      *
      */
     @Override
-    public List<Administrativo> mostrar() {
+    public List<Administrativo> mostrarAdministrativo() {
+        
         List<Administrativo> elementosMostrar = new ArrayList<>();
         for (Administrativo administrativo : this.administrativos) {
             if (!(administrativo.getEstatus().equals("IN"))) {
@@ -68,6 +70,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      */
     @Override
     public Administrativo searchAdministrativoByNoDocumento(String noDocumento) {
+        
         Administrativo elementoRetorno = null;
         for (Administrativo administrativo : this.administrativos) {
             if (administrativo.getNoDoumento().equals(noDocumento) && administrativo.getEstatus().equals("AC")) {
@@ -89,9 +92,10 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      * @param tipoDocumento
      * @param nombre
      * @param salario
+     * @param escalafon
      */
     @Override
-    public void actualizarAdministrativo(String noDocumento, String tipoDocumento, String nombre, Double salario) {
+    public void actualizarAdministrativo(String noDocumento, String tipoDocumento, String nombre, Double salario, String escalafon) {
 
         Administrativo elementoEncontrado = null;
 
@@ -102,11 +106,12 @@ public class AdministrativoServicio implements IAdministrativoServicio {
                 administrativo.setTipoDocumento(tipoDocumento);
                 administrativo.setNombre(nombre);
                 administrativo.setSalarioBase(salario);
+                administrativo.setEscalafon(escalafon);
             }
         }
 
         if (elementoEncontrado == null) {
-            throw new IllegalArgumentException("No fue posible actualizar al empleado con noDocumento " + noDocumento + ". Asegúrese que el No.documento existe y que los datos ingresados son correctos. ");
+            throw new IllegalArgumentException("No fue posible actualizar al empleado con No.documento " + noDocumento + ". Asegúrese que el No.documento existe y que los datos ingresados son correctos. ");
         }
 
     }
@@ -115,6 +120,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      *
      * Método que elimina logicamente a un administrativo mediante AC = "IN"
      * @param id
+     * 
      */
     @Override
     public void eliminarLogicamenteAdministrativoPorId(String id) {

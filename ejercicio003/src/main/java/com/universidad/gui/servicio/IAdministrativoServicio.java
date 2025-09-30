@@ -13,13 +13,13 @@ import java.util.List;
  */
 public interface IAdministrativoServicio {
     
-    public void agregar(Administrativo administrativo);
+    public void agregarAdministrativo(Administrativo administrativo);
 
-    public List<Administrativo> mostrar();
+    public List<Administrativo> mostrarAdministrativo();
 
     public Administrativo searchAdministrativoByNoDocumento(String noDocumento);
 
-    public void actualizarAdministrativo(String noDocumento, String tipoDocumento, String nombre, Double salario);
+    public void actualizarAdministrativo(String noDocumento, String tipoDocumento, String nombre, Double salario, String escalafon);
 
     public void eliminarLogicamenteAdministrativoPorId(String id);
 
