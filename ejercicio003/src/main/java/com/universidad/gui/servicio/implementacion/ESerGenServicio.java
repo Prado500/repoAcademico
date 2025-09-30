@@ -74,7 +74,7 @@ public class ESerGenServicio implements IEserGenServicio {
      *
      */
     @Override
-    public ESerGen searchESerGenByNoDocumento(String noDocumento) {
+    public ESerGen buscarESerGenPorNoDocumento(String noDocumento) {
         
         ESerGen elementoRetorno = null;
         for (ESerGen serGenerales : this.serGenerales) {

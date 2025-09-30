@@ -18,7 +18,7 @@ public interface IEserGenServicio {
 
     public List<ESerGen> mostrarESerGen();
 
-    public ESerGen searchESerGenByNoDocumento(String noDocumento);
+    public ESerGen buscarESerGenPorNoDocumento(String noDocumento);
 
     public void actualizarESerGen(String nNoDocumento, String noDocumento, String tipoDocumento, String nombre, Double salario, boolean cerAlturas);
 

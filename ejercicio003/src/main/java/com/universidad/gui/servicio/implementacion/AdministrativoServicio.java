@@ -69,7 +69,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      *
      */
     @Override
-    public Administrativo searchAdministrativoByNoDocumento(String noDocumento) {
+    public Administrativo buscarAdministrativoPorNoDocumento(String noDocumento) {
         
         Administrativo elementoRetorno = null;
         for (Administrativo administrativo : this.administrativos) {
