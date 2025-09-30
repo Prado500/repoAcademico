@@ -5,7 +5,6 @@
 package com.universidad.gui.servicio.implementacion;
 
 import com.universidad.gui.modelo.Empleado;
-import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.IEmpleadoServicio;
 import com.universidad.gui.servicio.IObservador;
 import java.text.DecimalFormat;
