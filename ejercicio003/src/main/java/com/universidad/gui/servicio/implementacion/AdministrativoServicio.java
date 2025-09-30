@@ -176,5 +176,37 @@ public class AdministrativoServicio implements IAdministrativoServicio {
         }
         return nominaAcumulada;  
     }
+    
+    //Metodos del servicio de notificacion
+    
+    public void agregarObservador(IObservador observador) {
+        
+        this.observadores.add(observador);
+    }
+
+    public void notificarObservadores() {
+
+        for (IObservador observador : observadores) {
+            observador.actualizar();
+        }
+    }
+
+    public void eliminarObservador(IObservador observador) {
+        
+        this.observadores.remove(observador);
+    }
+
+    public void mostrarObservadores() {
+
+        for (IObservador observador : observadores) {
+            System.out.println(observador);
+        }
+
+        if (observadores.isEmpty()) {
+            System.out.println("La lista de observadores esta vacia!");
+
+        }
+
+    }
 
 }
