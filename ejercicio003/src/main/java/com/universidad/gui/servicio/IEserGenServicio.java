@@ -20,7 +20,7 @@ public interface IEserGenServicio {
 
     public ESerGen searchESerGenByNoDocumento(String noDocumento);
 
-    public void actualizarESerGen(String noDocumento, String tipoDocumento, String nombre, Double salario, boolean cerAlturas);
+    public void actualizarESerGen(String nNoDocumento, String noDocumento, String tipoDocumento, String nombre, Double salario, boolean cerAlturas);
 
     public void eliminarLogicamenteESerGenPorId(String id);
 

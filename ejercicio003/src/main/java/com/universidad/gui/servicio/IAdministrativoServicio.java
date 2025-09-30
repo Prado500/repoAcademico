@@ -17,9 +17,9 @@ public interface IAdministrativoServicio {
 
     public List<Administrativo> mostrarAdministrativo();
 
-    public Administrativo searchAdministrativoByNoDocumento(String noDocumento);
+    public Administrativo buscarAdministrativoPorNoDocumento(String noDocumento);
 
-    public void actualizarAdministrativo(String noDocumento, String tipoDocumento, String nombre, Double salario, String escalafon);
+    public void actualizarAdministrativo(String nNoDocumento, String noDocumento, String tipoDocumento, String nombre, Double salario, String escalafon);
 
     public void eliminarLogicamenteAdministrativoPorId(String id);
 

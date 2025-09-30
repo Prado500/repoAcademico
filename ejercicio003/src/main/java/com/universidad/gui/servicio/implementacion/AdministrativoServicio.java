@@ -88,6 +88,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      *
      * Método para actualizar un administrativo usando sus setters
      *
+     * @param nNoDocumento
      * @param noDocumento
      * @param tipoDocumento
      * @param nombre
@@ -95,14 +96,14 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      * @param escalafon
      */
     @Override
-    public void actualizarAdministrativo(String noDocumento, String tipoDocumento, String nombre, Double salario, String escalafon) {
+    public void actualizarAdministrativo(String nNoDocumento, String noDocumento, String tipoDocumento, String nombre, Double salario, String escalafon) {
 
         Administrativo elementoEncontrado = null;
 
         for (Administrativo administrativo : this.administrativos) {
             if (administrativo.getNoDoumento().equals(noDocumento)) {
                 elementoEncontrado = administrativo;
-                administrativo.setNoDoumento(noDocumento);
+                administrativo.setNoDoumento(nNoDocumento);
                 administrativo.setTipoDocumento(tipoDocumento);
                 administrativo.setNombre(nombre);
                 administrativo.setSalarioBase(salario);

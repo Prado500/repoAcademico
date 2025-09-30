@@ -32,7 +32,7 @@ public class ESerGenServicio implements IEserGenServicio {
         this.observadores = new ArrayList<>();
     }
 
-    //Métodos heredados y específicos para ESerGen únicamente (MAESTRO Relacion maestro/detalle)
+    //Métodos heredados y específicos para ESerGen únicamente (DETALLE Relacion maestro/detalle)
     /**
      *
      * @param administrativo agregamos un ESerGen administrativos a la lista del
@@ -94,6 +94,7 @@ public class ESerGenServicio implements IEserGenServicio {
      *
      * Método para actualizar un empleado de servicios generales usando sus setters
      *
+     * @param nNoDocumento
      * @param noDocumento
      * @param tipoDocumento
      * @param nombre
@@ -101,14 +102,14 @@ public class ESerGenServicio implements IEserGenServicio {
      * @param cerAlturas
      */
     @Override
-    public void actualizarESerGen(String noDocumento, String tipoDocumento, String nombre, Double salario, boolean cerAlturas) {
+    public void actualizarESerGen(String nNoDocumento, String noDocumento, String tipoDocumento, String nombre, Double salario, boolean cerAlturas) {
         
         ESerGen elementoEncontrado = null;
 
         for (ESerGen serGenerales : this.serGenerales) {
             if (serGenerales.getNoDoumento().equals(noDocumento)) {
                 elementoEncontrado = serGenerales;
-                serGenerales.setNoDoumento(noDocumento);
+                serGenerales.setNoDoumento(nNoDocumento);
                 serGenerales.setTipoDocumento(tipoDocumento);
                 serGenerales.setNombre(nombre);
                 serGenerales.setSalarioBase(salario);
