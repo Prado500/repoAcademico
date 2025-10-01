@@ -35,7 +35,7 @@ public class ESerGenServicio implements IEserGenServicio {
     //Métodos heredados y específicos para ESerGen únicamente (DETALLE Relacion maestro/detalle)
     /**
      *
-     * @param administrativo agregamos un ESerGen administrativos a la lista del
+     * @param serGenerales agregamos un ESerGen administrativos a la lista del
      * servicio
      *
      */
@@ -150,13 +150,13 @@ public class ESerGenServicio implements IEserGenServicio {
     /**
      *
      * Método para calcular la nómina con bonificación de los empleados
-     * administrativos a partir de su atributo bonificación Se usa polimorfismo
+     * administrativos a partir de su atributo bonificación. Se usa polimorfismo
      * para calcular la bonificacion de cada empleado desde las clases
      * estrucutrales al sobreescribir el método calcularBonificación.
      *
-     * @param serGenerales
-     * @return el valor total de la nómina de los administrativos después de
-     * aplicada la bonificación
+     * @param serGeneralesList
+     * @return el valor total de la nómina de los empleados de servicios generales
+     * despues de aplicada la bonificación
      *
      */
     @Override
@@ -176,11 +176,10 @@ public class ESerGenServicio implements IEserGenServicio {
 
     /**
      *
-     * Método para calcular la nómina de los empleados administrativos sin
+     * Método para calcular la nómina de los empleados de servicios generales sin
      * aplicar la bonificación a partir de su atributo salarioBase
-     *
      * @param serGeneralesList
-     * @return el valor total de la nómina de los administrativos antes de
+     * @return el valor total de la nómina de los empleados de servicios generales antes de
      * aplicada la bonificación
      *
      */
@@ -200,18 +199,16 @@ public class ESerGenServicio implements IEserGenServicio {
     }
 
     //Métodos asociados con Comanda (DETALLE Relación maestro/detalle)
+
     public void crearYAsignarComanda(String idESerGen, Comanda comanda) {
 
         try {
 
             ESerGen serGenerales = this.buscarESerGenPorNoDocumento(idESerGen);
 
-            if (serGenerales != null) {
                 serGenerales.agregarComanda(comanda);
                 comandaServicio.agregarComanda(comanda);
-            } else {
-                throw new IllegalArgumentException("Error al asignar comanda. No se enconttró ningún empleado de servicios generales con id" + idESerGen);
-            }
+
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
