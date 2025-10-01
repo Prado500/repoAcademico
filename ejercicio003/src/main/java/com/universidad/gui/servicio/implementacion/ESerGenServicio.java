@@ -10,14 +10,16 @@ import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.IComandaServicio;
 import com.universidad.gui.servicio.IEserGenServicio;
 import com.universidad.gui.servicio.IObservador;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author Alejandro
+ * @author David Alejandro De los Reyes Ostos
  */
 public class ESerGenServicio implements IEserGenServicio {
 
@@ -33,10 +35,12 @@ public class ESerGenServicio implements IEserGenServicio {
     }
 
     //Métodos heredados y específicos para ESerGen únicamente (DETALLE Relacion maestro/detalle)
+
     /**
+     *Método para agregar un objeto del tipo ESerGen (Empleado de servicios generales)
+     * a la lista del serviucio de los empleados generales.
      *
-     * @param serGenerales agregamos un ESerGen administrativos a la lista del
-     * servicio
+     * @param serGenerales es objeto del tipo ESerGen.
      *
      */
     @Override
@@ -50,8 +54,8 @@ public class ESerGenServicio implements IEserGenServicio {
     /**
      *
      * @return Devolvemos una copia de la lista del servicio de empleados de
-     * servicios generales donde se agregan a ella unica y exclusivamente los
-     * empleados con estatus = "AC"
+     * servicios generales donde se agregan a ella única y exclusivamente los
+     * empleados con estatus = "AC".
      *
      */
     @Override
@@ -68,7 +72,7 @@ public class ESerGenServicio implements IEserGenServicio {
 
     /**
      *
-     * @param noDocumento
+     * @param noDocumento es el número del documento del empleado de servicios generales; es el atributo String noDocumento de la clase ESerGen.
      * @return Un objeto de tipo ESerGen alojado en la lista del servicio de los
      * empleados de ese tipo con estatus = "AC"
      *
@@ -92,15 +96,14 @@ public class ESerGenServicio implements IEserGenServicio {
 
     /**
      *
-     * Método para actualizar un empleado de servicios generales usando sus
-     * setters
+     * Método para actualizar un empleado de servicios generales (objeto ESerGen) usando sus setters
      *
-     * @param nNoDocumento
-     * @param noDocumento
-     * @param tipoDocumento
-     * @param nombre
-     * @param salario
-     * @param cerAlturas
+     * @param nNoDocumento String, nuevo número de documento que se asignará al atributo noDocumento de ESerGen. No admite caracteres extraños como !@#$$%^&&* etc...
+     * @param noDocumento String, número de documento, atributo de ESerGen. No admite caracteres que no sean números y no acepta una vlor con menos de 6 digitos o con más de 12 digitos
+     * @param tipoDocumento String, puede ser pasaporte ("PA"), cédula de extranjería (CE), o cédula de ciudadanía (CC). No admite caracteres extraños como !@#$$%^&&* etc...
+     * @param nombre String, no admite caracteres extraños como !@#$$%^&&* etc...
+     * @param salario double, debe ser un número entero e inferior a 20M (20000000).
+     * @param cerAlturas boolean, true si la tiene false si no. Se usaa para determinar la bonificación del empleado de servicios generales.
      */
     @Override
     public void actualizarESerGen(String nNoDocumento, String noDocumento, String tipoDocumento, String nombre, Double salario, boolean cerAlturas) {
@@ -125,38 +128,38 @@ public class ESerGenServicio implements IEserGenServicio {
 
     /**
      *
-     * Método que elimina logicamente a un empleado de servicios generales
-     * mediante AC = "IN"
+     * Método que elimina logicamente a un empleado de servicios generales mediante la modificación
+     * del atributo estatus de los objetos ESerGenAC. de estatus = "AC" se pasa a "IN".
      *
-     * @param id
+     * @param idSerGenerales String, es el valor del número de documento de un empleado de servicios generales; es su atributo noDocumento.
      *
      */
     @Override
-    public void eliminarLogicamenteESerGenPorId(String id) {
+    public void eliminarLogicamenteESerGenPorId(String idSerGenerales) {
 
         ESerGen elementoEncontrado = null;
         for (ESerGen serGenerales : this.serGenerales) {
-            if (serGenerales.getNoDoumento().equals(id)) {
+            if (serGenerales.getNoDoumento().equals(idSerGenerales)) {
                 elementoEncontrado = serGenerales;
                 serGenerales.setEstatus("IN");
             }
         }
 
         if (elementoEncontrado == null) {
-            throw new IllegalArgumentException("No fue posible eliminar al empleado de servicios generales con No.documento " + id + ". Asegúrese que el noDocumento existe y que los datos ingresados son correctos. ");
+            throw new IllegalArgumentException("No fue posible eliminar al empleado de servicios generales con No.documento " + idSerGenerales + ". Asegúrese que el noDocumento existe y que los datos ingresados son correctos. ");
         }
     }
 
     /**
      *
      * Método para calcular la nómina con bonificación de los empleados
-     * administrativos a partir de su atributo bonificación. Se usa polimorfismo
+     * de servicios generales a partir de su atributo bonificación. Se usa polimorfismo
      * para calcular la bonificacion de cada empleado desde las clases
      * estrucutrales al sobreescribir el método calcularBonificación.
      *
-     * @param serGeneralesList
-     * @return el valor total de la nómina de los empleados de servicios generales
-     * despues de aplicada la bonificación
+     * @param serGeneralesList Copia de la lista del servicio de empleados de sericio genereal ESserGenServicio.
+     * @return El valor total de la nómina de los empleados de servicios generales
+     * despues de aplicada la bonificación.
      *
      */
     @Override
@@ -178,7 +181,8 @@ public class ESerGenServicio implements IEserGenServicio {
      *
      * Método para calcular la nómina de los empleados de servicios generales sin
      * aplicar la bonificación a partir de su atributo salarioBase
-     * @param serGeneralesList
+     *
+     * @param serGeneralesList Copia de la lista del servicio de empleados de sericio genereal ESserGenServicio.
      * @return el valor total de la nómina de los empleados de servicios generales antes de
      * aplicada la bonificación
      *
@@ -200,60 +204,108 @@ public class ESerGenServicio implements IEserGenServicio {
 
     //Métodos asociados con Comanda (DETALLE Relación maestro/detalle)
 
-    public void crearYAsignarComanda(String idESerGen, Comanda comanda) {
+    /**
+     * Método que permite crear una comanda y dejarla asociada a un empleado de servicios generales,
+     * usado por la GUICrearyAsignarComanda.
+     *
+     * @param idESerGen es la cédula del empleado de servicios; es su atributo noDocumento. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param descripcion es la descripción a grandes razgos de la comanda de almuerzos del restaurante doña doris. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param principio describe si el principio será frijoles, arbeja, lentejas o verdura. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param proteina describe si la carne será de res, de cerdo o de pollo. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param sopa describe el tipo de sopa. No admite caracteres extraños. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param fechaComanda es la fecha de caducidad de la comanda.
+     */
+    public void crearYAsignarComanda(String idESerGen, String descripcion, String principio, String proteina, String sopa, String fechaComanda) {
 
         try {
 
+            Comanda comanda = new Comanda(descripcion, principio, proteina, sopa, fechaComanda);
             ESerGen serGenerales = this.buscarESerGenPorNoDocumento(idESerGen);
 
-                serGenerales.agregarComanda(comanda);
-                comandaServicio.agregarComanda(comanda);
+            serGenerales.agregarComanda(comanda);
+            comandaServicio.agregarComanda(comanda);
 
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
     }
 
-    public void crearComandaIndependiente(Comanda comanda) {
+    /**
+     * Método para crear una comanda sin asignarla a ningún empleado de servicios generales.
+     * La comanda se crea y se envía a la lista del servicio de las comandas ComandaServicio.
+     * @param descripcion es la descripción a grandes razgos de la comanda de almuerzos del restaurante doña doris. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param principio describe si el principio será frijoles, arbeja, lentejas o verdura. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param proteina describe si la carne será de res, de cerdo o de pollo. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param sopa describe el tipo de sopa. No admite caracteres extraños. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param fechaCaducidad es la fecha de caducidad de la comanda.
+     */
 
+    public void crearComandaIndependiente(String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
+
+        Comanda comanda = new Comanda(descripcion, principio, proteina, sopa, fechaCaducidad);
         comandaServicio.agregarComanda(comanda);
 
     }
 
+    /**
+     * Método para que una comanda sea eliminada lógicamente. El atributo estatus de la comanda pasa a valer "IN".
+     * Al usar este metodo sobre una comanda, esta no aparecera al buscarse o al listar todas las existentes.
+     * Este metodo tambien hace que el atributo de tipo ESerGen de la comanda pase a valer null.
+     * @param idESerGen String, es un número de documento de un empleado de servicios generales.
+     * @param idComanda int, es el id unívoco e incremental de una comanda.
+     */
     public void eliminaryDesasociarComanda(String idESerGen, int idComanda) {
 
         try {
             ESerGen serGenerales = this.buscarESerGenPorNoDocumento(idESerGen);
             Comanda comanda = comandaServicio.buscarComandaID(idComanda);
+            serGenerales.removerComanda(comanda);
+            comandaServicio.eliminarComandaLogId(idComanda);
 
-            if (serGenerales != null && comanda != null) {
-                serGenerales.removerComanda(comanda);
-                comandaServicio.eliminarComandaLogId(idComanda);
-            } else {
-                throw new IllegalArgumentException("No se pudo eliminar la comanda. Asegúrese que el No.documento " + idESerGen + " proporcionado pertenece a un\n empleado de servicios generales existente al cual se le haya asignado una comanda con id " + idComanda);
-            }
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("No se pudo eliminar la comanda: " + e);
         }
     }
 
+    /**
+     * Método para eliminar lógicamente una comanda no asociada. Su estatus pasa a ser "IN".
+     * @param idComanda int, el id de una comanda.
+     */
     public void eliminarComanda(int idComanda) {
 
         this.comandaServicio.eliminarComandaLogId(idComanda);
     }
 
+    /**
+     * Método que muestra todas las comandas asociadas a un empleado.
+     * @param idESerGen String, el número de documento de un empleado.
+     * @return una copia de la lista que tiene como atributo el empleado de servicios generales con todas las comandas asociadas con el.
+     */
     public List<Comanda> mostrarComandaPorESerGen(String idESerGen) {
 
         ESerGen serGenerales = this.buscarESerGenPorNoDocumento(idESerGen);
         return new ArrayList<>(serGenerales.getComandas());
     }
 
+    /**
+     * Método para buscar una comanda por su ID.
+     * @param id int, el id de una comanda.
+     * @return un objeto del tipo Comanda, cuyo id es igual al id ingresado como parametro.
+     */
     public Comanda buscarComandaPorId(int id) {
 
         Comanda comanda = this.comandaServicio.buscarComandaID(id);
         return comanda;
     }
 
+    /**
+     * Método para actualizar una comanda, buscándola por su ID.
+     * @param descripcion es la descripción a grandes razgos de la comanda de almuerzos del restaurante doña doris. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param principio describe si el principio será frijoles, arbeja, lentejas o verdura. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param proteina describe si la carne será de res, de cerdo o de pollo. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param sopa describe el tipo de sopa. No admite caracteres extraños. Solo permite 50 carácteres incluidos espacios en blanco.
+     * @param fechaCaducidad es la fecha de caducidad de la comanda.
+     */
     public void actualizarComanda(int idComanda, String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
 
         Comanda comanda = this.comandaServicio.buscarComandaID(idComanda);
@@ -264,11 +316,20 @@ public class ESerGenServicio implements IEserGenServicio {
         comanda.setFechaCaducidad(fechaCaducidad);
     }
 
+    /**
+     * Método para listar todas las comandas existentes en la lista del servicio de las comandas cuyo estatus sea "AC".
+     * @return una copia de la lista del servicio de las comandas.
+     */
     public List<Comanda> mostrarComandas() {
 
         return new ArrayList<>(this.comandaServicio.mostrarComandas());
     }
 
+    /**
+     * Método para asociar una comanda existente a un empleado de servicios generales
+     * @param ESerGenId String, es el número de documento de un empleado de servicios generales.
+     * @param comandaId int, es el id de una comanda.
+     */
     public void asignarComanda(String ESerGenId, int comandaId) {
 
         ESerGen serGenerales = this.buscarESerGenPorNoDocumento(ESerGenId);
@@ -287,7 +348,7 @@ public class ESerGenServicio implements IEserGenServicio {
     }
 
     // Métodos para la implementación del patrón observer
-    
+
     public void agregarObservador(IObservador observador) {
 
         this.observadores.add(observador);

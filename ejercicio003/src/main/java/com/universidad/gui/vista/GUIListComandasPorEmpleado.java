@@ -129,21 +129,20 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
                 JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
                 limpiar();
             } else {
-                this.cargarTabla(serGenerales);
+                this.cargarTabla(serGenerales.getNoDoumento());
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
 
-    private void cargarTabla(ESerGen serGenerales) {
+    private void cargarTabla(String idESerGen) {
         try {
-            List<Comanda> comandasList = serGenerales.getComandas();
+            List<Comanda> comandasList = eSerGenServicio.mostrarComandaPorESerGen(idESerGen);
             if (comandasList != null && !comandasList.isEmpty()) {
                 jPanelListComandas.setVisible(true);
                 DefaultTableModel model = (DefaultTableModel) jTableListComandas.getModel();
                 model.setRowCount(0);
-                String idESerGen = serGenerales.getNoDoumento();
                 for (Comanda comanda : comandasList) {
                     Object[] fila = {
                         comanda.getId(),
