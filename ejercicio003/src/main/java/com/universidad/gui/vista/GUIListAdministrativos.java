@@ -2,7 +2,7 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.servicio.IObservador;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GUIListAdministrativos extends JFrame implements IObservador {
 
-    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
+    private AdministrativoServicio administrativoServicio;
     private JButton jButton1Salir;
     private JButton jButton2Mostrar;
     private JCheckBox chkRefrescable;
@@ -34,14 +34,14 @@ public class GUIListAdministrativos extends JFrame implements IObservador {
     private JPanel jPanelListEmpleado;
     private JTable jTableListEmpleados;
 
-    public GUIListAdministrativos(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
-        this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
+    public GUIListAdministrativos(AdministrativoServicio administrativoServicio) {
+        this.administrativoServicio = administrativoServicio;
         initializeComponents();
         setupLayout();
         setupListeners();
         setLocationRelativeTo(null);
         jTableListEmpleados.setEnabled(false);
-        empleadoServicioAdministrativo.agregarObservador(this);
+        administrativoServicio.agregarObservador(this);
     }
 
     private void initializeComponents() {
@@ -52,16 +52,13 @@ public class GUIListAdministrativos extends JFrame implements IObservador {
         jPanelListEmpleado = new JPanel();
         jTableListEmpleados = new JTable();
 
-        
+
         // Panel Norte
         jPanelCheckBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
         jPanelCheckBox.add(new JLabel("Auto-Refrescable: "));
         jPanelCheckBox.add(chkRefrescable);
-        
-        
-        
-        
-        
+
+
         // Configurar tabla
         DefaultTableModel model = new DefaultTableModel(
                 new Object[][]{},
@@ -78,7 +75,7 @@ public class GUIListAdministrativos extends JFrame implements IObservador {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                empleadoServicioAdministrativo.eliminarObservador(GUIListAdministrativos.this);
+                administrativoServicio.eliminarObservador(GUIListAdministrativos.this);
             }
         });
 
@@ -124,24 +121,24 @@ public class GUIListAdministrativos extends JFrame implements IObservador {
 
     private void setupListeners() {
         jButton1Salir.addActionListener(e -> {
-            this.empleadoServicioAdministrativo.eliminarObservador(this);
-            empleadoServicioAdministrativo.mostrarObservadores();
+            this.administrativoServicio.eliminarObservador(this);
+            administrativoServicio.mostrarObservadores();
             dispose();
 
         });
 
         jButton2Mostrar.addActionListener(e -> {
             cargarTabla();
-            empleadoServicioAdministrativo.mostrarObservadores();
+            administrativoServicio.mostrarObservadores();
         });
-    
+
     }
-    
-    
+
+
     private void cargarTabla() {
+
         try {
-            List<Administrativo> administrativos = empleadoServicioAdministrativo.mostrar();
-            if (administrativos != null && !administrativos.isEmpty()) {
+            List<Administrativo> administrativos = administrativoServicio.mostrarAdministrativo();
                 jPanelListEmpleado.setVisible(true);
                 DecimalFormat formato = new DecimalFormat("#,##0.00");
                 DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
@@ -152,26 +149,25 @@ public class GUIListAdministrativos extends JFrame implements IObservador {
                 model.setRowCount(0);
                 for (Administrativo administrativo : administrativos) {
                     Object[] fila = {
-                        administrativo.getNoDoumento(),
-                        administrativo.getTipoDocumento(),
-                        administrativo.getNombre(),
-                        "$ " + formato.format(administrativo.getSalarioBase()),
-                        administrativo.getEstatus(),
-                        administrativo.getEscalafon()
+                            administrativo.getNoDoumento(),
+                            administrativo.getTipoDocumento(),
+                            administrativo.getNombre(),
+                            "$ " + formato.format(administrativo.getSalarioBase()),
+                            administrativo.getEstatus(),
+                            administrativo.getEscalafon()
                     };
                     model.addRow(fila);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "La lista está vacía");
-            }
+
         } catch (Exception ex) {
+            jPanelListEmpleado.setVisible(false);
             JOptionPane.showMessageDialog(this, "Error al mostrar empleados: " + ex.getMessage());
         }
     }
 
     @Override
     public void actualizar() {
-        if (this.chkRefrescable.isSelected())   
-        this.cargarTabla();
+        if (this.chkRefrescable.isSelected())
+            this.cargarTabla();
     }
 }
