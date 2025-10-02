@@ -349,11 +349,19 @@ public class ESerGenServicio implements IEserGenServicio {
 
     // Métodos para la implementación del patrón observer
 
+    /**
+     * Método que agruega un GUI que implementa la interfaz IObservador a la lista de observadores de este servicio.
+     * @param observador es un GUI que implementa la interfaz IObservador.
+     */
     public void agregarObservador(IObservador observador) {
 
         this.observadores.add(observador);
     }
 
+    /**
+     * Método que recorre la lista de observadores e invoca para cada uno el metodo heredado de IObservador (actualizar()) dentro del cual, en cada GUI, se hace la sobreescritura para que llame al metodo que carga la tabla, que es privado y existe en el mismo GUI.
+     * Este mismo metodo es el que se llama en el metodo agregar de este servicio, para que la notificación ocurra tan pronto se agrega un nuevo ESerGen.
+     */
     public void notificarObservadores() {
 
         for (IObservador observador : observadores) {
@@ -361,6 +369,10 @@ public class ESerGenServicio implements IEserGenServicio {
         }
     }
 
+    /**
+     * Método para de-registrar (eliminar) un observador (GUI) de la lista de observadores del servicio.
+     * @param observador es una interfaz que implementa la interfaz IObservador
+     */
     public void eliminarObservador(IObservador observador) {
 
         this.observadores.remove(observador);
