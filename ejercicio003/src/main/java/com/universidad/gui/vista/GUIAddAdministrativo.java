@@ -4,28 +4,27 @@
  */
 package com.universidad.gui.vista;
 
-import com.universidad.gui.modelo.Empleado;
-import com.universidad.gui.modelo.implementacion.Administrativo;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.IObservador;
+import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Alejandro
  */
-public class GUIAddAdministrativo extends javax.swing.JFrame  {
+public class GUIAddAdministrativo extends javax.swing.JFrame {
 
     /**
      * Creates new form GUIAddAdministrativo
      */
     
-    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
+    private AdministrativoServicio administrativoServicio;
     
     
-    public GUIAddAdministrativo(EmpleadoServicio<Administrativo> servicio) {
+    public GUIAddAdministrativo(AdministrativoServicio administrativoServicio) {
         initComponents();
         setLocationRelativeTo(null);
-        this.empleadoServicioAdministrativo = servicio;
+        this.administrativoServicio = administrativoServicio;
     }
     
     public void limpiar(){
@@ -204,11 +203,9 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
             String noDocumento = txtNoDocumento.getText().strip();
             String tipoDocumento = jComboBoxTipoDocumento.getSelectedItem().toString();
             String escalafon = cmbEscalafon.getSelectedItem().toString();
-            Administrativo administrativo = new Administrativo (noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
-            empleadoServicioAdministrativo.agregar(administrativo);
-            empleadoServicioAdministrativo.mostrarObservadores();
+            administrativoServicio.agregarAdministrativo(noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
             limpiar();
-            JOptionPane.showMessageDialog(this, "Administrativo con nombre " + administrativo.getNombre() + " y documento No." +administrativo.getNoDoumento()+ " creado exitosamente ");
+            JOptionPane.showMessageDialog(this, "Administrativo con nombre " + nombre + " y documento No." + noDocumento + " creado exitosamente ");
         
         }catch(Exception e){
           JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -251,14 +248,6 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            private EmpleadoServicio<Administrativo> empleadoServicio;
-            public void run() {
-                EmpleadoServicio<Administrativo> servicioPrueba = new EmpleadoServicio<>();
-                new GUIAddAdministrativo(servicioPrueba).setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -277,5 +266,7 @@ public class GUIAddAdministrativo extends javax.swing.JFrame  {
     private javax.swing.JTextField txtNoDocumento;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSalario;
+
+
     // End of variables declaration//GEN-END:variables
 }

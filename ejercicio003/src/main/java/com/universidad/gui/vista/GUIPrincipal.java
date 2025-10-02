@@ -7,6 +7,7 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.modelo.implementacion.ESerGen;
+import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
 import com.universidad.gui.servicio.implementacion.ComandaServicio;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
 import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
@@ -24,16 +25,15 @@ public class GUIPrincipal extends javax.swing.JFrame {
     
   
   private static GUIPrincipal instancia;
-  private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
-  //private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
-  private ComandaServicio comandaServicio;
+  private AdministrativoServicio administrativoServicio;
   private ESerGenServicio eSerGenServicio;
+  private ComandaServicio comandaServicio;
+
   
     private GUIPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
-        this.empleadoServicioAdministrativo = new EmpleadoServicio<>();
-        //this.empleadoServicioESerGen = new EmpleadoServicio<>();
+        this.administrativoServicio = new AdministrativoServicio();
         this.comandaServicio = new ComandaServicio();
         this.eSerGenServicio = new ESerGenServicio(comandaServicio);
     }
@@ -325,24 +325,24 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemAcercaDeActionPerformed
 
     private void itemAddAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAddAdministrativoActionPerformed
-        GUIAddAdministrativo gui = new GUIAddAdministrativo(this.empleadoServicioAdministrativo);
+        GUIAddAdministrativo gui = new GUIAddAdministrativo(this.administrativoServicio);
         gui.setVisible(true);
         
     }//GEN-LAST:event_itemAddAdministrativoActionPerformed
 
     private void jMenuItemSearchAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSearchAdministrativoActionPerformed
-        GUISearchAdministrativoPorNoDocumento gui = new GUISearchAdministrativoPorNoDocumento(this.empleadoServicioAdministrativo);
+        GUISearchAdministrativoPorNoDocumento gui = new GUISearchAdministrativoPorNoDocumento(this.administrativoServicio);
         gui.setVisible(true);
        
     }//GEN-LAST:event_jMenuItemSearchAdministrativoActionPerformed
 
     private void jMenuItemListAdministrativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListAdministrativosActionPerformed
-        GUIListAdministrativos guiListEmpleados = new GUIListAdministrativos(this.empleadoServicioAdministrativo);
+        GUIListAdministrativos guiListEmpleados = new GUIListAdministrativos(this.administrativoServicio);
         guiListEmpleados.setVisible(true);
     }//GEN-LAST:event_jMenuItemListAdministrativosActionPerformed
 
     private void jMenuItemUpdateAdministrativosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateAdministrativosActionPerformed
-        GUIActualizarAdministrativo guiActualizarEmpleado = new GUIActualizarAdministrativo(this.empleadoServicioAdministrativo);
+        GUIActualizarAdministrativo guiActualizarEmpleado = new GUIActualizarAdministrativo(this.administrativoServicio);
         guiActualizarEmpleado.setVisible(true);
     }//GEN-LAST:event_jMenuItemUpdateAdministrativosActionPerformed
 
@@ -351,7 +351,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAdministrativoActionPerformed
 
     private void jMenuItemDeleteAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteAdministrativoActionPerformed
-        GUIEliminarAdministrativo guiEliminarEmpleado = new GUIEliminarAdministrativo(this.empleadoServicioAdministrativo);
+        GUIEliminarAdministrativo guiEliminarEmpleado = new GUIEliminarAdministrativo(this.administrativoServicio);
         guiEliminarEmpleado.setVisible(true);
     }//GEN-LAST:event_jMenuItemDeleteAdministrativoActionPerformed
 
@@ -383,7 +383,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemBonificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBonificacionActionPerformed
         
-        GUICalcularNominaAdministrativos gui = new GUICalcularNominaAdministrativos(empleadoServicioAdministrativo);
+        GUICalcularNominaAdministrativos gui = new GUICalcularNominaAdministrativos(administrativoServicio);
         gui.setVisible(true);
         
     }//GEN-LAST:event_jMenuItemBonificacionActionPerformed
@@ -451,40 +451,6 @@ public class GUIPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemEliminarComandaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIPrincipal().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu CrudComandas;

@@ -12,8 +12,8 @@ import java.util.List;
  * @author Alejandro
  */
 public interface IAdministrativoServicio {
-    
-    public void agregarAdministrativo(Administrativo administrativo);
+
+    public void agregarAdministrativo( String noDocumento, String tipoDocumento, String nombre, double salario, String estatus, String escalafon);
 
     public List<Administrativo> mostrarAdministrativo();
 

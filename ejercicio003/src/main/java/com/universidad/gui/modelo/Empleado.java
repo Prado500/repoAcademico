@@ -13,10 +13,10 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author Alejandro
- * @param <T>
+ * @author David Alejandro De los Reyes Ostos
+ * @param <T> es un objeto
  */
-public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
+public abstract class Empleado implements IEmpleado {
 
     private String noDoumento;
     private String tipoDocumento;
@@ -199,7 +199,7 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
         }
     }
 
-    private LocalDate validarFechaNacimiento(String fechaNacimiento) {
+    private void validarFechaNacimiento(String fechaNacimiento) {
         Objects.requireNonNull(fechaNacimiento, "La fecha de nacimiento no puede ir vacia");
 
         if (!fechaNacimiento.matches("\\d{2}/\\d{2}/\\d{4}")) {
@@ -225,8 +225,6 @@ public abstract class Empleado <T extends Empleado<T>> implements IEmpleado<T> {
                                                    mayor de 100 años ni menor de 18 años.
                                                   """);
             }
-
-            return fecha;
 
         } catch (DateTimeParseException e) {
 

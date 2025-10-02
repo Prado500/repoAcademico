@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
  *
  * @author Alejandro
  */
-public class Administrativo extends Empleado<Administrativo> {
+public class Administrativo extends Empleado {
 
     private String escalafon;
   

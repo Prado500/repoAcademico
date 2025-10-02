@@ -15,9 +15,8 @@ import java.util.regex.Pattern;
 /**
  *
  * @author Alejandro
- * @param <T>
  */
-public interface IEmpleado<T extends Empleado<T>> {
+public interface IEmpleado {
 
     public void setNoDoumento(String noDoumento);
 

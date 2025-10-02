@@ -8,7 +8,7 @@ import com.universidad.gui.modelo.Empleado;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ESerGen extends Empleado<ESerGen> {
+public class ESerGen extends Empleado {
 
     private boolean cerAlturas;
     private List<Comanda> comandas;

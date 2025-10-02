@@ -36,8 +36,8 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      * @param administrativo agregamos administrativos a la lista del servicio
      */
     @Override
-    public void agregarAdministrativo(Administrativo administrativo) {
-       
+    public void agregarAdministrativo( String noDocumento, String tipoDocumento, String nombre, double salario, String estatus, String escalafon) {
+        Administrativo administrativo = new Administrativo(noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
         this.administrativos.add(administrativo);
         this.notificarObservadores();
     }
