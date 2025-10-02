@@ -33,7 +33,13 @@ public class AdministrativoServicio implements IAdministrativoServicio {
     }
 
     /**
-     * @param administrativo agregamos administrativos a la lista del servicio
+     *
+     * @param noDocumento
+     * @param tipoDocumento
+     * @param nombre
+     * @param salario
+     * @param estatus
+     * @param escalafon
      */
     @Override
     public void agregarAdministrativo( String noDocumento, String tipoDocumento, String nombre, double salario, String estatus, String escalafon) {
@@ -53,11 +59,15 @@ public class AdministrativoServicio implements IAdministrativoServicio {
     public List<Administrativo> mostrarAdministrativo() {
         
         List<Administrativo> elementosMostrar = new ArrayList<>();
+
         for (Administrativo administrativo : this.administrativos) {
             if (!(administrativo.getEstatus().equals("IN"))) {
                 elementosMostrar.add(administrativo);
             }
         }
+
+        if (elementosMostrar.isEmpty())
+            throw new IllegalArgumentException("La lista está vacía. No hay administrativos registrados todavía");
         return elementosMostrar;
     }
 
