@@ -2,7 +2,7 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Administrativo;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.util.Objects;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,8 +24,7 @@ import javax.swing.JTextField;
 
 public class GUIActualizarAdministrativo extends JFrame {
 
-    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
-
+private AdministrativoServicio administrativoServicio;
     // Componentes
     private JPanel panelPrincipal;
     private JPanel panelBusqueda;
@@ -35,8 +35,8 @@ public class GUIActualizarAdministrativo extends JFrame {
     private JComboBox<String> cmbEscalafon;
     private JButton btnBuscar, btnSalir, btnActualizar;
 
-    public GUIActualizarAdministrativo(EmpleadoServicio<Administrativo> empleadoServicio) {
-        this.empleadoServicioAdministrativo = empleadoServicio;
+    public GUIActualizarAdministrativo(AdministrativoServicio administrativoServicio) {
+        this.administrativoServicio = administrativoServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
     }
@@ -121,24 +121,16 @@ public class GUIActualizarAdministrativo extends JFrame {
 
     private void buscarEmpleado(ActionEvent evt) {
         try {
-            Administrativo administrativo = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
-            if (administrativo == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
-                limpiar();
-            } else {
+            Administrativo administrativo = administrativoServicio.buscarAdministrativoPorNoDocumento(txtBuscar.getText());
                 cmbTipoDocumento.setSelectedItem(administrativo.getTipoDocumento());
                 cmbEscalafon.setSelectedItem(administrativo.getEscalafon());
                 txtNombre.setText(administrativo.getNombre());
-//                DecimalFormat formato = new DecimalFormat("#,##0.00");
-//                DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-//                simbolos.setGroupingSeparator('.');
-//                simbolos.setDecimalSeparator(',');
-//                formato.setDecimalFormatSymbols(simbolos);
                 txtSalario.setText(Double.toString(administrativo.getSalarioBase()));
                 txtNuevoDocumento.setText(administrativo.getNoDoumento());
                 mostrar();
-            }
+
         } catch (Exception e) {
+            limpiar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
@@ -146,9 +138,8 @@ public class GUIActualizarAdministrativo extends JFrame {
     private void actualizarAdministrativo(ActionEvent evt) {
         try {
             String id = txtBuscar.getText();
-            Administrativo administrativo = empleadoServicioAdministrativo.searchElementoByNoDocumento(id.strip());
-            empleadoServicioAdministrativo.actualizarElemento(id.strip(), cmbTipoDocumento.getSelectedItem().toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()));
-            administrativo.setEscalafon(cmbEscalafon.getSelectedItem().toString().strip());
+            Administrativo administrativo = administrativoServicio.buscarAdministrativoPorNoDocumento(id.strip());
+            administrativoServicio.actualizarAdministrativo(this.txtNuevoDocumento.getText(), id.strip(), Objects.requireNonNull(cmbTipoDocumento.getSelectedItem()).toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()), Objects.requireNonNull(this.cmbEscalafon.getSelectedItem()).toString().strip());
             JOptionPane.showMessageDialog(this, "Empleado con id " + id + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());

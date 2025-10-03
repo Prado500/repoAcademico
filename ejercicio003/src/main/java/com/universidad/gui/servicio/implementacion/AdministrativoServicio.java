@@ -248,4 +248,17 @@ public class AdministrativoServicio implements IAdministrativoServicio {
 
     }
 
+//    public void verificarExistenciaAdministrativo(String noDocumento) {
+//
+//        boolean existe = false;
+//        for (Administrativo administrativo : this.administrativos) {
+//            if (administrativo.getNoDoumento().equals(noDocumento)) {
+//                existe = true;
+//            }
+//        }
+//        if (!existe) {
+//            throw new IllegalArgumentException("No se encontró ningún registro de un administrativo con No.documento");
+//        }
+//    }
+
 }
