@@ -1,10 +1,10 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Administrativo;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -14,7 +14,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,18 +23,17 @@ import javax.swing.JTextField;
 
 public class GUICalcularNominaAdministrativos extends JFrame {
 
-    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
+    private AdministrativoServicio administrativoServicio;
 
     // Componentes
     private JPanel panelPrincipal;
-    // private JPanel panelBusqueda;
     private JPanel panelDatos;
     private JPanel panelBotones;
     private JTextField txtNominaCruda, txtNominaTotal;
     private JButton btnSalir, btnCalcular;
 
-    public GUICalcularNominaAdministrativos(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
-        this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
+    public GUICalcularNominaAdministrativos(AdministrativoServicio administrativoServicio) {
+        this.administrativoServicio = administrativoServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
         this.txtNominaCruda.setEditable(false);
@@ -102,23 +100,19 @@ public class GUICalcularNominaAdministrativos extends JFrame {
         // Configurar action listeners
         btnCalcular.addActionListener(this::calcularNomina);
         btnCalcular.addActionListener(this::calcularNominaConBonificacion);
-        //btnCalcular.addActionListener(this::mostrar);
         btnSalir.addActionListener(e -> dispose());
 
         setContentPane(panelPrincipal);
     }
 
     private void calcularNomina(ActionEvent evt) {
+
         try {
-            if (empleadoServicioAdministrativo.mostrar().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "La lista está vacia");
-                this.ocultar();
-            } else {
-                this.mostrar();
-                this.txtNominaCruda.setText("$ " + this.aplicarFormato(empleadoServicioAdministrativo.calcularNomina(empleadoServicioAdministrativo.mostrar())));
-            }
+            this.txtNominaCruda.setText("$ " + this.aplicarFormato(administrativoServicio.calcularNominaAdministrativo(administrativoServicio.mostrarAdministrativo())));
+            this.mostrar();
 
         } catch (Exception e) {
+            this.ocultar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
@@ -127,8 +121,7 @@ public class GUICalcularNominaAdministrativos extends JFrame {
     private void calcularNominaConBonificacion(ActionEvent evt) {
 
         try {
-            
-            this.txtNominaTotal.setText("$ " + this.aplicarFormato(empleadoServicioAdministrativo.calcularNominaConBonificacion(empleadoServicioAdministrativo.mostrar())));
+            this.txtNominaTotal.setText("$ " + this.aplicarFormato(administrativoServicio.calcularNominaConBonificacionAdministrativo(administrativoServicio.mostrarAdministrativo())));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -136,11 +129,6 @@ public class GUICalcularNominaAdministrativos extends JFrame {
 
     }
 
-    private void limpiar() {
-        this.txtNominaCruda.setText("");
-        this.txtNominaTotal.setText("");
-        panelDatos.setVisible(false);
-    }
 
     private void mostrar() {
 
@@ -155,6 +143,7 @@ public class GUICalcularNominaAdministrativos extends JFrame {
     }
 
     private String aplicarFormato(Double numero) {
+
         DecimalFormat formato = new DecimalFormat("#,##0.00");
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
         simbolos.setGroupingSeparator('.');
@@ -163,6 +152,4 @@ public class GUICalcularNominaAdministrativos extends JFrame {
         
         return formato.format(numero);
     }
-
-    //private void
 }
