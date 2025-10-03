@@ -166,6 +166,9 @@ public class AdministrativoServicio implements IAdministrativoServicio {
         simbolos.setDecimalSeparator(',');
         formato.setDecimalFormatSymbols(simbolos);
         double nominaAcumulada = 0;
+        if (this.administrativos.isEmpty()) {
+            throw new IllegalArgumentException("No fue posible calcular la nómina con bonificación para los empleados administrativos porque\nno se ha registrado ningúno");
+        }
         for (Administrativo administrativo : administrativos) {
             nominaAcumulada += administrativo.getBonificacion();
         }
