@@ -6,9 +6,11 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.modelo.implementacion.Administrativo;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,14 +19,13 @@ import javax.swing.JOptionPane;
  */
 public class GUISearchAdministrativoPorNoDocumento extends javax.swing.JFrame {
 
-    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
-
+private AdministrativoServicio administrativoServicio;
     /**
      * Creates new form GUISearchEmpleadoPorNoDocumento
      */
-    public GUISearchAdministrativoPorNoDocumento(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
+    public GUISearchAdministrativoPorNoDocumento(AdministrativoServicio administrativoServicio) {
         initComponents();
-        this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
+        this.administrativoServicio = administrativoServicio;
         setLocationRelativeTo(null);
         jPanelSearchEmpleado.setVisible(false);
         
@@ -208,16 +209,17 @@ public class GUISearchAdministrativoPorNoDocumento extends javax.swing.JFrame {
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         try {
             String noDocumento = txtSearchEmpleado.getText();
-            Empleado emp = empleadoServicioAdministrativo.searchElementoByNoDocumento(noDocumento);
+            List<String> nombreSalarioEstatus = administrativoServicio.obtenerNombreSalarioEstatus(noDocumento);
             mostrar();
-            this.lblNombre.setText(emp.getNombre());
+            this.lblNombre.setText(nombreSalarioEstatus.get(0));
             DecimalFormat formato = new DecimalFormat("#,##0.00");
             DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
             simbolos.setGroupingSeparator('.');
             simbolos.setDecimalSeparator(',');
             formato.setDecimalFormatSymbols(simbolos);
-            this.lblSalario.setText("$ " + formato.format(emp.getSalarioBase()));
-            this.lblEstatus.setText(emp.getEstatus());
+            double salarioBase = Double.parseDouble(nombreSalarioEstatus.get(1));
+            this.lblSalario.setText("$ " + formato.format(salarioBase));
+            this.lblEstatus.setText(nombreSalarioEstatus.get(2));
             limpiar();
             
         } catch (Exception e) {
@@ -229,48 +231,6 @@ public class GUISearchAdministrativoPorNoDocumento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchEmpleadoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUISearchAdministrativoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUISearchAdministrativoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUISearchAdministrativoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUISearchAdministrativoPorNoDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GUISearchEmpleadoPorNoDocumento().setVisible(true);
-//            }
-//        });
-        //</editor-fold>
-
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new GUISearchAdministrativoPorNoDocumento().setVisible(true);
-//            }
-//        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;

@@ -43,6 +43,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      */
     @Override
     public void agregarAdministrativo( String noDocumento, String tipoDocumento, String nombre, double salario, String estatus, String escalafon) {
+
         Administrativo administrativo = new Administrativo(noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
         this.administrativos.add(administrativo);
         this.notificarObservadores();
@@ -92,6 +93,18 @@ public class AdministrativoServicio implements IAdministrativoServicio {
             throw new IllegalArgumentException("No se encontró ningún registro de un administrativo con No.documento " + noDocumento + "\nAsegúrese de ingresar un número de documento válido y existente.");
         }
         return elementoRetorno;
+    }
+
+    public List<String> obtenerNombreSalarioEstatus(String noDocumento) {
+
+        Administrativo administrativo = this.buscarAdministrativoPorNoDocumento(noDocumento);
+
+        List<String> nombreSalarioEstatus = new ArrayList<>();
+        nombreSalarioEstatus.add(administrativo.getNombre());
+        nombreSalarioEstatus.add(Double.toString(administrativo.getSalarioBase()));
+        nombreSalarioEstatus.add(administrativo.getNombre());
+
+        return nombreSalarioEstatus;
     }
 
     /**
@@ -159,16 +172,18 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      */
     @Override
     public double calcularNominaConBonificacionAdministrativo(List<Administrativo> administrativos) {
-        
+
+        if (this.administrativos.isEmpty()) {
+            throw new IllegalArgumentException("No fue posible calcular la nómina con bonificación para los empleados administrativos porque\nno se ha registrado ningúno");
+        }
+
         DecimalFormat formato = new DecimalFormat("#,##0.00");
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
         simbolos.setGroupingSeparator('.');
         simbolos.setDecimalSeparator(',');
         formato.setDecimalFormatSymbols(simbolos);
         double nominaAcumulada = 0;
-        if (this.administrativos.isEmpty()) {
-            throw new IllegalArgumentException("No fue posible calcular la nómina con bonificación para los empleados administrativos porque\nno se ha registrado ningúno");
-        }
+
         for (Administrativo administrativo : administrativos) {
             nominaAcumulada += administrativo.getBonificacion();
         }
@@ -184,7 +199,11 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      */
     @Override
     public double calcularNominaAdministrativo(List<Administrativo> administrativos) {
-        
+
+        if (this.administrativos.isEmpty()) {
+            throw new IllegalArgumentException("No fue posible calcular la nómina cruda (sin bonificación) para los empleados administrativos porque\nno se ha registrado ningúno");
+        }
+
         DecimalFormat formato = new DecimalFormat("#,##0.00");
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
         simbolos.setGroupingSeparator('.');
