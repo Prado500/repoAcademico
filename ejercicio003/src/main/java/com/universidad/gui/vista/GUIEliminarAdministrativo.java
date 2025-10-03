@@ -10,7 +10,7 @@ package com.universidad.gui.vista;
  */
 
 import com.universidad.gui.modelo.implementacion.Administrativo;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -32,8 +32,7 @@ import javax.swing.JTextField;
 
 public class GUIEliminarAdministrativo extends JFrame {
 
-    private EmpleadoServicio<Administrativo> empleadoServicioAdministrativo;
-
+    private AdministrativoServicio administrativoServicio;
     // Componentes
     private JPanel panelPrincipal;
     private JPanel panelBusqueda;
@@ -42,8 +41,8 @@ public class GUIEliminarAdministrativo extends JFrame {
     private JTextField txtBuscar, txtNombre, txtSalario, txtDocumento, txtTipoDocumento;
     private JButton btnBuscar, btnSalir, btnEliminar;
 
-    public GUIEliminarAdministrativo(EmpleadoServicio<Administrativo> empleadoServicioAdministrativo) {
-        this.empleadoServicioAdministrativo = empleadoServicioAdministrativo;
+    public GUIEliminarAdministrativo(AdministrativoServicio administrativoServicio) {
+        this.administrativoServicio = administrativoServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
     }
@@ -66,7 +65,7 @@ public class GUIEliminarAdministrativo extends JFrame {
         txtDocumento.setEditable(false);
         txtTipoDocumento = new JTextField();
         txtTipoDocumento.setEditable(false);
-        
+
 
         // Panel principal con BorderLayout
         panelPrincipal = new JPanel(new BorderLayout(10, 10));
@@ -129,39 +128,35 @@ public class GUIEliminarAdministrativo extends JFrame {
     }
 
     private void buscarAdministrativo(ActionEvent evt) {
+
         try {
-            Administrativo empleado = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
-            if (empleado == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
-                limpiar();
-            } else {
-                txtTipoDocumento.setText(empleado.getTipoDocumento());
-                txtNombre.setText(empleado.getNombre());
-                DecimalFormat formato = new DecimalFormat("#,##0.00");
-                DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-                simbolos.setGroupingSeparator('.');
-                simbolos.setDecimalSeparator(',');
-                formato.setDecimalFormatSymbols(simbolos);
-                txtSalario.setText("$ " + formato.format(empleado.getSalarioBase()));
-                txtDocumento.setText(empleado.getNoDoumento());
-                mostrar();
-            }
+            Administrativo empleado = administrativoServicio.buscarAdministrativoPorNoDocumento(txtBuscar.getText());
+            txtTipoDocumento.setText(empleado.getTipoDocumento());
+            txtNombre.setText(empleado.getNombre());
+            DecimalFormat formato = new DecimalFormat("#,##0.00");
+            DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+            simbolos.setGroupingSeparator('.');
+            simbolos.setDecimalSeparator(',');
+            formato.setDecimalFormatSymbols(simbolos);
+            txtSalario.setText("$ " + formato.format(empleado.getSalarioBase()));
+            txtDocumento.setText(empleado.getNoDoumento());
+            mostrar();
+
         } catch (Exception e) {
+            limpiar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
 
     private void borrarAdministrativo(ActionEvent evt) {
         try {
-            Administrativo empleadoABorrar = empleadoServicioAdministrativo.searchElementoByNoDocumento(txtBuscar.getText());
-            if (empleadoABorrar == null) {
-                throw new IllegalArgumentException("No se ha encontrado un registro con noDocumento " + txtBuscar.getText());
+
+            if (this.txtDocumento.getText().isBlank()) {
+                throw new IllegalArgumentException("Primero busque un empleado para poder eliminarlo. Recuerde hacerlo usando el número de documento del empleado");
             }
-            
-            if (this.txtDocumento.getText().isBlank()){
-               throw new IllegalArgumentException("Primero busque un empleado para poder eliminarlo. Recuerde hacerlo usando el número de documento del empleado");
-            }
-            
+
+            Administrativo empleadoABorrar = administrativoServicio.buscarAdministrativoPorNoDocumento(txtBuscar.getText());
+
             int respuesta = JOptionPane.showConfirmDialog(
                     this,
                     "¿Está seguro que desea eliminar al empleado " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + "?",
@@ -169,10 +164,10 @@ public class GUIEliminarAdministrativo extends JFrame {
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE
             );
-            
+
             if (respuesta == JOptionPane.YES_OPTION) {
-                empleadoServicioAdministrativo.eliminarLogicamenteElementoPorId(txtBuscar.getText());
                 JOptionPane.showMessageDialog(this, "Emplado " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + " eliminado exitosamente");
+                administrativoServicio.eliminarLogicamenteAdministrativoPorId(txtBuscar.getText());
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(this, "Eliminación canelada");
