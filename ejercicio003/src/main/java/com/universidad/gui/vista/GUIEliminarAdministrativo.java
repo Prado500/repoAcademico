@@ -152,14 +152,14 @@ public class GUIEliminarAdministrativo extends JFrame {
         try {
 
             if (this.txtDocumento.getText().isBlank()) {
-                throw new IllegalArgumentException("Primero busque un empleado para poder eliminarlo. Recuerde hacerlo usando el número de documento del empleado");
+                throw new IllegalArgumentException("Primero busque un administrativo para poder eliminarlo. Recuerde hacerlo usando el número de documento del empleado");
             }
 
             Administrativo empleadoABorrar = administrativoServicio.buscarAdministrativoPorNoDocumento(txtBuscar.getText());
 
             int respuesta = JOptionPane.showConfirmDialog(
                     this,
-                    "¿Está seguro que desea eliminar al empleado " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + "?",
+                    "¿Está seguro que desea eliminar al administrativo " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + "?",
                     "Confirmar Elección",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE

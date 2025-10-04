@@ -10,8 +10,8 @@ package com.universidad.gui.vista;
  */
 
 import com.universidad.gui.modelo.implementacion.ESerGen;
-import com.universidad.gui.servicio.IObservador;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -32,7 +32,7 @@ import javax.swing.JTextField;
 
 public class GUIEliminarESerGen extends JFrame {
 
-    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
+    private ESerGenServicio eSerGenServicio;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -42,8 +42,8 @@ public class GUIEliminarESerGen extends JFrame {
     private JTextField txtBuscar, txtNombre, txtSalario, txtDocumento, txtTipoDocumento;
     private JButton btnBuscar, btnSalir, btnEliminar;
 
-    public GUIEliminarESerGen(EmpleadoServicio<ESerGen> empleadoServicioESerGen) {
-        this.empleadoServicioESerGen = empleadoServicioESerGen;
+    public GUIEliminarESerGen(ESerGenServicio eSerGenServicio) {
+        this.eSerGenServicio = eSerGenServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
     }
@@ -130,11 +130,9 @@ public class GUIEliminarESerGen extends JFrame {
 
     private void buscarAdministrativo(ActionEvent evt) {
         try {
-            ESerGen serGenerales = empleadoServicioESerGen.searchElementoByNoDocumento(txtBuscar.getText());
-            if (serGenerales == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
-                limpiar();
-            } else {
+
+            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(txtBuscar.getText());
+
                 txtTipoDocumento.setText(serGenerales.getTipoDocumento());
                 txtNombre.setText(serGenerales.getNombre());
                 DecimalFormat formato = new DecimalFormat("#,##0.00");
@@ -145,34 +143,35 @@ public class GUIEliminarESerGen extends JFrame {
                 txtSalario.setText("$ " + formato.format(serGenerales.getSalarioBase()));
                 txtDocumento.setText(serGenerales.getNoDoumento());
                 mostrar();
-            }
+
         } catch (Exception e) {
+            limpiar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
 
     private void borrarAdministrativo(ActionEvent evt) {
+
         try {
-            ESerGen empleadoABorrar = empleadoServicioESerGen.searchElementoByNoDocumento(txtBuscar.getText());
-            if (empleadoABorrar == null) {
-                throw new IllegalArgumentException("No se ha encontrado un registro con noDocumento " + txtBuscar.getText());
+
+            if (this.txtDocumento.getText().isBlank()) {
+                throw new IllegalArgumentException("Primero busque un empleado de servicios generales para poder eliminarlo. Recuerde hacerlo usando el número de documento del empleado");
             }
-            
-            if (this.txtDocumento.getText().isBlank()){
-               throw new IllegalArgumentException("Primero busque un empleado para poder eliminarlo. Recuerde hacerlo usando el número de documento del empleado");
-            }
-            
+
+            ESerGen empleadoABorrar = eSerGenServicio.buscarESerGenPorNoDocumento(txtBuscar.getText());
+
             int respuesta = JOptionPane.showConfirmDialog(
                     this,
-                    "¿Está seguro que desea eliminar al empleado " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + "?",
+                    "¿Está seguro que desea eliminar al empleado de servicios generales " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + "?",
                     "Confirmar Elección",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE
             );
-            
+
+
             if (respuesta == JOptionPane.YES_OPTION) {
-                empleadoServicioESerGen.eliminarLogicamenteElementoPorId(txtBuscar.getText());
-                JOptionPane.showMessageDialog(this, "Emplado " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + " eliminado exitosamente");
+                eSerGenServicio.eliminarLogicamenteESerGenPorId(txtBuscar.getText());
+                JOptionPane.showMessageDialog(this, "Emplado de servicios generales " + empleadoABorrar.getNombre() + " con noDocumento " + empleadoABorrar.getNoDoumento() + " eliminado exitosamente");
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(this, "Eliminación canelada");

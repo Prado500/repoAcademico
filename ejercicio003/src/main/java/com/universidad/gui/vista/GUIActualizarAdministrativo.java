@@ -121,6 +121,7 @@ private AdministrativoServicio administrativoServicio;
 
     private void buscarEmpleado(ActionEvent evt) {
         try {
+
             Administrativo administrativo = administrativoServicio.buscarAdministrativoPorNoDocumento(txtBuscar.getText());
                 cmbTipoDocumento.setSelectedItem(administrativo.getTipoDocumento());
                 cmbEscalafon.setSelectedItem(administrativo.getEscalafon());
@@ -137,8 +138,8 @@ private AdministrativoServicio administrativoServicio;
 
     private void actualizarAdministrativo(ActionEvent evt) {
         try {
+
             String id = txtBuscar.getText();
-            Administrativo administrativo = administrativoServicio.buscarAdministrativoPorNoDocumento(id.strip());
             administrativoServicio.actualizarAdministrativo(this.txtNuevoDocumento.getText(), id.strip(), Objects.requireNonNull(cmbTipoDocumento.getSelectedItem()).toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()), Objects.requireNonNull(this.cmbEscalafon.getSelectedItem()).toString().strip());
             JOptionPane.showMessageDialog(this, "Empleado con id " + id + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
         } catch (Exception e) {

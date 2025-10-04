@@ -123,9 +123,6 @@ public class GUIActualizarESerGen extends JFrame {
         try {
 
             ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(txtBuscar.getText());
-            JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
-
-
             cmbTipoDocumento.setSelectedItem(serGenerales.getTipoDocumento());
             cmbAlturas.setSelectedItem(hasAlturas(serGenerales.getCerAlturas()));
             txtNombre.setText(serGenerales.getNombre());
