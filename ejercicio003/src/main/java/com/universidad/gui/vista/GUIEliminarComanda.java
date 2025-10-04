@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 
 public class GUIEliminarComanda extends JFrame {
 
-    private ESerGenServicio eSerGenServicio;
+    private final ESerGenServicio eSerGenServicio;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -186,7 +186,7 @@ public class GUIEliminarComanda extends JFrame {
 
             Comanda comanda = eSerGenServicio.buscarComandaPorId(Integer.parseInt(this.txtID.getText()));
 
-            String placeholder = " no asignada?";
+            String placeholder = " no asignada";
 
             if (comanda.getEserGen() != null) {
                 placeholder = " asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "?";
@@ -200,6 +200,7 @@ public class GUIEliminarComanda extends JFrame {
             );
 
             if (respuesta == JOptionPane.YES_OPTION) {
+
                 if (comanda.getEserGen() == null) {
 
                     eSerGenServicio.eliminarComanda(Integer.parseInt(this.txtID.getText()));
@@ -207,8 +208,8 @@ public class GUIEliminarComanda extends JFrame {
                     limpiar();
                 } else {
                     
-                    JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nEliminada exitosamente");
                     eSerGenServicio.eliminaryDesasociarComanda(comanda.getEserGen().getNoDoumento(), Integer.parseInt(this.txtID.getText()));
+                    JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nEliminada exitosamente");
                     limpiar();
                 }
 
