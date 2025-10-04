@@ -34,7 +34,7 @@ public class ESerGenServicio implements IEserGenServicio {
         this.observadores = new ArrayList<>();
     }
 
-    //Métodos heredados y específicos para ESerGen únicamente (DETALLE Relacion maestro/detalle)
+    //Métodos heredados y específicos para ESerGen únicamente (Maestro Relacion maestro/detalle)
 
     /**
      * Método para crear y agregar un objeto del tipo ESerGen (Empleado de servicios generales)
