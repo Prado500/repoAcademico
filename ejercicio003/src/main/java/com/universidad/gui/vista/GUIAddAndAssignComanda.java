@@ -4,6 +4,7 @@ import com.toedter.calendar.JDateChooser;
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -25,7 +26,6 @@ import javax.swing.JTextField;
 public class GUIAddAndAssignComanda extends JFrame {
 
     private ESerGenServicio eSerGenServicio;
-
     // Componentes
     private JPanel panelPrincipal;
     private JPanel panelBusqueda;
@@ -125,38 +125,33 @@ public class GUIAddAndAssignComanda extends JFrame {
 
     private void buscarEmpleado(ActionEvent evt) {
         try {
-            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(this.txtBuscar.getText());
-            System.out.println("Este es el id: " + this.txtBuscar.getText());
-            if (serGenerales == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
-                limpiar();
-            } else {
-                JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana para crear y asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
-                this.txtID.setText(this.txtBuscar.getText());
-                this.txtID.setEditable(false);
-                mostrar();
-            }
+
+            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(this.txtBuscar.getText());
+            JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana para crear y asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
+            this.txtID.setText(this.txtBuscar.getText());
+            this.txtID.setEditable(false);
+            mostrar();
+
         } catch (Exception e) {
+            limpiar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
 
-    
+
     private void crearYAsignarComanda(ActionEvent evt) {
         try {
-            String id = this.txtBuscar.getText();
-            
-            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(id.strip());
-            if (serGenerales == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
-                limpiar();
-            }
+            String idESerGen = this.txtBuscar.getText();
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
-            Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
-            System.out.println(comanda);
-            eSerGenServicio.crearYAsignarComanda(id, comanda);
-            JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada y asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " NO. " + serGenerales.getNoDoumento());
+            eSerGenServicio.crearYAsignarComanda(idESerGen, this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda );
+            int idComanda = eSerGenServicio.getIdComanda();
+            //Acá es válido crear el objeto serGenerales y obtener sus datos con get(), ya que simula que el cliente debera crear el json que se envia a la api, y del json creado puede extraer esa información para personalizar un mensaje de creacion exitosao, en este caso, de creación y asociación exitosas.
+            String nombreSerGenerales = eSerGenServicio.getNombreESerGen();
+            String tipoDocumentoSerGenerales = eSerGenServicio.getTipoDocumentoESerGen();
+            String noDocumentoSerGenerales = eSerGenServicio.getNoDocumentoESerGen();
+
+            JOptionPane.showMessageDialog(this, "Comanda con id " + idComanda + " creada y asignada al empleado " + nombreSerGenerales + " con " + tipoDocumentoSerGenerales + " NO. " + noDocumentoSerGenerales);
             limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());

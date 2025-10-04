@@ -239,8 +239,42 @@ public class ESerGenServicio implements IEserGenServicio {
             comandaServicio.agregarComanda(comanda);
 
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println(e);
         }
+    }
+
+    /**
+     * Método para retornar el id de la última comanda creada. se usa para pasarle a la GUI de creación de comandas el id de comanda que se muestra en el mensaje de creación exitosa.
+     * @return int, el id de la última comanda creada.
+     */
+    public int getIdComanda(){
+        List<Comanda> comandas = this.comandaServicio.mostrarComandas();
+
+        return comandas.getLast().getId();
+    }
+
+    /**
+     * Método que busca el último empleado de la lista del servicio y retorna su nombre. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su nombre.
+     * @return el nombre del empleado, String
+     */
+    public String getNombreESerGen(){
+        return this.serGenerales.getLast().getNombre();
+    }
+
+    /**
+     * Método que busca el último empleado de la lista del servicio y retorna su tipo de documento. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su tipo de documento.
+     * @return el tipo de documento del empleado, String
+     */
+    public String getTipoDocumentoESerGen(){
+        return this.serGenerales.getLast().getTipoDocumento();
+    }
+
+    /**
+     * Método que busca el último empleado de la lista del servicio y retorna su número de documento. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su número de documento.
+     * @return el nombre del empleado, String
+     */
+    public String getNoDocumentoESerGen(){
+        return this.serGenerales.getLast().getTipoDocumento();
     }
 
     /**
