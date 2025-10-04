@@ -1,7 +1,8 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.ESerGen;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -22,7 +23,7 @@ import javax.swing.JTextField;
 
 public class GUIActualizarESerGen extends JFrame {
 
-    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
+    private ESerGenServicio eSerGenServicio;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -34,8 +35,8 @@ public class GUIActualizarESerGen extends JFrame {
     private JComboBox<String> cmbAlturas;
     private JButton btnBuscar, btnSalir, btnActualizar;
 
-    public GUIActualizarESerGen(EmpleadoServicio<ESerGen> empleadoServicioESerGen) {
-        this.empleadoServicioESerGen = empleadoServicioESerGen;
+    public GUIActualizarESerGen(ESerGenServicio eSerGenServicio) {
+        this.eSerGenServicio = eSerGenServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
     }
@@ -120,34 +121,29 @@ public class GUIActualizarESerGen extends JFrame {
 
     private void buscarEmpleado(ActionEvent evt) {
         try {
-            ESerGen serGenerales = empleadoServicioESerGen.searchElementoByNoDocumento(txtBuscar.getText());
-            if (serGenerales == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
-                limpiar();
-            } else {
-                cmbTipoDocumento.setSelectedItem(serGenerales.getTipoDocumento());
-                cmbAlturas.setSelectedItem(hasAlturas(serGenerales.getCerAlturas()));
-                txtNombre.setText(serGenerales.getNombre());
-//                DecimalFormat formato = new DecimalFormat("#,##0.00");
-//                DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-//                simbolos.setGroupingSeparator('.');
-//                simbolos.setDecimalSeparator(',');
-//                formato.setDecimalFormatSymbols(simbolos);
-                txtSalario.setText(Double.toString(serGenerales.getSalarioBase()));
-                txtNuevoDocumento.setText(serGenerales.getNoDoumento());
-                mostrar();
-            }
+
+            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(txtBuscar.getText());
+            JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText());
+
+
+            cmbTipoDocumento.setSelectedItem(serGenerales.getTipoDocumento());
+            cmbAlturas.setSelectedItem(hasAlturas(serGenerales.getCerAlturas()));
+            txtNombre.setText(serGenerales.getNombre());
+            txtSalario.setText(Double.toString(serGenerales.getSalarioBase()));
+            txtNuevoDocumento.setText(serGenerales.getNoDoumento());
+            mostrar();
+
         } catch (Exception e) {
+            limpiar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
 
     private void actualizarAdministrativo(ActionEvent evt) {
         try {
+
             String id = txtBuscar.getText();
-            ESerGen serGenerales = empleadoServicioESerGen.searchElementoByNoDocumento(id.strip());
-            empleadoServicioESerGen.actualizarElemento(id.strip(), cmbTipoDocumento.getSelectedItem().toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()));
-            serGenerales.setCerAlturas(Boolean.parseBoolean(hasAlturasLogical(cmbAlturas.getSelectedItem().toString())));
+            eSerGenServicio.actualizarESerGen(this.txtNuevoDocumento.getText(), id.strip(), cmbTipoDocumento.getSelectedItem().toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()), Boolean.parseBoolean(hasAlturasLogical(cmbAlturas.getSelectedItem().toString())));
             JOptionPane.showMessageDialog(this, "Empleado con id " + id + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
