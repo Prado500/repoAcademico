@@ -120,7 +120,7 @@ public class GUIAddComanda extends JFrame {
             JOptionPane.showMessageDialog(this, "Comanda con id " + idComanda + " creada. ");
             limpiar();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error creando la comanda: " + e.getMessage());
         }
     }
 
@@ -132,10 +132,5 @@ public class GUIAddComanda extends JFrame {
 
     }
 
-    private void mostrar() {
-
-        panelDatos.setVisible(true);
-
-    }
 
 }
