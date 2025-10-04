@@ -248,9 +248,7 @@ public class ESerGenServicio implements IEserGenServicio {
      * @return int, el id de la última comanda creada.
      */
     public int getIdComanda(){
-        List<Comanda> comandas = this.comandaServicio.mostrarComandas();
-
-        return comandas.getLast().getId();
+        return this.comandaServicio.getComandaId();
     }
 
     /**

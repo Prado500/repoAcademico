@@ -17,4 +17,5 @@ public interface IComandaServicio {
     public Comanda buscarComandaID(int id);
     public List<Comanda> mostrarComandas();
     public void actualizarComanda(Comanda comanda, String descripcion, String principio, String proteina, String fechaCaducidad);
+    public int getComandaId();
 }

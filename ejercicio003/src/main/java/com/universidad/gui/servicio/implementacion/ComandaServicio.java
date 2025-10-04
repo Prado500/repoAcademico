@@ -80,5 +80,13 @@ public class ComandaServicio implements IComandaServicio {
         }
     }
 
+    /**
+     * Método para retornar el id de la última comanda creada. se usa para pasarle a la GUI de creación de comandas el id de comanda que se muestra en el mensaje de creación exitosa.
+     * @return int, el id de la última comanda creada.
+     */
+    @Override
+    public int getComandaId(){
+        return this.comandas.getLast().getId();
+    }
     
 }

@@ -110,20 +110,14 @@ public class GUIAddComanda extends JFrame {
 
     
     private void crearComanda(ActionEvent evt) {
+
         try {
-//            String id = this.txtBuscar.getText();
-//            
-//            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(id.strip());
-//            if (serGenerales == null) {
-//                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
-//                limpiar();
-//            }
+
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
-            Comanda comanda = new Comanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
-            System.out.println(comanda);
-            eSerGenServicio.crearComandaIndependiente(comanda);
-            JOptionPane.showMessageDialog(this, "Comanda con id " + comanda.getId() + " creada. ");
+            eSerGenServicio.crearComandaIndependiente(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
+            int idComanda = eSerGenServicio.getIdComanda();
+            JOptionPane.showMessageDialog(this, "Comanda con id " + idComanda + " creada. ");
             limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
