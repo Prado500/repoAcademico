@@ -329,6 +329,8 @@ public class ESerGenServicio implements IEserGenServicio {
     public List<Comanda> mostrarComandaPorESerGen(String idESerGen) {
 
         ESerGen serGenerales = this.buscarESerGenPorNoDocumento(idESerGen);
+        if (serGenerales.getComandas().isEmpty())
+            throw new IllegalArgumentException("No se han registrado comandas para el empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento()+".");
         return new ArrayList<>(serGenerales.getComandas());
     }
 

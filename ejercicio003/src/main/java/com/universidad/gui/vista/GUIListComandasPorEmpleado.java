@@ -4,6 +4,7 @@ import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.IObservador;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -122,16 +123,14 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
     }
 
     private void buscarEmpleado(ActionEvent evt) {
+
         try {
-            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(this.txtBuscar.getText());
-            System.out.println("Este es el id: " + this.txtBuscar.getText());
-            if (serGenerales == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
-                limpiar();
-            } else {
-                this.cargarTabla(serGenerales.getNoDoumento());
-            }
+
+            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(this.txtBuscar.getText());
+            this.cargarTabla(serGenerales.getNoDoumento());
+
         } catch (Exception e) {
+            limpiar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }
@@ -139,27 +138,24 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
     private void cargarTabla(String idESerGen) {
         try {
             List<Comanda> comandasList = eSerGenServicio.mostrarComandaPorESerGen(idESerGen);
-            if (comandasList != null && !comandasList.isEmpty()) {
+
                 jPanelListComandas.setVisible(true);
                 DefaultTableModel model = (DefaultTableModel) jTableListComandas.getModel();
                 model.setRowCount(0);
                 for (Comanda comanda : comandasList) {
                     Object[] fila = {
-                        comanda.getId(),
-                        idESerGen,
-                        comanda.getFechaCaducidad(),
-                        comanda.getDescripcion(),
-                        comanda.getPrincipio(),
-                        comanda.getProteina(),
-                        comanda.getSopa()
+                            comanda.getId(),
+                            idESerGen,
+                            comanda.getFechaCaducidad(),
+                            comanda.getDescripcion(),
+                            comanda.getPrincipio(),
+                            comanda.getProteina(),
+                            comanda.getSopa()
                     };
                     model.addRow(fila);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "La lista está vacía");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error al mostrar comandas: " + ex.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al mostrar comandas: " + e.getMessage());
         }
 
     }
@@ -172,8 +168,8 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
     @Override
     public void actualizar() {
         if (this.chkRefrescable.isSelected()) {
-            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(this.txtBuscar.getText());
-            this.cargarTabla(serGenerales);
+            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(this.txtBuscar.getText());
+            this.cargarTabla(serGenerales.getNoDoumento());
         }
     }
 }

@@ -55,10 +55,6 @@ public class ESerGen extends Empleado {
     }
     
     public List<Comanda> getComandas(){
-//        List<Comanda> retorno = new ArrayList<Comanda>();
-//        for (Comanda comanda : comandas){
-//            retorno.add(comanda);
-//        }
         return new ArrayList<>(comandas); //copia de comandas
     }
 
