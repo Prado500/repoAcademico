@@ -6,7 +6,8 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.modelo.implementacion.ESerGen;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -19,12 +20,12 @@ public class GUIAddESerGen extends javax.swing.JFrame  {
      * Creates new form GUIAddAdministrativo
      */
     
-    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
+    private ESerGenServicio eSerGenServicio;
     
-    public GUIAddESerGen(EmpleadoServicio<ESerGen> servicio) {
+    public GUIAddESerGen(ESerGenServicio eSerGenServicio) {
         initComponents();
         setLocationRelativeTo(null);
-        this.empleadoServicioESerGen = servicio;
+        this.eSerGenServicio = eSerGenServicio;
     }
     
     public void limpiar(){
@@ -196,6 +197,7 @@ public class GUIAddESerGen extends javax.swing.JFrame  {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try{
+
             boolean alturas = false;
             String nombre = txtNombre.getText().strip().toUpperCase();
             double salario = Double.parseDouble(txtSalario.getText().strip());
@@ -206,10 +208,9 @@ public class GUIAddESerGen extends javax.swing.JFrame  {
             if(resAlturas.equalsIgnoreCase("SI")){
             alturas = true;
             }
-            ESerGen serGenerales = new ESerGen (noDocumento, tipoDocumento, nombre, salario, estatus, alturas);
-            empleadoServicioESerGen.agregar(serGenerales);
+            eSerGenServicio.agregarESerGen(noDocumento, tipoDocumento, nombre, salario, estatus, alturas);
             limpiar();
-            JOptionPane.showMessageDialog(this, "Empleado con nombre " + serGenerales.getNombre() + " y documento No." +serGenerales.getNoDoumento()+ " creado exitosamente ");
+            JOptionPane.showMessageDialog(this, "Empleado con nombre " + nombre + " y documento No." + noDocumento + " creado exitosamente ");
         
         }catch(Exception e){
           JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -254,14 +255,7 @@ public class GUIAddESerGen extends javax.swing.JFrame  {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            private EmpleadoServicio<ESerGen> empleadoServicio;
-            public void run() {
-                EmpleadoServicio<ESerGen> servicioPrueba = new EmpleadoServicio<>();
-                new GUIAddESerGen(servicioPrueba).setVisible(true);
-            }
-        });
+      
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

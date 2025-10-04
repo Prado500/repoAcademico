@@ -13,8 +13,8 @@ import java.util.List;
  * @author David Alejandro De Los Reyes Ostos
  */
 public interface IEserGenServicio {
-    
-    public void agregarESerGen(ESerGen serGenerales);
+
+    public void agregarESerGen(String tipoDocumento, String noDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas);
 
     public List<ESerGen> mostrarESerGen();
 

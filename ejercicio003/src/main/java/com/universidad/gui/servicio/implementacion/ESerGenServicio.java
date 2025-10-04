@@ -37,18 +37,21 @@ public class ESerGenServicio implements IEserGenServicio {
     //Métodos heredados y específicos para ESerGen únicamente (DETALLE Relacion maestro/detalle)
 
     /**
-     *Método para agregar un objeto del tipo ESerGen (Empleado de servicios generales)
-     * a la lista del serviucio de los empleados generales.
-     *
-     * @param serGenerales es objeto del tipo ESerGen.
-     *
+     * Método para crear y agregar un objeto del tipo ESerGen (Empleado de servicios generales)
+     * a la lista del servicio de los empleados generales.
+     * @param tipoDocumento String, puede ser "CC" para cédula de ciudadanía, "CE" para cédula de extranjeria o "PA" para pasaporte.
+     * @param noDocumento String, es el número de documento. No admite caracteres no numéricos y su longitud debe estar entre 6 y 10 dígitos.
+     * @param nombre String, es el nombre del empleado de servicios generales.
+     * @param salarioBase double, es la cifra del salario base. No admite caracteres no númericos. No puede ser negativo y debe ser inferior a 20000000.
+     * @param estatus String, es el atributo que define si un empleado está activo "AC" o inactivo "IN". Se utiliza para el borrado lógico.
+     * @param certAlturas boolean, define si cuenta o no con certificación de alturas.
      */
     @Override
-    public void agregarESerGen(ESerGen serGenerales) {
+    public void agregarESerGen(String tipoDocumento, String noDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas) {
 
+        ESerGen serGenerales = new ESerGen(noDocumento , tipoDocumento, nombre, salarioBase, estatus, certAlturas);
         this.serGenerales.add(serGenerales);
         this.notificarObservadores();
-
     }
 
     /**
