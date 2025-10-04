@@ -20,7 +20,7 @@ public class GUIAddESerGen extends javax.swing.JFrame  {
      * Creates new form GUIAddAdministrativo
      */
     
-    private ESerGenServicio eSerGenServicio;
+    private final ESerGenServicio eSerGenServicio;
     
     public GUIAddESerGen(ESerGenServicio eSerGenServicio) {
         initComponents();

@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 public class GUICalcularNominaAdministrativos extends JFrame {
 
-    private AdministrativoServicio administrativoServicio;
+    private final AdministrativoServicio administrativoServicio;
 
     // Componentes
     private JPanel panelPrincipal;

@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 
 public class GUIActualizarAdministrativo extends JFrame {
 
-private AdministrativoServicio administrativoServicio;
+private final AdministrativoServicio administrativoServicio;
     // Componentes
     private JPanel panelPrincipal;
     private JPanel panelBusqueda;

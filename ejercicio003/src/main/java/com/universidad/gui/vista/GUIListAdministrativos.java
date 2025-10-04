@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GUIListAdministrativos extends JFrame implements IObservador {
 
-    private AdministrativoServicio administrativoServicio;
+    private final AdministrativoServicio administrativoServicio;
     private JButton jButton1Salir;
     private JButton jButton2Mostrar;
     private JCheckBox chkRefrescable;

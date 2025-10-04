@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GUIListESerGen extends JFrame implements IObservador {
 
-private ESerGenServicio eSerGenServicio;
+private final ESerGenServicio eSerGenServicio;
     private JButton jButton1Salir;
     private JButton jButton2Mostrar;
     private JCheckBox chkRefrescable;

@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 public class GUIActualizarESerGen extends JFrame {
 
-    private ESerGenServicio eSerGenServicio;
+    private final ESerGenServicio eSerGenServicio;
 
     // Componentes
     private JPanel panelPrincipal;

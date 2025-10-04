@@ -32,7 +32,7 @@ import javax.swing.JTextField;
 
 public class GUIEliminarAdministrativo extends JFrame {
 
-    private AdministrativoServicio administrativoServicio;
+    private final AdministrativoServicio administrativoServicio;
     // Componentes
     private JPanel panelPrincipal;
     private JPanel panelBusqueda;

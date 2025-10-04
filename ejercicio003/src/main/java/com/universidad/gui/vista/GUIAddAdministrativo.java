@@ -18,7 +18,7 @@ public class GUIAddAdministrativo extends javax.swing.JFrame {
      * Creates new form GUIAddAdministrativo
      */
     
-    private AdministrativoServicio administrativoServicio;
+    private final AdministrativoServicio administrativoServicio;
     
     
     public GUIAddAdministrativo(AdministrativoServicio administrativoServicio) {

@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class GUISearchAdministrativoPorNoDocumento extends javax.swing.JFrame {
 
-private AdministrativoServicio administrativoServicio;
+private final AdministrativoServicio administrativoServicio;
     /**
      * Creates new form GUISearchEmpleadoPorNoDocumento
      */

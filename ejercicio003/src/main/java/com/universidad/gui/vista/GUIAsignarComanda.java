@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 public class GUIAsignarComanda extends JFrame {
 
-    private ESerGenServicio eSerGenServicio;
+    private final ESerGenServicio eSerGenServicio;
 
     // Componentes
     private JPanel panelPrincipal;

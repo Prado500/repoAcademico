@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 
 public class GUIAddAndAssignComanda extends JFrame {
 
-    private ESerGenServicio eSerGenServicio;
+    private final ESerGenServicio eSerGenServicio;
     // Componentes
     private JPanel panelPrincipal;
     private JPanel panelBusqueda;

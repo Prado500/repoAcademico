@@ -33,7 +33,7 @@ import javax.swing.text.DateFormatter;
 
 public class GUIActualizarComanda extends JFrame {
 
-    private ESerGenServicio eSerGenServicio;
+    private final ESerGenServicio eSerGenServicio;
 
     // Componentes
     private JPanel panelPrincipal;

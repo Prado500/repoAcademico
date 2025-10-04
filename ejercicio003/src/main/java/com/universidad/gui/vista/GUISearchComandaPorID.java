@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class GUISearchComandaPorID extends javax.swing.JFrame {
 
-    private ESerGenServicio eSerGenServicio;
+    private final ESerGenServicio eSerGenServicio;
 
     /**
      * Creates new form GUISearchEmpleadoPorNoDocumento

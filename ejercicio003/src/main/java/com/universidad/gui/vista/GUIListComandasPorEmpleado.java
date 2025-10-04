@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
 
-    private ESerGenServicio eSerGenServicio;
+    private final ESerGenServicio eSerGenServicio;
     private JButton btnBuscar, jButton1Salir;
     private JCheckBox chkRefrescable;
     private JPanel jPanelBusqueda;
