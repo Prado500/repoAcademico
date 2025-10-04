@@ -2,7 +2,8 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.IObservador;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -26,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GUIListESerGen extends JFrame implements IObservador {
 
-    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
+private ESerGenServicio eSerGenServicio;
     private JButton jButton1Salir;
     private JButton jButton2Mostrar;
     private JCheckBox chkRefrescable;
@@ -34,14 +35,14 @@ public class GUIListESerGen extends JFrame implements IObservador {
     private JPanel jPanelListEmpleado;
     private JTable jTableListEmpleados;
 
-    public GUIListESerGen(EmpleadoServicio<ESerGen> empleadoServicioESerGen) {
-        this.empleadoServicioESerGen = empleadoServicioESerGen;
+    public GUIListESerGen(ESerGenServicio eSerGenServicio) {
+        this.eSerGenServicio = eSerGenServicio;
         initializeComponents();
         setupLayout();
         setupListeners();
         setLocationRelativeTo(null);
         jTableListEmpleados.setEnabled(false);
-        empleadoServicioESerGen.agregarObservador(this);
+        eSerGenServicio.agregarObservador(this);
     }
 
     private void initializeComponents() {
@@ -73,7 +74,7 @@ public class GUIListESerGen extends JFrame implements IObservador {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                empleadoServicioESerGen.eliminarObservador(GUIListESerGen.this);
+                eSerGenServicio.eliminarObservador(GUIListESerGen.this);
             }
         });
     }
@@ -118,8 +119,8 @@ public class GUIListESerGen extends JFrame implements IObservador {
 
     private void setupListeners() {
         jButton1Salir.addActionListener(e -> {
-            this.empleadoServicioESerGen.eliminarObservador(this);
-            empleadoServicioESerGen.mostrarObservadores();
+            this.eSerGenServicio.eliminarObservador(this);
+            eSerGenServicio.mostrarObservadores();
             dispose();
         });
 
@@ -130,8 +131,9 @@ public class GUIListESerGen extends JFrame implements IObservador {
 
     private void cargarTabla() {
         try {
-            List<ESerGen> ESerGenList = empleadoServicioESerGen.mostrar();
-            if (ESerGenList != null && !ESerGenList.isEmpty()) {
+
+            List<ESerGen> ESerGenList = eSerGenServicio.mostrarESerGen();
+
                 jPanelListEmpleado.setVisible(true);
                 DecimalFormat formato = new DecimalFormat("#,##0.00");
                 DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
@@ -157,9 +159,9 @@ public class GUIListESerGen extends JFrame implements IObservador {
                     model.addRow(fila);
                     alturas = "NO";
                 }
-            } else {
+                this.jPanelListEmpleado.setVisible(false);
                 JOptionPane.showMessageDialog(this, "La lista está vacía");
-            }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al mostrar empleados: " + ex.getMessage());
         }

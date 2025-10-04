@@ -70,6 +70,8 @@ public class ESerGenServicio implements IEserGenServicio {
                 elementosMostrar.add(serGenerales);
             }
         }
+        if (elementosMostrar.isEmpty())
+            throw new IllegalArgumentException("La lista está vacía. No hay administrativos registrados todavía");
         return elementosMostrar;
     }
 

@@ -255,7 +255,7 @@ public class GUIAddESerGen extends javax.swing.JFrame  {
         //</editor-fold>
         //</editor-fold>
 
-      
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
