@@ -62,6 +62,8 @@ public class ComandaServicio implements IComandaServicio {
         for (Comanda comanda : comandas)
             if (comanda.getEstatus().equals("AC"))
                 retorno.add(comanda);
+        if (retorno.isEmpty())
+            throw new IllegalArgumentException("Aún no se ha registrado ninguna comanda");
         return retorno;
     }
 

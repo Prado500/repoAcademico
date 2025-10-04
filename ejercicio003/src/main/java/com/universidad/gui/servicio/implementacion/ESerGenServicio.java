@@ -392,7 +392,7 @@ public class ESerGenServicio implements IEserGenServicio {
 
     /**
      * Método que agruega un GUI que implementa la interfaz IObservador a la lista de observadores de este servicio.
-     * @param observador es un GUI que implementa la interfaz IObservador.
+     * @param observador es una GUI que implementa la interfaz IObservador.
      */
     public void agregarObservador(IObservador observador) {
 

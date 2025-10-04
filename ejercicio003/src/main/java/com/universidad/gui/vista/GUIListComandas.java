@@ -127,9 +127,10 @@ public class GUIListComandas extends JFrame implements IObservador {
     }
 
     private void cargarTabla() {
+
         try {
+
             List<Comanda> comandasList = eSerGenServicio.mostrarComandas();
-            if (comandasList != null && !comandasList.isEmpty()) {
                 jPanelListComandas.setVisible(true);
                 DefaultTableModel model = (DefaultTableModel) jTableListComandas.getModel();
                 model.setRowCount(0);
@@ -150,11 +151,10 @@ public class GUIListComandas extends JFrame implements IObservador {
                         comanda.getSopa()
                     };
                     model.addRow(fila);
-                }
-            } else {
                 JOptionPane.showMessageDialog(this, "La lista está vacía");
             }
         } catch (Exception ex) {
+            jPanelListComandas.setVisible(false);
             JOptionPane.showMessageDialog(this, "Error al mostrar comandas: " + ex.getMessage());
         }
 
