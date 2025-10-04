@@ -7,7 +7,8 @@ package com.universidad.gui.vista;
 import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.modelo.implementacion.ESerGen;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.JOptionPane;
@@ -18,14 +19,14 @@ import javax.swing.JOptionPane;
  */
 public class GUISearchESerGenPorNoDocumento extends javax.swing.JFrame {
 
-    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
+    private ESerGenServicio eSerGenServicio;
 
     /**
      * Creates new form GUISearchEmpleadoPorNoDocumento
      */
-    public GUISearchESerGenPorNoDocumento(EmpleadoServicio<ESerGen> empleadoServicioESerGen) {
+    public GUISearchESerGenPorNoDocumento(ESerGenServicio eSerGenServicio) {
         initComponents();
-        this.empleadoServicioESerGen = empleadoServicioESerGen;
+        this.eSerGenServicio = eSerGenServicio;
         setLocationRelativeTo(null);
         jPanelSearchEmpleado.setVisible(false);
         
@@ -35,17 +36,17 @@ public class GUISearchESerGenPorNoDocumento extends javax.swing.JFrame {
     
     public void limpiar() {
         this.txtSearchEmpleado.setText(" ");
-//        this.txtSalario.setText(" ");
-//        this.txtEstatus.setText(" ");
-//        this.txtNoDocumento.setText(" ");
 
     }
 
     public void mostrar() {
-       jPanelSearchEmpleado.setVisible(true);
+
+        jPanelSearchEmpleado.setVisible(true);
     }
-    
-    
+
+    public void ocultar() {
+        jPanelSearchEmpleado.setVisible(false);
+    }
    
    
 
@@ -208,8 +209,9 @@ public class GUISearchESerGenPorNoDocumento extends javax.swing.JFrame {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         try {
+
             String noDocumento = txtSearchEmpleado.getText();
-            ESerGen serGenerales = empleadoServicioESerGen.searchElementoByNoDocumento(noDocumento);
+            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(noDocumento);
             mostrar();
             this.lblNombre.setText(serGenerales.getNombre());
             DecimalFormat formato = new DecimalFormat("#,##0.00");
@@ -222,6 +224,7 @@ public class GUISearchESerGenPorNoDocumento extends javax.swing.JFrame {
             limpiar();
             
         } catch (Exception e) {
+            ocultar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
