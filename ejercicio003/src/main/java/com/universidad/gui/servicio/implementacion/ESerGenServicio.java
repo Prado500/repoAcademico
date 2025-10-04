@@ -341,8 +341,7 @@ public class ESerGenServicio implements IEserGenServicio {
      */
     public Comanda buscarComandaPorId(int id) {
 
-        Comanda comanda = this.comandaServicio.buscarComandaID(id);
-        return comanda;
+        return this.comandaServicio.buscarComandaID(id);
     }
 
     /**
