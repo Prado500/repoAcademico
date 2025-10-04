@@ -380,12 +380,7 @@ public class ESerGenServicio implements IEserGenServicio {
             throw new IllegalArgumentException("La comanda con ID " + comandaId + " ya fué asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No." + comanda.getEserGen().getNoDoumento());
         }
 
-        for (Comanda comandaLista : this.comandaServicio.mostrarComandas()) {
-            if (comanda.getId() == comandaId) {
-                comanda.setEserGen(serGenerales);
-                serGenerales.agregarComanda(comanda);
-            }
-        }
+        comanda.setEserGen(serGenerales);
     }
 
     // Métodos para la implementación del patrón observer

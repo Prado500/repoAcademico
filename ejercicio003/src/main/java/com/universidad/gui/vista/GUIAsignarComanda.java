@@ -3,6 +3,7 @@ package com.universidad.gui.vista;
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -110,7 +111,7 @@ public class GUIAsignarComanda extends JFrame {
                 int idComanda = Integer.parseInt(idComandaS);
                 asignarComanda(idComanda);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error: " + e);
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
         });
 
@@ -120,48 +121,50 @@ public class GUIAsignarComanda extends JFrame {
     }
 
     private void buscarEmpleado(ActionEvent evt) {
+
         try {
-            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(this.txtBuscar.getText());
-            System.out.println("Este es el id: " + this.txtBuscar.getText());
-            if (serGenerales == null) {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con documento " + txtBuscar.getText() + "\nAsegúrese de ingresar un número de documento válido y existente.");
-                //limpiar();
-            } else {
-                JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana y haga clic en el botón Asignar Comanda para asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
-                this.txtID.setText(this.txtBuscar.getText());
-                this.txtID.setEditable(false);
-                mostrar();
-            }
+
+            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(this.txtBuscar.getText());
+            JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana y haga clic en el botón Asignar Comanda para asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
+            this.txtID.setText(this.txtBuscar.getText());
+            this.txtID.setEditable(false);
+            mostrar();
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error. Asegúrese de ingresar un ID de comanda válido y existente:\n" + e.getMessage());
+            ocultarPanel();
+            JOptionPane.showMessageDialog(this, "Error. Asegúrese de ingresar un No.documento válido y existente:\n" + e.getMessage());
         }
     }
 
     private void asignarComanda(int idComanda) {
         try {
-            ESerGen serGenerales = eSerGenServicio.searchElementoByNoDocumento(this.txtBuscar.getText());
-            String idEserGen = this.txtBuscar.getText();
 
             if (this.txtID.getText().isBlank()) {
                 throw new IllegalArgumentException("""
-                                                   No es posible asignar una comanda sin primero buscar un empleado.
-                                                   Primero busque un empleado por su número de documento y luego
-                                                   Asígnele a ese empleado la comanda.
-                                                   """);
+                        No es posible asignar una comanda sin primero buscar un empleado.
+                        Primero busque un empleado por su número de documento y luego
+                        Asígnele a ese empleado la comanda.
+                        """);
             }
-            
+
+            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(this.txtBuscar.getText());
+            String idEserGen = this.txtBuscar.getText();
             eSerGenServicio.asignarComanda(idEserGen, idComanda);
-            JOptionPane.showMessageDialog(this, "Comanda exitosamente asignada al empleado " + serGenerales.getNombre() + " con " +serGenerales.getTipoDocumento() +  " No. " + idEserGen);
+            JOptionPane.showMessageDialog(this, "Comanda exitosamente asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + idEserGen);
             limpiar();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-            limpiar();
+            JOptionPane.showMessageDialog(this, "Error al asignar la comanda con id: " + idComanda + e.getMessage());
+
         }
     }
 
     private void limpiar() {
         txtBuscar.setText("");
         txtID.setText("");
+
+    }
+
+    private void ocultarPanel(){
         panelDatos.setVisible(false);
     }
 
