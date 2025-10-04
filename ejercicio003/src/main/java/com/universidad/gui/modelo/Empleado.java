@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 /**
  *
  * @author David Alejandro De los Reyes Ostos
- * @param <T> es un objeto
  */
 public abstract class Empleado implements IEmpleado {
 
@@ -37,8 +36,8 @@ public abstract class Empleado implements IEmpleado {
 
         validarTipoDocumento(tipoDocumento);
         this.tipoDocumento = tipoDocumento;
-        validarNombre(nombre);
 
+        validarNombre(nombre);
         this.nombre = Objects.requireNonNull(nombre, "El nombre no puede ser nulo ");
 
         validarSalarioBase(salarioBase);
@@ -153,7 +152,7 @@ public abstract class Empleado implements IEmpleado {
         return ESTATUS_PERMITIDOS;
     }
 
-   // delego la implementacion a las subclases.
+   // delego la implementación a las subclases.
     
     private void validarNoDocumento(String noDocumento) {
 

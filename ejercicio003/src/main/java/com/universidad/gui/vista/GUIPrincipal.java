@@ -5,8 +5,7 @@
 package com.universidad.gui.vista;
 
 
-import com.universidad.gui.modelo.implementacion.Administrativo;
-import com.universidad.gui.modelo.implementacion.ESerGen;
+
 import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
 import com.universidad.gui.servicio.implementacion.ComandaServicio;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;

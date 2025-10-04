@@ -15,7 +15,6 @@ public class ESerGen extends Empleado {
 
     public ESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean cerAlturas) {
         super(noDocumento, tipoDocumento, nombre, salarioBase, estatus);
-
         this.cerAlturas = cerAlturas;
         this.setBonificacion(this.aplicarBonificacion(this.getSalarioBase()));
         this.comandas = new ArrayList<>();

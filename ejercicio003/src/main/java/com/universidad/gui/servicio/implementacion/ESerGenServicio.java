@@ -47,9 +47,9 @@ public class ESerGenServicio implements IEserGenServicio {
      * @param certAlturas boolean, define si cuenta o no con certificación de alturas.
      */
     @Override
-    public void agregarESerGen(String tipoDocumento, String noDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas) {
+    public void agregarESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas) {
 
-        ESerGen serGenerales = new ESerGen(noDocumento , tipoDocumento, nombre, salarioBase, estatus, certAlturas);
+        ESerGen serGenerales = new ESerGen(noDocumento, tipoDocumento, nombre, salarioBase, estatus, certAlturas);
         this.serGenerales.add(serGenerales);
         this.notificarObservadores();
     }

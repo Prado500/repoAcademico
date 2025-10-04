@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface IEserGenServicio {
 
-    public void agregarESerGen(String tipoDocumento, String noDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas);
+    public void agregarESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas);
 
     public List<ESerGen> mostrarESerGen();
 
