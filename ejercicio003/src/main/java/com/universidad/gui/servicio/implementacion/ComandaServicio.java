@@ -66,12 +66,14 @@ public class ComandaServicio implements IComandaServicio {
     }
 
     @Override
-    public void actualizarComanda(Comanda comanda, String descripcion, String principio, String proteina, String fechaCaducidad) {
+    public void actualizarComanda(int idComanda, String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
         
         try{
+            Comanda comanda = this.buscarComandaID(idComanda);
             comanda.setDescripcion(descripcion);
             comanda.setPrincipio(principio);
             comanda.setProteina(proteina);
+            comanda.setSopa(sopa);
             comanda.setFechaCaducidad(fechaCaducidad);    
         }catch(Exception e){
             throw new IllegalArgumentException("""

@@ -4,7 +4,6 @@ import com.toedter.calendar.JDateChooser;
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -13,7 +12,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -22,14 +20,11 @@ import java.time.format.ResolverStyle;
 import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.DateFormatter;
 
 public class GUIActualizarComanda extends JFrame {
 
@@ -184,8 +179,7 @@ public class GUIActualizarComanda extends JFrame {
             SimpleDateFormat formatoFechaCaducidad = new SimpleDateFormat("dd/MM/yyyy");
             String fechaCaducidad = formatoFechaCaducidad.format(this.jdcFechaCaducidad.getDate());
             eSerGenServicio.actualizarComanda(id, this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
-            ESerGen serGenerales = comanda.getEserGen();
-            if (serGenerales == null) {
+            if (comanda.getEserGen() == null) {
                 JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y sin asignar actualizada exitosamente");
             } else {
                 JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nActualizada exitosamente");

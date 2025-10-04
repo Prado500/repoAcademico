@@ -352,14 +352,9 @@ public class ESerGenServicio implements IEserGenServicio {
      * @param sopa describe el tipo de sopa. No admite caracteres extraños. Solo permite 50 carácteres incluidos espacios en blanco.
      * @param fechaCaducidad es la fecha de caducidad de la comanda.
      */
-    public void actualizarComanda(int idComanda, String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
+    public void actualizarComanda( int idComanda, String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
 
-        Comanda comanda = this.comandaServicio.buscarComandaID(idComanda);
-        comanda.setDescripcion(descripcion);
-        comanda.setPrincipio(principio);
-        comanda.setProteina(proteina);
-        comanda.setSopa(sopa);
-        comanda.setFechaCaducidad(fechaCaducidad);
+        this.comandaServicio.actualizarComanda(idComanda, descripcion, principio, proteina, sopa, fechaCaducidad);
     }
 
     /**
