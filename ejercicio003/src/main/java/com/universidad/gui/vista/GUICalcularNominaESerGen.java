@@ -2,7 +2,8 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.modelo.implementacion.ESerGen;
-import com.universidad.gui.servicio.implementacion.EmpleadoServicio;
+import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -17,14 +18,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GUICalcularNominaESerGen extends JFrame {
 
-    private EmpleadoServicio<ESerGen> empleadoServicioESerGen;
-
+private ESerGenServicio eSerGenServicio;
     // Componentes
     private JPanel panelPrincipal;
     // private JPanel panelBusqueda;
@@ -33,8 +32,8 @@ public class GUICalcularNominaESerGen extends JFrame {
     private JTextField txtNominaCruda, txtNominaTotal;
     private JButton btnSalir, btnCalcular;
 
-    public GUICalcularNominaESerGen(EmpleadoServicio<ESerGen> empleadoServicioESerGen) {
-        this.empleadoServicioESerGen = empleadoServicioESerGen;
+    public GUICalcularNominaESerGen(ESerGenServicio eSerGenServicio) {
+        this.eSerGenServicio = eSerGenServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
         this.txtNominaCruda.setEditable(false);
@@ -109,15 +108,13 @@ public class GUICalcularNominaESerGen extends JFrame {
 
     private void calcularNomina(ActionEvent evt) {
         try {
-            if (empleadoServicioESerGen.mostrar().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "La lista está vacia");
-                this.ocultar();
-            } else {
+
                 this.mostrar();
-                this.txtNominaCruda.setText("$ " + this.aplicarFormato(empleadoServicioESerGen.calcularNomina(empleadoServicioESerGen.mostrar())));
-            }
+                this.txtNominaCruda.setText("$ " + this.aplicarFormato(eSerGenServicio.calcularNominaESerGen(eSerGenServicio.mostrarESerGen())));
+
 
         } catch (Exception e) {
+            this.ocultar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
@@ -127,19 +124,15 @@ public class GUICalcularNominaESerGen extends JFrame {
 
         try {
             
-            this.txtNominaTotal.setText("$ " + this.aplicarFormato(empleadoServicioESerGen.calcularNominaConBonificacion(empleadoServicioESerGen.mostrar())));
+            this.txtNominaTotal.setText("$ " + this.aplicarFormato(eSerGenServicio.calcularNominaConBonificacionESerGen(eSerGenServicio.mostrarESerGen())));
 
         } catch (Exception e) {
+            this.ocultar();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
     }
 
-    private void limpiar() {
-        this.txtNominaCruda.setText("");
-        this.txtNominaTotal.setText("");
-        panelDatos.setVisible(false);
-    }
 
     private void mostrar() {
 
@@ -162,6 +155,5 @@ public class GUICalcularNominaESerGen extends JFrame {
         
         return formato.format(numero);
     }
-
-    //private void
+    
 }

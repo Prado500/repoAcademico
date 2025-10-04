@@ -164,11 +164,15 @@ public class ESerGenServicio implements IEserGenServicio {
      *
      * @param serGeneralesList Copia de la lista del servicio de empleados de sericio genereal ESserGenServicio.
      * @return El valor total de la nómina de los empleados de servicios generales
-     * despues de aplicada la bonificación.
+     * después de aplicada la bonificación.
      *
      */
     @Override
     public double calcularNominaConBonificacionESerGen(List<ESerGen> serGeneralesList) {
+
+        if (this.serGenerales.isEmpty()) {
+            throw new IllegalArgumentException("No fue posible calcular la nómina cruda con bonificación para los empleados de servicios generales porque\nno se ha registrado ningúno");
+        }
 
         DecimalFormat formato = new DecimalFormat("#,##0.00");
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
@@ -194,6 +198,10 @@ public class ESerGenServicio implements IEserGenServicio {
      */
     @Override
     public double calcularNominaESerGen(List<ESerGen> serGeneralesList) {
+
+        if (this.serGenerales.isEmpty()) {
+            throw new IllegalArgumentException("No fue posible calcular la nómina cruda (sin bonificación) para los empleados de servicios generales porque\nno se ha registrado ningúno");
+        }
 
         DecimalFormat formato = new DecimalFormat("#,##0.00");
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();

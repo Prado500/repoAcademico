@@ -174,7 +174,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
     public double calcularNominaConBonificacionAdministrativo(List<Administrativo> administrativos) {
 
         if (this.administrativos.isEmpty()) {
-            throw new IllegalArgumentException("No fue posible calcular la nómina con bonificación para los empleados administrativos porque\nno se ha registrado ningúno");
+            throw new IllegalArgumentException("No fue posible calcular la nómina con bonificación para los administrativos porque\nno se ha registrado ningúno");
         }
 
         DecimalFormat formato = new DecimalFormat("#,##0.00");
@@ -201,7 +201,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
     public double calcularNominaAdministrativo(List<Administrativo> administrativos) {
 
         if (this.administrativos.isEmpty()) {
-            throw new IllegalArgumentException("No fue posible calcular la nómina cruda (sin bonificación) para los empleados administrativos porque\nno se ha registrado ningúno");
+            throw new IllegalArgumentException("No fue posible calcular la nómina cruda (sin bonificación) para los administrativos porque\nno se ha registrado ningúno");
         }
 
         DecimalFormat formato = new DecimalFormat("#,##0.00");
