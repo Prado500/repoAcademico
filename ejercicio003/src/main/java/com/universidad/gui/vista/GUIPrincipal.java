@@ -9,6 +9,8 @@ package com.universidad.gui.vista;
 import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
 import com.universidad.gui.servicio.implementacion.ComandaServicio;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+import com.universidad.gui.servicio.implementacion.MaestroDetalleServicio;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -26,14 +28,15 @@ public class GUIPrincipal extends javax.swing.JFrame {
   private AdministrativoServicio administrativoServicio;
   private ESerGenServicio eSerGenServicio;
   private ComandaServicio comandaServicio;
-
+  private MaestroDetalleServicio maestroDetalleServicio;
   
     private GUIPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
         this.administrativoServicio = new AdministrativoServicio();
-        this.comandaServicio = new ComandaServicio();
         this.eSerGenServicio = new ESerGenServicio(comandaServicio);
+        this.comandaServicio = new ComandaServicio();
+        this.maestroDetalleServicio = new MaestroDetalleServicio(eSerGenServicio, comandaServicio);
     }
 
     public static GUIPrincipal getInstance(){
@@ -437,7 +440,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemActualizarComandaActionPerformed
 
     private void CrudComandasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrudComandasActionPerformed
-        GUIActualizarComanda gui = new GUIActualizarComanda(eSerGenServicio);
+        GUIActualizarComanda gui = new GUIActualizarComanda(this.maestroDetalleServicio);
         gui.setVisible(true);
     }//GEN-LAST:event_CrudComandasActionPerformed
 

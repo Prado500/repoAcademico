@@ -2,8 +2,8 @@ package com.universidad.gui.vista;
 
 import com.toedter.calendar.JDateChooser;
 import com.universidad.gui.modelo.implementacion.Comanda;
-import com.universidad.gui.modelo.implementacion.ESerGen;
-import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+import com.universidad.gui.servicio.implementacion.MaestroDetalleServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 
 public class GUIActualizarComanda extends JFrame {
 
-    private final ESerGenServicio eSerGenServicio;
+    private final MaestroDetalleServicio maestroDetalleServicio;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -39,8 +39,8 @@ public class GUIActualizarComanda extends JFrame {
     private JDateChooser jdcFechaCaducidad;
     private JButton btnBuscar, btnSalir, btnActualizar;
 
-    public GUIActualizarComanda(ESerGenServicio eSerGenServicio) {
-        this.eSerGenServicio = eSerGenServicio;
+    public GUIActualizarComanda(MaestroDetalleServicio maestroDetalleServicio) {
+        this.maestroDetalleServicio = maestroDetalleServicio;
         initComponentsManual();
         this.txtID.setEditable(false);
         this.txtIdESerGen.setEditable(false);
@@ -135,7 +135,7 @@ public class GUIActualizarComanda extends JFrame {
     private void buscarComanda(ActionEvent evt) {
         try {
             int idComanda = Integer.parseInt(this.txtBuscar.getText().trim());
-            Comanda comanda = eSerGenServicio.buscarComandaPorId(idComanda);
+            Comanda comanda = maestroDetalleServicio.buscarComandaPorId(idComanda);
                 this.txtID.setText(Integer.toString(comanda.getId()));
                 String idESerGen = "No asignada";
                 if (comanda.getEserGen() != null) {
@@ -175,10 +175,10 @@ public class GUIActualizarComanda extends JFrame {
                                                    Es necesario que busque la comanda por su ID único antes de poder actualizarla
                                                    """);
             int id = Integer.parseInt(txtBuscar.getText());
-            Comanda comanda = this.eSerGenServicio.buscarComandaPorId(id);
+            Comanda comanda = this.maestroDetalleServicio.buscarComandaPorId(id);
             SimpleDateFormat formatoFechaCaducidad = new SimpleDateFormat("dd/MM/yyyy");
             String fechaCaducidad = formatoFechaCaducidad.format(this.jdcFechaCaducidad.getDate());
-            eSerGenServicio.actualizarComanda(id, this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
+            maestroDetalleServicio.actualizarComanda(id, this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaCaducidad);
             if (comanda.getEserGen() == null) {
                 JOptionPane.showMessageDialog(this, "Comanda con ID " + id + " y sin asignar actualizada exitosamente");
             } else {
