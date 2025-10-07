@@ -202,14 +202,12 @@ public class GUIEliminarComanda extends JFrame {
             if (respuesta == JOptionPane.YES_OPTION) {
 
                 if (comanda.getEserGen() == null) {
-
-                    eSerGenServicio.eliminarComanda(Integer.parseInt(this.txtID.getText()));
                     JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y sin asignar eliminada exitosamente");
+                    eSerGenServicio.eliminarComanda(Integer.parseInt(this.txtID.getText()));
                     limpiar();
                 } else {
-                    
-                    eSerGenServicio.eliminaryDesasociarComanda(comanda.getEserGen().getNoDoumento(), Integer.parseInt(this.txtID.getText()));
                     JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nEliminada exitosamente");
+                    eSerGenServicio.eliminaryDesasociarComanda(comanda.getEserGen().getNoDoumento(), Integer.parseInt(this.txtID.getText()));
                     limpiar();
                 }
 
