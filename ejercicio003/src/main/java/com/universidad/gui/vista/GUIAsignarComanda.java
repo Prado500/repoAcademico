@@ -132,6 +132,7 @@ public class GUIAsignarComanda extends JFrame {
 
         } catch (Exception e) {
             ocultarPanel();
+            limpiar();
             JOptionPane.showMessageDialog(this, "Error. Asegúrese de ingresar un No.documento válido y existente:\n" + e.getMessage());
         }
     }
@@ -152,7 +153,10 @@ public class GUIAsignarComanda extends JFrame {
             eSerGenServicio.asignarComanda(idEserGen, idComanda);
             JOptionPane.showMessageDialog(this, "Comanda exitosamente asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + idEserGen);
             limpiar();
+            ocultarPanel();
         } catch (Exception e) {
+            limpiar();
+            ocultarPanel();
             JOptionPane.showMessageDialog(this, "Error al asignar la comanda con id: " + idComanda + e.getMessage());
 
         }
