@@ -159,8 +159,7 @@ private final ESerGenServicio eSerGenServicio;
                     model.addRow(fila);
                     alturas = "NO";
                 }
-                this.jPanelListEmpleado.setVisible(false);
-                JOptionPane.showMessageDialog(this, "La lista está vacía");
+
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al mostrar empleados: " + ex.getMessage());
