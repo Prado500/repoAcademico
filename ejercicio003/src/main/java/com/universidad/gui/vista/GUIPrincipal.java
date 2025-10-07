@@ -435,8 +435,8 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAsignarComandaActionPerformed
 
     private void jMenuItemActualizarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemActualizarComandaActionPerformed
-       GUIActualizarComanda gui = new GUIActualizarComanda(eSerGenServicio);
-       gui.setVisible(true);
+        GUIActualizarComanda gui = new GUIActualizarComanda(this.maestroDetalleServicio);
+        gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemActualizarComandaActionPerformed
 
     private void CrudComandasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrudComandasActionPerformed
