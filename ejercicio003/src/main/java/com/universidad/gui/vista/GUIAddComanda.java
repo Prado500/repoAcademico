@@ -1,8 +1,6 @@
 package com.universidad.gui.vista;
 
 import com.toedter.calendar.JDateChooser;
-import com.universidad.gui.modelo.implementacion.Comanda;
-import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -40,7 +38,7 @@ public class GUIAddComanda extends JFrame {
     }
 
     private void initComponentsManual() {
-        setTitle("Crear y Asignar Comanda");
+        setTitle("Crear Comanda");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(495, 425);
 
