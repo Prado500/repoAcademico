@@ -151,7 +151,6 @@ public class GUIListComandas extends JFrame implements IObservador {
                         comanda.getSopa()
                     };
                     model.addRow(fila);
-                JOptionPane.showMessageDialog(this, "La lista está vacía");
             }
         } catch (Exception ex) {
             jPanelListComandas.setVisible(false);
