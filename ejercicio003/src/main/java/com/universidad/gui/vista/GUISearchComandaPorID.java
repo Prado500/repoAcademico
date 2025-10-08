@@ -5,6 +5,7 @@
 package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Comanda;
+import com.universidad.gui.servicio.implementacion.ComandaServicio;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
 
 import javax.swing.JOptionPane;
@@ -15,14 +16,14 @@ import javax.swing.JOptionPane;
  */
 public class GUISearchComandaPorID extends javax.swing.JFrame {
 
-    private final ESerGenServicio eSerGenServicio;
+    private final ComandaServicio comandaServicio;
 
     /**
      * Creates new form GUISearchEmpleadoPorNoDocumento
      */
-    public GUISearchComandaPorID(ESerGenServicio eSerGenServicio) {
+    public GUISearchComandaPorID(ComandaServicio comandaServicio) {
         initComponents();
-        this.eSerGenServicio = eSerGenServicio;
+        this.comandaServicio = comandaServicio;
         setLocationRelativeTo(null);
         jPanelSearchEmpleado.setVisible(false);
 
@@ -203,7 +204,7 @@ public class GUISearchComandaPorID extends javax.swing.JFrame {
         try {
 
             int Id = Integer.parseInt(txtSearchComanda.getText());
-            Comanda comanda = eSerGenServicio.buscarComandaPorId(Id);
+            Comanda comanda = comandaServicio.buscarComandaID(Id);
             mostrar();
             this.lblDescripcion.setText(comanda.getDescripcion());
             this.lblFechaCaducidad.setText(comanda.getFechaCaducidad());
