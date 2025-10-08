@@ -9,8 +9,8 @@ import java.util.List;
 
 public class MaestroDetalleServicio implements IMaestroDetalleServicio {
 
-private ESerGenServicio eSerGenServicio;
-private ComandaServicio comandaServicio;
+private final ESerGenServicio eSerGenServicio;
+private final ComandaServicio comandaServicio;
 
     public MaestroDetalleServicio(ESerGenServicio eSerGenServicio, ComandaServicio comandaServicio) {
 
@@ -189,4 +189,19 @@ private ComandaServicio comandaServicio;
         comanda.setEserGen(serGenerales);
     }
 
+    /**
+     * Método para acceder al servicio de los empleados de servivios generales
+     * @return el objeto servicio de los empleados de servicios generales que se inyectó.
+     */
+    public ESerGenServicio geteSerGenServicio() {
+        return this.eSerGenServicio;
+    }
+
+    /**
+     * Método para acceder al servicio de las comandas
+     * @return el objeto servicio de las comandas que se inyectó.
+     */
+    public ComandaServicio getServicioComanda() {
+        return this.comandaServicio;
+    }
 }

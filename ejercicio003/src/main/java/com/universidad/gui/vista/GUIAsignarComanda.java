@@ -2,6 +2,8 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+import com.universidad.gui.servicio.implementacion.MaestroDetalleServicio;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -21,7 +23,7 @@ import javax.swing.JTextField;
 
 public class GUIAsignarComanda extends JFrame {
 
-    private final ESerGenServicio eSerGenServicio;
+    private final MaestroDetalleServicio maestroDetalleServicio;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -31,8 +33,8 @@ public class GUIAsignarComanda extends JFrame {
     private JTextField txtBuscar, txtID;
     private JButton btnBuscar, btnSalir, btnAsignar;
 
-    public GUIAsignarComanda(ESerGenServicio eSerGenServicio) {
-        this.eSerGenServicio = eSerGenServicio;
+    public GUIAsignarComanda(MaestroDetalleServicio maestroDetalleServicio) {
+        this.maestroDetalleServicio = maestroDetalleServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
     }
@@ -121,7 +123,7 @@ public class GUIAsignarComanda extends JFrame {
 
         try {
 
-            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(this.txtBuscar.getText());
+            ESerGen serGenerales = maestroDetalleServicio.(this.txtBuscar.getText());
             JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana y haga clic en el botón Asignar Comanda para asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
             this.txtID.setText(this.txtBuscar.getText());
             this.txtID.setEditable(false);

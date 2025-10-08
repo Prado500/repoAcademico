@@ -430,7 +430,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemVerComandasEmpActionPerformed
 
     private void jMenuItemAsignarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAsignarComandaActionPerformed
-        GUIAsignarComanda gui = new GUIAsignarComanda();
+        GUIAsignarComanda gui = new GUIAsignarComanda(this.maestroDetalleServicio);
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemAsignarComandaActionPerformed
 
