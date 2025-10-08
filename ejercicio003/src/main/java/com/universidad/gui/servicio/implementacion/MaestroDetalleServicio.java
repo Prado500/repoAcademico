@@ -49,14 +49,6 @@ private final ComandaServicio comandaServicio;
     }
 
     /**
-     * Método para retornar el id de la última comanda creada. se usa para pasarle a la GUI de creación de comandas el id de comanda que se muestra en el mensaje de creación exitosa.
-     * @return int, el id de la última comanda creada.
-     */
-    public int getIdComanda(){
-        return this.comandaServicio.getComandaId();
-    }
-
-    /**
      * Método que busca el último empleado de la lista del servicio y retorna su nombre. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su nombre.
      * @return el nombre del empleado, String
      */

@@ -8,8 +8,6 @@ public interface IMaestroDetalleServicio {
 
     public void crearYAsignarComanda(String idESerGen, String descripcion, String principio, String proteina, String sopa, String fechaComanda);
 
-    public int getIdComanda();
-
     public String getNombreESerGen();
 
     public String getTipoDocumentoESerGen();
