@@ -4,6 +4,7 @@ import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.IObservador;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+import com.universidad.gui.servicio.implementacion.MaestroDetalleServicio;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -28,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
 
-    private final ESerGenServicio eSerGenServicio;
+    private final MaestroDetalleServicio maestroDetalleServicio;
     private JButton btnBuscar, jButton1Salir;
     private JCheckBox chkRefrescable;
     private JPanel jPanelBusqueda;
@@ -36,14 +37,14 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
     private JTable jTableListComandas;
     private JTextField txtBuscar;
 
-    public GUIListComandasPorEmpleado(ESerGenServicio eSerGenServicio) {
-        this.eSerGenServicio = eSerGenServicio;
+    public GUIListComandasPorEmpleado(MaestroDetalleServicio maestroDetalleServicio) {
+        this.maestroDetalleServicio = maestroDetalleServicio;
         initializeComponents();
         setupLayout();
         setupListeners();
         setLocationRelativeTo(null);
         jTableListComandas.setEnabled(false);
-        this.eSerGenServicio.agregarObservador(this);
+        this.maestroDetalleServicio.getServicioComanda().agregarObservador(this);
     }
 
     private void initializeComponents() {
@@ -78,7 +79,8 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                eSerGenServicio.eliminarObservador(GUIListComandasPorEmpleado.this);
+                maestroDetalleServicio.getServicioComanda().eliminarObservador(GUIListComandasPorEmpleado.this);
+
             }
         });
     }
@@ -114,8 +116,7 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
 
     private void setupListeners() {
         jButton1Salir.addActionListener(e -> {
-            this.eSerGenServicio.eliminarObservador(this);
-            eSerGenServicio.mostrarObservadores();
+            this.maestroDetalleServicio.getServicioComanda().eliminarObservador(this);
             dispose();
         });
         btnBuscar.addActionListener(this::buscarEmpleado);
@@ -126,7 +127,7 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
 
         try {
 
-            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(this.txtBuscar.getText());
+            ESerGen serGenerales = maestroDetalleServicio.getESerGenServicio().buscarESerGenPorNoDocumento(this.txtBuscar.getText());
             this.cargarTabla(serGenerales.getNoDoumento());
 
         } catch (Exception e) {
@@ -137,23 +138,23 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
 
     private void cargarTabla(String idESerGen) {
         try {
-            List<Comanda> comandasList = eSerGenServicio.mostrarComandaPorESerGen(idESerGen);
+            List<Comanda> comandasList = maestroDetalleServicio.mostrarComandaPorESerGen(idESerGen);
 
-                jPanelListComandas.setVisible(true);
-                DefaultTableModel model = (DefaultTableModel) jTableListComandas.getModel();
-                model.setRowCount(0);
-                for (Comanda comanda : comandasList) {
-                    Object[] fila = {
-                            comanda.getId(),
-                            idESerGen,
-                            comanda.getFechaCaducidad(),
-                            comanda.getDescripcion(),
-                            comanda.getPrincipio(),
-                            comanda.getProteina(),
-                            comanda.getSopa()
-                    };
-                    model.addRow(fila);
-                }
+            jPanelListComandas.setVisible(true);
+            DefaultTableModel model = (DefaultTableModel) jTableListComandas.getModel();
+            model.setRowCount(0);
+            for (Comanda comanda : comandasList) {
+                Object[] fila = {
+                        comanda.getId(),
+                        idESerGen,
+                        comanda.getFechaCaducidad(),
+                        comanda.getDescripcion(),
+                        comanda.getPrincipio(),
+                        comanda.getProteina(),
+                        comanda.getSopa()
+                };
+                model.addRow(fila);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al mostrar comandas: " + e.getMessage());
         }
@@ -168,7 +169,7 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
     @Override
     public void actualizar() {
         if (this.chkRefrescable.isSelected()) {
-            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(this.txtBuscar.getText());
+            ESerGen serGenerales = maestroDetalleServicio.getESerGenServicio().buscarESerGenPorNoDocumento(this.txtBuscar.getText());
             this.cargarTabla(serGenerales.getNoDoumento());
         }
     }
