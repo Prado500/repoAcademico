@@ -2,8 +2,7 @@ package com.universidad.gui.vista;
 
 import com.toedter.calendar.JDateChooser;
 import com.universidad.gui.modelo.implementacion.Comanda;
-import com.universidad.gui.modelo.implementacion.ESerGen;
-import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+import com.universidad.gui.servicio.implementacion.MaestroDetalleServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,7 +11,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -28,7 +26,7 @@ import javax.swing.JTextField;
 
 public class GUIEliminarComanda extends JFrame {
 
-    private final ESerGenServicio eSerGenServicio;
+    private final MaestroDetalleServicio maestroDetalleServicio;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -39,8 +37,8 @@ public class GUIEliminarComanda extends JFrame {
     private JDateChooser jdcFechaCaducidad;
     private JButton btnBuscar, btnSalir, btnActualizar;
 
-    public GUIEliminarComanda(ESerGenServicio eSerGenServicio) {
-        this.eSerGenServicio = eSerGenServicio;
+    public GUIEliminarComanda(MaestroDetalleServicio maestroDetalleServicio) {
+        this.maestroDetalleServicio = maestroDetalleServicio;
         initComponentsManual();
         this.txtID.setEditable(false);
         this.txtIdESerGen.setEditable(false);
@@ -140,7 +138,7 @@ public class GUIEliminarComanda extends JFrame {
     private void buscarComanda(ActionEvent evt) {
         try {
             int idComanda = Integer.parseInt(this.txtBuscar.getText().trim());
-            Comanda comanda = eSerGenServicio.buscarComandaPorId(idComanda);
+            Comanda comanda = maestroDetalleServicio.buscarComandaPorId(idComanda);
             this.txtID.setText(Integer.toString(comanda.getId()));
             String idESerGen = "No asignada";
             if (comanda.getEserGen() != null) {
@@ -184,7 +182,7 @@ public class GUIEliminarComanda extends JFrame {
                                                    """);
             }
 
-            Comanda comanda = eSerGenServicio.buscarComandaPorId(Integer.parseInt(this.txtID.getText()));
+            Comanda comanda = maestroDetalleServicio.buscarComandaPorId(Integer.parseInt(this.txtID.getText()));
 
             String placeholder = " no asignada";
 
@@ -203,11 +201,11 @@ public class GUIEliminarComanda extends JFrame {
 
                 if (comanda.getEserGen() == null) {
                     JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y sin asignar eliminada exitosamente");
-                    eSerGenServicio.eliminarComanda(Integer.parseInt(this.txtID.getText()));
+                    maestroDetalleServicio.eliminarComanda(Integer.parseInt(this.txtID.getText()));
                     limpiar();
                 } else {
                     JOptionPane.showMessageDialog(this, "Comanda con ID " + this.txtID.getText() + " y asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No. " + comanda.getEserGen().getNoDoumento() + "\nEliminada exitosamente");
-                    eSerGenServicio.eliminaryDesasociarComanda(comanda.getEserGen().getNoDoumento(), Integer.parseInt(this.txtID.getText()));
+                    maestroDetalleServicio.eliminaryDesasociarComanda(comanda.getEserGen().getNoDoumento(), Integer.parseInt(this.txtID.getText()));
                     limpiar();
                 }
 

@@ -404,33 +404,33 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemCrearYAsignarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearYAsignarComandaActionPerformed
         
-        GUIAddAndAssignComanda gui = new GUIAddAndAssignComanda(this.eSerGenServicio);
+        GUIAddAndAssignComanda gui = new GUIAddAndAssignComanda(this.maestroDetalleServicio);
         gui.setVisible(true);
         
     }//GEN-LAST:event_jMenuItemCrearYAsignarComandaActionPerformed
 
     private void jMenuItemCrearComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearComandaActionPerformed
-        GUIAddComanda gui = new GUIAddComanda(eSerGenServicio);
+        GUIAddComanda gui = new GUIAddComanda(comandaServicio);
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemCrearComandaActionPerformed
 
     private void jMenuItemBuscarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscarComandaActionPerformed
-       GUISearchComandaPorID gui = new GUISearchComandaPorID(eSerGenServicio);
+       GUISearchComandaPorID gui = new GUISearchComandaPorID(comandaServicio);
        gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemBuscarComandaActionPerformed
 
     private void jMenuItemVerComandasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerComandasActionPerformed
-        GUIListComandas gui = new GUIListComandas(eSerGenServicio);
+        GUIListComandas gui = new GUIListComandas(comandaServicio);
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemVerComandasActionPerformed
 
     private void jMenuItemVerComandasEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerComandasEmpActionPerformed
-        GUIListComandasPorEmpleado gui = new GUIListComandasPorEmpleado(eSerGenServicio);
+        GUIListComandasPorEmpleado gui = new GUIListComandasPorEmpleado();
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemVerComandasEmpActionPerformed
 
     private void jMenuItemAsignarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAsignarComandaActionPerformed
-        GUIAsignarComanda gui = new GUIAsignarComanda(eSerGenServicio);
+        GUIAsignarComanda gui = new GUIAsignarComanda();
         gui.setVisible(true);
     }//GEN-LAST:event_jMenuItemAsignarComandaActionPerformed
 
@@ -445,7 +445,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_CrudComandasActionPerformed
 
     private void jMenuItemEliminarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEliminarComandaActionPerformed
-        GUIEliminarComanda gui = new GUIEliminarComanda(eSerGenServicio);
+        GUIEliminarComanda gui = new GUIEliminarComanda(this.maestroDetalleServicio);
         gui.setVisible(true);
 
 
