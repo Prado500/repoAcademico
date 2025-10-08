@@ -268,24 +268,24 @@ public class ESerGenServicio implements IEserGenServicio {
      *
      * @return el nombre del empleado, String
      */
-    public String getNombreESerGen() {
-        return this.mostrarESerGen().getLast().getNombre();
+    public String getNombreESerGen(String idESerGen) {
+        return this.buscarESerGenPorNoDocumento(idESerGen).getNombre();
     }
 
     /**
      * Método que busca el último empleado de la lista del servicio y retorna su tipo de documento. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su tipo de documento.
      * @return el tipo de documento del empleado, String
      */
-    public String getTipoDocumentoESerGen(){
-        return this.mostrarESerGen().getLast().getTipoDocumento();
+    public String getTipoDocumentoESerGen(String idESerGen){
+        return this.buscarESerGenPorNoDocumento(idESerGen).getTipoDocumento();
     }
 
     /**
      * Método que busca el último empleado de la lista del servicio y retorna su número de documento. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su número de documento.
      * @return el nombre del empleado, String
      */
-    public String getNoDocumentoESerGen(){
-        return this.mostrarESerGen().getLast().getNoDoumento();
+    public String getNoDocumentoESerGen(String idESerGen){
+        return this.buscarESerGenPorNoDocumento(idESerGen).getNoDoumento();
     }
 
 }

@@ -28,11 +28,11 @@ public interface IEserGenServicio {
 
     public double calcularNominaESerGen(List<ESerGen> serGenerales);
 
-    public String getNombreESerGen();
+    public String getNombreESerGen(String idESerGen);
 
-    public String getTipoDocumentoESerGen();
+    public String getTipoDocumentoESerGen(String idESerGen);
 
-    public String getNoDocumentoESerGen();
+    public String getNoDocumentoESerGen(String idESerGen);
 
 
 }
