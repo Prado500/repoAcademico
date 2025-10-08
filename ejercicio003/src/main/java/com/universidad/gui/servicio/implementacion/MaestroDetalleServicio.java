@@ -193,7 +193,7 @@ private final ComandaServicio comandaServicio;
      * Método para acceder al servicio de los empleados de servivios generales
      * @return el objeto servicio de los empleados de servicios generales que se inyectó.
      */
-    public ESerGenServicio geteSerGenServicio() {
+    public ESerGenServicio getESerGenServicio() {
         return this.eSerGenServicio;
     }
 

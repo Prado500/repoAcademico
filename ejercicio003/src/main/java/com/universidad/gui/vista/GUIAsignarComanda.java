@@ -123,7 +123,7 @@ public class GUIAsignarComanda extends JFrame {
 
         try {
 
-            ESerGen serGenerales = maestroDetalleServicio.(this.txtBuscar.getText());
+            ESerGen serGenerales = maestroDetalleServicio.getESerGenServicio().buscarESerGenPorNoDocumento(this.txtBuscar.getText());
             JOptionPane.showMessageDialog(this, "Empleado encontrado. Presione 'Ok' o cierre esta ventana y haga clic en el botón Asignar Comanda para asignar una comanda\nAl empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + serGenerales.getNoDoumento());
             this.txtID.setText(this.txtBuscar.getText());
             this.txtID.setEditable(false);
@@ -147,9 +147,9 @@ public class GUIAsignarComanda extends JFrame {
                         """);
             }
 
-            ESerGen serGenerales = eSerGenServicio.buscarESerGenPorNoDocumento(this.txtBuscar.getText());
+            ESerGen serGenerales = maestroDetalleServicio.getESerGenServicio().buscarESerGenPorNoDocumento(this.txtBuscar.getText());
             String idEserGen = this.txtBuscar.getText();
-            eSerGenServicio.asignarComanda(idEserGen, idComanda);
+            maestroDetalleServicio.asignarComanda(idEserGen, idComanda);
             JOptionPane.showMessageDialog(this, "Comanda exitosamente asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + idEserGen);
             limpiar();
             ocultarPanel();
