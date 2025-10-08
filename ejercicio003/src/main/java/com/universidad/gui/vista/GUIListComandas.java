@@ -2,6 +2,7 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.servicio.IObservador;
+import com.universidad.gui.servicio.implementacion.ComandaServicio;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -24,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GUIListComandas extends JFrame implements IObservador {
 
-    private final ESerGenServicio eSerGenServicio;
+    private final ComandaServicio comandaServicio;
     private JButton jButton1Salir;
     private JButton jButton2Mostrar;
     private JCheckBox chkRefrescable;
@@ -32,14 +33,14 @@ public class GUIListComandas extends JFrame implements IObservador {
     private JPanel jPanelListComandas;
     private JTable jTableListComandas;
 
-    public GUIListComandas(ESerGenServicio eSerGenServicio) {
-        this.eSerGenServicio = eSerGenServicio;
+    public GUIListComandas(ComandaServicio comandaServicio) {
+        this.comandaServicio = comandaServicio;
         initializeComponents();
         setupLayout();
         setupListeners();
         setLocationRelativeTo(null);
         jTableListComandas.setEnabled(false);
-        eSerGenServicio.agregarObservador(this);
+        comandaServicio.agregarObservador(this);
     }
 
     private void initializeComponents() {

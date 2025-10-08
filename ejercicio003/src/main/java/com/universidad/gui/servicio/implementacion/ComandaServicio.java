@@ -6,6 +6,8 @@ package com.universidad.gui.servicio.implementacion;
 
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.servicio.IComandaServicio;
+import com.universidad.gui.servicio.IObservador;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,13 @@ import java.util.List;
  */
 public class ComandaServicio implements IComandaServicio {
 
-    private List<Comanda> comandas = new ArrayList<>();
+    private List<Comanda> comandas;
+    private List<IObservador> observadores;
+
+    public ComandaServicio() {
+        this.comandas = new ArrayList<>();
+        this.observadores = new ArrayList<>();
+    }
 
     @Override
     public void agregarComanda(Comanda comanda) {
@@ -24,6 +32,8 @@ public class ComandaServicio implements IComandaServicio {
         this.comandas.add(comanda);
         acumulador = comandas.size();
         comanda.setId(acumulador);
+        this.notificarObservadores();
+
     }
 
     @Override
@@ -92,5 +102,31 @@ public class ComandaServicio implements IComandaServicio {
     public int getComandaId(){
         return this.comandas.getLast().getId();
     }
-    
+
+    //Métodos para el mecanismo de suscripción de observadores
+
+    /**
+     * Método que agrega un observador a la lista de observadores del servicio de las comandas.
+     * @param observador un objeto de la familia IObservador (un GUI).
+     */
+    public void agregarObservador(IObservador observador) {
+        this.observadores.add(observador);
+    }
+
+    /**
+     * Método que elimina un observador a la lista de observadores del servicio de las comandas.
+     * @param observador un objeto de la familia IObservador (un GUI).
+     */
+    public void eliminarObservador(IObservador observador) {
+        this.observadores.remove(observador);
+    }
+
+    /**
+     * Método que notifica a los observadores cuando se realiza la adición de una comanda
+     */
+    public void notificarObservadores() {
+        for (IObservador observador : observadores) {
+            observador.actualizar();
+        }
+    }
 }
