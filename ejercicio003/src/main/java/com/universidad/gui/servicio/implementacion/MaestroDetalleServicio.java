@@ -39,8 +39,9 @@ private final ComandaServicio comandaServicio;
 
         try {
 
-            ESerGen serGenerales = this.eSerGenServicio.buscarESerGenPorNoDocumento(idESerGen);
             this.comandaServicio.crearYAgregarComanda(descripcion, principio, proteina, sopa, fechaComanda);
+            ESerGen serGenerales = this.eSerGenServicio.buscarESerGenPorNoDocumento(idESerGen);
+            this.asignarComanda(idESerGen, this.mostrarComandas().size());
             serGenerales.agregarComanda(this.comandaServicio.mostrarComandas().getLast());
 
         } catch (Exception e) {
