@@ -49,31 +49,6 @@ private final ComandaServicio comandaServicio;
     }
 
     /**
-     * Método que busca el último empleado de la lista del servicio y retorna su nombre. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su nombre.
-     * @return el nombre del empleado, String
-     */
-    public String getNombreESerGen(){
-        return this.eSerGenServicio.mostrarESerGen().getLast().getNombre();
-    }
-
-    /**
-     * Método que busca el último empleado de la lista del servicio y retorna su tipo de documento. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su tipo de documento.
-     * @return el tipo de documento del empleado, String
-     */
-    public String getTipoDocumentoESerGen(){
-        return this.eSerGenServicio.mostrarESerGen().getLast().getTipoDocumento();
-    }
-
-    /**
-     * Método que busca el último empleado de la lista del servicio y retorna su número de documento. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su número de documento.
-     * @return el nombre del empleado, String
-     */
-    public String getNoDocumentoESerGen(){
-        return this.eSerGenServicio.mostrarESerGen().getLast().getTipoDocumento();
-    }
-
-
-    /**
      * Método para que una comanda sea eliminada lógicamente. El atributo estatus de la comanda pasa a valer "IN".
      * Al usar este metodo sobre una comanda, esta no aparecera al buscarse o al listar todas las existentes.
      * Este metodo tambien hace que el atributo de tipo ESerGen de la comanda pase a valer null.

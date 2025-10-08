@@ -145,9 +145,9 @@ public class GUIAddAndAssignComanda extends JFrame {
             maestroDetalleServicio.getServicioComanda().crearYAgregarComanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
             int idComanda = maestroDetalleServicio.getServicioComanda().getComandaId();
             //Acá es válido crear el objeto serGenerales y obtener sus datos con get(), ya que simula que el cliente debera crear el json que se envia a la api, y del json creado puede extraer esa información para personalizar un mensaje de creacion exitosao, en este caso, de creación y asociación exitosas.
-            String nombreSerGenerales = eSerGenServicio.getNombreESerGen();
-            String tipoDocumentoSerGenerales = eSerGenServicio.getTipoDocumentoESerGen();
-            String noDocumentoSerGenerales = eSerGenServicio.getNoDocumentoESerGen();
+            String nombreSerGenerales = maestroDetalleServicio.getESerGenServicio().getNombreESerGen();
+            String tipoDocumentoSerGenerales = maestroDetalleServicio.getESerGenServicio().getTipoDocumentoESerGen();
+            String noDocumentoSerGenerales = maestroDetalleServicio.getESerGenServicio().getNoDocumentoESerGen();
 
             JOptionPane.showMessageDialog(this, "Comanda con id " + idComanda + " creada y asignada al empleado " + nombreSerGenerales + " con " + tipoDocumentoSerGenerales + " NO. " + noDocumentoSerGenerales);
             limpiar();

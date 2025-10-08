@@ -39,12 +39,13 @@ public class ESerGenServicio implements IEserGenServicio {
     /**
      * Método para crear y agregar un objeto del tipo ESerGen (Empleado de servicios generales)
      * a la lista del servicio de los empleados generales.
+     *
      * @param tipoDocumento String, puede ser "CC" para cédula de ciudadanía, "CE" para cédula de extranjeria o "PA" para pasaporte.
-     * @param noDocumento String, es el número de documento. No admite caracteres no numéricos y su longitud debe estar entre 6 y 10 dígitos.
-     * @param nombre String, es el nombre del empleado de servicios generales.
-     * @param salarioBase double, es la cifra del salario base. No admite caracteres no númericos. No puede ser negativo y debe ser inferior a 20000000.
-     * @param estatus String, es el atributo que define si un empleado está activo "AC" o inactivo "IN". Se utiliza para el borrado lógico.
-     * @param certAlturas boolean, define si cuenta o no con certificación de alturas.
+     * @param noDocumento   String, es el número de documento. No admite caracteres no numéricos y su longitud debe estar entre 6 y 10 dígitos.
+     * @param nombre        String, es el nombre del empleado de servicios generales.
+     * @param salarioBase   double, es la cifra del salario base. No admite caracteres no númericos. No puede ser negativo y debe ser inferior a 20000000.
+     * @param estatus       String, es el atributo que define si un empleado está activo "AC" o inactivo "IN". Se utiliza para el borrado lógico.
+     * @param certAlturas   boolean, define si cuenta o no con certificación de alturas.
      */
     @Override
     public void agregarESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas) {
@@ -103,12 +104,12 @@ public class ESerGenServicio implements IEserGenServicio {
      *
      * Método para actualizar un empleado de servicios generales (objeto ESerGen) usando sus setters
      *
-     * @param nNoDocumento String, nuevo número de documento que se asignará al atributo noDocumento de ESerGen. No admite caracteres extraños como !@#$$%^&&* etc...
-     * @param noDocumento String, número de documento, atributo de ESerGen. No admite caracteres que no sean números y no acepta una vlor con menos de 6 digitos o con más de 12 digitos
+     * @param nNoDocumento  String, nuevo número de documento que se asignará al atributo noDocumento de ESerGen. No admite caracteres extraños como !@#$$%^&&* etc...
+     * @param noDocumento   String, número de documento, atributo de ESerGen. No admite caracteres que no sean números y no acepta una vlor con menos de 6 digitos o con más de 12 digitos
      * @param tipoDocumento String, puede ser pasaporte ("PA"), cédula de extranjería (CE), o cédula de ciudadanía (CC). No admite caracteres extraños como !@#$$%^&&* etc...
-     * @param nombre String, no admite caracteres extraños como !@#$$%^&&* etc...
-     * @param salario double, debe ser un número entero e inferior a 20M (20000000).
-     * @param cerAlturas boolean, true si la tiene false si no. Se usaa para determinar la bonificación del empleado de servicios generales.
+     * @param nombre        String, no admite caracteres extraños como !@#$$%^&&* etc...
+     * @param salario       double, debe ser un número entero e inferior a 20M (20000000).
+     * @param cerAlturas    boolean, true si la tiene false si no. Se usaa para determinar la bonificación del empleado de servicios generales.
      */
     @Override
     public void actualizarESerGen(String nNoDocumento, String noDocumento, String tipoDocumento, String nombre, Double salario, boolean cerAlturas) {
@@ -220,6 +221,7 @@ public class ESerGenServicio implements IEserGenServicio {
 
     /**
      * Método que agruega un GUI que implementa la interfaz IObservador a la lista de observadores de este servicio.
+     *
      * @param observador es una GUI que implementa la interfaz IObservador.
      */
     public void agregarObservador(IObservador observador) {
@@ -240,6 +242,7 @@ public class ESerGenServicio implements IEserGenServicio {
 
     /**
      * Método para de-registrar (eliminar) un observador (GUI) de la lista de observadores del servicio.
+     *
      * @param observador es una interfaz que implementa la interfaz IObservador
      */
     public void eliminarObservador(IObservador observador) {
@@ -258,6 +261,31 @@ public class ESerGenServicio implements IEserGenServicio {
 
         }
 
+    }
+
+    /**
+     * Método que busca el último empleado de la lista del servicio y retorna su nombre. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su nombre.
+     *
+     * @return el nombre del empleado, String
+     */
+    public String getNombreESerGen() {
+        return this.mostrarESerGen().getLast().getNombre();
+    }
+
+    /**
+     * Método que busca el último empleado de la lista del servicio y retorna su tipo de documento. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su tipo de documento.
+     * @return el tipo de documento del empleado, String
+     */
+    public String getTipoDocumentoESerGen(){
+        return this.mostrarESerGen().getLast().getTipoDocumento();
+    }
+
+    /**
+     * Método que busca el último empleado de la lista del servicio y retorna su número de documento. Es opcional a simplemente traer al empleado desde el servicio mediante el método de buscarlo por su id y obtener su número de documento.
+     * @return el nombre del empleado, String
+     */
+    public String getNoDocumentoESerGen(){
+        return this.mostrarESerGen().getLast().getNoDoumento();
     }
 
 }

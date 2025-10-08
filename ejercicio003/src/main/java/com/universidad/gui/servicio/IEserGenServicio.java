@@ -27,4 +27,12 @@ public interface IEserGenServicio {
     public double calcularNominaConBonificacionESerGen(List<ESerGen> serGenerales);
 
     public double calcularNominaESerGen(List<ESerGen> serGenerales);
+
+    public String getNombreESerGen();
+
+    public String getTipoDocumentoESerGen();
+
+    public String getNoDocumentoESerGen();
+
+
 }
