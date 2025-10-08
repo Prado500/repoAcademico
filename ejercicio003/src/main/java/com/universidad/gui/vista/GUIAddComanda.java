@@ -1,7 +1,7 @@
 package com.universidad.gui.vista;
 
 import com.toedter.calendar.JDateChooser;
-import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+import com.universidad.gui.servicio.implementacion.ComandaServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 
 public class GUIAddComanda extends JFrame {
 
-    private final ESerGenServicio eSerGenServicio;
+    private final ComandaServicio comandaServicio;
 
     // Componentes
     private JPanel panelPrincipal;
@@ -31,8 +31,8 @@ public class GUIAddComanda extends JFrame {
     private JDateChooser cldFechaCaducidad;
     private JButton btnSalir, btnCrear;
 
-    public GUIAddComanda(ESerGenServicio eSerGenServicio) {
-        this.eSerGenServicio = eSerGenServicio;
+    public GUIAddComanda(ComandaServicio comandaServicio) {
+        this.comandaServicio = comandaServicio;
         initComponentsManual();
         setLocationRelativeTo(null);
     }
@@ -113,7 +113,7 @@ public class GUIAddComanda extends JFrame {
 
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
-            eSerGenServicio.crearComandaIndependiente(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
+            comandaServicio.agregarComanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
             int idComanda = eSerGenServicio.getIdComanda();
             JOptionPane.showMessageDialog(this, "Comanda con id " + idComanda + " creada. ");
             limpiar();

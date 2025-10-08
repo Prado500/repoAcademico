@@ -12,7 +12,7 @@ import java.util.List;
  * @author Alejandro
  */
 public interface IComandaServicio {
-    public void agregarComanda(Comanda comanda);
+    public void crearYAgregarComanda(String descripcion, String principio, String proteina, String sopa, String fechaCaducidad);
     public void eliminarComandaLogId(int id);
     public Comanda buscarComandaID(int id);
     public List<Comanda> mostrarComandas();

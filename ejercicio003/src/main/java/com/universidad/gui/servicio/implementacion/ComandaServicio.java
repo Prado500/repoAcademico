@@ -26,14 +26,13 @@ public class ComandaServicio implements IComandaServicio {
     }
 
     @Override
-    public void agregarComanda(Comanda comanda) {
-        
+    public void crearYAgregarComanda(String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
+        Comanda comanda = new Comanda(descripcion, principio, proteina, sopa, fechaCaducidad);
         int acumulador = 0; 
         this.comandas.add(comanda);
         acumulador = comandas.size();
         comanda.setId(acumulador);
         this.notificarObservadores();
-
     }
 
     @Override
