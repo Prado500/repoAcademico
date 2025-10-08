@@ -72,7 +72,7 @@ public class GUIListComandas extends JFrame implements IObservador {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                eSerGenServicio.eliminarObservador(GUIListComandas.this);
+                comandaServicio.eliminarObservador(GUIListComandas.this);
             }
         });
     }
@@ -117,8 +117,7 @@ public class GUIListComandas extends JFrame implements IObservador {
 
     private void setupListeners() {
         jButton1Salir.addActionListener(e -> {
-            this.eSerGenServicio.eliminarObservador(this);
-            eSerGenServicio.mostrarObservadores();
+            this.comandaServicio.eliminarObservador(this);
             dispose();
         });
 
@@ -131,7 +130,7 @@ public class GUIListComandas extends JFrame implements IObservador {
 
         try {
 
-            List<Comanda> comandasList = eSerGenServicio.mostrarComandas();
+            List<Comanda> comandasList = comandaServicio.mostrarComandas();
                 jPanelListComandas.setVisible(true);
                 DefaultTableModel model = (DefaultTableModel) jTableListComandas.getModel();
                 model.setRowCount(0);
