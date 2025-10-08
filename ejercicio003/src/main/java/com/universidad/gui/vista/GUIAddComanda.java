@@ -113,8 +113,8 @@ public class GUIAddComanda extends JFrame {
 
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
-            comandaServicio.agregarComanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
-            int idComanda = eSerGenServicio.getIdComanda();
+            comandaServicio.crearYAgregarComanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
+            int idComanda = comandaServicio.getComandaId();
             JOptionPane.showMessageDialog(this, "Comanda con id " + idComanda + " creada. ");
             limpiar();
         } catch (Exception e) {

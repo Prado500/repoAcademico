@@ -34,15 +34,14 @@ private final ComandaServicio comandaServicio;
      * @param sopa describe el tipo de sopa. No admite caracteres extraños. Solo permite 50 carácteres incluidos espacios en blanco.
      * @param fechaComanda es la fecha de caducidad de la comanda.
      */
+    @Override
     public void crearYAsignarComanda(String idESerGen, String descripcion, String principio, String proteina, String sopa, String fechaComanda) {
 
         try {
 
-            Comanda comanda = new Comanda(descripcion, principio, proteina, sopa, fechaComanda);
             ESerGen serGenerales = this.eSerGenServicio.buscarESerGenPorNoDocumento(idESerGen);
-
-            serGenerales.agregarComanda(comanda);
-            comandaServicio.agregarComanda(comanda);
+            this.comandaServicio.crearYAgregarComanda(descripcion, principio, proteina, sopa, fechaComanda);
+            serGenerales.agregarComanda(this.comandaServicio.mostrarComandas().getLast());
 
         } catch (Exception e) {
             System.out.println(e);
@@ -81,22 +80,6 @@ private final ComandaServicio comandaServicio;
         return this.eSerGenServicio.mostrarESerGen().getLast().getTipoDocumento();
     }
 
-    /**
-     * Método para crear una comanda sin asignarla a ningún empleado de servicios generales.
-     * La comanda se crea y se envía a la lista del servicio de las comandas ComandaServicio.
-     * @param descripcion es la descripción a grandes razgos de la comanda de almuerzos del restaurante doña doris. Solo permite 50 carácteres incluidos espacios en blanco.
-     * @param principio describe si el principio será frijoles, arbeja, lentejas o verdura. Solo permite 50 carácteres incluidos espacios en blanco.
-     * @param proteina describe si la carne será de res, de cerdo o de pollo. Solo permite 50 carácteres incluidos espacios en blanco.
-     * @param sopa describe el tipo de sopa. No admite caracteres extraños. Solo permite 50 carácteres incluidos espacios en blanco.
-     * @param fechaCaducidad es la fecha de caducidad de la comanda.
-     */
-
-    public void crearComandaIndependiente(String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
-
-        Comanda comanda = new Comanda(descripcion, principio, proteina, sopa, fechaCaducidad);
-        comandaServicio.agregarComanda(comanda);
-
-    }
 
     /**
      * Método para que una comanda sea eliminada lógicamente. El atributo estatus de la comanda pasa a valer "IN".

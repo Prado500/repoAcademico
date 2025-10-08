@@ -16,8 +16,6 @@ public interface IMaestroDetalleServicio {
 
     public String getNoDocumentoESerGen();
 
-    public void crearComandaIndependiente(String descripcion, String principio, String proteina, String sopa, String fechaCaducidad);
-
     public void eliminaryDesasociarComanda(String idESerGen, int idComanda);
 
     public void eliminarComanda(int idComanda);
