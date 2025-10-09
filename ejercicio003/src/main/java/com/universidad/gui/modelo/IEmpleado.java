@@ -39,7 +39,6 @@ public interface IEmpleado {
     public String getNombre();
 
     public double getSalarioBase();
-
     public String getFechaNacimiento();
 
     public String getEstatus();

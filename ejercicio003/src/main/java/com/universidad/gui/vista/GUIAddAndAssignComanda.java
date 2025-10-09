@@ -139,17 +139,14 @@ public class GUIAddAndAssignComanda extends JFrame {
 
     private void crearYAsignarComanda(ActionEvent evt) {
         try {
-            String idESerGen = this.txtBuscar.getText();
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
-            maestroDetalleServicio.crearYAsignarComanda(idESerGen, this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
-
+            maestroDetalleServicio.crearYAsignarComanda(this.txtBuscar.getText().strip(), this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
             int idComanda = maestroDetalleServicio.getServicioComanda().getComandaId();
             //Acá es válido crear el objeto serGenerales y obtener sus datos con get(), ya que simula que el cliente debera crear el json que se envia a la api, y del json creado puede extraer esa información para personalizar un mensaje de creacion exitosao, en este caso, de creación y asociación exitosas.
-            String nombreSerGenerales = maestroDetalleServicio.getESerGenServicio().getNombreESerGen(idESerGen);
-            String tipoDocumentoSerGenerales = maestroDetalleServicio.getESerGenServicio().getTipoDocumentoESerGen(idESerGen);
-            String noDocumentoSerGenerales = maestroDetalleServicio.getESerGenServicio().getNoDocumentoESerGen(idESerGen);
-
+            String nombreSerGenerales = maestroDetalleServicio.getESerGenServicio().getNombreESerGen(this.txtBuscar.getText().strip());
+            String tipoDocumentoSerGenerales = maestroDetalleServicio.getESerGenServicio().getTipoDocumentoESerGen(this.txtBuscar.getText().strip());
+            String noDocumentoSerGenerales = maestroDetalleServicio.getESerGenServicio().getNoDocumentoESerGen(this.txtBuscar.getText().strip());
             JOptionPane.showMessageDialog(this, "Comanda con id " + idComanda + " creada y asignada al empleado " + nombreSerGenerales + " con " + tipoDocumentoSerGenerales + " NO. " + noDocumentoSerGenerales);
             limpiar();
         } catch (Exception e) {
