@@ -39,9 +39,8 @@ private final ComandaServicio comandaServicio;
 
         try {
             Comanda comanda = this.comandaServicio.crearYDevolverComanda(descripcion, principio, proteina, sopa, fechaComanda);
-            System.out.println("El id de la comanda es: " + comanda.getId());
             ESerGen serGenerales = this.eSerGenServicio.buscarESerGenPorNoDocumento(idESerGen);
-            this.asignarComanda(serGenerales.getNoDoumento(), comanda.getId());
+            this.asignarComanda(serGenerales.getNoDoumento(), comanda);
             this.comandaServicio.agregarComanda(comanda);
             
         } catch (Exception e) {
@@ -128,13 +127,11 @@ private final ComandaServicio comandaServicio;
      * @param ESerGenId String, es el número de documento de un empleado de servicios generales.
      * @param comandaId int, es el id de una comanda.
      */
-    public void asignarComanda(String ESerGenId, int comandaId) {
-
+    public void asignarComanda(String ESerGenId, Comanda comanda) {
         ESerGen serGenerales = this.eSerGenServicio.buscarESerGenPorNoDocumento(ESerGenId);
-        Comanda comanda = comandaServicio.buscarComandaID(comandaId);
-
+      
         if (comanda.getEserGen() != null) {
-            throw new IllegalArgumentException("La comanda con ID " + comandaId + " ya fué asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No." + comanda.getEserGen().getNoDoumento());
+            throw new IllegalArgumentException("La comanda con ID " + comanda.getId() + " ya fué asignada al empleado " + comanda.getEserGen().getNombre() + " con " + comanda.getEserGen().getTipoDocumento() + " No." + comanda.getEserGen().getNoDoumento());
         }
 
         comanda.setEserGen(serGenerales);

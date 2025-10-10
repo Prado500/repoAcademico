@@ -1,5 +1,6 @@
 package com.universidad.gui.vista;
 
+import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
 import com.universidad.gui.servicio.implementacion.MaestroDetalleServicio;
@@ -149,7 +150,8 @@ public class GUIAsignarComanda extends JFrame {
 
             ESerGen serGenerales = maestroDetalleServicio.getESerGenServicio().buscarESerGenPorNoDocumento(this.txtBuscar.getText());
             String idEserGen = this.txtBuscar.getText();
-            maestroDetalleServicio.asignarComanda(idEserGen, idComanda);
+            Comanda comanda = maestroDetalleServicio.getServicioComanda().buscarComandaID(idComanda);
+            maestroDetalleServicio.asignarComanda(idEserGen, comanda);
             JOptionPane.showMessageDialog(this, "Comanda exitosamente asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + idEserGen);
             limpiar();
             ocultarPanel();

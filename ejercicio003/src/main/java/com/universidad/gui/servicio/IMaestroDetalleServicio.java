@@ -20,7 +20,7 @@ public interface IMaestroDetalleServicio {
 
     public List<Comanda> mostrarComandas();
 
-    public void asignarComanda(String ESerGenId, int comandaId);
+    public void asignarComanda(String ESerGenId, Comanda comanda);
 
 
 }
