@@ -1,6 +1,7 @@
 package com.universidad.gui.vista;
 
 import com.toedter.calendar.JDateChooser;
+import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.servicio.implementacion.ComandaServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -113,7 +114,8 @@ public class GUIAddComanda extends JFrame {
 
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
-            comandaServicio.crearYAgregarComanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
+            Comanda comanda = comandaServicio.crearYDevolverComanda(this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
+            this.comandaServicio.agregarComanda(comanda);
             int idComanda = comandaServicio.getComandaId();
             JOptionPane.showMessageDialog(this, "Comanda con id " + idComanda + " creada. ");
             limpiar();

@@ -140,15 +140,24 @@ public class GUIAddAndAssignComanda extends JFrame {
     private void crearYAsignarComanda(ActionEvent evt) {
         try {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            System.out.println("Formatee la fecha");
             String fechaComanda = formatoFecha.format(this.cldFechaCaducidad.getDate());
+            System.out.println("volvi string la fecha");
             maestroDetalleServicio.crearYAsignarComanda(this.txtBuscar.getText().strip(), this.txtDescripcion.getText(), this.txtPrincipio.getText(), this.txtProteina.getText(), this.txtSopa.getText(), fechaComanda);
+            System.out.println("Se creo y se asigno la comanda");
             int idComanda = maestroDetalleServicio.getServicioComanda().getComandaId();
             //Acá es válido crear el objeto serGenerales y obtener sus datos con get(), ya que simula que el cliente debera crear el json que se envia a la api, y del json creado puede extraer esa información para personalizar un mensaje de creacion exitosao, en este caso, de creación y asociación exitosas.
+            System.out.println("Obtuve el id de la comanda");
             String nombreSerGenerales = maestroDetalleServicio.getESerGenServicio().getNombreESerGen(this.txtBuscar.getText().strip());
+            System.out.println("Obtuve el nombre del empleado de servicios generales");
             String tipoDocumentoSerGenerales = maestroDetalleServicio.getESerGenServicio().getTipoDocumentoESerGen(this.txtBuscar.getText().strip());
+            System.out.println("tipo documento");
             String noDocumentoSerGenerales = maestroDetalleServicio.getESerGenServicio().getNoDocumentoESerGen(this.txtBuscar.getText().strip());
+            System.out.println("no documento");
             JOptionPane.showMessageDialog(this, "Comanda con id " + idComanda + " creada y asignada al empleado " + nombreSerGenerales + " con " + tipoDocumentoSerGenerales + " NO. " + noDocumentoSerGenerales);
+            System.out.println("creacion exitosa");
             limpiar();
+            System.out.println("limpie");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }

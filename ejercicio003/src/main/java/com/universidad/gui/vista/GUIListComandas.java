@@ -3,7 +3,6 @@ package com.universidad.gui.vista;
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.servicio.IObservador;
 import com.universidad.gui.servicio.implementacion.ComandaServicio;
-import com.universidad.gui.servicio.implementacion.ESerGenServicio;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

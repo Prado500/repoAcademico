@@ -34,7 +34,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.administrativoServicio = new AdministrativoServicio();
-        this.eSerGenServicio = new ESerGenServicio(comandaServicio);
+        this.eSerGenServicio = new ESerGenServicio();
         this.comandaServicio = new ComandaServicio();
         this.maestroDetalleServicio = new MaestroDetalleServicio(eSerGenServicio, comandaServicio);
     }

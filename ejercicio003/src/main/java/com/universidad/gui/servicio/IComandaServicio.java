@@ -12,7 +12,8 @@ import java.util.List;
  * @author Alejandro
  */
 public interface IComandaServicio {
-    public void crearYAgregarComanda(String descripcion, String principio, String proteina, String sopa, String fechaCaducidad);
+    public Comanda crearYDevolverComanda(String descripcion, String principio, String proteina, String sopa, String fechaCaducidad);
+    public void agregarComanda(Comanda comanda);
     public void eliminarComandaLogId(int id);
     public Comanda buscarComandaID(int id);
     public List<Comanda> mostrarComandas();

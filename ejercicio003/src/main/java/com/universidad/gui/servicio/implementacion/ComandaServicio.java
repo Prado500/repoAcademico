@@ -34,10 +34,16 @@ public class ComandaServicio implements IComandaServicio {
      * @param sopa describe el tipo de sopa. No admite caracteres extraños. Solo permite 50 carácteres incluidos espacios en blanco.
      * @param fechaCaducidad es la fecha de caducidad de la comanda.
      */
-    @Override
-    public void crearYAgregarComanda(String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
+    
+     @Override
+    public Comanda crearYDevolverComanda(String descripcion, String principio, String proteina, String sopa, String fechaCaducidad) {
         Comanda comanda = new Comanda(descripcion, principio, proteina, sopa, fechaCaducidad);
-        int acumulador = 0; 
+        return comanda;
+    }
+    
+    @Override
+    public void agregarComanda(Comanda comanda) {
+        int acumulador = 0;
         this.comandas.add(comanda);
         acumulador = comandas.size();
         comanda.setId(acumulador);
@@ -138,4 +144,6 @@ public class ComandaServicio implements IComandaServicio {
             observador.actualizar();
         }
     }
+
+   
 }

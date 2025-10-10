@@ -23,14 +23,12 @@ import java.util.List;
  */
 public class ESerGenServicio implements IEserGenServicio {
 
-    private final IComandaServicio comandaServicio;
     private List<ESerGen> serGenerales;
     private List<IObservador> observadores;
 
-    public ESerGenServicio(IComandaServicio comandaServicio) {
+    public ESerGenServicio() {
 
         this.serGenerales = new ArrayList<>();
-        this.comandaServicio = comandaServicio;
         this.observadores = new ArrayList<>();
     }
 

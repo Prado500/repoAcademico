@@ -38,12 +38,12 @@ private final ComandaServicio comandaServicio;
     public void crearYAsignarComanda(String idESerGen, String descripcion, String principio, String proteina, String sopa, String fechaComanda) {
 
         try {
-
-            this.comandaServicio.crearYAgregarComanda(descripcion, principio, proteina, sopa, fechaComanda);
+            Comanda comanda = this.comandaServicio.crearYDevolverComanda(descripcion, principio, proteina, sopa, fechaComanda);
+            System.out.println("El id de la comanda es: " + comanda.getId());
             ESerGen serGenerales = this.eSerGenServicio.buscarESerGenPorNoDocumento(idESerGen);
-            this.asignarComanda(idESerGen, this.mostrarComandas().size());
-            System.out.println(this.mostrarComandas().size());
-
+            this.asignarComanda(serGenerales.getNoDoumento(), comanda.getId());
+            this.comandaServicio.agregarComanda(comanda);
+            
         } catch (Exception e) {
             System.out.println(e);
         }
