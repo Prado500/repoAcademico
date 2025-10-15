@@ -34,10 +34,13 @@ private final ComandaServicio comandaServicio;
      * @param sopa describe el tipo de sopa. No admite caracteres extraños. Solo permite 50 carácteres incluidos espacios en blanco.
      * @param fechaComanda es la fecha de caducidad de la comanda.
      */
+    
+    //se va por dto -> si tiene mas de 4, se va a dto
     @Override
     public void crearYAsignarComanda(String idESerGen, String descripcion, String principio, String proteina, String sopa, String fechaComanda) {
 
         try {
+            //tengo 4 procesos que pueden fallar. necesito poder usar diferentes catch con su excepcion y loggear.
             Comanda comanda = this.comandaServicio.crearYDevolverComanda(descripcion, principio, proteina, sopa, fechaComanda);
             ESerGen serGenerales = this.eSerGenServicio.buscarESerGenPorNoDocumento(idESerGen);
             this.asignarComanda(serGenerales.getNoDoumento(), comanda);
