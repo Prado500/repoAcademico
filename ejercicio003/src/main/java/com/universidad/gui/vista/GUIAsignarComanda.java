@@ -102,14 +102,16 @@ public class GUIAsignarComanda extends JFrame {
         btnBuscar.addActionListener(this::buscarEmpleado);
         btnAsignar.addActionListener(evt -> {
             try {
+                String idESerGen = this.txtBuscar.getText();
                 String idComandaS = JOptionPane.showInputDialog(
                         this,
                         "Ingrese el ID de la comanda que asignará. Si no lo conoce, diríjase desde el menú principal\na la barra de opiones, Comanda, y Ver Comandas o Ver Comandas Por Empleado",
                         "Ingresar ID de la comanda",
                         JOptionPane.QUESTION_MESSAGE
                 );
+
                 int idComanda = Integer.parseInt(idComandaS);
-                asignarComanda(idComanda);
+                asignarComanda(idESerGen, idComanda); //Este asignar comanda es el metodo de la interfaz
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -137,21 +139,18 @@ public class GUIAsignarComanda extends JFrame {
         }
     }
 
-    private void asignarComanda(int idComanda) {
+    private void asignarComanda(String idEserGen, int idComanda) {
         try {
 
-            if (this.txtID.getText().isBlank()) {
+            if (this.txtID.getText().isBlank()) { //Ese txtID es el id que se muestra en pantalla sobre a quien se le va a asignar la comanda.
                 throw new IllegalArgumentException("""
                         No es posible asignar una comanda sin primero buscar un empleado.
                         Primero busque un empleado por su número de documento y luego
                         Asígnele a ese empleado la comanda.
                         """);
             }
-
+            maestroDetalleServicio.asignarComanda(idEserGen, idComanda);
             ESerGen serGenerales = maestroDetalleServicio.getESerGenServicio().buscarESerGenPorNoDocumento(this.txtBuscar.getText());
-            String idEserGen = this.txtBuscar.getText();
-            Comanda comanda = maestroDetalleServicio.getServicioComanda().buscarComandaID(idComanda);
-            maestroDetalleServicio.asignarComanda(idEserGen, comanda);
             JOptionPane.showMessageDialog(this, "Comanda exitosamente asignada al empleado " + serGenerales.getNombre() + " con " + serGenerales.getTipoDocumento() + " No. " + idEserGen);
             limpiar();
             ocultarPanel();

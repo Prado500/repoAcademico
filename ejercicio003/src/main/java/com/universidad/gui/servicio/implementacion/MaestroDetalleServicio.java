@@ -43,7 +43,7 @@ private final ComandaServicio comandaServicio;
             //tengo 4 procesos que pueden fallar. necesito poder usar diferentes catch con su excepcion y loggear.
             Comanda comanda = this.comandaServicio.crearYDevolverComanda(descripcion, principio, proteina, sopa, fechaComanda);
             ESerGen serGenerales = this.eSerGenServicio.buscarESerGenPorNoDocumento(idESerGen);
-            this.asignarComanda(serGenerales.getNoDoumento(), comanda);
+            this.asignarComandaAlCrear(serGenerales.getNoDoumento(), comanda);
             this.comandaServicio.agregarComanda(comanda);
             
         } catch (Exception e) {
@@ -128,9 +128,9 @@ private final ComandaServicio comandaServicio;
     /**
      * Método para asociar una comanda existente a un empleado de servicios generales
      * @param ESerGenId String, es el número de documento de un empleado de servicios generales.
-     * @param comandaId int, es el id de una comanda.
+     * @param comanda Comanda, es un objeto Comanda ya eistente.
      */
-    public void asignarComanda(String ESerGenId, Comanda comanda) {
+    public void asignarComandaAlCrear(String ESerGenId, Comanda comanda) {
         ESerGen serGenerales = this.eSerGenServicio.buscarESerGenPorNoDocumento(ESerGenId);
       
         if (comanda.getEserGen() != null) {
@@ -139,6 +139,16 @@ private final ComandaServicio comandaServicio;
 
         comanda.setEserGen(serGenerales);
         serGenerales.agregarComanda(comanda);
+    }
+
+    @Override
+    public void asignarComanda(String idEserGen, int idComanda) {
+
+        ESerGen serGenerales = this.getESerGenServicio().buscarESerGenPorNoDocumento(idEserGen);
+        Comanda comanda = this.getServicioComanda().buscarComandaID(idComanda);
+        serGenerales.agregarComanda(comanda);
+        comanda.setEserGen(serGenerales);
+
     }
 
     /**
