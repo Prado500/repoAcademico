@@ -111,9 +111,11 @@ public class ESerGenServicio implements IEserGenServicio {
      */
     @Override
     public void actualizarESerGen(String nNoDocumento, String noDocumento, String tipoDocumento, String nombre, Double salario, boolean cerAlturas) {
-
         ESerGen elementoEncontrado = null;
 
+        if (elementoEncontrado == null) {
+            throw new IllegalArgumentException("No fue posible actualizar al empleado de servicios generales con No.documento " + noDocumento + ". Asegúrese que el No.documento existe y que los datos ingresados son correctos. ");
+        }
         for (ESerGen serGenerales : this.serGenerales) {
             if (serGenerales.getNoDoumento().equals(noDocumento)) {
                 elementoEncontrado = serGenerales;
@@ -124,10 +126,9 @@ public class ESerGenServicio implements IEserGenServicio {
                 serGenerales.setCerAlturas(cerAlturas);
             }
         }
+        System.out.println("Ok");
+        this.notificarObservadores();
 
-        if (elementoEncontrado == null) {
-            throw new IllegalArgumentException("No fue posible actualizar al empleado de servicios generales con No.documento " + noDocumento + ". Asegúrese que el No.documento existe y que los datos ingresados son correctos. ");
-        }
     }
 
     /**

@@ -113,7 +113,7 @@ public class GUIActualizarESerGen extends JFrame {
 
         // Configurar action listeners
         btnBuscar.addActionListener(this::buscarEmpleado);
-        btnActualizar.addActionListener(this::actualizarAdministrativo);
+        btnActualizar.addActionListener(this::actualizarESerGen);
         btnSalir.addActionListener(e -> dispose());
 
         setContentPane(panelPrincipal);
@@ -136,9 +136,8 @@ public class GUIActualizarESerGen extends JFrame {
         }
     }
 
-    private void actualizarAdministrativo(ActionEvent evt) {
+    private void actualizarESerGen(ActionEvent evt) {
         try {
-
             String id = txtBuscar.getText();
             eSerGenServicio.actualizarESerGen(this.txtNuevoDocumento.getText(), id.strip(), cmbTipoDocumento.getSelectedItem().toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()), Boolean.parseBoolean(hasAlturasLogical(cmbAlturas.getSelectedItem().toString())));
             JOptionPane.showMessageDialog(this, "Empleado con id " + id + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
