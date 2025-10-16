@@ -2,6 +2,7 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
+import com.universidad.gui.servicio.IObservador;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
 import com.universidad.gui.servicio.implementacion.MaestroDetalleServicio;
 
@@ -175,5 +176,6 @@ public class GUIAsignarComanda extends JFrame {
     private void mostrar() {
         panelDatos.setVisible(true);
     }
+
 
 }

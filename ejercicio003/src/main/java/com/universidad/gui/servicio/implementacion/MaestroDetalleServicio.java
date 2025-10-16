@@ -148,7 +148,7 @@ private final ComandaServicio comandaServicio;
         Comanda comanda = this.getServicioComanda().buscarComandaID(idComanda);
         serGenerales.agregarComanda(comanda);
         comanda.setEserGen(serGenerales);
-
+        this.getServicioComanda().notificarObservadores();
     }
 
     /**
