@@ -134,6 +134,8 @@ public class AdministrativoServicio implements IAdministrativoServicio {
             }
         }
 
+        this.notificarObservadores();
+
         if (elementoEncontrado == null) {
             throw new IllegalArgumentException("No fue posible actualizar al empleado con No.documento " + noDocumento + ". Asegúrese que el No.documento existe y que los datos ingresados son correctos. ");
         }
