@@ -101,7 +101,8 @@ public class ComandaServicio implements IComandaServicio {
             comanda.setPrincipio(principio);
             comanda.setProteina(proteina);
             comanda.setSopa(sopa);
-            comanda.setFechaCaducidad(fechaCaducidad);    
+            comanda.setFechaCaducidad(fechaCaducidad);
+            this.notificarObservadores();
         }catch(Exception e){
             throw new IllegalArgumentException("""
                                                Error actualizando la comanda: 
