@@ -74,7 +74,7 @@ public class GUIListComandasPorEmpleado extends JFrame implements IObservador {
         setTitle("Lista de Comandas Por Empleado");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setMinimumSize(new Dimension(495, 425));
+        setMinimumSize(new Dimension(550, 425));
 
         this.addWindowListener(new WindowAdapter() {
             @Override
