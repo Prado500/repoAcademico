@@ -50,13 +50,17 @@ public class Administrativo extends Empleado {
 
     @Override
     public double aplicarBonificacion(Double salarioBase) {
+
         double bonificacion = 0;
 
-        if (this.getEscalafon().equals("1")) {
-            bonificacion = salarioBase * 1.1;
+        if (this.getEscalafon().equals("1")){
+            bonificacion = salarioBase * 1.1;;
         }
-        if (this.getEscalafon().equals("2")) {
+
+        else
+            if (this.getEscalafon().equals("2")) {
             bonificacion = salarioBase * 1.3;
+
         } else {
             bonificacion = salarioBase * 1.5;
         }

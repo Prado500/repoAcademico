@@ -31,8 +31,7 @@ public abstract class Empleado implements IEmpleado {
 
     public Empleado(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
 
-        validarNoDocumento(noDocumento);
-        this.noDoumento = noDocumento;
+        this.setNoDoumento(noDocumento);
 
         validarTipoDocumento(tipoDocumento);
         this.tipoDocumento = tipoDocumento;
@@ -154,7 +153,7 @@ public abstract class Empleado implements IEmpleado {
 
    // delego la implementación a las subclases.
     
-    private void validarNoDocumento(String noDocumento) {
+    private void validarNoDocumento(String noDocumento) { //aqui debe ir throws ILLegalArgument exception
 
         if (noDocumento.isBlank() || (!PATRON_VERIFICACION.matcher(noDocumento).matches())) {
             throw new IllegalArgumentException("""

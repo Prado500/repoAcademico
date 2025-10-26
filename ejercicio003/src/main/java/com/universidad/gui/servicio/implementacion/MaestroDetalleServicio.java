@@ -35,7 +35,7 @@ private final ComandaServicio comandaServicio;
      * @param fechaComanda es la fecha de caducidad de la comanda.
      */
     
-    //se va por dto -> si tiene mas de 4, se va a dto
+    //se va por dto -> si tiene mas de 4, se va a dto...?
     @Override
     public void crearYAsignarComanda(String idESerGen, String descripcion, String principio, String proteina, String sopa, String fechaComanda) {
 

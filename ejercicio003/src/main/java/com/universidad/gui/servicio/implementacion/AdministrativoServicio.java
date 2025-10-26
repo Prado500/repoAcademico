@@ -131,6 +131,8 @@ public class AdministrativoServicio implements IAdministrativoServicio {
                 administrativo.setNombre(nombre);
                 administrativo.setSalarioBase(salario);
                 administrativo.setEscalafon(escalafon);
+                //OPCION 1, actualizar bonificacion como metodo que reccore cada admn. y actualiza su bonificacion
+                //OPCION 2, Observer para que cada vez que se haga una actualizacion, se notifique a los administrativos
             }
         }
 
@@ -246,6 +248,14 @@ public class AdministrativoServicio implements IAdministrativoServicio {
         if (observadores.isEmpty()) {
             System.out.println("La lista de observadores esta vacia!");
 
+        }
+
+    }
+
+    public void recalcularNomina(){
+
+        for (Administrativo administrativo : administrativos) {
+            administrativo.aplicarBonificacion(administrativo.getSalarioBase());
         }
 
     }
