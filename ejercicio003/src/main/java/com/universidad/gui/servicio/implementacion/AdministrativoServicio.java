@@ -252,10 +252,13 @@ public class AdministrativoServicio implements IAdministrativoServicio {
 
     }
 
-    public void recalcularNomina(){
+    public void recalcularNomina(String idAdministrativo){
 
         for (Administrativo administrativo : administrativos) {
-            administrativo.aplicarBonificacion(administrativo.getSalarioBase());
+            if (administrativo.getNoDoumento().equals(idAdministrativo)){
+                administrativo.setBonificacion(administrativo.aplicarBonificacion(administrativo.getSalarioBase()));
+            }
+
         }
 
     }

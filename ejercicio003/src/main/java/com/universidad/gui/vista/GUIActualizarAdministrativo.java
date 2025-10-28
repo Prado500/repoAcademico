@@ -139,10 +139,10 @@ private final AdministrativoServicio administrativoServicio;
     private void actualizarAdministrativo(ActionEvent evt) {
         try {
 
-            String id = txtBuscar.getText();
-            administrativoServicio.actualizarAdministrativo(this.txtNuevoDocumento.getText(), id.strip(), Objects.requireNonNull(cmbTipoDocumento.getSelectedItem()).toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()), Objects.requireNonNull(this.cmbEscalafon.getSelectedItem()).toString().strip());
-            JOptionPane.showMessageDialog(this, "Empleado con id " + id + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
-            administrativoServicio.recalcularNomina();
+            String idAdministrativo = txtBuscar.getText();
+            administrativoServicio.actualizarAdministrativo(this.txtNuevoDocumento.getText(), idAdministrativo.strip(), Objects.requireNonNull(cmbTipoDocumento.getSelectedItem()).toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()), Objects.requireNonNull(this.cmbEscalafon.getSelectedItem()).toString().strip());
+            JOptionPane.showMessageDialog(this, "Empleado con id " + idAdministrativo + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
+            administrativoServicio.recalcularNomina(idAdministrativo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
