@@ -121,6 +121,7 @@ public class ESerGenServicio implements IEserGenServicio {
                 serGenerales.setNombre(nombre);
                 serGenerales.setSalarioBase(salario);
                 serGenerales.setCerAlturas(cerAlturas);
+                serGenerales.setBonificacion(serGenerales.aplicarBonificacion(serGenerales.getSalarioBase()));
             }
         }
 

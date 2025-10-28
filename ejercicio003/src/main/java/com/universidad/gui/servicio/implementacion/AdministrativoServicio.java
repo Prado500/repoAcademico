@@ -131,7 +131,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
                 administrativo.setNombre(nombre);
                 administrativo.setSalarioBase(salario);
                 administrativo.setEscalafon(escalafon);
-                administrativo.setBonificacion(elementoEncontrado.aplicarBonificacion(elementoEncontrado.getSalarioBase()));
+                administrativo.setBonificacion(administrativo.aplicarBonificacion(administrativo.getSalarioBase()));
                 //OPCION 1, actualizar bonificacion como metodo que reccore cada admn. y actualiza su bonificacion
                 //OPCION 2, Observer para que cada vez que se haga una actualizacion, se notifique a los administrativos
             }
