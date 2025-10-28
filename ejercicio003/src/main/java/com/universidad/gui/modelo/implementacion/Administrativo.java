@@ -57,8 +57,7 @@ public class Administrativo extends Empleado {
             bonificacion = salarioBase * 1.1;;
         }
 
-        else
-            if (this.getEscalafon().equals("2")) {
+        else if (this.getEscalafon().equals("2")) {
             bonificacion = salarioBase * 1.3;
 
         } else {

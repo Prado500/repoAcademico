@@ -32,31 +32,21 @@ public abstract class Empleado implements IEmpleado {
     public Empleado(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus) {
 
         this.setNoDoumento(noDocumento);
+        this.setTipoDocumento(tipoDocumento);
+        this.setNombre(nombre);
+        this.setSalarioBase(salarioBase);
+        this.setEstatus(estatus);
 
-        validarTipoDocumento(tipoDocumento);
-        this.tipoDocumento = tipoDocumento;
-
-        validarNombre(nombre);
-        this.nombre = Objects.requireNonNull(nombre, "El nombre no puede ser nulo ");
-
-        validarSalarioBase(salarioBase);
-        this.salarioBase = Objects.requireNonNull(salarioBase, "El salario base no puede ser nulo ");
-        
-        validarEstatus(estatus);
-        this.estatus = estatus;
-        
-        
-        
     }
 
     public Empleado(String noDoumento, String tipoDocumento, String nombre, double salarioBase, String fechaNacimiento, String estatus) {
 
         this(noDoumento, tipoDocumento, nombre, salarioBase, estatus);
 
-        
+
         validarFechaNacimiento(fechaNacimiento);
         this.fechaNacimiento = fechaNacimiento;
-         
+
     }
 
     @Override
@@ -74,7 +64,7 @@ public abstract class Empleado implements IEmpleado {
     @Override
     public void setNombre(String nombre) {
         validarNombre(nombre);
-        this.nombre = nombre;
+        this.nombre = Objects.requireNonNull(nombre, "El nombre no puede ser nulo ");
     }
 
     @Override
@@ -94,10 +84,10 @@ public abstract class Empleado implements IEmpleado {
         validarEstatus(estatus);
         this.estatus = estatus;
     }
-    
+
     @Override
-    public void setBonificacion(Double bonificacion){
-    this.bonificacion = bonificacion;
+    public void setBonificacion(Double bonificacion) {
+        this.bonificacion = bonificacion;
     }
 
     @Override
@@ -129,9 +119,9 @@ public abstract class Empleado implements IEmpleado {
     public String getEstatus() {
         return estatus;
     }
-    
+
     @Override
-    public double getBonificacion(){
+    public double getBonificacion() {
         return bonificacion;
     }
 
@@ -151,26 +141,26 @@ public abstract class Empleado implements IEmpleado {
         return ESTATUS_PERMITIDOS;
     }
 
-   // delego la implementación a las subclases.
-    
+    // delego la implementación a las subclases.
+
     private void validarNoDocumento(String noDocumento) { //aqui debe ir throws ILLegalArgument exception
 
         if (noDocumento.isBlank() || (!PATRON_VERIFICACION.matcher(noDocumento).matches())) {
             throw new IllegalArgumentException("""
-                                               Recuerde que el campo del número de documento no puede
-                                               estar en blanco y solo puede contener cifras del 0 al 9.
-                                               
-                                               Tambien recuerde que los números de identificación en Colombia
-                                               solo cuentan con entre 6 y 10 dígitos.""");
+                    Recuerde que el campo del número de documento no puede
+                    estar en blanco y solo puede contener cifras del 0 al 9.
+                    
+                    Tambien recuerde que los números de identificación en Colombia
+                    solo cuentan con entre 6 y 10 dígitos.""");
         }
     }
 
     private void validarTipoDocumento(String tipoDocumento) {
         if (tipoDocumento.isBlank() || (!IDENTIFICACIONES_PERMITIDAS.matcher(tipoDocumento).matches())) {
             throw new IllegalArgumentException("""
-                                               Solo puede ingresar "CC" para cédula de ciudadanía
-                                               "CE" para cédula de extranjería o "PA" para
-                                                pasaporte.""");
+                    Solo puede ingresar "CC" para cédula de ciudadanía
+                    "CE" para cédula de extranjería o "PA" para
+                     pasaporte.""");
         }
     }
 
@@ -178,10 +168,10 @@ public abstract class Empleado implements IEmpleado {
 
         if (salarioBase <= 0.0 || salarioBase > 21000000) {
             throw new IllegalArgumentException("""
-                                               Ingrese un valor para el salario que sea positivo
-                                               y mayor que 0. Recuerde que el salario base no
-                                               puede exceder los COP $20.000.000.
-                                               """
+                    Ingrese un valor para el salario que sea positivo
+                    y mayor que 0. Recuerde que el salario base no
+                    puede exceder los COP $20.000.000.
+                    """
             );
         }
     }
@@ -189,11 +179,11 @@ public abstract class Empleado implements IEmpleado {
     private void validarNombre(String nombre) {
         if (nombre.isBlank() || (!NOMBRE_CARACTERES_PERMITIDOS.matcher(nombre).matches())) {
             throw new IllegalArgumentException("""
-                                               Recuerde que el campo del nombre no puede estar
-                                               en blanco y que los nombres solo pueden incluir
-                                               combinaciones de palabras hechas con las vocales
-                                               y consonantes del alfabeto.
-                                                 """);
+                    Recuerde que el campo del nombre no puede estar
+                    en blanco y que los nombres solo pueden incluir
+                    combinaciones de palabras hechas con las vocales
+                    y consonantes del alfabeto.
+                    """);
         }
     }
 
@@ -202,9 +192,9 @@ public abstract class Empleado implements IEmpleado {
 
         if (!fechaNacimiento.matches("\\d{2}/\\d{2}/\\d{4}")) {
             throw new IllegalArgumentException("""
-                                               Formato de fecha inválido. Ingrese una fecha de acuerdo al
-                                               formato DD/MM/AAAA.
-                                              """);
+                     Formato de fecha inválido. Ingrese una fecha de acuerdo al
+                     formato DD/MM/AAAA.
+                    """);
         }
         try {
 
@@ -219,9 +209,9 @@ public abstract class Empleado implements IEmpleado {
             if (fecha.isBefore(minFechaNacimiento) || fecha.isAfter(maxFechaNacimiento)) {
 
                 throw new IllegalArgumentException("""
-                                                   La fecha de nacimiento no puede ser la de una persona
-                                                   mayor de 100 años ni menor de 18 años.
-                                                  """);
+                         La fecha de nacimiento no puede ser la de una persona
+                         mayor de 100 años ni menor de 18 años.
+                        """);
             }
 
         } catch (DateTimeParseException e) {
@@ -234,18 +224,18 @@ public abstract class Empleado implements IEmpleado {
     private void validarEstatus(String estatus) {
         if (estatus.isBlank() || (!ESTATUS_PERMITIDOS.matcher(estatus).matches())) {
             throw new IllegalArgumentException("""
-                                               Recuerde que el campo del estatus no puede estar
-                                               en blanco y que el estatus solo puede ser "AC" o 
-                                               "IN".
-                                                 """);
+                    Recuerde que el campo del estatus no puede estar
+                    en blanco y que el estatus solo puede ser "AC" o 
+                    "IN".
+                    """);
         }
     }
 
-    
+
     @Override
     public abstract double aplicarBonificacion(Double salarioBase); //delego la implementacion a las subclases hijas de Empleado
-    
-//    @Override
+
+    //    @Override
 //    public String toString() {
 //        return "Empleado{" + "noDoumento=" + noDoumento + ", tipoDocumento=" + tipoDocumento + ", nombre=" + nombre + ", salarioBase=" + salarioBase + ", fechaNacimiento=" + fechaNacimiento + ", estatus=" + estatus + '}';
 //    }
