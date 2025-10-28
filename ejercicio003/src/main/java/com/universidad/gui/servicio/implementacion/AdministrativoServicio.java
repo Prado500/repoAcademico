@@ -43,7 +43,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      */
     @Override
     public void agregarAdministrativo( String noDocumento, String tipoDocumento, String nombre, double salario, String estatus, String escalafon) {
-
+        this.verificarExistenciaNoDocumento(noDocumento);
         Administrativo administrativo = new Administrativo(noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
         this.administrativos.add(administrativo);
         this.notificarObservadores();
@@ -220,7 +220,18 @@ public class AdministrativoServicio implements IAdministrativoServicio {
         }
         return nominaAcumulada;  
     }
-    
+
+
+    private void verificarExistenciaNoDocumento(String noDocumento){
+        for (Administrativo administrativo : this.administrativos) {
+            if (administrativo.getNoDoumento().equals(noDocumento)){
+                throw new IllegalArgumentException(
+                        "Ya existe un administrativo con el documento " + noDocumento + "."
+                        );
+            }
+        }
+    }
+
     //Metodos del servicio de notificacion
     
     public void agregarObservador(IObservador observador) {
