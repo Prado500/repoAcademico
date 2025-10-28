@@ -221,7 +221,10 @@ public class AdministrativoServicio implements IAdministrativoServicio {
         return nominaAcumulada;  
     }
 
-
+    /**
+     * Method that verifies a noDocumento (colombian national id number of an administrative employee) is not repeated when creating a new Administrativo object.
+     * @param noDocumento, a String representing the value of a noDocumento (id) which belongs to a new Administrativo instance.
+     */
     private void verificarExistenciaNoDocumento(String noDocumento){
         for (Administrativo administrativo : this.administrativos) {
             if (administrativo.getNoDoumento().equals(noDocumento)){

@@ -47,7 +47,7 @@ public class ESerGenServicio implements IEserGenServicio {
      */
     @Override
     public void agregarESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas) {
-
+        verificarExistenciaNoDocumento(noDocumento);
         ESerGen serGenerales = new ESerGen(noDocumento, tipoDocumento, nombre, salarioBase, estatus, certAlturas);
         this.serGenerales.add(serGenerales);
         this.notificarObservadores();
@@ -217,6 +217,18 @@ public class ESerGenServicio implements IEserGenServicio {
         return nominaAcumulada;
     }
 
+    /**
+     * Method that verifies a noDocumento (colombian national id number of a general services employee) is not repeated when creating a new ESerGen object.
+     * @param noDocumento, a String representing the value of a noDocumento (id) which belongs to a new ESerGen instance.
+     */
+    private void verificarExistenciaNoDocumento(String noDocumento){
+        for (ESerGen serGenerales : this.serGenerales) {
+            if (serGenerales.getNoDoumento().equals(noDocumento)) {
+                throw new IllegalArgumentException("Ya existe un empleado de servicios generales con el documento " + noDocumento + "."
+                );
+            }
+        }
+    }
 
     // Métodos para la implementación del patrón observer
 
