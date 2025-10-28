@@ -142,7 +142,6 @@ private final AdministrativoServicio administrativoServicio;
             String idAdministrativo = txtBuscar.getText();
             administrativoServicio.actualizarAdministrativo(this.txtNuevoDocumento.getText(), idAdministrativo.strip(), Objects.requireNonNull(cmbTipoDocumento.getSelectedItem()).toString(), txtNombre.getText().strip().toUpperCase(), Double.parseDouble(txtSalario.getText()), Objects.requireNonNull(this.cmbEscalafon.getSelectedItem()).toString().strip());
             JOptionPane.showMessageDialog(this, "Empleado con id " + idAdministrativo + " y nombre " + txtNombre.getText() + " actualizado exitosamente");
-            administrativoServicio.recalcularNomina(idAdministrativo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
