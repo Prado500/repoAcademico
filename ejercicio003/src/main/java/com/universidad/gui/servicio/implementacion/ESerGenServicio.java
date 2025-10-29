@@ -223,7 +223,7 @@ public class ESerGenServicio implements IEserGenServicio {
      */
     private void verificarExistenciaNoDocumento(String noDocumento){
         for (ESerGen serGenerales : this.serGenerales) {
-            if (serGenerales.getNoDoumento().equals(noDocumento)) {
+            if (serGenerales.getNoDoumento().equals(noDocumento) && serGenerales.getEstatus().equals("AC")) {
                 throw new IllegalArgumentException("Ya existe un empleado de servicios generales con el documento " + noDocumento + "."
                 );
             }

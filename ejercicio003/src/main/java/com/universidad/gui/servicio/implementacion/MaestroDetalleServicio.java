@@ -1,5 +1,6 @@
 package com.universidad.gui.servicio.implementacion;
 
+import com.universidad.gui.modelo.implementacion.Administrativo;
 import com.universidad.gui.modelo.implementacion.Comanda;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.IMaestroDetalleServicio;
@@ -166,4 +167,6 @@ private final ComandaServicio comandaServicio;
     public ComandaServicio getServicioComanda() {
         return this.comandaServicio;
     }
+
+
 }

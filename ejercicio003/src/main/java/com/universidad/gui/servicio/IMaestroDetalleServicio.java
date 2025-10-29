@@ -24,4 +24,5 @@ public interface IMaestroDetalleServicio {
 
     public void asignarComanda(String idEserGen, int idComanda);
 
+
 }

@@ -6,10 +6,7 @@ package com.universidad.gui.vista;
 
 
 
-import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
-import com.universidad.gui.servicio.implementacion.ComandaServicio;
-import com.universidad.gui.servicio.implementacion.ESerGenServicio;
-import com.universidad.gui.servicio.implementacion.MaestroDetalleServicio;
+import com.universidad.gui.servicio.implementacion.*;
 
 import javax.swing.JOptionPane;
 
@@ -29,7 +26,8 @@ public class GUIPrincipal extends javax.swing.JFrame {
   private ESerGenServicio eSerGenServicio;
   private ComandaServicio comandaServicio;
   private MaestroDetalleServicio maestroDetalleServicio;
-  
+
+  private VerificacionServicio verificacionServicio;
     private GUIPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
@@ -37,6 +35,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         this.eSerGenServicio = new ESerGenServicio();
         this.comandaServicio = new ComandaServicio();
         this.maestroDetalleServicio = new MaestroDetalleServicio(eSerGenServicio, comandaServicio);
+        this.verificacionServicio = new VerificacionServicio(administrativoServicio, eSerGenServicio);
     }
 
     public static GUIPrincipal getInstance(){
@@ -326,7 +325,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemAcercaDeActionPerformed
 
     private void itemAddAdministrativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAddAdministrativoActionPerformed
-        GUIAddAdministrativo gui = new GUIAddAdministrativo(this.administrativoServicio);
+        GUIAddAdministrativo gui = new GUIAddAdministrativo(this.verificacionServicio);
         gui.setVisible(true);
         
     }//GEN-LAST:event_itemAddAdministrativoActionPerformed

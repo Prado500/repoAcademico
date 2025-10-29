@@ -6,6 +6,8 @@ package com.universidad.gui.vista;
 
 import com.universidad.gui.servicio.IObservador;
 import com.universidad.gui.servicio.implementacion.AdministrativoServicio;
+import com.universidad.gui.servicio.implementacion.VerificacionServicio;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -18,13 +20,13 @@ public class GUIAddAdministrativo extends javax.swing.JFrame {
      * Creates new form GUIAddAdministrativo
      */
     
-    private final AdministrativoServicio administrativoServicio;
+    private final VerificacionServicio verificacionServicio;
     
     
-    public GUIAddAdministrativo(AdministrativoServicio administrativoServicio) {
+    public GUIAddAdministrativo(VerificacionServicio verificacionServicio) {
         initComponents();
         setLocationRelativeTo(null);
-        this.administrativoServicio = administrativoServicio;
+        this.verificacionServicio = verificacionServicio;
     }
     
     public void limpiar(){
@@ -197,7 +199,7 @@ public class GUIAddAdministrativo extends javax.swing.JFrame {
             String noDocumento = txtNoDocumento.getText().strip();
             String tipoDocumento = jComboBoxTipoDocumento.getSelectedItem().toString();
             String escalafon = cmbEscalafon.getSelectedItem().toString();
-            administrativoServicio.agregarAdministrativo(noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
+            this.verificacionServicio.verificarYAgregarAdministrativo(noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
             limpiar();
             JOptionPane.showMessageDialog(this, "Administrativo con nombre " + nombre + " y documento No." + noDocumento + " creado exitosamente ");
         
