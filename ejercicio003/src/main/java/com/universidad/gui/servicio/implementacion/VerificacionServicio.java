@@ -52,13 +52,25 @@ public class VerificacionServicio implements IVerificacionServicio {
 
     @Override
     public void verificarYAgregarESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas) {
-        for (Administrativo administrativo : this.administrativoServicio.mostrarAdministrativo()) {
-            if (administrativo.getNoDoumento().equals(noDocumento) && administrativo.getEstatus().equals("AC")) {
-                throw new IllegalArgumentException(
-                        "Ya existe un empleado Administrativo con el documento " + noDocumento + "."
-                );
+
+        int longitud = this.administrativoServicio.getLongitudListaAdministrativos();
+
+        if (longitud == 0) {
+            this.eSerGenServicio.agregarESerGen(noDocumento, tipoDocumento, nombre, salarioBase, estatus, certAlturas);
+        }else{
+            for (Administrativo administrativo : this.administrativoServicio.mostrarAdministrativo()) {
+                if (administrativo.getNoDoumento().equals(noDocumento) && administrativo.getEstatus().equals("AC")) {
+                    throw new IllegalArgumentException(
+                            "Ya existe un empleado Administrativo con el documento " + noDocumento + "."
+                    );
+                }
             }
+
+            this.eSerGenServicio.agregarESerGen(noDocumento, tipoDocumento, nombre, salarioBase, estatus, certAlturas);
+
         }
+
+
     }
 }
 
