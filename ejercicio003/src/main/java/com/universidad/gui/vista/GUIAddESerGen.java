@@ -7,6 +7,7 @@ package com.universidad.gui.vista;
 import com.universidad.gui.modelo.Empleado;
 import com.universidad.gui.modelo.implementacion.ESerGen;
 import com.universidad.gui.servicio.implementacion.ESerGenServicio;
+import com.universidad.gui.servicio.implementacion.VerificacionServicio;
 
 import javax.swing.JOptionPane;
 
@@ -20,12 +21,12 @@ public class GUIAddESerGen extends javax.swing.JFrame  {
      * Creates new form GUIAddAdministrativo
      */
     
-    private final ESerGenServicio eSerGenServicio;
+    private final VerificacionServicio verificacionServicio;
     
-    public GUIAddESerGen(ESerGenServicio eSerGenServicio) {
+    public GUIAddESerGen(VerificacionServicio verificacionServicio) {
         initComponents();
         setLocationRelativeTo(null);
-        this.eSerGenServicio = eSerGenServicio;
+        this.verificacionServicio = verificacionServicio;
     }
     
     public void limpiar(){
@@ -208,7 +209,7 @@ public class GUIAddESerGen extends javax.swing.JFrame  {
             if(resAlturas.equalsIgnoreCase("SI")){
             alturas = true;
             }
-            eSerGenServicio.agregarESerGen(noDocumento, tipoDocumento, nombre, salario, estatus, alturas);
+            this.verificacionServicio.verificarYAgregarESerGen(noDocumento, tipoDocumento, nombre, salario, estatus, alturas);
             limpiar();
             JOptionPane.showMessageDialog(this, "Empleado con nombre " + nombre + " y documento No." + noDocumento + " creado exitosamente ");
         

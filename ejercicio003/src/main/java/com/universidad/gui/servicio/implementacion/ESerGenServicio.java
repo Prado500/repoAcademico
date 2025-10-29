@@ -32,6 +32,9 @@ public class ESerGenServicio implements IEserGenServicio {
         this.observadores = new ArrayList<>();
     }
 
+    public int getLongitudListaESerGen() {
+        return this.serGenerales.size();
+    }
     //Métodos heredados y específicos para ESerGen únicamente (Maestro Relación maestro/detalle)
 
     /**
@@ -70,7 +73,7 @@ public class ESerGenServicio implements IEserGenServicio {
             }
         }
         if (elementosMostrar.isEmpty())
-            throw new IllegalArgumentException("La lista está vacía. No hay administrativos registrados todavía");
+            throw new IllegalArgumentException("La lista está vacía. No hay empleados de servicios generales registrados todavía");
         return elementosMostrar;
     }
 

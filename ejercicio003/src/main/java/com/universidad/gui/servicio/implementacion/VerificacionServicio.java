@@ -32,25 +32,31 @@ public class VerificacionServicio implements IVerificacionServicio {
      */
     @Override
     public void verificarYAgregarAdministrativo(String noDocumento, String tipoDocumento, String nombre, double salario, String estatus, String escalafon) {
-        for (ESerGen serGenerales : this.eSerGenServicio.mostrarESerGen()) {
-            if (serGenerales.getNoDoumento().equals(noDocumento) && serGenerales.getEstatus().equals("AC")) {
-                throw new IllegalArgumentException(
-                        "Ya existe un empleado de servicios generales con el documento " + noDocumento + "."
-                );
-            }
-        }
 
-        this.administrativoServicio.agregarAdministrativo(noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
+        int longitud = this.eSerGenServicio.getLongitudListaESerGen();
+
+        if (longitud == 0) {
+            this.administrativoServicio.agregarAdministrativo(noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
+        } else {
+            for (ESerGen serGenerales : this.eSerGenServicio.mostrarESerGen()) {
+                if (serGenerales.getNoDoumento().equals(noDocumento) && serGenerales.getEstatus().equals("AC")) {
+                    throw new IllegalArgumentException(
+                            "Ya existe un empleado de servicios generales con el documento " + noDocumento + "."
+                    );
+                }
+            }
+            this.administrativoServicio.agregarAdministrativo(noDocumento, tipoDocumento, nombre, salario, estatus, escalafon);
+        }
 
     }
 
     @Override
-    public void verificarYAgregarESerGen (String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas){
+    public void verificarYAgregarESerGen(String noDocumento, String tipoDocumento, String nombre, double salarioBase, String estatus, boolean certAlturas) {
         for (Administrativo administrativo : this.administrativoServicio.mostrarAdministrativo()) {
             if (administrativo.getNoDoumento().equals(noDocumento) && administrativo.getEstatus().equals("AC")) {
                 throw new IllegalArgumentException(
                         "Ya existe un empleado Administrativo con el documento " + noDocumento + "."
-                        );
+                );
             }
         }
     }

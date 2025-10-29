@@ -361,7 +361,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemAddEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddEmpleadoActionPerformed
 
-        GUIAddESerGen gui = new GUIAddESerGen(this.eSerGenServicio);
+        GUIAddESerGen gui = new GUIAddESerGen(this.verificacionServicio);
         gui.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemAddEmpleadoActionPerformed

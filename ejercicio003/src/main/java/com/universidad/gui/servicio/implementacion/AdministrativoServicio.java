@@ -32,6 +32,10 @@ public class AdministrativoServicio implements IAdministrativoServicio {
         this.observadores = new ArrayList<>();
     }
 
+    public int getLongitudListaAdministrativos() {
+        return this.administrativos.size();
+    }
+
     /**
      *
      * @param noDocumento
