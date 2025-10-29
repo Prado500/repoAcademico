@@ -227,7 +227,7 @@ public class AdministrativoServicio implements IAdministrativoServicio {
      */
     private void verificarExistenciaNoDocumento(String noDocumento){
         for (Administrativo administrativo : this.administrativos) {
-            if (administrativo.getNoDoumento().equals(noDocumento)){
+            if (administrativo.getNoDoumento().equals(noDocumento) && administrativo.getEstatus().equals("AC")) {
                 throw new IllegalArgumentException(
                         "Ya existe un administrativo con el documento " + noDocumento + "."
                         );
